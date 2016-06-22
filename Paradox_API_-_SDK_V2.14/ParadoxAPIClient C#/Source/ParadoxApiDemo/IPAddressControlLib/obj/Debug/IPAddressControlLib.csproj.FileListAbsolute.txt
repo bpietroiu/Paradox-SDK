@@ -1,0 +1,17 @@
+C:\Paradox Softwares XE2\ParadoxAPI\SDK Package\ParadoxAPIClient C#\Source\ParadoxApiDemo\IPAddressControlLib\bin\Debug\IPAddressControlLib.dll
+C:\Paradox Softwares XE2\ParadoxAPI\SDK Package\ParadoxAPIClient C#\Source\ParadoxApiDemo\IPAddressControlLib\bin\Debug\IPAddressControlLib.pdb
+C:\Paradox Softwares XE2\ParadoxAPI\SDK Package\ParadoxAPIClient C#\Source\ParadoxApiDemo\IPAddressControlLib\bin\Debug\IPAddressControlLib.dll.CodeAnalysisLog.xml
+C:\Paradox Softwares XE2\ParadoxAPI\SDK Package\ParadoxAPIClient C#\Source\ParadoxApiDemo\IPAddressControlLib\bin\Debug\IPAddressControlLib.dll.lastcodeanalysissucceeded
+C:\Paradox Softwares XE2\ParadoxAPI\SDK Package\ParadoxAPIClient C#\Source\ParadoxApiDemo\IPAddressControlLib\obj\Debug\IPAddressControlLib.csprojResolveAssemblyReference.cache
+C:\Paradox Softwares XE2\ParadoxAPI\SDK Package\ParadoxAPIClient C#\Source\ParadoxApiDemo\IPAddressControlLib\obj\Debug\IPAddressControlLib.Properties.Resources.resources
+C:\Paradox Softwares XE2\ParadoxAPI\SDK Package\ParadoxAPIClient C#\Source\ParadoxApiDemo\IPAddressControlLib\obj\Debug\IPAddressControlLib.csproj.GenerateResource.Cache
+C:\Paradox Softwares XE2\ParadoxAPI\SDK Package\ParadoxAPIClient C#\Source\ParadoxApiDemo\IPAddressControlLib\obj\Debug\IPAddressControlLib.dll
+C:\Paradox Softwares XE2\ParadoxAPI\SDK Package\ParadoxAPIClient C#\Source\ParadoxApiDemo\IPAddressControlLib\obj\Debug\IPAddressControlLib.pdb
+C:\Paradox Softwares XE2\ParadoxAPI\Demo\ParadoxApiDemo\IPAddressControlLib\bin\Debug\IPAddressControlLib.dll
+C:\Paradox Softwares XE2\ParadoxAPI\Demo\ParadoxApiDemo\IPAddressControlLib\bin\Debug\IPAddressControlLib.pdb
+C:\Paradox Softwares XE2\ParadoxAPI\Demo\ParadoxApiDemo\IPAddressControlLib\bin\Debug\IPAddressControlLib.dll.CodeAnalysisLog.xml
+C:\Paradox Softwares XE2\ParadoxAPI\Demo\ParadoxApiDemo\IPAddressControlLib\bin\Debug\IPAddressControlLib.dll.lastcodeanalysissucceeded
+C:\Paradox Softwares XE2\ParadoxAPI\Demo\ParadoxApiDemo\IPAddressControlLib\obj\Debug\IPAddressControlLib.Properties.Resources.resources
+C:\Paradox Softwares XE2\ParadoxAPI\Demo\ParadoxApiDemo\IPAddressControlLib\obj\Debug\IPAddressControlLib.csproj.GenerateResource.Cache
+C:\Paradox Softwares XE2\ParadoxAPI\Demo\ParadoxApiDemo\IPAddressControlLib\obj\Debug\IPAddressControlLib.dll
+C:\Paradox Softwares XE2\ParadoxAPI\Demo\ParadoxApiDemo\IPAddressControlLib\obj\Debug\IPAddressControlLib.pdb

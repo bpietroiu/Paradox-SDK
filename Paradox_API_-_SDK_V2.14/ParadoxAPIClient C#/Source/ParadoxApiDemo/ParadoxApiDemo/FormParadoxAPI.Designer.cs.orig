@@ -1,0 +1,1749 @@
+﻿namespace ParadoxApiDemo
+{
+    partial class FormParadoxAPI
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormParadoxAPI));
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.tabControlAll = new System.Windows.Forms.TabControl();
+            this.tabPageControlPanels = new System.Windows.Forms.TabPage();
+            this.splitter4 = new System.Windows.Forms.Splitter();
+            this.splitter3 = new System.Windows.Forms.Splitter();
+            this.listViewPanelEvent = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.panelControlPanels = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.tabControlPanel = new System.Windows.Forms.TabControl();
+            this.tabPagePanelStatus = new System.Windows.Forms.TabPage();
+            this.tvControlPanelStatus = new System.Windows.Forms.TreeView();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.listViewPanelTrouble = new System.Windows.Forms.ListView();
+            this.textBoxSMSMessageToSend = new System.Windows.Forms.TextBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.discoverModulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.retrievePanelNfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.registerPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.readMonitoringStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.getSystemTroublesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.areaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.controlAreaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.areaStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.readAllAreaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zoneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.controlZoneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zoneStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.readAllZonesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pGMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.controlPGMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pGMStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.readAllPGMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.doorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.controlDoorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.doorStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.readAllDoorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.readTimeStampToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.readDateTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.writeDateTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iPReportingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.readIpReportingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.writeIPReportingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.getIPRegistartionStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabPageEvents = new System.Windows.Forms.TabPage();
+            this.listViewPanelBufferedEvent = new System.Windows.Forms.ListView();
+            this.PanelID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.DateTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Label = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.SerialNo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Description = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.AdditionalInformation = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.UserLabel = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Order = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Buffered = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.LoadPanelBufferedEventsButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.PanelBufferedEventCountLabel = new System.Windows.Forms.ToolStripLabel();
+            this.tabPageUsers = new System.Windows.Forms.TabPage();
+            this.listViewUsers = new System.Windows.Forms.ListView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItem26 = new System.Windows.Forms.ToolStripMenuItem();
+            this.readAllUsersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem28 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripPanelStatus = new System.Windows.Forms.ToolStrip();
+            this.tsBtnConnect = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnRX = new System.Windows.Forms.ToolStripButton();
+            this.btnTX = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.PanelProductLabel = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.PanelStatusLabel = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.PanelDateTimeLabel = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnrefreshUI = new System.Windows.Forms.ToolStripButton();
+            this.PanelStatusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.PanelStatusInfoLabel = new System.Windows.Forms.ToolStripLabel();
+            this.splitter1 = new System.Windows.Forms.Splitter();
+            this.panelLeft = new System.Windows.Forms.Panel();
+            this.tvContolPanels = new System.Windows.Forms.TreeView();
+            this.statusStrip2 = new System.Windows.Forms.StatusStrip();
+            this.btnControlPanelActions = new System.Windows.Forms.ToolStripSplitButton();
+            this.menuConnectToAllControlPanels = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuDisconnectFromAllControlPanels = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripControlPanels = new System.Windows.Forms.ToolStrip();
+            this.tsBtnAddControlPanel = new System.Windows.Forms.ToolStripButton();
+            this.tsBtnModifySettings = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsBtnDeletePanel = new System.Windows.Forms.ToolStripButton();
+            this.tabPageIPReportingEvent = new System.Windows.Forms.TabPage();
+            this.tabControlIPReporting = new System.Windows.Forms.TabControl();
+            this.tabPageIPReportingEvents = new System.Windows.Forms.TabPage();
+            this.listViewIPReportingEvents = new System.Windows.Forms.ListView();
+            this.tabPageIPReportingAccounts = new System.Windows.Forms.TabPage();
+            this.listViewIPReportingAccounts = new System.Windows.Forms.ListView();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+<<<<<<< local
+            this.btnStartIPDOX = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.textBoxIPDOXWanAddress = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.textBoxIPDOXWanPort = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.textBoxIPDOXIPPassword = new System.Windows.Forms.ToolStripTextBox();
+=======
+            this.btnConfigureIPDOX = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.textBoxIPDOXWanAddress = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.textBoxIPDOXWanPort = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.textBoxIPDOXIPPassword = new System.Windows.Forms.ToolStripTextBox();
+>>>>>>> other
+            this.tabPageDetectIPModule = new System.Windows.Forms.TabPage();
+            this.listViewIPDeviceOnNetwork = new System.Windows.Forms.ListView();
+            this.toolStripModuelOnLAN = new System.Windows.Forms.ToolStrip();
+            this.tsBtnDiscoverIPModuleOnLAN = new System.Windows.Forms.ToolStripButton();
+            this.tabPageLogs = new System.Windows.Forms.TabPage();
+            this.textBoxLogs = new System.Windows.Forms.RichTextBox();
+            this.toolStripLogs = new System.Windows.Forms.ToolStrip();
+            this.toolStripButtonClearLogs = new System.Windows.Forms.ToolStripButton();
+            this.tabPageErrors = new System.Windows.Forms.TabPage();
+            this.textBoxErrors = new System.Windows.Forms.RichTextBox();
+            this.toolStripErrors = new System.Windows.Forms.ToolStrip();
+            this.toolStripButtonClearErrors = new System.Windows.Forms.ToolStripButton();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.StatusLabelPanelInfo = new System.Windows.Forms.ToolStripStatusLabel();
+            this.splitter2 = new System.Windows.Forms.Splitter();
+            this.imageListStatus = new System.Windows.Forms.ImageList(this.components);
+            this.timerStatusTx = new System.Windows.Forms.Timer(this.components);
+            this.timerStatusRx = new System.Windows.Forms.Timer(this.components);
+            this.miniToolStrip = new System.Windows.Forms.ToolStrip();
+<<<<<<< local
+            this.btnStopIPDOX = new System.Windows.Forms.ToolStripButton();
+            this.btnDeleteSelectedIPDOXAccount = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.labelIPDOXStatus = new System.Windows.Forms.ToolStripLabel();
+=======
+            this.labelIPDOXStatus = new System.Windows.Forms.ToolStripLabel();
+>>>>>>> other
+            this.panel3.SuspendLayout();
+            this.tabControlAll.SuspendLayout();
+            this.tabPageControlPanels.SuspendLayout();
+            this.panelControlPanels.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.tabControlPanel.SuspendLayout();
+            this.tabPagePanelStatus.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
+            this.tabPageEvents.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
+            this.tabPageUsers.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.menuStrip2.SuspendLayout();
+            this.toolStripPanelStatus.SuspendLayout();
+            this.panelLeft.SuspendLayout();
+            this.statusStrip2.SuspendLayout();
+            this.toolStripControlPanels.SuspendLayout();
+            this.tabPageIPReportingEvent.SuspendLayout();
+            this.tabControlIPReporting.SuspendLayout();
+            this.tabPageIPReportingEvents.SuspendLayout();
+            this.tabPageIPReportingAccounts.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
+            this.tabPageDetectIPModule.SuspendLayout();
+            this.toolStripModuelOnLAN.SuspendLayout();
+            this.tabPageLogs.SuspendLayout();
+            this.toolStripLogs.SuspendLayout();
+            this.tabPageErrors.SuspendLayout();
+            this.toolStripErrors.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.tabControlAll);
+            this.panel3.Controls.Add(this.statusStrip1);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1266, 594);
+            this.panel3.TabIndex = 9;
+            // 
+            // tabControlAll
+            // 
+            this.tabControlAll.Controls.Add(this.tabPageControlPanels);
+            this.tabControlAll.Controls.Add(this.tabPageIPReportingEvent);
+            this.tabControlAll.Controls.Add(this.tabPageDetectIPModule);
+            this.tabControlAll.Controls.Add(this.tabPageLogs);
+            this.tabControlAll.Controls.Add(this.tabPageErrors);
+            this.tabControlAll.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlAll.Location = new System.Drawing.Point(0, 0);
+            this.tabControlAll.Name = "tabControlAll";
+            this.tabControlAll.SelectedIndex = 0;
+            this.tabControlAll.Size = new System.Drawing.Size(1266, 572);
+            this.tabControlAll.TabIndex = 9;
+            // 
+            // tabPageControlPanels
+            // 
+            this.tabPageControlPanels.Controls.Add(this.splitter4);
+            this.tabPageControlPanels.Controls.Add(this.splitter3);
+            this.tabPageControlPanels.Controls.Add(this.listViewPanelEvent);
+            this.tabPageControlPanels.Controls.Add(this.panelControlPanels);
+            this.tabPageControlPanels.Location = new System.Drawing.Point(4, 22);
+            this.tabPageControlPanels.Name = "tabPageControlPanels";
+            this.tabPageControlPanels.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageControlPanels.Size = new System.Drawing.Size(1258, 546);
+            this.tabPageControlPanels.TabIndex = 0;
+            this.tabPageControlPanels.Text = "Control Panels";
+            this.tabPageControlPanels.UseVisualStyleBackColor = true;
+            // 
+            // splitter4
+            // 
+            this.splitter4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitter4.Location = new System.Drawing.Point(3, 397);
+            this.splitter4.Name = "splitter4";
+            this.splitter4.Size = new System.Drawing.Size(1252, 3);
+            this.splitter4.TabIndex = 19;
+            this.splitter4.TabStop = false;
+            // 
+            // splitter3
+            // 
+            this.splitter3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.splitter3.Location = new System.Drawing.Point(3, 540);
+            this.splitter3.Name = "splitter3";
+            this.splitter3.Size = new System.Drawing.Size(1252, 3);
+            this.splitter3.TabIndex = 17;
+            this.splitter3.TabStop = false;
+            // 
+            // listViewPanelEvent
+            // 
+            this.listViewPanelEvent.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6,
+            this.columnHeader7,
+            this.columnHeader8,
+            this.columnHeader9,
+            this.columnHeader10});
+            this.listViewPanelEvent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewPanelEvent.FullRowSelect = true;
+            this.listViewPanelEvent.GridLines = true;
+            this.listViewPanelEvent.Location = new System.Drawing.Point(3, 397);
+            this.listViewPanelEvent.Name = "listViewPanelEvent";
+            this.listViewPanelEvent.Size = new System.Drawing.Size(1252, 146);
+            this.listViewPanelEvent.TabIndex = 16;
+            this.listViewPanelEvent.UseCompatibleStateImageBehavior = false;
+            this.listViewPanelEvent.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Panel ID";
+            this.columnHeader1.Width = 55;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Date + Time";
+            this.columnHeader2.Width = 158;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Type";
+            this.columnHeader3.Width = 89;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Label";
+            this.columnHeader4.Width = 97;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Serial #";
+            this.columnHeader5.Width = 61;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Description";
+            this.columnHeader6.Width = 193;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Additional Information";
+            this.columnHeader7.Width = 133;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "User Label";
+            this.columnHeader8.Width = 125;
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "Order";
+            // 
+            // columnHeader10
+            // 
+            this.columnHeader10.Text = "Buffered";
+            // 
+            // panelControlPanels
+            // 
+            this.panelControlPanels.Controls.Add(this.panel5);
+            this.panelControlPanels.Controls.Add(this.splitter1);
+            this.panelControlPanels.Controls.Add(this.panelLeft);
+            this.panelControlPanels.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelControlPanels.Location = new System.Drawing.Point(3, 3);
+            this.panelControlPanels.Name = "panelControlPanels";
+            this.panelControlPanels.Size = new System.Drawing.Size(1252, 394);
+            this.panelControlPanels.TabIndex = 10;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.tabControlPanel);
+            this.panel5.Controls.Add(this.toolStripPanelStatus);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel5.Location = new System.Drawing.Point(265, 0);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(987, 394);
+            this.panel5.TabIndex = 23;
+            // 
+            // tabControlPanel
+            // 
+            this.tabControlPanel.Controls.Add(this.tabPagePanelStatus);
+            this.tabControlPanel.Controls.Add(this.tabPageEvents);
+            this.tabControlPanel.Controls.Add(this.tabPageUsers);
+            this.tabControlPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlPanel.Location = new System.Drawing.Point(0, 25);
+            this.tabControlPanel.Name = "tabControlPanel";
+            this.tabControlPanel.SelectedIndex = 0;
+            this.tabControlPanel.Size = new System.Drawing.Size(987, 369);
+            this.tabControlPanel.TabIndex = 21;
+            // 
+            // tabPagePanelStatus
+            // 
+            this.tabPagePanelStatus.Controls.Add(this.tvControlPanelStatus);
+            this.tabPagePanelStatus.Controls.Add(this.panel4);
+            this.tabPagePanelStatus.Location = new System.Drawing.Point(4, 22);
+            this.tabPagePanelStatus.Name = "tabPagePanelStatus";
+            this.tabPagePanelStatus.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPagePanelStatus.Size = new System.Drawing.Size(979, 343);
+            this.tabPagePanelStatus.TabIndex = 0;
+            this.tabPagePanelStatus.Text = "Status";
+            this.tabPagePanelStatus.UseVisualStyleBackColor = true;
+            // 
+            // tvControlPanelStatus
+            // 
+            this.tvControlPanelStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tvControlPanelStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvControlPanelStatus.Location = new System.Drawing.Point(3, 119);
+            this.tvControlPanelStatus.Name = "tvControlPanelStatus";
+            this.tvControlPanelStatus.Size = new System.Drawing.Size(973, 221);
+            this.tvControlPanelStatus.TabIndex = 14;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.listViewPanelTrouble);
+            this.panel4.Controls.Add(this.textBoxSMSMessageToSend);
+            this.panel4.Controls.Add(this.menuStrip1);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(3, 3);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(973, 116);
+            this.panel4.TabIndex = 12;
+            // 
+            // listViewPanelTrouble
+            // 
+            this.listViewPanelTrouble.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewPanelTrouble.Location = new System.Drawing.Point(0, 24);
+            this.listViewPanelTrouble.Name = "listViewPanelTrouble";
+            this.listViewPanelTrouble.Size = new System.Drawing.Size(645, 92);
+            this.listViewPanelTrouble.TabIndex = 19;
+            this.listViewPanelTrouble.UseCompatibleStateImageBehavior = false;
+            // 
+            // textBoxSMSMessageToSend
+            // 
+            this.textBoxSMSMessageToSend.Dock = System.Windows.Forms.DockStyle.Right;
+            this.textBoxSMSMessageToSend.Location = new System.Drawing.Point(645, 24);
+            this.textBoxSMSMessageToSend.Multiline = true;
+            this.textBoxSMSMessageToSend.Name = "textBoxSMSMessageToSend";
+            this.textBoxSMSMessageToSend.Size = new System.Drawing.Size(328, 92);
+            this.textBoxSMSMessageToSend.TabIndex = 18;
+            this.textBoxSMSMessageToSend.Text = "SMS Message to Send:";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.discoverModulesToolStripMenuItem,
+            this.areaToolStripMenuItem,
+            this.zoneToolStripMenuItem,
+            this.pGMToolStripMenuItem,
+            this.doorToolStripMenuItem,
+            this.timeToolStripMenuItem,
+            this.iPReportingToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(973, 24);
+            this.menuStrip1.TabIndex = 17;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // discoverModulesToolStripMenuItem
+            // 
+            this.discoverModulesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.retrievePanelNfoToolStripMenuItem,
+            this.registerPanelToolStripMenuItem,
+            this.readMonitoringStatusToolStripMenuItem,
+            this.getSystemTroublesToolStripMenuItem});
+            this.discoverModulesToolStripMenuItem.Name = "discoverModulesToolStripMenuItem";
+            this.discoverModulesToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.discoverModulesToolStripMenuItem.Text = "Panel";
+            // 
+            // retrievePanelNfoToolStripMenuItem
+            // 
+            this.retrievePanelNfoToolStripMenuItem.Name = "retrievePanelNfoToolStripMenuItem";
+            this.retrievePanelNfoToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.retrievePanelNfoToolStripMenuItem.Text = "Retrieve Panel Information";
+            this.retrievePanelNfoToolStripMenuItem.Click += new System.EventHandler(this.retrievePanelInfoToolStripMenuItem_Click);
+            // 
+            // registerPanelToolStripMenuItem
+            // 
+            this.registerPanelToolStripMenuItem.Name = "registerPanelToolStripMenuItem";
+            this.registerPanelToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.registerPanelToolStripMenuItem.Text = "Register Panel";
+            this.registerPanelToolStripMenuItem.Click += new System.EventHandler(this.registerPanelToolStripMenuItem_Click);
+            // 
+            // readMonitoringStatusToolStripMenuItem
+            // 
+            this.readMonitoringStatusToolStripMenuItem.Name = "readMonitoringStatusToolStripMenuItem";
+            this.readMonitoringStatusToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.readMonitoringStatusToolStripMenuItem.Text = "Get All System Status";
+            this.readMonitoringStatusToolStripMenuItem.Click += new System.EventHandler(this.readMonitoringStatusToolStripMenuItem_Click);
+            // 
+            // getSystemTroublesToolStripMenuItem
+            // 
+            this.getSystemTroublesToolStripMenuItem.Name = "getSystemTroublesToolStripMenuItem";
+            this.getSystemTroublesToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.getSystemTroublesToolStripMenuItem.Text = "Get All SystemTroubles";
+            this.getSystemTroublesToolStripMenuItem.Click += new System.EventHandler(this.getSystemTroublesToolStripMenuItem_Click);
+            // 
+            // areaToolStripMenuItem
+            // 
+            this.areaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.controlAreaToolStripMenuItem,
+            this.areaStatusToolStripMenuItem,
+            this.readAllAreaToolStripMenuItem});
+            this.areaToolStripMenuItem.Name = "areaToolStripMenuItem";
+            this.areaToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.areaToolStripMenuItem.Text = "Area ";
+            // 
+            // controlAreaToolStripMenuItem
+            // 
+            this.controlAreaToolStripMenuItem.Name = "controlAreaToolStripMenuItem";
+            this.controlAreaToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.controlAreaToolStripMenuItem.Text = "Control Area";
+            this.controlAreaToolStripMenuItem.Click += new System.EventHandler(this.controlAreaToolStripMenuItem_Click);
+            // 
+            // areaStatusToolStripMenuItem
+            // 
+            this.areaStatusToolStripMenuItem.Name = "areaStatusToolStripMenuItem";
+            this.areaStatusToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.areaStatusToolStripMenuItem.Text = "Get All Areas Status";
+            this.areaStatusToolStripMenuItem.Click += new System.EventHandler(this.areaStatusToolStripMenuItem_Click);
+            // 
+            // readAllAreaToolStripMenuItem
+            // 
+            this.readAllAreaToolStripMenuItem.Name = "readAllAreaToolStripMenuItem";
+            this.readAllAreaToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.readAllAreaToolStripMenuItem.Text = "Read All Areas";
+            this.readAllAreaToolStripMenuItem.Click += new System.EventHandler(this.readAllAreasToolStripMenuItem_Click);
+            // 
+            // zoneToolStripMenuItem
+            // 
+            this.zoneToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.controlZoneToolStripMenuItem,
+            this.zoneStatusToolStripMenuItem,
+            this.readAllZonesToolStripMenuItem});
+            this.zoneToolStripMenuItem.Name = "zoneToolStripMenuItem";
+            this.zoneToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.zoneToolStripMenuItem.Text = "Zone";
+            // 
+            // controlZoneToolStripMenuItem
+            // 
+            this.controlZoneToolStripMenuItem.Name = "controlZoneToolStripMenuItem";
+            this.controlZoneToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.controlZoneToolStripMenuItem.Text = "Control Zone";
+            this.controlZoneToolStripMenuItem.Click += new System.EventHandler(this.controlZoneToolStripMenuItem_Click);
+            // 
+            // zoneStatusToolStripMenuItem
+            // 
+            this.zoneStatusToolStripMenuItem.Name = "zoneStatusToolStripMenuItem";
+            this.zoneStatusToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.zoneStatusToolStripMenuItem.Text = "Get All Zones Status";
+            this.zoneStatusToolStripMenuItem.Click += new System.EventHandler(this.zoneStatusToolStripMenuItem_Click);
+            // 
+            // readAllZonesToolStripMenuItem
+            // 
+            this.readAllZonesToolStripMenuItem.Name = "readAllZonesToolStripMenuItem";
+            this.readAllZonesToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.readAllZonesToolStripMenuItem.Text = "Read All Zones";
+            this.readAllZonesToolStripMenuItem.Click += new System.EventHandler(this.readAllZonesToolStripMenuItem_Click);
+            // 
+            // pGMToolStripMenuItem
+            // 
+            this.pGMToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.controlPGMToolStripMenuItem,
+            this.pGMStatusToolStripMenuItem,
+            this.readAllPGMToolStripMenuItem});
+            this.pGMToolStripMenuItem.Name = "pGMToolStripMenuItem";
+            this.pGMToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
+            this.pGMToolStripMenuItem.Text = "PGM";
+            // 
+            // controlPGMToolStripMenuItem
+            // 
+            this.controlPGMToolStripMenuItem.Name = "controlPGMToolStripMenuItem";
+            this.controlPGMToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.controlPGMToolStripMenuItem.Text = "Control PGM";
+            this.controlPGMToolStripMenuItem.Click += new System.EventHandler(this.controlPGMToolStripMenuItem_Click);
+            // 
+            // pGMStatusToolStripMenuItem
+            // 
+            this.pGMStatusToolStripMenuItem.Name = "pGMStatusToolStripMenuItem";
+            this.pGMStatusToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.pGMStatusToolStripMenuItem.Text = "Get All PGMs Status";
+            this.pGMStatusToolStripMenuItem.Click += new System.EventHandler(this.pGMStatusToolStripMenuItem_Click);
+            // 
+            // readAllPGMToolStripMenuItem
+            // 
+            this.readAllPGMToolStripMenuItem.Name = "readAllPGMToolStripMenuItem";
+            this.readAllPGMToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.readAllPGMToolStripMenuItem.Text = "Read All PGMs";
+            this.readAllPGMToolStripMenuItem.Click += new System.EventHandler(this.readAllPGMsToolStripMenuItem_Click);
+            // 
+            // doorToolStripMenuItem
+            // 
+            this.doorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.controlDoorToolStripMenuItem,
+            this.doorStatusToolStripMenuItem,
+            this.readAllDoorsToolStripMenuItem});
+            this.doorToolStripMenuItem.Name = "doorToolStripMenuItem";
+            this.doorToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
+            this.doorToolStripMenuItem.Text = "Door";
+            this.doorToolStripMenuItem.Visible = false;
+            // 
+            // controlDoorToolStripMenuItem
+            // 
+            this.controlDoorToolStripMenuItem.Name = "controlDoorToolStripMenuItem";
+            this.controlDoorToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.controlDoorToolStripMenuItem.Text = "Control Door";
+            this.controlDoorToolStripMenuItem.Click += new System.EventHandler(this.controlDoorToolStripMenuItem_Click);
+            // 
+            // doorStatusToolStripMenuItem
+            // 
+            this.doorStatusToolStripMenuItem.Name = "doorStatusToolStripMenuItem";
+            this.doorStatusToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.doorStatusToolStripMenuItem.Text = "Get All Doors Status";
+            this.doorStatusToolStripMenuItem.Click += new System.EventHandler(this.doorStatusToolStripMenuItem_Click);
+            // 
+            // readAllDoorsToolStripMenuItem
+            // 
+            this.readAllDoorsToolStripMenuItem.Name = "readAllDoorsToolStripMenuItem";
+            this.readAllDoorsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.readAllDoorsToolStripMenuItem.Text = "Read All Doors";
+            this.readAllDoorsToolStripMenuItem.Click += new System.EventHandler(this.readAllDoorsToolStripMenuItem_Click);
+            // 
+            // timeToolStripMenuItem
+            // 
+            this.timeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.readTimeStampToolStripMenuItem,
+            this.readDateTimeToolStripMenuItem,
+            this.writeDateTimeToolStripMenuItem});
+            this.timeToolStripMenuItem.Name = "timeToolStripMenuItem";
+            this.timeToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
+            this.timeToolStripMenuItem.Text = "Date/Time";
+            // 
+            // readTimeStampToolStripMenuItem
+            // 
+            this.readTimeStampToolStripMenuItem.Name = "readTimeStampToolStripMenuItem";
+            this.readTimeStampToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.readTimeStampToolStripMenuItem.Text = "Read Time Stamp";
+            this.readTimeStampToolStripMenuItem.Click += new System.EventHandler(this.readTimeStampToolStripMenuItem_Click);
+            // 
+            // readDateTimeToolStripMenuItem
+            // 
+            this.readDateTimeToolStripMenuItem.Name = "readDateTimeToolStripMenuItem";
+            this.readDateTimeToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.readDateTimeToolStripMenuItem.Text = "Read DateTime";
+            this.readDateTimeToolStripMenuItem.Click += new System.EventHandler(this.readDateTimeToolStripMenuItem_Click);
+            // 
+            // writeDateTimeToolStripMenuItem
+            // 
+            this.writeDateTimeToolStripMenuItem.Name = "writeDateTimeToolStripMenuItem";
+            this.writeDateTimeToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.writeDateTimeToolStripMenuItem.Text = "Write Curent Date Time";
+            this.writeDateTimeToolStripMenuItem.Click += new System.EventHandler(this.writeDateTimeToolStripMenuItem_Click);
+            // 
+            // iPReportingToolStripMenuItem
+            // 
+            this.iPReportingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.readIpReportingToolStripMenuItem,
+            this.writeIPReportingToolStripMenuItem,
+            this.getIPRegistartionStatusToolStripMenuItem});
+            this.iPReportingToolStripMenuItem.Name = "iPReportingToolStripMenuItem";
+            this.iPReportingToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
+            this.iPReportingToolStripMenuItem.Text = "IP Reporting";
+            // 
+            // readIpReportingToolStripMenuItem
+            // 
+            this.readIpReportingToolStripMenuItem.Name = "readIpReportingToolStripMenuItem";
+            this.readIpReportingToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.readIpReportingToolStripMenuItem.Text = "Read IP Reporting";
+            this.readIpReportingToolStripMenuItem.Click += new System.EventHandler(this.readIpReportingToolStripMenuItem_Click);
+            // 
+            // writeIPReportingToolStripMenuItem
+            // 
+            this.writeIPReportingToolStripMenuItem.Name = "writeIPReportingToolStripMenuItem";
+            this.writeIPReportingToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.writeIPReportingToolStripMenuItem.Text = "Write IP Reporting";
+            this.writeIPReportingToolStripMenuItem.Click += new System.EventHandler(this.writeIPReportingToolStripMenuItem_Click_1);
+            // 
+            // getIPRegistartionStatusToolStripMenuItem
+            // 
+            this.getIPRegistartionStatusToolStripMenuItem.Name = "getIPRegistartionStatusToolStripMenuItem";
+            this.getIPRegistartionStatusToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.getIPRegistartionStatusToolStripMenuItem.Text = "Get IP Registartion Status";
+            this.getIPRegistartionStatusToolStripMenuItem.Click += new System.EventHandler(this.getIPRegistartionStatusToolStripMenuItem_Click);
+            // 
+            // tabPageEvents
+            // 
+            this.tabPageEvents.Controls.Add(this.listViewPanelBufferedEvent);
+            this.tabPageEvents.Controls.Add(this.toolStrip2);
+            this.tabPageEvents.Location = new System.Drawing.Point(4, 22);
+            this.tabPageEvents.Name = "tabPageEvents";
+            this.tabPageEvents.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageEvents.Size = new System.Drawing.Size(979, 343);
+            this.tabPageEvents.TabIndex = 1;
+            this.tabPageEvents.Text = "Buffered Events";
+            this.tabPageEvents.UseVisualStyleBackColor = true;
+            // 
+            // listViewPanelBufferedEvent
+            // 
+            this.listViewPanelBufferedEvent.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.PanelID,
+            this.DateTime,
+            this.Type,
+            this.Label,
+            this.SerialNo,
+            this.Description,
+            this.AdditionalInformation,
+            this.UserLabel,
+            this.Order,
+            this.Buffered});
+            this.listViewPanelBufferedEvent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewPanelBufferedEvent.FullRowSelect = true;
+            this.listViewPanelBufferedEvent.GridLines = true;
+            this.listViewPanelBufferedEvent.Location = new System.Drawing.Point(3, 28);
+            this.listViewPanelBufferedEvent.Name = "listViewPanelBufferedEvent";
+            this.listViewPanelBufferedEvent.Size = new System.Drawing.Size(973, 312);
+            this.listViewPanelBufferedEvent.TabIndex = 13;
+            this.listViewPanelBufferedEvent.UseCompatibleStateImageBehavior = false;
+            this.listViewPanelBufferedEvent.View = System.Windows.Forms.View.Details;
+            // 
+            // PanelID
+            // 
+            this.PanelID.Text = "Panel ID";
+            this.PanelID.Width = 54;
+            // 
+            // DateTime
+            // 
+            this.DateTime.Text = "Date + Time";
+            this.DateTime.Width = 139;
+            // 
+            // Type
+            // 
+            this.Type.Text = "Type";
+            this.Type.Width = 77;
+            // 
+            // Label
+            // 
+            this.Label.Text = "Label";
+            this.Label.Width = 97;
+            // 
+            // SerialNo
+            // 
+            this.SerialNo.Text = "Serial #";
+            this.SerialNo.Width = 59;
+            // 
+            // Description
+            // 
+            this.Description.Text = "Description";
+            this.Description.Width = 196;
+            // 
+            // AdditionalInformation
+            // 
+            this.AdditionalInformation.Text = "Additional Information";
+            this.AdditionalInformation.Width = 115;
+            // 
+            // UserLabel
+            // 
+            this.UserLabel.Text = "User Label";
+            this.UserLabel.Width = 125;
+            // 
+            // Order
+            // 
+            this.Order.Text = "Order";
+            // 
+            // Buffered
+            // 
+            this.Buffered.Text = "Buffered";
+            // 
+            // toolStrip2
+            // 
+            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.LoadPanelBufferedEventsButton,
+            this.toolStripSeparator6,
+            this.PanelBufferedEventCountLabel});
+            this.toolStrip2.Location = new System.Drawing.Point(3, 3);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Size = new System.Drawing.Size(973, 25);
+            this.toolStrip2.TabIndex = 12;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // LoadPanelBufferedEventsButton
+            // 
+            this.LoadPanelBufferedEventsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.LoadPanelBufferedEventsButton.Image = ((System.Drawing.Image)(resources.GetObject("LoadPanelBufferedEventsButton.Image")));
+            this.LoadPanelBufferedEventsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.LoadPanelBufferedEventsButton.Name = "LoadPanelBufferedEventsButton";
+            this.LoadPanelBufferedEventsButton.Size = new System.Drawing.Size(74, 22);
+            this.LoadPanelBufferedEventsButton.Text = "Load Events";
+            this.LoadPanelBufferedEventsButton.Click += new System.EventHandler(this.LoadPanelBufferedEventsButton_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.AutoSize = false;
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(20, 25);
+            // 
+            // PanelBufferedEventCountLabel
+            // 
+            this.PanelBufferedEventCountLabel.Name = "PanelBufferedEventCountLabel";
+            this.PanelBufferedEventCountLabel.Size = new System.Drawing.Size(45, 22);
+            this.PanelBufferedEventCountLabel.Text = "0 Event";
+            // 
+            // tabPageUsers
+            // 
+            this.tabPageUsers.Controls.Add(this.listViewUsers);
+            this.tabPageUsers.Controls.Add(this.panel1);
+            this.tabPageUsers.Location = new System.Drawing.Point(4, 22);
+            this.tabPageUsers.Name = "tabPageUsers";
+            this.tabPageUsers.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageUsers.Size = new System.Drawing.Size(979, 343);
+            this.tabPageUsers.TabIndex = 3;
+            this.tabPageUsers.Text = "Users";
+            this.tabPageUsers.UseVisualStyleBackColor = true;
+            // 
+            // listViewUsers
+            // 
+            this.listViewUsers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewUsers.FullRowSelect = true;
+            this.listViewUsers.GridLines = true;
+            this.listViewUsers.Location = new System.Drawing.Point(3, 51);
+            this.listViewUsers.Name = "listViewUsers";
+            this.listViewUsers.Size = new System.Drawing.Size(973, 289);
+            this.listViewUsers.TabIndex = 14;
+            this.listViewUsers.UseCompatibleStateImageBehavior = false;
+            this.listViewUsers.View = System.Windows.Forms.View.Details;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.menuStrip2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(973, 48);
+            this.panel1.TabIndex = 13;
+            // 
+            // menuStrip2
+            // 
+            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem26});
+            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip2.Name = "menuStrip2";
+            this.menuStrip2.Size = new System.Drawing.Size(973, 24);
+            this.menuStrip2.TabIndex = 17;
+            this.menuStrip2.Text = "menuStrip2";
+            // 
+            // toolStripMenuItem26
+            // 
+            this.toolStripMenuItem26.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.readAllUsersToolStripMenuItem,
+            this.toolStripMenuItem28});
+            this.toolStripMenuItem26.Name = "toolStripMenuItem26";
+            this.toolStripMenuItem26.Size = new System.Drawing.Size(42, 20);
+            this.toolStripMenuItem26.Text = "User";
+            // 
+            // readAllUsersToolStripMenuItem
+            // 
+            this.readAllUsersToolStripMenuItem.Name = "readAllUsersToolStripMenuItem";
+            this.readAllUsersToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.readAllUsersToolStripMenuItem.Text = "Read All Users";
+            this.readAllUsersToolStripMenuItem.Click += new System.EventHandler(this.readAllUsersToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem28
+            // 
+            this.toolStripMenuItem28.Name = "toolStripMenuItem28";
+            this.toolStripMenuItem28.Size = new System.Drawing.Size(148, 22);
+            this.toolStripMenuItem28.Text = "Write User 1";
+            this.toolStripMenuItem28.Click += new System.EventHandler(this.writeUser1ToolStripMenuItem_Click);
+            // 
+            // toolStripPanelStatus
+            // 
+            this.toolStripPanelStatus.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStripPanelStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsBtnConnect,
+            this.toolStripSeparator7,
+            this.btnRX,
+            this.btnTX,
+            this.toolStripSeparator2,
+            this.PanelProductLabel,
+            this.toolStripSeparator1,
+            this.PanelStatusLabel,
+            this.toolStripSeparator4,
+            this.PanelDateTimeLabel,
+            this.toolStripSeparator3,
+            this.btnrefreshUI,
+            this.PanelStatusProgressBar,
+            this.toolStripSeparator5,
+            this.PanelStatusInfoLabel});
+            this.toolStripPanelStatus.Location = new System.Drawing.Point(0, 0);
+            this.toolStripPanelStatus.Name = "toolStripPanelStatus";
+            this.toolStripPanelStatus.Size = new System.Drawing.Size(987, 25);
+            this.toolStripPanelStatus.TabIndex = 19;
+            this.toolStripPanelStatus.Text = "toolStrip1";
+            // 
+            // tsBtnConnect
+            // 
+            this.tsBtnConnect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsBtnConnect.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.tsBtnConnect.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnConnect.Image")));
+            this.tsBtnConnect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsBtnConnect.Name = "tsBtnConnect";
+            this.tsBtnConnect.Size = new System.Drawing.Size(57, 22);
+            this.tsBtnConnect.Text = "Connect";
+            this.tsBtnConnect.Click += new System.EventHandler(this.tsBtnConnect_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.AutoSize = false;
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(20, 25);
+            // 
+            // btnRX
+            // 
+            this.btnRX.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnRX.Image = ((System.Drawing.Image)(resources.GetObject("btnRX.Image")));
+            this.btnRX.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRX.Name = "btnRX";
+            this.btnRX.Size = new System.Drawing.Size(23, 22);
+            this.btnRX.Text = "Rx";
+            // 
+            // btnTX
+            // 
+            this.btnTX.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTX.Image = ((System.Drawing.Image)(resources.GetObject("btnTX.Image")));
+            this.btnTX.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTX.Name = "btnTX";
+            this.btnTX.Size = new System.Drawing.Size(23, 22);
+            this.btnTX.Text = "Tx";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // PanelProductLabel
+            // 
+            this.PanelProductLabel.Name = "PanelProductLabel";
+            this.PanelProductLabel.Size = new System.Drawing.Size(47, 22);
+            this.PanelProductLabel.Text = "Panel: ?";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.AutoSize = false;
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(20, 25);
+            // 
+            // PanelStatusLabel
+            // 
+            this.PanelStatusLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.PanelStatusLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.PanelStatusLabel.ImageTransparentColor = System.Drawing.Color.White;
+            this.PanelStatusLabel.Name = "PanelStatusLabel";
+            this.PanelStatusLabel.Size = new System.Drawing.Size(94, 22);
+            this.PanelStatusLabel.Text = "DISCONNECTED";
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
+            // PanelDateTimeLabel
+            // 
+            this.PanelDateTimeLabel.Name = "PanelDateTimeLabel";
+            this.PanelDateTimeLabel.Size = new System.Drawing.Size(37, 22);
+            this.PanelDateTimeLabel.Text = "Time:";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.AutoSize = false;
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(20, 25);
+            // 
+            // btnrefreshUI
+            // 
+            this.btnrefreshUI.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnrefreshUI.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.btnrefreshUI.Image = ((System.Drawing.Image)(resources.GetObject("btnrefreshUI.Image")));
+            this.btnrefreshUI.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnrefreshUI.Name = "btnrefreshUI";
+            this.btnrefreshUI.Size = new System.Drawing.Size(64, 22);
+            this.btnrefreshUI.Text = "Refresh UI";
+            this.btnrefreshUI.Click += new System.EventHandler(this.btnrefreshUI_Click);
+            // 
+            // PanelStatusProgressBar
+            // 
+            this.PanelStatusProgressBar.Name = "PanelStatusProgressBar";
+            this.PanelStatusProgressBar.Size = new System.Drawing.Size(100, 22);
+            this.PanelStatusProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.AutoSize = false;
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(20, 25);
+            // 
+            // PanelStatusInfoLabel
+            // 
+            this.PanelStatusInfoLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.PanelStatusInfoLabel.Name = "PanelStatusInfoLabel";
+            this.PanelStatusInfoLabel.Size = new System.Drawing.Size(49, 22);
+            this.PanelStatusInfoLabel.Text = "              ";
+            this.PanelStatusInfoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // splitter1
+            // 
+            this.splitter1.Location = new System.Drawing.Point(262, 0);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 394);
+            this.splitter1.TabIndex = 22;
+            this.splitter1.TabStop = false;
+            // 
+            // panelLeft
+            // 
+            this.panelLeft.Controls.Add(this.tvContolPanels);
+            this.panelLeft.Controls.Add(this.statusStrip2);
+            this.panelLeft.Controls.Add(this.toolStripControlPanels);
+            this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelLeft.Location = new System.Drawing.Point(0, 0);
+            this.panelLeft.Name = "panelLeft";
+            this.panelLeft.Size = new System.Drawing.Size(262, 394);
+            this.panelLeft.TabIndex = 21;
+            // 
+            // tvContolPanels
+            // 
+            this.tvContolPanels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tvContolPanels.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvContolPanels.Location = new System.Drawing.Point(0, 25);
+            this.tvContolPanels.Name = "tvContolPanels";
+            this.tvContolPanels.Size = new System.Drawing.Size(262, 347);
+            this.tvContolPanels.TabIndex = 9;
+            this.tvContolPanels.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvContolPanels_AfterSelect);
+            // 
+            // statusStrip2
+            // 
+            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnControlPanelActions});
+            this.statusStrip2.Location = new System.Drawing.Point(0, 372);
+            this.statusStrip2.Name = "statusStrip2";
+            this.statusStrip2.Size = new System.Drawing.Size(262, 22);
+            this.statusStrip2.TabIndex = 8;
+            this.statusStrip2.Text = "statusStrip2";
+            // 
+            // btnControlPanelActions
+            // 
+            this.btnControlPanelActions.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnControlPanelActions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuConnectToAllControlPanels,
+            this.menuDisconnectFromAllControlPanels});
+            this.btnControlPanelActions.Image = ((System.Drawing.Image)(resources.GetObject("btnControlPanelActions.Image")));
+            this.btnControlPanelActions.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnControlPanelActions.Name = "btnControlPanelActions";
+            this.btnControlPanelActions.Size = new System.Drawing.Size(138, 20);
+            this.btnControlPanelActions.Text = "Control Panel Actions";
+            // 
+            // menuConnectToAllControlPanels
+            // 
+            this.menuConnectToAllControlPanels.Name = "menuConnectToAllControlPanels";
+            this.menuConnectToAllControlPanels.Size = new System.Drawing.Size(257, 22);
+            this.menuConnectToAllControlPanels.Text = "Connect to all Control Panels";
+            this.menuConnectToAllControlPanels.Click += new System.EventHandler(this.menuConnectToAllControlPanels_Click);
+            // 
+            // menuDisconnectFromAllControlPanels
+            // 
+            this.menuDisconnectFromAllControlPanels.Name = "menuDisconnectFromAllControlPanels";
+            this.menuDisconnectFromAllControlPanels.Size = new System.Drawing.Size(257, 22);
+            this.menuDisconnectFromAllControlPanels.Text = "Disconnect from all Control Panels";
+            this.menuDisconnectFromAllControlPanels.Click += new System.EventHandler(this.menuDisconnectFromAllControlPanels_Click);
+            // 
+            // toolStripControlPanels
+            // 
+            this.toolStripControlPanels.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStripControlPanels.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsBtnAddControlPanel,
+            this.tsBtnModifySettings,
+            this.toolStripSeparator9,
+            this.tsBtnDeletePanel});
+            this.toolStripControlPanels.Location = new System.Drawing.Point(0, 0);
+            this.toolStripControlPanels.Name = "toolStripControlPanels";
+            this.toolStripControlPanels.Size = new System.Drawing.Size(262, 25);
+            this.toolStripControlPanels.TabIndex = 5;
+            this.toolStripControlPanels.Text = "Control Panels";
+            // 
+            // tsBtnAddControlPanel
+            // 
+            this.tsBtnAddControlPanel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsBtnAddControlPanel.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnAddControlPanel.Image")));
+            this.tsBtnAddControlPanel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsBtnAddControlPanel.Name = "tsBtnAddControlPanel";
+            this.tsBtnAddControlPanel.Size = new System.Drawing.Size(33, 22);
+            this.tsBtnAddControlPanel.Text = "Add";
+            this.tsBtnAddControlPanel.ToolTipText = "Add Control Panel";
+            this.tsBtnAddControlPanel.Click += new System.EventHandler(this.tsBtnAddControlPanel_Click_1);
+            // 
+            // tsBtnModifySettings
+            // 
+            this.tsBtnModifySettings.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsBtnModifySettings.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnModifySettings.Image")));
+            this.tsBtnModifySettings.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsBtnModifySettings.Name = "tsBtnModifySettings";
+            this.tsBtnModifySettings.Size = new System.Drawing.Size(49, 22);
+            this.tsBtnModifySettings.Text = "Modify";
+            this.tsBtnModifySettings.Click += new System.EventHandler(this.tsBtnModifySettings_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.AutoSize = false;
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(20, 25);
+            // 
+            // tsBtnDeletePanel
+            // 
+            this.tsBtnDeletePanel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsBtnDeletePanel.ForeColor = System.Drawing.Color.Brown;
+            this.tsBtnDeletePanel.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnDeletePanel.Image")));
+            this.tsBtnDeletePanel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsBtnDeletePanel.Name = "tsBtnDeletePanel";
+            this.tsBtnDeletePanel.Size = new System.Drawing.Size(44, 22);
+            this.tsBtnDeletePanel.Text = "Delete";
+            this.tsBtnDeletePanel.Click += new System.EventHandler(this.tsBtnDeletePanel_Click);
+            // 
+            // tabPageIPReportingEvent
+            // 
+            this.tabPageIPReportingEvent.Controls.Add(this.tabControlIPReporting);
+            this.tabPageIPReportingEvent.Controls.Add(this.toolStrip1);
+            this.tabPageIPReportingEvent.Location = new System.Drawing.Point(4, 22);
+            this.tabPageIPReportingEvent.Name = "tabPageIPReportingEvent";
+            this.tabPageIPReportingEvent.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageIPReportingEvent.Size = new System.Drawing.Size(1258, 546);
+            this.tabPageIPReportingEvent.TabIndex = 1;
+            this.tabPageIPReportingEvent.Text = "IP Reporting Events (IPDOX)";
+            this.tabPageIPReportingEvent.UseVisualStyleBackColor = true;
+            // 
+            // tabControlIPReporting
+            // 
+            this.tabControlIPReporting.Controls.Add(this.tabPageIPReportingEvents);
+            this.tabControlIPReporting.Controls.Add(this.tabPageIPReportingAccounts);
+            this.tabControlIPReporting.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlIPReporting.Location = new System.Drawing.Point(3, 28);
+            this.tabControlIPReporting.Name = "tabControlIPReporting";
+            this.tabControlIPReporting.SelectedIndex = 0;
+            this.tabControlIPReporting.Size = new System.Drawing.Size(1252, 515);
+            this.tabControlIPReporting.TabIndex = 8;
+            // 
+            // tabPageIPReportingEvents
+            // 
+            this.tabPageIPReportingEvents.Controls.Add(this.listViewIPReportingEvents);
+            this.tabPageIPReportingEvents.Location = new System.Drawing.Point(4, 22);
+            this.tabPageIPReportingEvents.Name = "tabPageIPReportingEvents";
+            this.tabPageIPReportingEvents.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageIPReportingEvents.Size = new System.Drawing.Size(1244, 489);
+            this.tabPageIPReportingEvents.TabIndex = 0;
+            this.tabPageIPReportingEvents.Text = "Events";
+            this.tabPageIPReportingEvents.UseVisualStyleBackColor = true;
+            // 
+            // listViewIPReportingEvents
+            // 
+            this.listViewIPReportingEvents.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewIPReportingEvents.FullRowSelect = true;
+            this.listViewIPReportingEvents.GridLines = true;
+            this.listViewIPReportingEvents.Location = new System.Drawing.Point(3, 3);
+            this.listViewIPReportingEvents.Name = "listViewIPReportingEvents";
+            this.listViewIPReportingEvents.Size = new System.Drawing.Size(1238, 483);
+            this.listViewIPReportingEvents.TabIndex = 14;
+            this.listViewIPReportingEvents.UseCompatibleStateImageBehavior = false;
+            this.listViewIPReportingEvents.View = System.Windows.Forms.View.Details;
+            // 
+            // tabPageIPReportingAccounts
+            // 
+            this.tabPageIPReportingAccounts.Controls.Add(this.listViewIPReportingAccounts);
+            this.tabPageIPReportingAccounts.Location = new System.Drawing.Point(4, 22);
+            this.tabPageIPReportingAccounts.Name = "tabPageIPReportingAccounts";
+            this.tabPageIPReportingAccounts.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageIPReportingAccounts.Size = new System.Drawing.Size(1244, 489);
+            this.tabPageIPReportingAccounts.TabIndex = 1;
+            this.tabPageIPReportingAccounts.Text = "Accounts";
+            this.tabPageIPReportingAccounts.UseVisualStyleBackColor = true;
+            // 
+            // listViewIPReportingAccounts
+            // 
+            this.listViewIPReportingAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewIPReportingAccounts.FullRowSelect = true;
+            this.listViewIPReportingAccounts.GridLines = true;
+            this.listViewIPReportingAccounts.Location = new System.Drawing.Point(3, 3);
+            this.listViewIPReportingAccounts.Name = "listViewIPReportingAccounts";
+            this.listViewIPReportingAccounts.Size = new System.Drawing.Size(1238, 483);
+            this.listViewIPReportingAccounts.TabIndex = 15;
+            this.listViewIPReportingAccounts.UseCompatibleStateImageBehavior = false;
+            this.listViewIPReportingAccounts.View = System.Windows.Forms.View.Details;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnStartIPDOX,
+            this.toolStripSeparator8,
+            this.btnStopIPDOX,
+            this.toolStripSeparator10,
+            this.btnDeleteSelectedIPDOXAccount,
+            this.toolStripSeparator11,
+            this.toolStripLabel1,
+            this.textBoxIPDOXWanAddress,
+            this.toolStripLabel2,
+            this.textBoxIPDOXWanPort,
+            this.toolStripLabel3,
+            this.textBoxIPDOXIPPassword,
+            this.labelIPDOXStatus});
+            this.toolStrip1.Location = new System.Drawing.Point(3, 3);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(1252, 25);
+            this.toolStrip1.TabIndex = 7;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // btnStartIPDOX
+            // 
+            this.btnStartIPDOX.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnStartIPDOX.ForeColor = System.Drawing.Color.SeaGreen;
+            this.btnStartIPDOX.Image = ((System.Drawing.Image)(resources.GetObject("btnStartIPDOX.Image")));
+            this.btnStartIPDOX.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnStartIPDOX.Name = "btnStartIPDOX";
+            this.btnStartIPDOX.Size = new System.Drawing.Size(72, 22);
+            this.btnStartIPDOX.Text = "Start IPDOX";
+            this.btnStartIPDOX.Click += new System.EventHandler(this.btnStartIPDOX_Click);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(83, 22);
+            this.toolStripLabel1.Text = "WAN Address:";
+            // 
+            // textBoxIPDOXWanAddress
+            // 
+            this.textBoxIPDOXWanAddress.Name = "textBoxIPDOXWanAddress";
+            this.textBoxIPDOXWanAddress.Size = new System.Drawing.Size(100, 25);
+            this.textBoxIPDOXWanAddress.Text = "0.0.0.0";
+            // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(60, 22);
+            this.toolStripLabel2.Text = "WAN Port";
+            // 
+            // textBoxIPDOXWanPort
+            // 
+            this.textBoxIPDOXWanPort.MaxLength = 5;
+            this.textBoxIPDOXWanPort.Name = "textBoxIPDOXWanPort";
+            this.textBoxIPDOXWanPort.Size = new System.Drawing.Size(100, 25);
+            this.textBoxIPDOXWanPort.Text = "15000";
+            // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(57, 22);
+            this.toolStripLabel3.Text = "Password";
+            // 
+            // textBoxIPDOXIPPassword
+            // 
+            this.textBoxIPDOXIPPassword.Name = "textBoxIPDOXIPPassword";
+            this.textBoxIPDOXIPPassword.Size = new System.Drawing.Size(100, 25);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(83, 22);
+            this.toolStripLabel1.Text = "WAN Address:";
+            // 
+            // textBoxIPDOXWanAddress
+            // 
+            this.textBoxIPDOXWanAddress.Name = "textBoxIPDOXWanAddress";
+            this.textBoxIPDOXWanAddress.Size = new System.Drawing.Size(100, 25);
+            this.textBoxIPDOXWanAddress.Text = "0.0.0.0";
+            // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(60, 22);
+            this.toolStripLabel2.Text = "WAN Port";
+            // 
+            // textBoxIPDOXWanPort
+            // 
+            this.textBoxIPDOXWanPort.MaxLength = 5;
+            this.textBoxIPDOXWanPort.Name = "textBoxIPDOXWanPort";
+            this.textBoxIPDOXWanPort.Size = new System.Drawing.Size(100, 25);
+            this.textBoxIPDOXWanPort.Text = "15000";
+            // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(57, 22);
+            this.toolStripLabel3.Text = "Password";
+            // 
+            // textBoxIPDOXIPPassword
+            // 
+            this.textBoxIPDOXIPPassword.Name = "textBoxIPDOXIPPassword";
+            this.textBoxIPDOXIPPassword.Size = new System.Drawing.Size(100, 25);
+            // 
+            // tabPageDetectIPModule
+            // 
+            this.tabPageDetectIPModule.Controls.Add(this.listViewIPDeviceOnNetwork);
+            this.tabPageDetectIPModule.Controls.Add(this.toolStripModuelOnLAN);
+            this.tabPageDetectIPModule.Location = new System.Drawing.Point(4, 22);
+            this.tabPageDetectIPModule.Name = "tabPageDetectIPModule";
+            this.tabPageDetectIPModule.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageDetectIPModule.Size = new System.Drawing.Size(1258, 546);
+            this.tabPageDetectIPModule.TabIndex = 2;
+            this.tabPageDetectIPModule.Text = "Detect IP Module on LAN";
+            this.tabPageDetectIPModule.UseVisualStyleBackColor = true;
+            // 
+            // listViewIPDeviceOnNetwork
+            // 
+            this.listViewIPDeviceOnNetwork.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewIPDeviceOnNetwork.Location = new System.Drawing.Point(3, 28);
+            this.listViewIPDeviceOnNetwork.Name = "listViewIPDeviceOnNetwork";
+            this.listViewIPDeviceOnNetwork.Size = new System.Drawing.Size(1252, 515);
+            this.listViewIPDeviceOnNetwork.TabIndex = 6;
+            this.listViewIPDeviceOnNetwork.UseCompatibleStateImageBehavior = false;
+            // 
+            // toolStripModuelOnLAN
+            // 
+            this.toolStripModuelOnLAN.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStripModuelOnLAN.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsBtnDiscoverIPModuleOnLAN});
+            this.toolStripModuelOnLAN.Location = new System.Drawing.Point(3, 3);
+            this.toolStripModuelOnLAN.Name = "toolStripModuelOnLAN";
+            this.toolStripModuelOnLAN.Size = new System.Drawing.Size(1252, 25);
+            this.toolStripModuelOnLAN.TabIndex = 5;
+            this.toolStripModuelOnLAN.Text = "toolStrip1";
+            // 
+            // tsBtnDiscoverIPModuleOnLAN
+            // 
+            this.tsBtnDiscoverIPModuleOnLAN.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsBtnDiscoverIPModuleOnLAN.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnDiscoverIPModuleOnLAN.Image")));
+            this.tsBtnDiscoverIPModuleOnLAN.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsBtnDiscoverIPModuleOnLAN.Name = "tsBtnDiscoverIPModuleOnLAN";
+            this.tsBtnDiscoverIPModuleOnLAN.Size = new System.Drawing.Size(156, 22);
+            this.tsBtnDiscoverIPModuleOnLAN.Text = "Discover IP Module on LAN";
+            this.tsBtnDiscoverIPModuleOnLAN.Click += new System.EventHandler(this.tsBtnDiscoverIPModuleOnLAN_Click);
+            // 
+            // tabPageLogs
+            // 
+            this.tabPageLogs.Controls.Add(this.textBoxLogs);
+            this.tabPageLogs.Controls.Add(this.toolStripLogs);
+            this.tabPageLogs.Location = new System.Drawing.Point(4, 22);
+            this.tabPageLogs.Name = "tabPageLogs";
+            this.tabPageLogs.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageLogs.Size = new System.Drawing.Size(1258, 546);
+            this.tabPageLogs.TabIndex = 3;
+            this.tabPageLogs.Text = "Logs";
+            this.tabPageLogs.UseVisualStyleBackColor = true;
+            // 
+            // textBoxLogs
+            // 
+            this.textBoxLogs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxLogs.Location = new System.Drawing.Point(3, 28);
+            this.textBoxLogs.Name = "textBoxLogs";
+            this.textBoxLogs.Size = new System.Drawing.Size(1252, 515);
+            this.textBoxLogs.TabIndex = 7;
+            this.textBoxLogs.Text = "";
+            // 
+            // toolStripLogs
+            // 
+            this.toolStripLogs.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStripLogs.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButtonClearLogs});
+            this.toolStripLogs.Location = new System.Drawing.Point(3, 3);
+            this.toolStripLogs.Name = "toolStripLogs";
+            this.toolStripLogs.Size = new System.Drawing.Size(1252, 25);
+            this.toolStripLogs.TabIndex = 6;
+            this.toolStripLogs.Text = "toolStrip1";
+            // 
+            // toolStripButtonClearLogs
+            // 
+            this.toolStripButtonClearLogs.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButtonClearLogs.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonClearLogs.Image")));
+            this.toolStripButtonClearLogs.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonClearLogs.Name = "toolStripButtonClearLogs";
+            this.toolStripButtonClearLogs.Size = new System.Drawing.Size(66, 22);
+            this.toolStripButtonClearLogs.Text = "Clear Logs";
+            this.toolStripButtonClearLogs.Click += new System.EventHandler(this.btnClearLogs_Click);
+            // 
+            // tabPageErrors
+            // 
+            this.tabPageErrors.Controls.Add(this.textBoxErrors);
+            this.tabPageErrors.Controls.Add(this.toolStripErrors);
+            this.tabPageErrors.Location = new System.Drawing.Point(4, 22);
+            this.tabPageErrors.Name = "tabPageErrors";
+            this.tabPageErrors.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageErrors.Size = new System.Drawing.Size(1258, 546);
+            this.tabPageErrors.TabIndex = 4;
+            this.tabPageErrors.Text = "Errors";
+            this.tabPageErrors.UseVisualStyleBackColor = true;
+            // 
+            // textBoxErrors
+            // 
+            this.textBoxErrors.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxErrors.Location = new System.Drawing.Point(3, 28);
+            this.textBoxErrors.Name = "textBoxErrors";
+            this.textBoxErrors.Size = new System.Drawing.Size(1252, 515);
+            this.textBoxErrors.TabIndex = 9;
+            this.textBoxErrors.Text = "";
+            // 
+            // toolStripErrors
+            // 
+            this.toolStripErrors.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStripErrors.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButtonClearErrors});
+            this.toolStripErrors.Location = new System.Drawing.Point(3, 3);
+            this.toolStripErrors.Name = "toolStripErrors";
+            this.toolStripErrors.Size = new System.Drawing.Size(1252, 25);
+            this.toolStripErrors.TabIndex = 8;
+            this.toolStripErrors.Text = "toolStrip1";
+            // 
+            // toolStripButtonClearErrors
+            // 
+            this.toolStripButtonClearErrors.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButtonClearErrors.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonClearErrors.Image")));
+            this.toolStripButtonClearErrors.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonClearErrors.Name = "toolStripButtonClearErrors";
+            this.toolStripButtonClearErrors.Size = new System.Drawing.Size(71, 22);
+            this.toolStripButtonClearErrors.Text = "Clear Errors";
+            this.toolStripButtonClearErrors.Click += new System.EventHandler(this.toolStripButtonClearErrors_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.StatusLabelPanelInfo});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 572);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1266, 22);
+            this.statusStrip1.SizingGrip = false;
+            this.statusStrip1.TabIndex = 7;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // StatusLabelPanelInfo
+            // 
+            this.StatusLabelPanelInfo.AutoSize = false;
+            this.StatusLabelPanelInfo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.StatusLabelPanelInfo.Name = "StatusLabelPanelInfo";
+            this.StatusLabelPanelInfo.Size = new System.Drawing.Size(1251, 17);
+            this.StatusLabelPanelInfo.Spring = true;
+            this.StatusLabelPanelInfo.Tag = "";
+            this.StatusLabelPanelInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // splitter2
+            // 
+            this.splitter2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitter2.Location = new System.Drawing.Point(0, 0);
+            this.splitter2.Name = "splitter2";
+            this.splitter2.Size = new System.Drawing.Size(1266, 3);
+            this.splitter2.TabIndex = 10;
+            this.splitter2.TabStop = false;
+            // 
+            // imageListStatus
+            // 
+            this.imageListStatus.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListStatus.ImageStream")));
+            this.imageListStatus.TransparentColor = System.Drawing.Color.Magenta;
+            this.imageListStatus.Images.SetKeyName(0, "rectangle corner 20x17-grey2.bmp");
+            this.imageListStatus.Images.SetKeyName(1, "rectangle corner 20x17-grey light.bmp");
+            this.imageListStatus.Images.SetKeyName(2, "rectangle corner 20x17-grey.bmp");
+            this.imageListStatus.Images.SetKeyName(3, "rectangle corner 20x17-green.bmp");
+            this.imageListStatus.Images.SetKeyName(4, "rectangle corner 20x17-red.bmp");
+            this.imageListStatus.Images.SetKeyName(5, "rectangle corner 20x17-yellow.bmp");
+            // 
+            // timerStatusTx
+            // 
+            this.timerStatusTx.Tick += new System.EventHandler(this.timerStatusTx_Tick);
+            // 
+            // timerStatusRx
+            // 
+            this.timerStatusRx.Tick += new System.EventHandler(this.timerStatusRx_Tick);
+            // 
+            // miniToolStrip
+            // 
+            this.miniToolStrip.AutoSize = false;
+            this.miniToolStrip.CanOverflow = false;
+            this.miniToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.miniToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.miniToolStrip.Location = new System.Drawing.Point(481, 3);
+            this.miniToolStrip.Name = "miniToolStrip";
+            this.miniToolStrip.Size = new System.Drawing.Size(1017, 25);
+            this.miniToolStrip.TabIndex = 15;
+            // 
+<<<<<<< local
+            // btnStopIPDOX
+=======
+            // labelIPDOXStatus
+>>>>>>> other
+            // 
+<<<<<<< local
+            this.btnStopIPDOX.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnStopIPDOX.ForeColor = System.Drawing.Color.Maroon;
+            this.btnStopIPDOX.Image = ((System.Drawing.Image)(resources.GetObject("btnStopIPDOX.Image")));
+            this.btnStopIPDOX.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnStopIPDOX.Name = "btnStopIPDOX";
+            this.btnStopIPDOX.Size = new System.Drawing.Size(72, 22);
+            this.btnStopIPDOX.Text = "Stop IPDOX";
+            this.btnStopIPDOX.Click += new System.EventHandler(this.btnStopIPDOX_Click);
+            // 
+            // btnDeleteSelectedIPDOXAccount
+            // 
+            this.btnDeleteSelectedIPDOXAccount.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnDeleteSelectedIPDOXAccount.ForeColor = System.Drawing.Color.DarkOrange;
+            this.btnDeleteSelectedIPDOXAccount.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteSelectedIPDOXAccount.Image")));
+            this.btnDeleteSelectedIPDOXAccount.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDeleteSelectedIPDOXAccount.Name = "btnDeleteSelectedIPDOXAccount";
+            this.btnDeleteSelectedIPDOXAccount.Size = new System.Drawing.Size(139, 22);
+            this.btnDeleteSelectedIPDOXAccount.Text = "Delete Selected Account";
+            this.btnDeleteSelectedIPDOXAccount.Click += new System.EventHandler(this.btnDeleteSelectedIPDOXAccount_Click);
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            this.toolStripSeparator11.Size = new System.Drawing.Size(6, 25);
+            // 
+            // labelIPDOXStatus
+            // 
+            this.labelIPDOXStatus.Name = "labelIPDOXStatus";
+            this.labelIPDOXStatus.Size = new System.Drawing.Size(42, 22);
+            this.labelIPDOXStatus.Text = "Status:";
+=======
+            this.labelIPDOXStatus.Name = "labelIPDOXStatus";
+            this.labelIPDOXStatus.Size = new System.Drawing.Size(42, 22);
+            this.labelIPDOXStatus.Text = "Status:";
+>>>>>>> other
+            // 
+            // FormParadoxAPI
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1266, 594);
+            this.Controls.Add(this.splitter2);
+            this.Controls.Add(this.panel3);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "FormParadoxAPI";
+            this.Text = "Paradox API Demo";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormParadoxAPI_FormClosing);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.tabControlAll.ResumeLayout(false);
+            this.tabPageControlPanels.ResumeLayout(false);
+            this.panelControlPanels.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.tabControlPanel.ResumeLayout(false);
+            this.tabPagePanelStatus.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.tabPageEvents.ResumeLayout(false);
+            this.tabPageEvents.PerformLayout();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
+            this.tabPageUsers.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.menuStrip2.ResumeLayout(false);
+            this.menuStrip2.PerformLayout();
+            this.toolStripPanelStatus.ResumeLayout(false);
+            this.toolStripPanelStatus.PerformLayout();
+            this.panelLeft.ResumeLayout(false);
+            this.panelLeft.PerformLayout();
+            this.statusStrip2.ResumeLayout(false);
+            this.statusStrip2.PerformLayout();
+            this.toolStripControlPanels.ResumeLayout(false);
+            this.toolStripControlPanels.PerformLayout();
+            this.tabPageIPReportingEvent.ResumeLayout(false);
+            this.tabPageIPReportingEvent.PerformLayout();
+            this.tabControlIPReporting.ResumeLayout(false);
+            this.tabPageIPReportingEvents.ResumeLayout(false);
+            this.tabPageIPReportingAccounts.ResumeLayout(false);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            this.tabPageDetectIPModule.ResumeLayout(false);
+            this.tabPageDetectIPModule.PerformLayout();
+            this.toolStripModuelOnLAN.ResumeLayout(false);
+            this.toolStripModuelOnLAN.PerformLayout();
+            this.tabPageLogs.ResumeLayout(false);
+            this.tabPageLogs.PerformLayout();
+            this.toolStripLogs.ResumeLayout(false);
+            this.toolStripLogs.PerformLayout();
+            this.tabPageErrors.ResumeLayout(false);
+            this.tabPageErrors.PerformLayout();
+            this.toolStripErrors.ResumeLayout(false);
+            this.toolStripErrors.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Splitter splitter2;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel StatusLabelPanelInfo;
+        private System.Windows.Forms.ImageList imageListStatus;
+        private System.Windows.Forms.Timer timerStatusTx;
+        private System.Windows.Forms.Timer timerStatusRx;
+        private System.Windows.Forms.TabControl tabControlAll;
+        private System.Windows.Forms.TabPage tabPageControlPanels;
+        private System.Windows.Forms.TabPage tabPageIPReportingEvent;
+        private System.Windows.Forms.ToolStrip miniToolStrip;
+        private System.Windows.Forms.TabPage tabPageDetectIPModule;
+        private System.Windows.Forms.ListView listViewIPDeviceOnNetwork;
+        private System.Windows.Forms.ToolStrip toolStripModuelOnLAN;
+        private System.Windows.Forms.ToolStripButton tsBtnDiscoverIPModuleOnLAN;
+        private System.Windows.Forms.TabPage tabPageLogs;
+        private System.Windows.Forms.RichTextBox textBoxLogs;
+        private System.Windows.Forms.ToolStrip toolStripLogs;
+        private System.Windows.Forms.ToolStripButton toolStripButtonClearLogs;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton btnStartIPDOX;
+        private System.Windows.Forms.Splitter splitter3;
+        private System.Windows.Forms.ListView listViewPanelEvent;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.ColumnHeader columnHeader9;
+        private System.Windows.Forms.ColumnHeader columnHeader10;
+        private System.Windows.Forms.Panel panelControlPanels;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.TabControl tabControlPanel;
+        private System.Windows.Forms.TabPage tabPagePanelStatus;
+        private System.Windows.Forms.TreeView tvControlPanelStatus;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem discoverModulesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem retrievePanelNfoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem registerPanelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem readMonitoringStatusToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem getSystemTroublesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem areaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem controlAreaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem areaStatusToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem readAllAreaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zoneToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem controlZoneToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zoneStatusToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem readAllZonesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pGMToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem controlPGMToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pGMStatusToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem readAllPGMToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem doorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem controlDoorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem doorStatusToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem readAllDoorsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem timeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem readTimeStampToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem readDateTimeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem writeDateTimeToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabPageEvents;
+        private System.Windows.Forms.ListView listViewPanelBufferedEvent;
+        private System.Windows.Forms.ColumnHeader PanelID;
+        private System.Windows.Forms.ColumnHeader DateTime;
+        private System.Windows.Forms.ColumnHeader Type;
+        private System.Windows.Forms.ColumnHeader Label;
+        private System.Windows.Forms.ColumnHeader SerialNo;
+        private System.Windows.Forms.ColumnHeader Description;
+        private System.Windows.Forms.ColumnHeader AdditionalInformation;
+        private System.Windows.Forms.ColumnHeader UserLabel;
+        private System.Windows.Forms.ColumnHeader Order;
+        private System.Windows.Forms.ColumnHeader Buffered;
+        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStripButton LoadPanelBufferedEventsButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripLabel PanelBufferedEventCountLabel;
+        private System.Windows.Forms.TabPage tabPageUsers;
+        private System.Windows.Forms.ToolStrip toolStripPanelStatus;
+        private System.Windows.Forms.ToolStripButton tsBtnConnect;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripButton btnRX;
+        private System.Windows.Forms.ToolStripButton btnTX;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripLabel PanelProductLabel;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripLabel PanelStatusLabel;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripProgressBar PanelStatusProgressBar;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripLabel PanelStatusInfoLabel;
+        private System.Windows.Forms.Splitter splitter1;
+        private System.Windows.Forms.Panel panelLeft;
+        private System.Windows.Forms.ToolStrip toolStripControlPanels;
+        private System.Windows.Forms.ToolStripButton tsBtnAddControlPanel;
+        private System.Windows.Forms.ToolStripButton tsBtnModifySettings;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripButton tsBtnDeletePanel;
+        private System.Windows.Forms.ListView listViewUsers;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.MenuStrip menuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem26;
+        private System.Windows.Forms.ToolStripMenuItem readAllUsersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem28;
+        private System.Windows.Forms.TabControl tabControlIPReporting;
+        private System.Windows.Forms.TabPage tabPageIPReportingEvents;
+        private System.Windows.Forms.TabPage tabPageIPReportingAccounts;
+        private System.Windows.Forms.ListView listViewIPReportingEvents;
+        private System.Windows.Forms.ListView listViewIPReportingAccounts;
+        private System.Windows.Forms.TextBox textBoxSMSMessageToSend;
+        private System.Windows.Forms.ListView listViewPanelTrouble;
+        private System.Windows.Forms.ToolStripMenuItem iPReportingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem readIpReportingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem writeIPReportingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem getIPRegistartionStatusToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton btnrefreshUI;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripLabel PanelDateTimeLabel;
+        private System.Windows.Forms.TabPage tabPageErrors;
+        private System.Windows.Forms.RichTextBox textBoxErrors;
+        private System.Windows.Forms.ToolStrip toolStripErrors;
+        private System.Windows.Forms.ToolStripButton toolStripButtonClearErrors;
+        private System.Windows.Forms.TreeView tvContolPanels;
+        private System.Windows.Forms.StatusStrip statusStrip2;
+        private System.Windows.Forms.ToolStripSplitButton btnControlPanelActions;
+        private System.Windows.Forms.ToolStripMenuItem menuConnectToAllControlPanels;
+        private System.Windows.Forms.ToolStripMenuItem menuDisconnectFromAllControlPanels;
+        private System.Windows.Forms.Splitter splitter4;
+        private System.Windows.Forms.ToolStripTextBox textBoxIPDOXWanAddress;
+        private System.Windows.Forms.ToolStripTextBox textBoxIPDOXWanPort;
+        private System.Windows.Forms.ToolStripTextBox textBoxIPDOXIPPassword;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel3;
+<<<<<<< local
+        private System.Windows.Forms.ToolStripButton btnStopIPDOX;
+        private System.Windows.Forms.ToolStripButton btnDeleteSelectedIPDOXAccount;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+        private System.Windows.Forms.ToolStripLabel labelIPDOXStatus;
+=======
+        private System.Windows.Forms.ToolStripLabel labelIPDOXStatus;
+>>>>>>> other
+    }
+}
+

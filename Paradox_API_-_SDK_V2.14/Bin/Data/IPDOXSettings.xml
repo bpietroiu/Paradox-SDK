@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<Data>
+  <objects1>
+    <object objectname="TIPDOXSettingsXML" name="Settings">
+      <published>
+        <method name="IPPassword" readonly="True" type="UnicodeString">123456</method>
+        <method name="LogEnabled" readonly="True" type="Boolean">False</method>
+        <method name="LogLevel" readonly="True" type="Integer">0</method>
+        <method name="LogInterval" readonly="True" type="Integer">0</method>
+        <method name="LogFileLifeTime" readonly="True" type="Integer">0</method>
+        <method name="LogMaxDiskSize" readonly="True" type="Integer">0</method>
+        <method name="OutputEnabled" readonly="True" type="Boolean">False</method>
+        <method name="OutputType" readonly="True" type="Integer">0</method>
+        <method name="OutputCOMPort" readonly="True" type="Integer">0</method>
+        <method name="OutputBaudRate" readonly="True" type="Integer">0</method>
+        <method name="OutputUDP" readonly="True" type="Boolean">False</method>
+        <method name="OutputIPPort" readonly="True" type="Integer">0</method>
+        <method name="OutputProtocolID" readonly="True" type="Integer">0</method>
+        <method name="OutputReceiverNo" readonly="True" type="Integer">0</method>
+        <method name="OutputLineNo" readonly="True" type="Integer">0</method>
+        <method name="OutputHeaderID" readonly="True" type="Integer">0</method>
+        <method name="OutputTrailerID" readonly="True" type="Integer">0</method>
+        <method name="OutputAckNack" readonly="True" type="Boolean">False</method>
+        <method name="OutputWaitForAck" readonly="True" type="Integer">0</method>
+        <method name="OutputTestMessage" readonly="True" type="Boolean">False</method>
+        <method name="OutputTestMsgDelay" readonly="True" type="Integer">0</method>
+        <method name="OutputForcePartition" readonly="True" type="Boolean">False</method>
+        <method name="OutputPartitionNo" readonly="True" type="Integer">0</method>
+        <method name="OutputUseMACAddress" readonly="True" type="Boolean">False</method>
+        <method name="WANId" readonly="True" type="Integer">0</method>
+        <method name="WANEnabled" readonly="True" type="Boolean">True</method>
+        <method name="WANPort" readonly="True" type="Integer">15000</method>
+        <method name="WANAddress" readonly="True" type="UnicodeString">0.0.0.0</method>
+      </published>
+    </object>
+  </objects1>
+</Data>
