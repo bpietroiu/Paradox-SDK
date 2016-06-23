@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using ParadoxAPILibrary;
-using ParadoxAPILibrary.Model;
+using Harmony.SDK.Paradox;
+using Harmony.SDK.Paradox.Model;
 
 namespace ParadoxApiDemo
 {

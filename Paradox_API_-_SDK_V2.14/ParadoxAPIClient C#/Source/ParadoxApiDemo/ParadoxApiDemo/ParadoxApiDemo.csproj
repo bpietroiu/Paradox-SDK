@@ -124,13 +124,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Harmony.SDK.Paradox\Harmony.SDK.Paradox.csproj">
+      <Project>{baaca01e-b4d9-4c33-a906-d90ea51deeed}</Project>
+      <Name>Harmony.SDK.Paradox</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IPAddressControlLib\IPAddressControlLib.csproj">
       <Project>{a5ed2b33-5644-47c4-bc30-a4840f67ff87}</Project>
       <Name>IPAddressControlLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ParadoxAPILibrary\ParadoxAPILibrary.csproj">
-      <Project>{baaca01e-b4d9-4c33-a906-d90ea51deeed}</Project>
-      <Name>ParadoxAPILibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

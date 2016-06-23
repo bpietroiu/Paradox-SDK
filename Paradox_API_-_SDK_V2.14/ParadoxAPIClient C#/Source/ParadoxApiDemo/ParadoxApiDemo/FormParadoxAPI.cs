@@ -11,8 +11,8 @@ using System.Threading;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Diagnostics;
-using ParadoxAPILibrary;
-using ParadoxAPILibrary.Model;
+using Harmony.SDK.Paradox;
+using Harmony.SDK.Paradox.Model;
 using ParadoxApiDemo.ViewModel;
 
 namespace ParadoxApiDemo
@@ -1284,7 +1284,7 @@ namespace ParadoxApiDemo
 
             if (GetSelectedControlPanel(panelID, ref controlPanel))
             {
-                if (ActionType == ParadoxAPI.AT_READ)
+                if (ActionType == OperationTypes.AT_READ)
                 {
                     if (ItemType == PanelObjectTypes.OT_IP_RECEIVER)
                     {
@@ -1393,7 +1393,7 @@ namespace ParadoxApiDemo
                         UpdateControlPanelStatusView(tvControlPanelStatus, controlPanel, ItemNo, ItemType);
                     }                                        
                 }
-                else if (ActionType == ParadoxAPI.AT_WRITE)
+                else if (ActionType == OperationTypes.AT_WRITE)
                 {
                     
                 }
@@ -2302,7 +2302,7 @@ namespace ParadoxApiDemo
             {
                 PanelControl panelControl = new PanelControl();
 
-                panelControl.Command = ParadoxAPI.C_CONTROL_AREA_ARM;
+                panelControl.Command = AreaActions.C_CONTROL_AREA_ARM;
                 panelControl.Items = "1";
 
                 Int32 returnValue = ParadoxAPI.ControlArea(controlPanel.panelID, panelControl);
@@ -2317,7 +2317,7 @@ namespace ParadoxApiDemo
             {
                 PanelControl panelControl = new PanelControl();
 
-                panelControl.Command = ParadoxAPI.C_CONTROL_AREA_DISARM;
+                panelControl.Command = AreaActions.C_CONTROL_AREA_DISARM;
                 panelControl.Items = "1";
 
                 Int32 returnValue = ParadoxAPI.ControlArea(controlPanel.panelID, panelControl);
@@ -2332,7 +2332,7 @@ namespace ParadoxApiDemo
             {
                 PanelControl panelControl = new PanelControl();
 
-                panelControl.Command = ParadoxAPI.C_CONTROL_AREA_ARM;
+                panelControl.Command = AreaActions.C_CONTROL_AREA_ARM;
                 panelControl.Items = "2";
 
                 Int32 returnValue = ParadoxAPI.ControlArea(controlPanel.panelID, panelControl);
@@ -2347,7 +2347,7 @@ namespace ParadoxApiDemo
             {
                 PanelControl panelControl = new PanelControl();
 
-                panelControl.Command = ParadoxAPI.C_CONTROL_AREA_DISARM;
+                panelControl.Command = AreaActions.C_CONTROL_AREA_DISARM;
                 panelControl.Items = "2";
 
                 Int32 returnValue = ParadoxAPI.ControlArea(controlPanel.panelID, panelControl);
@@ -2374,7 +2374,7 @@ namespace ParadoxApiDemo
             {
                 PanelControl panelControl = new PanelControl();
 
-                panelControl.Command = ParadoxAPI.C_CONTROL_ZONE_BYPASS;
+                panelControl.Command = ZoneActions.C_CONTROL_ZONE_BYPASS;
                 panelControl.Items = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32";
 
                 Int32 returnValue = ParadoxAPI.ControlZone(controlPanel.panelID, panelControl);
@@ -2389,7 +2389,7 @@ namespace ParadoxApiDemo
             {
                 PanelControl panelControl = new PanelControl();
 
-                panelControl.Command = ParadoxAPI.C_CONTROL_ZONE_UNBYPASS;
+                panelControl.Command = ZoneActions.C_CONTROL_ZONE_UNBYPASS;
                 panelControl.Items = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32";
 
                 Int32 returnValue = ParadoxAPI.ControlZone(controlPanel.panelID, panelControl);
@@ -2418,7 +2418,7 @@ namespace ParadoxApiDemo
 
                  //To Do initialize values
 
-                 panelControl.Command = ParadoxAPI.C_CONTROL_PGM_ON;
+                 panelControl.Command = PGMActions.C_CONTROL_PGM_ON;
                  panelControl.Items = "1,2";
 
                  Int32 returnValue = ParadoxAPI.ControlPGM(controlPanel.panelID, panelControl);
@@ -2435,7 +2435,7 @@ namespace ParadoxApiDemo
 
                 //To Do initialize values
 
-                panelControl.Command = ParadoxAPI.C_CONTROL_PGM_OFF;
+                panelControl.Command = PGMActions.C_CONTROL_PGM_OFF;
                 panelControl.Items = "1,2";
 
                 Int32 returnValue = ParadoxAPI.ControlPGM(controlPanel.panelID, panelControl);
@@ -2462,7 +2462,7 @@ namespace ParadoxApiDemo
             {
                 PanelControl panelControl = new PanelControl();
 
-                panelControl.Command = ParadoxAPI.C_CONTROL_DOOR_UNLOCK;
+                panelControl.Command = DoorActions.C_CONTROL_DOOR_UNLOCK;
                 panelControl.Items = "1,2";
 
                 Int32 returnValue = ParadoxAPI.ControlDoor(controlPanel.panelID, panelControl);
@@ -2477,7 +2477,7 @@ namespace ParadoxApiDemo
             {
                 PanelControl panelControl = new PanelControl();
 
-                panelControl.Command = ParadoxAPI.C_CONTROL_DOOR_LOCK;
+                panelControl.Command = DoorActions.C_CONTROL_DOOR_LOCK;
                 panelControl.Items = "1,2";
 
                 Int32 returnValue = ParadoxAPI.ControlDoor(controlPanel.panelID, panelControl);

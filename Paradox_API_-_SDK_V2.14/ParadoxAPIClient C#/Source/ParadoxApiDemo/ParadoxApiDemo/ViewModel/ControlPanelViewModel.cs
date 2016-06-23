@@ -2,8 +2,8 @@
 using System.IO;
 using System.Text;
 using System.Xml;
-using ParadoxAPILibrary;
-using ParadoxAPILibrary.Model;
+using Harmony.SDK.Paradox;
+using Harmony.SDK.Paradox.Model;
 
 namespace ParadoxApiDemo.ViewModel
 {
