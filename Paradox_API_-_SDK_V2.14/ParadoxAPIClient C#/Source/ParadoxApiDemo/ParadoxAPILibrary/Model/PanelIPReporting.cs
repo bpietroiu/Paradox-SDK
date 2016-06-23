@@ -33,7 +33,7 @@ namespace ParadoxAPILibrary.Model
 
     #endregion
     
-    public class PanelIPReporting : CustomXmlParser<PanelIPReporting>
+    public class PanelIPReporting : BasePanelModel<PanelIPReporting>
     {
         public Int32 ReceiverNo;
         public bool ReportingIPEnabled;

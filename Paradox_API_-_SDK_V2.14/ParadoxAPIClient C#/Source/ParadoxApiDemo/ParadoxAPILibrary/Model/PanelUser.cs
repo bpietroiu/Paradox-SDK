@@ -42,7 +42,7 @@ namespace ParadoxAPILibrary.Model
 
     #endregion
     
-    public class PanelUser : CustomXmlParser<PanelUser>
+    public class PanelUser : BasePanelModel<PanelUser>
     {
         public UInt32 UserNo;
         public string UserName;

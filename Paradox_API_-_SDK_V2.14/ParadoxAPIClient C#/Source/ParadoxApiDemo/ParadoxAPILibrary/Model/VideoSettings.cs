@@ -20,7 +20,7 @@ namespace ParadoxAPILibrary.Model
 
     #endregion
     
-    public class VideoSettings : CustomXmlParser<VideoSettings>
+    public class VideoSettings : BasePanelModel<VideoSettings>
     {
         public string VideoFileDir;
         public UInt32 VideoFileLifeTime; //Days        

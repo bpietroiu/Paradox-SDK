@@ -1,0 +1,2574 @@
+Panel ID: 1
+Result: E_PID002A_INVALID_PANEL_NOT_CONNECTED
+
+Start Monitoring
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version='1.0'?>
+<objects>
+  <object objectname="TPanelSettingsXML" name="Settings">
+    <published>
+      <method name="PanelType" readonly="True" type="UnicodeString">EVO192</method>
+      <method name="ComType" readonly="True" type="UnicodeString">IP</method>
+      <method name="SiteID" readonly="True" type="UnicodeString"></method>
+      <method name="SerialNo" readonly="True" type="UnicodeString">0502482E</method>
+      <method name="IPAddress" readonly="True" type="UnicodeString">10.0.1.8</method>
+      <method name="IPPort" readonly="True" type="Integer">10000</method>
+      <method name="ComPort" readonly="True" type="Integer">0</method>
+      <method name="BaudRate" readonly="True" type="Integer">0</method>
+      <method name="SMSCallback" readonly="True" type="Boolean">False</method>
+      <method name="IPPassword" readonly="True" type="UnicodeString">paradox</method>
+      <method name="UserCode" readonly="True" type="UnicodeString">1234</method>
+      <method name="SystemAlarmLanguage" readonly="True" type="UnicodeString">ENGLISH</method>
+    </published>
+  </object>
+</objects>
+
+Panel ID: 1
+Result: SUCCESS
+
+Start Monitoring
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelInfoExXML" name="PanelInfoEx">
+    <published>
+      <method name="Description" readonly="True" type="UnicodeString">EVO192</method>
+      <method name="ProductID" readonly="True" type="Integer">41251</method>
+      <method name="SerialNo" readonly="True" type="UnicodeString">0502482E</method>
+      <method name="Version" readonly="True" type="Integer">3</method>
+      <method name="Revision" readonly="True" type="Integer">49</method>
+      <method name="AreaCount" readonly="True" type="Integer">8</method>
+      <method name="ZoneCount" readonly="True" type="Integer">192</method>
+      <method name="PGMCount" readonly="True" type="Integer">5</method>
+      <method name="UserCount" readonly="True" type="Integer">999</method>
+      <method name="DoorCount" readonly="True" type="Integer">32</method>
+      <method name="ReceiverCount" readonly="True" type="Integer">4</method>
+      <method name="ScheduleCount" readonly="True" type="Integer">33</method>
+      <method name="AccessLevelCount" readonly="True" type="Integer">16</method>
+      <method name="UserNo" readonly="True" type="Integer">1</method>
+      <method name="UserPartitionAccess" readonly="True" type="UnicodeString">1,2,3,4,5,6,7,8</method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: E_PID002A_NO_SYSTEM_TROUBLES
+
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelReportingStatusXML" name="Receiver1">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver2">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver3">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver4">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: E_PID002A_NO_SYSTEM_TROUBLES
+
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelReportingStatusXML" name="Receiver1">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver2">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver3">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver4">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: E_PID002A_NO_SYSTEM_TROUBLES
+
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelReportingStatusXML" name="Receiver1">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver2">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver3">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver4">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<PanelInfo>
+  <PanelTrouble Trouble1="Missing Module:11C0044B" Trouble2="Missing Module:D5300212" Trouble3="Clock Trouble" Trouble4="Bell Absent" Trouble5="Battery Failure"/>
+</PanelInfo>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelReportingStatusXML" name="Receiver1">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver2">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver3">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver4">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<PanelInfo>
+  <PanelTrouble Trouble1="Missing Module:11C0044B" Trouble2="Missing Module:D5300212" Trouble3="Clock Trouble" Trouble4="Bell Absent" Trouble5="Battery Failure"/>
+</PanelInfo>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<PanelInfo>
+  <PanelHolidays Holidays="11/1,10/2,9/3,8/4,7/5,7/6,8/7,9/8,10/9,11/10,12/11"/>
+</PanelInfo>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelReportingStatusXML" name="Receiver1">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver2">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver3">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver4">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelReportingStatusXML" name="Receiver1">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver2">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver3">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver4">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<PanelInfo>
+  <PanelTrouble Trouble1="Missing Module:11C0044B" Trouble2="Missing Module:D5300212" Trouble3="Clock Trouble" Trouble4="Bell Absent" Trouble5="Battery Failure"/>
+</PanelInfo>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<PanelInfo>
+  <PanelTrouble Trouble1="Missing Module:11C0044B" Trouble2="Missing Module:D5300212" Trouble3="Clock Trouble" Trouble4="Bell Absent" Trouble5="Battery Failure"/>
+</PanelInfo>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelReportingStatusXML" name="Receiver1">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver2">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver3">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver4">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<PanelInfo>
+  <PanelTrouble Trouble1="Missing Module:11C0044B" Trouble2="Missing Module:D5300212" Trouble3="Clock Trouble" Trouble4="Bell Absent" Trouble5="Battery Failure"/>
+</PanelInfo>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelReportingStatusXML" name="Receiver1">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver2">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver3">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver4">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<PanelInfo>
+  <PanelHolidays Holidays="11/1,10/2,9/3,8/4,7/5,7/6,8/7,9/8,10/9,11/10,12/11"/>
+</PanelInfo>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<PanelInfo>
+  <PanelTrouble Trouble1="Missing Module:11C0044B" Trouble2="Missing Module:D5300212" Trouble3="Clock Trouble" Trouble4="Bell Absent" Trouble5="Battery Failure"/>
+</PanelInfo>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelReportingStatusXML" name="Receiver1">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver2">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver3">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver4">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<PanelInfo>
+  <PanelTrouble Trouble1="Missing Module:11C0044B" Trouble2="Missing Module:D5300212" Trouble3="Clock Trouble" Trouble4="Bell Absent" Trouble5="Battery Failure"/>
+</PanelInfo>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelReportingStatusXML" name="Receiver1">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver2">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver3">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver4">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<PanelInfo>
+  <PanelTrouble Trouble1="Missing Module:11C0044B" Trouble2="Missing Module:D5300212" Trouble3="Clock Trouble" Trouble4="Bell Absent" Trouble5="Battery Failure"/>
+</PanelInfo>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelReportingStatusXML" name="Receiver1">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver2">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver3">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver4">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<PanelInfo>
+  <PanelTrouble Trouble1="Missing Module:11C0044B" Trouble2="Missing Module:D5300212" Trouble3="Clock Trouble" Trouble4="Bell Absent" Trouble5="Battery Failure"/>
+</PanelInfo>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelReportingStatusXML" name="Receiver1">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver2">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver3">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver4">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<PanelInfo>
+  <PanelTrouble Trouble1="Missing Module:11C0044B" Trouble2="Missing Module:D5300212" Trouble3="Clock Trouble" Trouble4="Bell Absent" Trouble5="Battery Failure"/>
+</PanelInfo>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelReportingStatusXML" name="Receiver1">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver2">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver3">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver4">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<PanelInfo>
+  <PanelTrouble Trouble1="Missing Module:11C0044B" Trouble2="Missing Module:D5300212" Trouble3="Clock Trouble" Trouble4="Bell Absent" Trouble5="Battery Failure"/>
+</PanelInfo>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelReportingStatusXML" name="Receiver1">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver2">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver3">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver4">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelDoorXML" name="Door1">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">1</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 01</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">18B5062D</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">Or</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door2">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">2</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 02</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door3">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">3</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 03</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door4">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">4</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 04</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door5">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">5</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 05</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door6">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">6</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 06</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door7">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">7</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 07</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door8">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">8</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 08</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door9">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">9</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 09</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door10">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">10</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 10</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door11">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">11</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 11</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door12">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">12</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 12</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door13">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">13</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 13</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door14">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">14</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 14</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door15">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">15</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 15</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door16">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">16</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 16</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door17">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">17</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 17</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door18">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">18</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 18</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door19">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">19</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 19</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door20">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">20</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 20</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door21">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">21</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 21</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door22">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">22</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 22</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door23">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">23</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 23</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door24">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">24</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 24</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door25">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">25</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 25</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door26">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">26</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 26</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door27">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">27</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 27</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door28">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">28</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 28</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door29">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">29</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 29</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door30">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">30</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 30</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door31">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">31</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 31</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+  <object objectname="TPanelDoorXML" name="Door32">
+    <published>
+      <method name="DoorNo" readonly="True" type="Integer">32</method>
+      <method name="DoorLabel" readonly="False" type="UnicodeString">Door 32</method>
+      <method name="DoorEnabled" readonly="True" type="Boolean">False</method>
+      <method name="DoorSerialNo" readonly="True" type="UnicodeString">00000000</method>
+      <method name="DoorAreaAssignment" readonly="True" type="UnicodeString"></method>
+      <method name="DoorAccessEnabled" readonly="True" type="Boolean">True</method>
+      <method name="DoorAccessOption" readonly="True" type="UnicodeString">And</method>
+      <method name="DoorAccessCodeOnKeypad" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessCardAndCode" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessArmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorAccessDisarmRestricted" readonly="True" type="Boolean">False</method>
+      <method name="DoorBurglaryAlarmOnForced" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockScheduleStartTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeA" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysA" readonly="False" type="UnicodeString"></method>
+      <method name="DoorUnlockScheduleStartTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleEndTimeB" readonly="False" type="Double">0</method>
+      <method name="DoorUnlockScheduleDaysB" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeEnabled" readonly="False" type="Boolean">False</method>
+      <method name="DoorSafeModeCard1" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard2" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard3" readonly="False" type="UnicodeString"></method>
+      <method name="DoorSafeModeCard4" readonly="False" type="UnicodeString"></method>
+      <method name="DoorCardActivatesUnlockedSchedule" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockDoorOnFireAlarm" readonly="True" type="Boolean">False</method>
+      <method name="DoorUnlockOnRequestForExit" readonly="True" type="Boolean">False</method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<PanelInfo>
+  <PanelHolidays Holidays="11/1,10/2,9/3,8/4,7/5,7/6,8/7,9/8,10/9,11/10,12/11"/>
+</PanelInfo>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<PanelInfo>
+  <PanelTrouble Trouble1="Missing Module:11C0044B" Trouble2="Missing Module:D5300212" Trouble3="Clock Trouble" Trouble4="Bell Absent" Trouble5="Battery Failure"/>
+</PanelInfo>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelReportingStatusXML" name="Receiver1">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver2">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver3">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver4">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<PanelInfo>
+  <PanelTrouble Trouble1="Missing Module:11C0044B" Trouble2="Missing Module:D5300212" Trouble3="Clock Trouble" Trouble4="Bell Absent" Trouble5="Battery Failure"/>
+</PanelInfo>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelReportingStatusXML" name="Receiver1">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver2">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver3">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver4">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelScheduleXML" name="Schedule0">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">0</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Default Schedule</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0.999305555555556</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString">Sun,Mon,Tue,Wed,Thu,Fri,Sat,Hol</method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0.999305555555556</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString">Sun,Mon,Tue,Wed,Thu,Fri,Sat,Hol</method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule1">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">1</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule1</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule2">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">2</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule2</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule3">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">3</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule3</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule4">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">4</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule4</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule5">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">5</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule5</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule6">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">6</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule6</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule7">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">7</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule7</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule8">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">8</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule8</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule9">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">9</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule9</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule10">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">10</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule10</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule11">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">11</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule11</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule12">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">12</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule12</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule13">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">13</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule13</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule14">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">14</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule14</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule15">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">15</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule15</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule16">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">16</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule16</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule17">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">17</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule17</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule18">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">18</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule18</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule19">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">19</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule19</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule20">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">20</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule20</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule21">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">21</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule21</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule22">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">22</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule22</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule23">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">23</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule23</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule24">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">24</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule24</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule25">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">25</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule25</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule26">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">26</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule26</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule27">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">27</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule27</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule28">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">28</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule28</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule29">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">29</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule29</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule30">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">30</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule30</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule31">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">31</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule31</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+  <object objectname="TPanelScheduleXML" name="Schedule32">
+    <published>
+      <method name="ScheduleNo" readonly="True" type="Integer">32</method>
+      <method name="ScheduleLabel" readonly="False" type="UnicodeString">Access Schedule32</method>
+      <method name="ScheduleBackupNo" readonly="False" type="Integer">0</method>
+      <method name="ScheduleStartTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalA" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalA" readonly="False" type="UnicodeString"></method>
+      <method name="ScheduleStartTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleEndTimeIntervalB" readonly="False" type="Double">0</method>
+      <method name="ScheduleDaysIntervalB" readonly="False" type="UnicodeString"></method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<PanelInfo>
+  <PanelTrouble Trouble1="Missing Module:11C0044B" Trouble2="Missing Module:D5300212" Trouble3="Clock Trouble" Trouble4="Bell Absent" Trouble5="Battery Failure"/>
+</PanelInfo>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelReportingStatusXML" name="Receiver1">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver2">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver3">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver4">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<PanelInfo>
+  <PanelTrouble Trouble1="Missing Module:11C0044B" Trouble2="Missing Module:D5300212" Trouble3="Clock Trouble" Trouble4="Bell Absent" Trouble5="Battery Failure"/>
+</PanelInfo>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelReportingStatusXML" name="Receiver1">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver2">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver3">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver4">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<PanelInfo>
+  <PanelTrouble Trouble1="Missing Module:11C0044B" Trouble2="Missing Module:D5300212" Trouble3="Clock Trouble" Trouble4="Bell Absent" Trouble5="Battery Failure"/>
+</PanelInfo>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelReportingStatusXML" name="Receiver1">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver2">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver3">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver4">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<PanelInfo>
+  <PanelTrouble Trouble1="Missing Module:11C0044B" Trouble2="Missing Module:D5300212" Trouble3="Clock Trouble" Trouble4="Bell Absent" Trouble5="Battery Failure"/>
+</PanelInfo>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelReportingStatusXML" name="Receiver1">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver2">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver3">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver4">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<PanelInfo>
+  <PanelTrouble Trouble1="Missing Module:11C0044B" Trouble2="Missing Module:D5300212" Trouble3="Clock Trouble" Trouble4="Bell Absent" Trouble5="Battery Failure"/>
+</PanelInfo>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelReportingStatusXML" name="Receiver1">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver2">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver3">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver4">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<PanelInfo>
+  <PanelHolidays Holidays="11/1,10/2,9/3,8/4,7/5,7/6,8/7,9/8,10/9,11/10,12/11"/>
+</PanelInfo>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<PanelInfo>
+  <PanelTrouble Trouble1="Missing Module:11C0044B" Trouble2="Missing Module:D5300212" Trouble3="Clock Trouble" Trouble4="Bell Absent" Trouble5="Battery Failure"/>
+</PanelInfo>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelReportingStatusXML" name="Receiver1">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver2">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver3">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver4">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<PanelInfo>
+  <PanelTrouble Trouble1="Missing Module:11C0044B" Trouble2="Missing Module:D5300212" Trouble3="Clock Trouble" Trouble4="Bell Absent" Trouble5="Battery Failure"/>
+</PanelInfo>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelReportingStatusXML" name="Receiver1">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver2">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver3">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver4">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<PanelInfo>
+  <PanelTrouble Trouble1="Missing Module:11C0044B" Trouble2="Missing Module:D5300212" Trouble3="Clock Trouble" Trouble4="Bell Absent" Trouble5="Battery Failure"/>
+</PanelInfo>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+<?xml version="1.0"?>
+<objects>
+  <object objectname="TPanelReportingStatusXML" name="Receiver1">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver2">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver3">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Registration Error</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString">No IP Address,No IP Port,Invalid Format</method>
+    </published>
+  </object>
+  <object objectname="TPanelReportingStatusXML" name="Receiver4">
+    <published>
+      <method name="Registered" readonly="True" type="Boolean">False</method>
+      <method name="RegistrationStatus" readonly="True" type="UnicodeString">Unregistered</method>
+      <method name="RegistrationError" readonly="True" type="UnicodeString"></method>
+    </published>
+  </object>
+</objects>
+
+
+Panel ID: 1
+Result: SUCCESS
+
+Disconnet
+

@@ -15,7 +15,7 @@ namespace ParadoxAPILibrary.Model
 
     #endregion
 
-    public class PanelMonitoring : CustomXmlParser<PanelMonitoring>
+    public class PanelMonitoring : BasePanelModel<PanelMonitoring>
     {
         public const string C_MONITORING_ZONE_ITEM_TYPE = "Zone";
         public const string C_MONITORING_AREA_ITEM_TYPE = "Area";

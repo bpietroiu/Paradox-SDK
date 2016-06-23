@@ -5,10 +5,7 @@ using System.Reflection;
 
 namespace ParadoxAPILibrary
 {
-    /// <summary>
-    /// CustomXmlParser Base class 
-    /// </summary>
-    public class CustomXmlParser<T> : IDisposable
+    public class BasePanelModel<T> : IDisposable
     {
         protected string sObjectname;
         protected string sName;
@@ -37,7 +34,7 @@ namespace ParadoxAPILibrary
             }
         }
 
-        protected void fullCopy(CustomXmlParser<T> dest)
+        protected void fullCopy(BasePanelModel<T> dest)
         {
             dest.sName = (string)sName.Clone();
             dest.sObjectname = (string)sObjectname.Clone();

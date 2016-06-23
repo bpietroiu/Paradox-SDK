@@ -2,7 +2,7 @@
 
 namespace ParadoxAPILibrary
 {
-    public class ErrorCodes
+    public class PanelResults
     {
         const UInt32 E_FAIL = 0x80004005;
 

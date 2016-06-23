@@ -21,7 +21,7 @@ namespace ParadoxAPILibrary.Model
 
     #endregion
 
-    public class IPReportingStatus : CustomXmlParser<IPReportingStatus>
+    public class IPReportingStatus : BasePanelModel<IPReportingStatus>
     {
         public bool Registered;
         public string RegistrationStatus;

@@ -7,6 +7,8 @@ namespace ParadoxAPILibrary
 {
     public class ParadoxAPI
     {
+        #region Constants
+
         public static Form formRef = null;
         
         // Action Type
@@ -33,32 +35,19 @@ namespace ParadoxAPILibrary
         // Control Door
         public const string C_CONTROL_DOOR_LOCK      = "Lock";
         public const string C_CONTROL_DOOR_UNLOCK    = "Unlock";
+
+        #endregion
+
+        #region Externs
+
+        [DllImport("ParadoxAPI.dll", CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Unicode, EntryPoint = "GetDriverVersion")]
+        public static extern Int32 GetDriverVersion([MarshalAs(UnmanagedType.BStr)] out string version);
+
+        [DllImport("ParadoxAPI.dll", CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Unicode, EntryPoint = "DiscoverModule")]
+        public static extern Int32 DiscoverModule([MarshalAs(UnmanagedType.BStr)] out string xmlInfo);
         
-        [DllImport("ParadoxAPI.dll",
-           CallingConvention = CallingConvention.StdCall,
-           CharSet = CharSet.Unicode,
-           EntryPoint = "GetDriverVersion")]
-        public static extern Int32 GetDriverVersion(
-                                                [MarshalAs(UnmanagedType.BStr)] out string version
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-           CallingConvention = CallingConvention.StdCall,
-           CharSet = CharSet.Unicode,
-           EntryPoint = "DiscoverModule")]
-        public static extern Int32 DiscoverModule(
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlInfo
-                                                );
-
-
-        [DllImport("ParadoxAPI.dll",
-           CallingConvention = CallingConvention.StdCall,
-           CharSet = CharSet.Unicode,
-           EntryPoint = "DetectPanel")]
-        public static extern Int32 DetectPanel(
-                                                [MarshalAs(UnmanagedType.BStr)] string xmlSettings,
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlInfo
-                                                );
+        [DllImport("ParadoxAPI.dll", CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Unicode, EntryPoint = "DetectPanel")]
+        public static extern Int32 DetectPanel([MarshalAs(UnmanagedType.BStr)] string xmlSettings, [MarshalAs(UnmanagedType.BStr)] out string xmlInfo);
 
         [DllImport("ParadoxAPI.dll",
            CallingConvention = CallingConvention.StdCall,
@@ -812,7 +801,8 @@ namespace ParadoxAPILibrary
         CharSet = CharSet.Unicode,
         EntryPoint = "RegisterIPDOXSocketChangedCallback")]
         public static extern void RegisterIPDOXSocketChangedCallback([MarshalAs(UnmanagedType.FunctionPtr)] ProcIPDOXSocketChangedDelegate callBackHandle);
-        
+
+        #endregion
 
         // Callbacks
         public static void RegisterAllCallback()
@@ -863,8 +853,7 @@ namespace ParadoxAPILibrary
             RegisterAccountLinkCallback(procAccountLinkDelegate);
 
             procIPDOXSocketChangedDelegate = new ProcIPDOXSocketChangedDelegate(IPDOXSocketChangedCalledFromParadoxAPI);
-            RegisterIPDOXSocketChangedCallback(procIPDOXSocketChangedDelegate); 
-                     
+            RegisterIPDOXSocketChangedCallback(procIPDOXSocketChangedDelegate);                     
         }
 
         public delegate void MonitoringStatusChangesDelegate(UInt32 panelID, PanelMonitoring panelMonitoring);
@@ -1197,9 +1186,9 @@ namespace ParadoxAPILibrary
         {
             Int32 returnValue = GetDriverVersion(out version);                      
 
-            if (!ErrorCodes.Succeeded((UInt32)returnValue))
+            if (!PanelResults.Succeeded((UInt32)returnValue))
             {
-                errorNotification(0, returnValue, "GetDriverVersion: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                errorNotification(0, returnValue, "GetDriverVersion: " + PanelResults.GetResultCode((UInt32)returnValue));
             }
 
             return returnValue;
@@ -1217,9 +1206,9 @@ namespace ParadoxAPILibrary
 
                 Log(0, returnValue, xmlInfo);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(0, returnValue, "DiscoverModules: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(0, returnValue, "DiscoverModules: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 return returnValue;
@@ -1242,9 +1231,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlSettings);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "ConnectToPanel: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "ConnectToPanel: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 return returnValue;
@@ -1261,9 +1250,9 @@ namespace ParadoxAPILibrary
 
             Log(panelID, returnValue, "Disconnet");
 
-            if (!ErrorCodes.Succeeded((UInt32)returnValue))
+            if (!PanelResults.Succeeded((UInt32)returnValue))
             {
-                errorNotification(panelID, returnValue, "DisconnectFromPanel: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                errorNotification(panelID, returnValue, "DisconnectFromPanel: " + PanelResults.GetResultCode((UInt32)returnValue));
             }
 
             return returnValue;
@@ -1282,9 +1271,9 @@ namespace ParadoxAPILibrary
 
                 panelInfo.parseXML(xmlInfo);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "DetectPanel: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "DetectPanel: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 return returnValue;
@@ -1307,9 +1296,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlInfo);
                 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "RetrievePanelInfo: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "RetrievePanelInfo: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
                 else
                 {
@@ -1336,9 +1325,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlAction);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "RegisterPanel: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "RegisterPanel: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 return returnValue;
@@ -1361,9 +1350,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlArea);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "ControlArea: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "ControlArea: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 return returnValue;
@@ -1386,9 +1375,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlStatus);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "AreaStatus: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "AreaStatus: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 return returnValue;
@@ -1411,9 +1400,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlZone);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "ControlZone: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "ControlZone: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 return returnValue;
@@ -1436,9 +1425,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlStatus);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "ZoneStatus: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "ZoneStatus: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 return returnValue;
@@ -1461,9 +1450,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlPGM);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "ControlPGM: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "ControlPGM: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 return returnValue;
@@ -1486,9 +1475,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlStatus);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "PGMStatus: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "PGMStatus: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 return returnValue;
@@ -1511,9 +1500,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlDoor);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "ControlDoor: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "ControlDoor: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 return returnValue;
@@ -1536,9 +1525,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlStatus);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "DoorStatus: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "DoorStatus: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 return returnValue;
@@ -1561,9 +1550,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlTimeStamp);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "ReadTimeStamp: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "ReadTimeStamp: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 RefreshNotification(panelID, returnValue);
@@ -1586,9 +1575,9 @@ namespace ParadoxAPILibrary
 
                 dateTime = DateTime.FromOADate(dt);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "ReadDateTime: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "ReadDateTime: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 RefreshNotification(panelID, returnValue);
@@ -1609,9 +1598,9 @@ namespace ParadoxAPILibrary
 
                 Int32 returnValue = WriteDateTime(panelID, dt);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "WriteDateTime: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "WriteDateTime: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 return returnValue;
@@ -1634,9 +1623,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlArea);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "ReadArea: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "ReadArea: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
                 
                 NotifyTaskCompleted(panelID, returnValue, areaNo, PanelObjectTypes.OT_AREA, AT_READ);
@@ -1661,9 +1650,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlAreas);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "ReadAllAreas: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "ReadAllAreas: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 NotifyTaskCompleted(panelID, returnValue, 0, PanelObjectTypes.OT_AREAS, AT_READ);
@@ -1688,9 +1677,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlZone);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "ReadZone: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "ReadZone: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 NotifyTaskCompleted(panelID, returnValue, zoneNo, PanelObjectTypes.OT_ZONE, AT_READ);
@@ -1702,8 +1691,7 @@ namespace ParadoxAPILibrary
                 return -1;
             }
         }
-
-
+        
         public static Int32 ReadAllZones(UInt32 panelID, PanelZoneList panelZones)
         {
             if (panelZones != null)
@@ -1716,9 +1704,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlZones);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "ReadAllZones: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "ReadAllZones: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 NotifyTaskCompleted(panelID, returnValue, 0, PanelObjectTypes.OT_ZONES, AT_READ);
@@ -1743,9 +1731,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlPGM);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "ReadPGM: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "ReadPGM: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 NotifyTaskCompleted(panelID, returnValue, pgmNo, PanelObjectTypes.OT_PGM, AT_READ);
@@ -1770,9 +1758,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlPGMs);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "ReadAllPGMs: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "ReadAllPGMs: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 NotifyTaskCompleted(panelID, returnValue, 0, PanelObjectTypes.OT_PGMS, AT_READ);
@@ -1797,9 +1785,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlDoor);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "ReadDoor: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "ReadDoor: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 NotifyTaskCompleted(panelID, returnValue, doorNo, PanelObjectTypes.OT_DOOR, AT_READ);
@@ -1824,9 +1812,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlDoor);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "WriteDoor: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "WriteDoor: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 NotifyTaskCompleted(panelID, returnValue, doorNo, PanelObjectTypes.OT_DOOR, AT_WRITE);
@@ -1851,9 +1839,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlDoors);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "ReadAllDoors: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "ReadAllDoors: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 NotifyTaskCompleted(panelID, returnValue, 0, PanelObjectTypes.OT_DOORS, AT_READ);
@@ -1878,9 +1866,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlUser);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "ReadUser: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "ReadUser: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 NotifyTaskCompleted(panelID, returnValue, userNo, PanelObjectTypes.OT_USER, AT_READ);
@@ -1905,9 +1893,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlUser);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "WriteUser: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "WriteUser: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 NotifyTaskCompleted(panelID, returnValue, userNo, PanelObjectTypes.OT_USER, AT_WRITE);
@@ -1932,9 +1920,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlUsers);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "ReadAllUsers: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "ReadAllUsers: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 NotifyTaskCompleted(panelID, returnValue, 0, PanelObjectTypes.OT_USERS, AT_READ);
@@ -1959,9 +1947,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlUsers);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "WriteMultipleUsers: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "WriteMultipleUsers: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 NotifyTaskCompleted(panelID, returnValue, 0, PanelObjectTypes.OT_USERS, AT_WRITE);
@@ -1986,9 +1974,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlSchedule);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "ReadSchedule: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "ReadSchedule: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 NotifyTaskCompleted(panelID, returnValue, scheduleNo, PanelObjectTypes.OT_SCHEDULE, AT_READ);
@@ -2013,9 +2001,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlSchedule);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "WriteSchedule: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "WriteSchedule: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 NotifyTaskCompleted(panelID, returnValue, scheduleNo, PanelObjectTypes.OT_SCHEDULE, AT_WRITE);
@@ -2040,9 +2028,9 @@ namespace ParadoxAPILibrary
                                               
                 Log(panelID, returnValue, xmlSchedules);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "ReadAllSchedules: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "ReadAllSchedules: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 NotifyTaskCompleted(panelID, returnValue, 0, PanelObjectTypes.OT_SCHEDULES, AT_READ);
@@ -2067,9 +2055,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlAccessLevel);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "ReadAccessLevel: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "ReadAccessLevel: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 NotifyTaskCompleted(panelID, returnValue, accessLevelNo, PanelObjectTypes.OT_ACCESS_LEVEL, AT_READ);
@@ -2094,9 +2082,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlAccessLevel);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "WriteAccessLevel: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "WriteAccessLevel: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 NotifyTaskCompleted(panelID, returnValue, accessLevelNo, PanelObjectTypes.OT_ACCESS_LEVEL, AT_WRITE);
@@ -2121,9 +2109,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlAccessLevels);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "ReadAllAccessLevels: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "ReadAllAccessLevels: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 NotifyTaskCompleted(panelID, returnValue, 0, PanelObjectTypes.OT_ACCESS_LEVELS, AT_READ);
@@ -2148,9 +2136,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlHolidays);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "ReadHolidays: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "ReadHolidays: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 NotifyTaskCompleted(panelID, returnValue, 0, PanelObjectTypes.OT_HOLIDAYS, AT_READ);
@@ -2175,9 +2163,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlHolidays);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "WriteHolidays: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "WriteHolidays: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 NotifyTaskCompleted(panelID, returnValue, 0, PanelObjectTypes.OT_HOLIDAYS, AT_WRITE);
@@ -2196,9 +2184,9 @@ namespace ParadoxAPILibrary
 
             Log(panelID, returnValue, string.Format("Read Buffered Event Count: {0}", eventCount));
 
-            if (!ErrorCodes.Succeeded((UInt32)returnValue))
+            if (!PanelResults.Succeeded((UInt32)returnValue))
             {
-                errorNotification(panelID, returnValue, "ReadBufferedEvents: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                errorNotification(panelID, returnValue, "ReadBufferedEvents: " + PanelResults.GetResultCode((UInt32)returnValue));
             }
 
             return returnValue;
@@ -2216,9 +2204,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlMonitoring);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "ReadMonitoringStatus: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "ReadMonitoringStatus: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 RefreshNotification(panelID, returnValue);
@@ -2243,9 +2231,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlTroubles);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "GetSystemTroubles: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "GetSystemTroubles: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 RefreshNotification(panelID, returnValue);
@@ -2265,9 +2253,9 @@ namespace ParadoxAPILibrary
 
             Log(panelID, returnValue, "Start Monitoring");
 
-            if (!ErrorCodes.Succeeded((UInt32)returnValue))
+            if (!PanelResults.Succeeded((UInt32)returnValue))
             {
-                errorNotification(panelID, returnValue, "StartControlPanelMonitoring: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                errorNotification(panelID, returnValue, "StartControlPanelMonitoring: " + PanelResults.GetResultCode((UInt32)returnValue));
             }
 
             return returnValue;            
@@ -2285,9 +2273,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlReporting);
                                
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "WriteIPReporting: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "WriteIPReporting: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
                 else
                 {
@@ -2314,9 +2302,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlReporting);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "ReadIPReporting: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "ReadIPReporting: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
                 else                
                 {
@@ -2345,9 +2333,9 @@ namespace ParadoxAPILibrary
 
                 Log(0, returnValue, xmlSetting);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(0, returnValue, "StartIPDOX: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(0, returnValue, "StartIPDOX: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 return returnValue;
@@ -2364,9 +2352,9 @@ namespace ParadoxAPILibrary
 
             Log(0, returnValue, "StopIPDOX");
 
-            if (!ErrorCodes.Succeeded((UInt32)returnValue))
+            if (!PanelResults.Succeeded((UInt32)returnValue))
             {
-                errorNotification(0, returnValue, "StopIPDOX: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                errorNotification(0, returnValue, "StopIPDOX: " + PanelResults.GetResultCode((UInt32)returnValue));
             }
 
             return returnValue;            
@@ -2378,9 +2366,9 @@ namespace ParadoxAPILibrary
 
             Log(0, returnValue, "DeleteIPDOXAccount");
 
-            if (!ErrorCodes.Succeeded((UInt32)returnValue))
+            if (!PanelResults.Succeeded((UInt32)returnValue))
             {
-                errorNotification(0, returnValue, "DeleteIPDOXAccount: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                errorNotification(0, returnValue, "DeleteIPDOXAccount: " + PanelResults.GetResultCode((UInt32)returnValue));
             }
 
             return returnValue;
@@ -2398,9 +2386,9 @@ namespace ParadoxAPILibrary
 
                 Log(panelID, returnValue, xmlStatus);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(panelID, returnValue, "IPReportingStatus: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(panelID, returnValue, "IPReportingStatus: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 RefreshNotification(panelID, returnValue);
@@ -2425,9 +2413,9 @@ namespace ParadoxAPILibrary
 
                 Log(0, returnValue, xmlSiteInfo);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(0, returnValue, "GetSiteFromPMH: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(0, returnValue, "GetSiteFromPMH: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 return returnValue;
@@ -2450,9 +2438,9 @@ namespace ParadoxAPILibrary
 
                 Log(0, returnValue, xmlVideoSettings);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(0, returnValue, "ConfigureVideoServer: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(0, returnValue, "ConfigureVideoServer: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 return returnValue;
@@ -2477,9 +2465,9 @@ namespace ParadoxAPILibrary
 
                 Log(0, returnValue, XMLVideoFiles);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(0, returnValue, "GetVideoAlarmFiles: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(0, returnValue, "GetVideoAlarmFiles: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 return returnValue;
@@ -2503,9 +2491,9 @@ namespace ParadoxAPILibrary
 
                 Log(0, returnValue, xmlVideoFile);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(0, returnValue, "StartVideoOnDemand: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(0, returnValue, "StartVideoOnDemand: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 return returnValue;
@@ -2531,9 +2519,9 @@ namespace ParadoxAPILibrary
 
                 Log(0, returnValue, xmlVideoFile);
 
-                if (!ErrorCodes.Succeeded((UInt32)returnValue))
+                if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
-                    errorNotification(0, returnValue, "StartVideoOnDemandEx: " + ErrorCodes.GetResultCode((UInt32)returnValue));
+                    errorNotification(0, returnValue, "StartVideoOnDemandEx: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
 
                 return returnValue;

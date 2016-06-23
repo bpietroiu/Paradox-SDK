@@ -23,7 +23,7 @@ namespace ParadoxAPILibrary.Model
 
     #endregion
     
-    public class VODSettings : CustomXmlParser<VODSettings>
+    public class VODSettings : BasePanelModel<VODSettings>
     {
         public string IPAddress;
         public UInt32 IPPort;

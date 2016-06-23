@@ -22,7 +22,7 @@ namespace ParadoxAPILibrary.Model
 
     #endregion
     
-    public class PanelAccessLevel : CustomXmlParser<PanelAccessLevel>
+    public class PanelAccessLevel : BasePanelModel<PanelAccessLevel>
     {
         protected string sAccessLevelDoors;
 

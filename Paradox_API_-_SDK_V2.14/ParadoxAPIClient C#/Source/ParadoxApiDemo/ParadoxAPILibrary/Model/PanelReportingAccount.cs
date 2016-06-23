@@ -32,7 +32,7 @@ namespace ParadoxAPILibrary.Model
 
     #endregion
 
-    public class PanelReportingAccount : CustomXmlParser<PanelReportingAccount>
+    public class PanelReportingAccount : BasePanelModel<PanelReportingAccount>
     {
         public string AccountNo;
         public string AccountStatus;

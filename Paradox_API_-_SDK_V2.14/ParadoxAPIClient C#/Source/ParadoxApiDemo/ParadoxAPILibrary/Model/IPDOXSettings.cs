@@ -50,7 +50,7 @@ namespace ParadoxAPILibrary.Model
     
     #endregion
     
-    public class IPDOXSettings : CustomXmlParser<IPDOXSettings>
+    public class IPDOXSettings : BasePanelModel<IPDOXSettings>
     {
         public string IPPassword;
         public string AccountFilePath;

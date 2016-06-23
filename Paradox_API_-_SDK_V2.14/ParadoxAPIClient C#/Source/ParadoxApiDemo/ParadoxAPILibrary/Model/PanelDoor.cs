@@ -54,7 +54,7 @@ namespace ParadoxAPILibrary.Model
 
     #endregion
     
-    public class PanelDoor : CustomXmlParser<PanelDoor>
+    public class PanelDoor : BasePanelModel<PanelDoor>
     {
         public UInt32 DoorNo;
         public string DoorLabel;

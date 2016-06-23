@@ -30,7 +30,7 @@ namespace ParadoxAPILibrary.Model
 
     #endregion
 
-    public class PanelSettings : CustomXmlParser<PanelSettings>
+    public class PanelSettings : BasePanelModel<PanelSettings>
     {
         public string PanelType;
         public string ComType;

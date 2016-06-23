@@ -22,7 +22,7 @@ namespace ParadoxAPILibrary.Model
 
     #endregion  
 
-    public class VideoFile : CustomXmlParser<VideoFile>
+    public class VideoFile : BasePanelModel<VideoFile>
     {
         public UInt32 FileID;
         public string FileType;

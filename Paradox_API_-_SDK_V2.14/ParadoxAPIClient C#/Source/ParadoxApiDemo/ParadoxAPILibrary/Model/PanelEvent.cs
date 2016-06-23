@@ -28,7 +28,7 @@ namespace ParadoxAPILibrary.Model
 
     #endregion
 
-    public class PanelEvent : CustomXmlParser<PanelEvent>
+    public class PanelEvent : BasePanelModel<PanelEvent>
     {
         public DateTime dateTime;
         public Int64 SequenceNo;

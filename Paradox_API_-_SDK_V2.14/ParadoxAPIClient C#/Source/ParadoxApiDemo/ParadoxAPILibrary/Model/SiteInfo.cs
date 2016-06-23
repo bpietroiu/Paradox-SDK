@@ -24,7 +24,7 @@ namespace ParadoxAPILibrary.Model
 
     #endregion
 
-    public class SiteInfo : CustomXmlParser<SiteInfo>
+    public class SiteInfo : BasePanelModel<SiteInfo>
     {
         public string SerialNo;
         public string ItemType;

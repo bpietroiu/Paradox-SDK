@@ -19,7 +19,7 @@ namespace ParadoxAPILibrary.Model
 
     #endregion
     
-    public class PanelTimeStamp : CustomXmlParser<PanelTimeStamp>
+    public class PanelTimeStamp : BasePanelModel<PanelTimeStamp>
     {
         public Int32 TimeStamp;
 

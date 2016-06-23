@@ -20,7 +20,7 @@ namespace ParadoxAPILibrary.Model
     */
     #endregion
     
-    public class PanelReportingEventUpdate : CustomXmlParser<PanelReportingEventUpdate>
+    public class PanelReportingEventUpdate : BasePanelModel<PanelReportingEventUpdate>
     {
         public Int32 EventID;
         public string EventStatus;

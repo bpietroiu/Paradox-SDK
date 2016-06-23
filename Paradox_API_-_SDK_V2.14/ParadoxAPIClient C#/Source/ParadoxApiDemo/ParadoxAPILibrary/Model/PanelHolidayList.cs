@@ -17,7 +17,7 @@ namespace ParadoxAPILibrary.Model
 
     #endregion
     
-    public class PanelHolidayList : CustomXmlParser<PanelHolidayList>
+    public class PanelHolidayList : BasePanelModel<PanelHolidayList>
     {
         public ArrayList panelHolidays;
         public string Holidays;

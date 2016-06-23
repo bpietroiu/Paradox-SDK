@@ -27,7 +27,7 @@ namespace ParadoxAPILibrary.Model
 
     #endregion
 
-    public class PanelSchedule : CustomXmlParser<PanelSchedule>
+    public class PanelSchedule : BasePanelModel<PanelSchedule>
     {
         public UInt32 ScheduleNo;
         public string ScheduleLabel;

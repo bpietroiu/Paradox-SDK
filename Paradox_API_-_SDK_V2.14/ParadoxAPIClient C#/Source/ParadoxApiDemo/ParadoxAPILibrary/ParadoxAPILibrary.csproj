@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ErrorCodes.cs" />
+    <Compile Include="PanelResults.cs" />
     <Compile Include="Model\IPDOXSettings.cs" />
     <Compile Include="Model\IPReportingStatus.cs" />
     <Compile Include="Model\ModuleInfo.cs" />
@@ -89,7 +89,7 @@
     <Compile Include="PanelTypes.cs" />
     <Compile Include="ParadoxAPI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CustomXmlParser.cs" />
+    <Compile Include="Model\BasePanelModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

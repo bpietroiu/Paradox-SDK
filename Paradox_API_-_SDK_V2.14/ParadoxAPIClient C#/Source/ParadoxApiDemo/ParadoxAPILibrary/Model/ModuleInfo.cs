@@ -35,7 +35,7 @@ namespace ParadoxAPILibrary.Model
 
     #endregion
     
-    public class ModuleInfo : CustomXmlParser<ModuleInfo>
+    public class ModuleInfo : BasePanelModel<ModuleInfo>
     {
         public string MacString;
         public string NetMaskString;

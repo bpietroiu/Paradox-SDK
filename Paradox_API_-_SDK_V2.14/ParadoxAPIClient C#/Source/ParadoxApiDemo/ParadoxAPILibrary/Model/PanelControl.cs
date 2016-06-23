@@ -21,7 +21,7 @@ namespace ParadoxAPILibrary.Model
 
     #endregion
     
-    public class PanelControl : CustomXmlParser<PanelControl>
+    public class PanelControl : BasePanelModel<PanelControl>
     {
         public string Command;
         public string Items;

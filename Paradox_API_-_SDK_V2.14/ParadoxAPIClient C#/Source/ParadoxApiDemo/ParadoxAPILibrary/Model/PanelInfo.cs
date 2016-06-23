@@ -28,7 +28,7 @@ namespace ParadoxAPILibrary.Model
 
     #endregion
     
-    public class PanelInfo : CustomXmlParser<PanelInfo>
+    public class PanelInfo : BasePanelModel<PanelInfo>
     {
         public string SiteName;
         public string MediaType;

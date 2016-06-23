@@ -29,7 +29,7 @@ namespace ParadoxAPILibrary.Model
 
     #endregion
     
-    public class PanelPGM : CustomXmlParser<PanelPGM>
+    public class PanelPGM : BasePanelModel<PanelPGM>
     {
         public UInt32 PGMNo;
         public string PGMLabel;

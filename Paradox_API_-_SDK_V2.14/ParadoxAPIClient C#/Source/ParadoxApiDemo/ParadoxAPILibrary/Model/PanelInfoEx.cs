@@ -32,7 +32,7 @@ namespace ParadoxAPILibrary.Model
 
     #endregion
 
-    public class PanelInfoEx : CustomXmlParser<PanelInfoEx>
+    public class PanelInfoEx : BasePanelModel<PanelInfoEx>
     {
         public string Description;
         public Int32 ProductID;

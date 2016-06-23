@@ -40,7 +40,7 @@ namespace ParadoxAPILibrary.Model
 
     #endregion
 
-    public class PanelZone : CustomXmlParser<PanelZone>
+    public class PanelZone : BasePanelModel<PanelZone>
     {
         public UInt32 ZoneNo;
         public bool ZoneEnabled;

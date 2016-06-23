@@ -30,7 +30,7 @@ namespace ParadoxAPILibrary.Model
 
     #endregion
 
-    public class PanelReportingEvent : CustomXmlParser<PanelReportingEvent>
+    public class PanelReportingEvent : BasePanelModel<PanelReportingEvent>
     {
         public Int32 EventID;
         public string EventAccountNo;

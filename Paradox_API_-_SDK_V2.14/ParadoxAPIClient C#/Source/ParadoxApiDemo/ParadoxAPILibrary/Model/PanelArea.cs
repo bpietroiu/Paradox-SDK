@@ -83,7 +83,7 @@ namespace ParadoxAPILibrary.Model
 
     #endregion
 
-    public class PanelArea : CustomXmlParser<PanelArea>
+    public class PanelArea : BasePanelModel<PanelArea>
     {
         public UInt32 AreaNo;
         public string AreaLabel;
