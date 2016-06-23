@@ -155,8 +155,8 @@ namespace Harmony.SDK.Paradox.Model
 
         public PanelArea()
         {
-            sObjectname = "TPanelAreaXML";
-            sName = "Area";
+            ObjectName = "TPanelAreaXML";
+            Name = "Area";
         }
         
         protected internal bool parseXML(string xmlString)
@@ -169,7 +169,7 @@ namespace Harmony.SDK.Paradox.Model
                     try
                     {
                         reader.ReadToFollowing("object");
-                        base.parseXML(reader);
+                        base.ParseXml(reader);
 
                         while (reader.ReadToFollowing("method"))
                         {

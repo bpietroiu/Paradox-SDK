@@ -47,8 +47,8 @@ namespace Harmony.SDK.Paradox.Model
 
         public PanelSettings()
         {
-            sObjectname = "TPanelSettingsXML";
-            sName = "Settings";
+            ObjectName = "TPanelSettingsXML";
+            Name = "Settings";
             IPPort = 10000;
             IPPassword = "paradox";
             UserCode = "1234";
@@ -64,7 +64,7 @@ namespace Harmony.SDK.Paradox.Model
                     try
                     {
                         reader.ReadToFollowing("object");
-                        base.parseXML(reader);
+                        base.ParseXml(reader);
 
                         while (reader.ReadToFollowing("method"))
                         {

@@ -54,8 +54,8 @@ namespace Harmony.SDK.Paradox.Model
 
         public PanelIPReporting()
         {
-            sObjectname = "TPanelIPReportingXML";
-            sName = "IPReporting";
+            ObjectName = "TPanelIPReportingXML";
+            Name = "IPReporting";
         }
         
         protected internal bool parseXML(string xmlString)
@@ -68,7 +68,7 @@ namespace Harmony.SDK.Paradox.Model
                     try
                     {
                         reader.ReadToFollowing("object");
-                        base.parseXML(reader);
+                        base.ParseXml(reader);
 
                         while (reader.ReadToFollowing("method"))
                         {

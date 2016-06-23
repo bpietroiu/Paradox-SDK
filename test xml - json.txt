@@ -1,0 +1,37 @@
+
+<?xml version="1.0"?>
+<PanelInfo>
+	<ZoneStatus Zone3="Opened,Alarm In Memory"/>
+</PanelInfo>
+
+
+<?xml version="1.0" encoding="utf-16"?>
+<PanelMonitoring xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Objectname>PanelInfo</Objectname>
+  <Name>Status</Name>
+  <ItemNo>777</ItemNo>
+  <ItemType>The item type</ItemType>
+  <Status>Status</Status>
+</PanelMonitoring>
+
+
+{
+	==> ClassType: "PanelInfo"
+	"ItemNo": 777,
+	"ItemType": "The item type",
+	"Status": "Status",
+	"Objectname": "PanelInfo",
+	"Name": "Status"
+}
+
+{
+	"$type":"Harmony.SDK.Paradox.Model.PanelMonitoring, Harmony.SDK.Paradox",
+	"ItemNo":777,
+	"ItemType":"The item type",
+	"Status":"Status",
+	"Objectname":"PanelInfo",
+	"Name":"Status"
+}
+
+
+193 vs 327 bytes (59%)

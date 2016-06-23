@@ -31,8 +31,8 @@ namespace Harmony.SDK.Paradox.Model
 
         public VideoFile()
         {
-            sObjectname = "TVideoFileXML";
-            sName = "File";
+            ObjectName = "TVideoFileXML";
+            Name = "File";
         }
         
         protected internal bool parseXML(string xmlString)
@@ -46,7 +46,7 @@ namespace Harmony.SDK.Paradox.Model
                     try
                     {
                         reader.ReadToFollowing("object");
-                        base.parseXML(reader);
+                        base.ParseXml(reader);
 
                         while (reader.ReadToFollowing("method"))
                         {

@@ -49,8 +49,8 @@ namespace Harmony.SDK.Paradox.Model
 
         public PanelAccessLevel()
         {
-            sObjectname = "TPanelAccessLevelXML";
-            sName = "AccessLevel";
+            ObjectName = "TPanelAccessLevelXML";
+            Name = "AccessLevel";
             Doors = new List<int>();
         }
 
@@ -70,7 +70,7 @@ namespace Harmony.SDK.Paradox.Model
                     try
                     {
                         reader.ReadToFollowing("object");
-                        base.parseXML(reader);
+                        base.ParseXml(reader);
 
                         while (reader.ReadToFollowing("method"))
                         {

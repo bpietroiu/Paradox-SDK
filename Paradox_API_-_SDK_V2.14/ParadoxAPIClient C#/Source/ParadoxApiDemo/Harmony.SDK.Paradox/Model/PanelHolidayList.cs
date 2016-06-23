@@ -26,8 +26,8 @@ namespace Harmony.SDK.Paradox.Model
         {
             panelHolidays = new ArrayList();
 
-            sObjectname = "PanelHolidays";
-            sName = "Holidays";
+            ObjectName = "PanelHolidays";
+            Name = "Holidays";
         }
 
         ~PanelHolidayList()
@@ -107,8 +107,8 @@ namespace Harmony.SDK.Paradox.Model
                 {
                     writer.WriteProcessingInstruction("xml", "version='1.0'");
                     writer.WriteStartElement("PanelInfo");
-                    writer.WriteStartElement(sObjectname);
-                    writer.WriteStartAttribute(sName); writer.WriteValue(Holidays); writer.WriteEndAttribute();
+                    writer.WriteStartElement(ObjectName);
+                    writer.WriteStartAttribute(Name); writer.WriteValue(Holidays); writer.WriteEndAttribute();
                     writer.WriteEndElement();
                     writer.WriteFullEndElement();
 

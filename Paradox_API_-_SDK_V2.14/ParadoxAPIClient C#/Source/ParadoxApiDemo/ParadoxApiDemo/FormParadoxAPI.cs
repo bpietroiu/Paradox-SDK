@@ -369,7 +369,7 @@ namespace ParadoxApiDemo
                             XmlDocument doc = new XmlDocument();
                             doc.Load(str);
                             String xml = doc.InnerXml;
-                            ipDOXSettings.parseXML(xml);
+                            ipDOXSettings.ParseXML(xml);
                             UpdateIPDOXSettingsUI();
                         }
                     }

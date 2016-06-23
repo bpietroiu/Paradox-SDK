@@ -30,7 +30,7 @@ namespace Harmony.SDK.Paradox.Model
 
     public class PanelEvent : BasePanelModel<PanelEvent>
     {
-        public DateTime dateTime;
+        public DateTime DateTime;
         public Int64 SequenceNo;
         public string EventDateTime;
         public string EventLabel;
@@ -43,8 +43,8 @@ namespace Harmony.SDK.Paradox.Model
 
         public PanelEvent()
         {
-            sObjectname = "TPanelEventXML";
-            sName = "PanelEvent";
+            ObjectName = "TPanelEventXML";
+            Name = "PanelEvent";
         }
         
         protected internal bool parseXML(string xmlString)
@@ -57,7 +57,7 @@ namespace Harmony.SDK.Paradox.Model
                     try
                     {
                         reader.ReadToFollowing("object");
-                        base.parseXML(reader);
+                        base.ParseXml(reader);
 
                         while (reader.ReadToFollowing("method"))
                         {
@@ -71,11 +71,11 @@ namespace Harmony.SDK.Paradox.Model
                                 {
                                     try
                                     {
-                                        dateTime = System.DateTime.FromOADate(Convert.ToDouble(svalue.Trim()));
+                                        DateTime = System.DateTime.FromOADate(Convert.ToDouble(svalue.Trim()));
                                     }
                                     catch
                                     {
-                                        dateTime = System.DateTime.FromOADate(0.0);
+                                        DateTime = System.DateTime.FromOADate(0.0);
                                     }
                                 }
                                 else if (sname == "SequenceNo") SequenceNo = Convert.ToInt64(svalue.Trim());

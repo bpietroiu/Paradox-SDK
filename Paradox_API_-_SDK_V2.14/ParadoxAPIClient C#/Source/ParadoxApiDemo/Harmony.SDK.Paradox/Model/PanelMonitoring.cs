@@ -28,8 +28,8 @@ namespace Harmony.SDK.Paradox.Model
 
         public PanelMonitoring()
         {
-            sObjectname = "PanelInfo";
-            sName = "Status";
+            ObjectName = "PanelInfo";
+            Name = "Status";
         }
         
         protected internal bool parseXML(string xmlString)
@@ -37,7 +37,7 @@ namespace Harmony.SDK.Paradox.Model
             string sType, sname, svalue, sItemNo;
             if (xmlString != null)
             {
-                using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                using (var reader = XmlReader.Create(new StringReader(xmlString)))
                 {
                     try
                     {

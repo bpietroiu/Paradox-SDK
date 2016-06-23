@@ -58,8 +58,8 @@ namespace Harmony.SDK.Paradox.Model
 
         public ModuleInfo()
         {
-            sObjectname = "TModuleInfoXML";
-            sName = "ModuleInfo";
+            ObjectName = "TModuleInfoXML";
+            Name = "ModuleInfo";
         }
         
         protected internal bool parseXML(string xmlString)
@@ -72,7 +72,7 @@ namespace Harmony.SDK.Paradox.Model
                     try
                     {
                         reader.ReadToFollowing("object");
-                        base.parseXML(reader);
+                        base.ParseXml(reader);
 
                         while (reader.ReadToFollowing("method"))
                         {

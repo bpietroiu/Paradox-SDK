@@ -69,8 +69,8 @@ namespace Harmony.SDK.Paradox.Model
 
         public PanelZone()
         {
-            sObjectname = "TPanelZoneXML";
-            sName = "Zone";
+            ObjectName = "TPanelZoneXML";
+            Name = "Zone";
         }
         
         protected internal bool parseXML(string xmlString)
@@ -83,7 +83,7 @@ namespace Harmony.SDK.Paradox.Model
                     try
                     {
                         reader.ReadToFollowing("object");
-                        base.parseXML(reader);
+                        base.ParseXml(reader);
 
                         while (reader.ReadToFollowing("method"))
                         {

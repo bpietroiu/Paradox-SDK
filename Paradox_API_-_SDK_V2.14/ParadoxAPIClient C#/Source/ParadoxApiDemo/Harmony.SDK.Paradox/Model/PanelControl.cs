@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace Harmony.SDK.Paradox.Model
 {
@@ -21,6 +22,7 @@ namespace Harmony.SDK.Paradox.Model
 
     #endregion
     
+    [XmlRoot("object")]
     public class PanelControl : BasePanelModel<PanelControl>
     {
         public string Command;
@@ -29,8 +31,8 @@ namespace Harmony.SDK.Paradox.Model
 
         public PanelControl()
         {
-            sObjectname = "TPanelControlXML";
-            sName = "Action";
+            ObjectName = "TPanelControlXML";
+            Name = "Action";
             Command = "";
             Items = "";
             Timer = 0;
@@ -46,7 +48,7 @@ namespace Harmony.SDK.Paradox.Model
                     try
                     {
                         reader.ReadToFollowing("object");
-                        base.parseXML(reader);
+                        base.ParseXml(reader);
 
                         while (reader.ReadToFollowing("method"))
                         {

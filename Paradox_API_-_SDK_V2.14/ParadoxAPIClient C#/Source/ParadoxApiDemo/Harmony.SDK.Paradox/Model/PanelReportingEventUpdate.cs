@@ -28,8 +28,8 @@ namespace Harmony.SDK.Paradox.Model
 
         public PanelReportingEventUpdate()
         {
-            sObjectname = "TPanelReportingEventUpdateXML";
-            sName = "PanelReportingEventUpdate";
+            ObjectName = "TPanelReportingEventUpdateXML";
+            Name = "PanelReportingEventUpdate";
         }
         
         protected internal bool parseXML(string xmlString)
@@ -42,7 +42,7 @@ namespace Harmony.SDK.Paradox.Model
                     try
                     {
                         reader.ReadToFollowing("object");
-                        base.parseXML(reader);
+                        base.ParseXml(reader);
 
                         while (reader.ReadToFollowing("method"))
                         {

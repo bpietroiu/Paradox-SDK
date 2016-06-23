@@ -27,8 +27,8 @@ namespace Harmony.SDK.Paradox.Model
 
         public VideoSettings()
         {
-            sObjectname = "TVideoSettingsXML";
-            sName = "VideoSettings";
+            ObjectName = "TVideoSettingsXML";
+            Name = "VideoSettings";
         }
         
         public bool parseXML(string xmlString)
@@ -41,7 +41,7 @@ namespace Harmony.SDK.Paradox.Model
                     try
                     {
                         reader.ReadToFollowing("object");
-                        base.parseXML(reader);
+                        base.ParseXml(reader);
 
                         while (reader.ReadToFollowing("method"))
                         {

@@ -33,8 +33,8 @@ namespace Harmony.SDK.Paradox.Model
 
         public VODSettings()
         {
-            sObjectname = "TVODSettingsXML";
-            sName = "Settings";
+            ObjectName = "TVODSettingsXML";
+            Name = "Settings";
         }
         
         protected internal bool parseXML(string xmlString)
@@ -48,7 +48,7 @@ namespace Harmony.SDK.Paradox.Model
                     try
                     {
                         reader.ReadToFollowing("object");
-                        base.parseXML(reader);
+                        base.ParseXml(reader);
 
                         while (reader.ReadToFollowing("method"))
                         {

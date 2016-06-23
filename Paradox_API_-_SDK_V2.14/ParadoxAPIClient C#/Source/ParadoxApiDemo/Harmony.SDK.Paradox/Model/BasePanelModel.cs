@@ -1,43 +1,23 @@
 ﻿using System;
+using System.Reflection;
 using System.Text;
 using System.Xml;
-using System.Reflection;
+using System.Xml.Serialization;
 
-namespace Harmony.SDK.Paradox
+namespace Harmony.SDK.Paradox.Model
 {
     public class BasePanelModel<T> : IDisposable
     {
-        protected string sObjectname;
-        protected string sName;
+        [XmlAttribute(AttributeName = "objectname")]
+        public string ObjectName { get; set; }
 
-        public string Objectname 
-        { 
-            get 
-            { 
-                return sObjectname; 
-            }
-            set 
-            { 
-                sObjectname = value; 
-            }
-        }
-
-        public string Name 
-        { 
-            get 
-            { 
-                return sName; 
-            }
-            set
-            {
-                sName = value;
-            }
-        }
+        [XmlAttribute(AttributeName = "name")]
+        public string Name { get; set; }
 
         protected void fullCopy(BasePanelModel<T> dest)
         {
-            dest.sName = (string)sName.Clone();
-            dest.sObjectname = (string)sObjectname.Clone();
+            dest.Name = (string)Name.Clone();
+            dest.ObjectName = (string)ObjectName.Clone();
         }
         
         // public-generic method for performing memberwise object copy
@@ -59,20 +39,22 @@ namespace Harmony.SDK.Paradox
 
         private string propname(string fldname)
         {
-            if (fldname == null || fldname == "") return "";
-            else if (fldname[0] == 'F') return fldname.Substring(1);
-            else return fldname;
+            if (string.IsNullOrWhiteSpace(fldname))
+                return string.Empty;
+            if (fldname[0] == 'F')
+                return fldname.Substring(1);
+            return fldname;
         }
 
         //Example:  <object objectname="TPanelUserXML" name="User1">
-        protected internal bool parseXML(XmlReader reader)
+        protected internal bool ParseXml(XmlReader reader)
         {
             try
             {
                 reader.MoveToFirstAttribute();
-                sObjectname = reader.Value;                
+                ObjectName = reader.Value;                
                 reader.MoveToNextAttribute();
-                sName = reader.Value;
+                Name = reader.Value;
                 return true;
             }
             catch
@@ -99,7 +81,7 @@ namespace Harmony.SDK.Paradox
                 {
                     writer.WriteProcessingInstruction("xml", "version='1.0'");
                     writer.WriteStartElement("objects");
-                    writer.WriteStartElement("object"); writer.WriteStartAttribute("objectname"); writer.WriteValue(Objectname); writer.WriteEndAttribute();
+                    writer.WriteStartElement("object"); writer.WriteStartAttribute("objectname"); writer.WriteValue(ObjectName); writer.WriteEndAttribute();
                     writer.WriteStartAttribute("name"); writer.WriteValue(Name); writer.WriteEndAttribute();
 
                     writer.WriteStartElement("published");
@@ -171,7 +153,7 @@ namespace Harmony.SDK.Paradox
                 writer.WriteStartElement(string.Format("objects{0}", objectCount));
                 objectCount += 1;
                     
-                writer.WriteStartElement("object"); writer.WriteStartAttribute("objectname"); writer.WriteValue(Objectname); writer.WriteEndAttribute();
+                writer.WriteStartElement("object"); writer.WriteStartAttribute("objectname"); writer.WriteValue(ObjectName); writer.WriteEndAttribute();
                 writer.WriteStartAttribute("name"); writer.WriteValue(Name); writer.WriteEndAttribute();
 
                 writer.WriteStartElement("published");

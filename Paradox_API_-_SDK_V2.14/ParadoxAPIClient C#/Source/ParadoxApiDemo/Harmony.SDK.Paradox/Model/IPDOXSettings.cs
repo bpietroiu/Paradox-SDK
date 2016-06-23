@@ -87,11 +87,11 @@ namespace Harmony.SDK.Paradox.Model
 
         public IPDOXSettings()
         {
-            sObjectname = "TIPDOXSettingsXML";
-            sName = "Settings";
+            ObjectName = "TIPDOXSettingsXML";
+            Name = "Settings";
         }
         
-        public bool parseXML(string xmlString)
+        public bool ParseXML(string xmlString)
         {
             string sname, svalue;
             if (xmlString != null)
@@ -101,7 +101,7 @@ namespace Harmony.SDK.Paradox.Model
                     try
                     {
                         reader.ReadToFollowing("object");
-                        base.parseXML(reader);
+                        base.ParseXml(reader);
 
                         while (reader.ReadToFollowing("method"))
                         {
