@@ -34,7 +34,7 @@ namespace ParadoxAPILibrary.Model
             {
                 if ((index > 0) && (index <= panelIPReportings.Count))
                 {
-                    return (PanelIPReporting)panelIPReportings[(Int32)(index - 1)];
+                    return (PanelIPReporting)panelIPReportings[(int)(index - 1)];
                 }
                 else
                 {
@@ -45,14 +45,14 @@ namespace ParadoxAPILibrary.Model
             {
                 if ((index > 0) && (index <= panelIPReportings.Count))
                 {
-                    PanelIPReporting panelIPReporting = (PanelIPReporting)panelIPReportings[(Int32)index - 1];
-                    panelIPReporting.ReceiverNo = (Int32)index;
+                    PanelIPReporting panelIPReporting = (PanelIPReporting)panelIPReportings[(int)index - 1];
+                    panelIPReporting.ReceiverNo = (int)index;
                     panelIPReporting = value;
                 }
                 else
                 {
                     PanelIPReporting panelIPReporting = new PanelIPReporting();
-                    panelIPReporting.ReceiverNo = (Int32)index;
+                    panelIPReporting.ReceiverNo = (int)index;
                     panelIPReporting = value;
                     panelIPReportings.Add(panelIPReporting);
                 }

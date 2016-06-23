@@ -31,7 +31,7 @@ namespace ParadoxAPILibrary.Model
     {
         public UInt32 ScheduleNo;
         public string ScheduleLabel;
-        public Int32 ScheduleBackupNo;
+        public int ScheduleBackupNo;
         public DateTime ScheduleStartTimeIntervalA;
         public DateTime ScheduleEndTimeIntervalA;
         public string ScheduleDaysIntervalA;

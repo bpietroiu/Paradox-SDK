@@ -32,7 +32,7 @@ namespace ParadoxAPILibrary.Model
 
     public class PanelReportingEvent : BasePanelModel<PanelReportingEvent>
     {
-        public Int32 EventID;
+        public int EventID;
         public string EventAccountNo;
         public DateTime EventDateTime;
         public string EventProtocolID;

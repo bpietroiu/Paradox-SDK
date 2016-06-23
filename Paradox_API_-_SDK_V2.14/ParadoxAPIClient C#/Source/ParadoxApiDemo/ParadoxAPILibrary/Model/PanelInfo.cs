@@ -32,14 +32,14 @@ namespace ParadoxAPILibrary.Model
     {
         public string SiteName;
         public string MediaType;
-        public Int32 ProductID;
+        public int ProductID;
         public string Description;
         public string SerialNo;
         public string SiteID;
         public string Version;
         public string IPAddress;
-        public Int32 IPPort;
-        public Int32 WebPort;
+        public int IPPort;
+        public int WebPort;
 
         public PanelInfo()
         {

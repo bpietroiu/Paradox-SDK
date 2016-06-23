@@ -171,3 +171,6 @@ ClientBin/
 
 # RIA/Silverlight projects
 Generated_Code/
+*.suo
+*.suo
+*.suo

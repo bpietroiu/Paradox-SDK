@@ -33,9 +33,9 @@ namespace ParadoxAPILibrary.Model
     {
         public UInt32 PGMNo;
         public string PGMLabel;
-        public Int32 PGMTimer;
+        public int PGMTimer;
         public string PGMSerialNo;
-        public Int32 PGMInputNo;
+        public int PGMInputNo;
         public string PGMActivationEvent;
         public string PGMDeactivationEvent;
         public string PGMActvationMode;

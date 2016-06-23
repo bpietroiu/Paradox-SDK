@@ -37,9 +37,9 @@ namespace ParadoxAPILibrary.Model
         public string SiteID;
         public string SerialNo;
         public string IPAddress;
-        public Int32 IPPort;
-        public Int32 ComPort;
-        public Int32 BaudRate;
+        public int IPPort;
+        public int ComPort;
+        public int BaudRate;
         public bool SMSCallback;
         public string IPPassword;
         public string UserCode;

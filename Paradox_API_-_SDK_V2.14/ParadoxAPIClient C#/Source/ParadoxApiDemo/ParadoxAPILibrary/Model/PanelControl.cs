@@ -25,7 +25,7 @@ namespace ParadoxAPILibrary.Model
     {
         public string Command;
         public string Items;
-        public Int32 Timer;
+        public int Timer;
 
         public PanelControl()
         {

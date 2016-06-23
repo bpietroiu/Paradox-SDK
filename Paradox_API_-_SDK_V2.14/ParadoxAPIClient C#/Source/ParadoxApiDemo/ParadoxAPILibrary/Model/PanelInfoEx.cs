@@ -35,19 +35,19 @@ namespace ParadoxAPILibrary.Model
     public class PanelInfoEx : BasePanelModel<PanelInfoEx>
     {
         public string Description;
-        public Int32 ProductID;
+        public int ProductID;
         public string SerialNo;
-        public Int32 Version;
-        public Int32 Revision;
-        public Int32 Build;
-        public Int32 AreaCount;
-        public Int32 ZoneCount;
-        public Int32 PGMCount;
-        public Int32 UserCount;
-        public Int32 DoorCount;
-        public Int32 ReceiverCount;
-        public Int32 ScheduleCount;
-        public Int32 AccessLevelCount;
+        public int Version;
+        public int Revision;
+        public int Build;
+        public int AreaCount;
+        public int ZoneCount;
+        public int PGMCount;
+        public int UserCount;
+        public int DoorCount;
+        public int ReceiverCount;
+        public int ScheduleCount;
+        public int AccessLevelCount;
 
         public PanelInfoEx()
         {

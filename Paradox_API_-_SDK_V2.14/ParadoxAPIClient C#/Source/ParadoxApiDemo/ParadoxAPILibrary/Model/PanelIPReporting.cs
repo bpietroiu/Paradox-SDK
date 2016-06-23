@@ -35,16 +35,16 @@ namespace ParadoxAPILibrary.Model
     
     public class PanelIPReporting : BasePanelModel<PanelIPReporting>
     {
-        public Int32 ReceiverNo;
+        public int ReceiverNo;
         public bool ReportingIPEnabled;
         public string ReceiverIPPassword;
-        public Int32 ReceiverIPProfile;
+        public int ReceiverIPProfile;
         public string Area1AccountNo;
         public string Area2AccountNo;
         public string WAN1IPAddress;
-        public Int32 WAN1IPPort;
+        public int WAN1IPPort;
         public string WAN2IPAddress;
-        public Int32 WAN2IPPort;
+        public int WAN2IPPort;
         public bool ParallelReporting;
         public string ServiceFailureOptions;
         public string GPRSAccessPointName;

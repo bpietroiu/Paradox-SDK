@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="External\ParadoxAPIImport.cs" />
     <Compile Include="PanelResults.cs" />
     <Compile Include="Model\IPDOXSettings.cs" />
     <Compile Include="Model\IPReportingStatus.cs" />

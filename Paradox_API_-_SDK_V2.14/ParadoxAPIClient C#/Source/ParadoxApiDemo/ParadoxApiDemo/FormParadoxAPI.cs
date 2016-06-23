@@ -53,7 +53,7 @@ namespace ParadoxApiDemo
 
             UpdateUI();
 
-            ParadoxAPI.monitoringStatusChangesDelegate = monitoringStatusChangesDelegate;
+            ParadoxAPI.MonitoringStatusChanges = monitoringStatusChangesDelegate;
             ParadoxAPI.heartbeatDelegate = heartbeatDelegate;
             ParadoxAPI.receiveLiveEventDelegate = receiveLiveEventDelegate;
             ParadoxAPI.receiveBufferedEventDelegate = receiveBufferedEventDelegate;
@@ -3102,7 +3102,7 @@ namespace ParadoxApiDemo
             {
                 var macAddress = listViewItem.SubItems[0].Text;
 
-                if (PanelResults.Succeeded((UInt32)ParadoxAPI.deleteIPDOXAccount(macAddress)))
+                if (PanelResults.Succeeded((UInt32)ParadoxAPI.DeleteIPDOXAccount(macAddress)))
                 {
                     listViewItem.Remove();
                 }

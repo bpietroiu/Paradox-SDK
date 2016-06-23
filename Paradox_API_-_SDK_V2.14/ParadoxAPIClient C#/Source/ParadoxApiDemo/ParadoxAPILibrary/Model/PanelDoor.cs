@@ -71,7 +71,7 @@ namespace ParadoxAPILibrary.Model
         public bool DoorSkipDelayOnArmWithCard;
         public bool DoorBurglaryAlarmOnLeftOpen;
         public bool DoorMasterOnlyOnClockLost;
-        public Int32 DoorEntryToleranceWindow;
+        public int DoorEntryToleranceWindow;
         public bool DoorReportOnRequestToExit;
         public bool DoorReportOnDoorCommandFromPC;
         public bool DoorReportOnUserAccessDenied;

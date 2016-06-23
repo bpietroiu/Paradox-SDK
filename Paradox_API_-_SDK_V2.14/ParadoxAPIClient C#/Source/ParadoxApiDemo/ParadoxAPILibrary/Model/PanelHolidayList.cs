@@ -49,7 +49,7 @@ namespace ParadoxAPILibrary.Model
             {
                 if (index < panelHolidays.Count)
                 {
-                    return (PanelHoliday)panelHolidays[(Int32)index];
+                    return (PanelHoliday)panelHolidays[(int)index];
                 }
                 else
                 {
@@ -62,7 +62,7 @@ namespace ParadoxAPILibrary.Model
             {
                 if (index < panelHolidays.Count)
                 {
-                    PanelHoliday panelHoliday = (PanelHoliday)panelHolidays[(Int32)index];
+                    PanelHoliday panelHoliday = (PanelHoliday)panelHolidays[(int)index];
 
                     panelHoliday = value;
                 }

@@ -34,7 +34,7 @@ namespace ParadoxAPILibrary.Model
             {
                 if (index < panelIPReportingStatusList.Count)
                 {
-                    return (IPReportingStatus)panelIPReportingStatusList[(Int32)index];
+                    return (IPReportingStatus)panelIPReportingStatusList[(int)index];
                 }
                 else
                 {
@@ -45,7 +45,7 @@ namespace ParadoxAPILibrary.Model
             {
                 if (index < panelIPReportingStatusList.Count)
                 {
-                    IPReportingStatus panelIPReportingStatus = (IPReportingStatus)panelIPReportingStatusList[(Int32)index];
+                    IPReportingStatus panelIPReportingStatus = (IPReportingStatus)panelIPReportingStatusList[(int)index];
                     panelIPReportingStatus = value;
                 }
                 else

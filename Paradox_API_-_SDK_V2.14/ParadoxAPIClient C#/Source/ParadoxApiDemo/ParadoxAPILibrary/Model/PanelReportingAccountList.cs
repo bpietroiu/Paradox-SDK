@@ -34,7 +34,7 @@ namespace ParadoxAPILibrary.Model
             {
                 if (index < panelReportingAccounts.Count)
                 {
-                    return (PanelReportingAccount)panelReportingAccounts[(Int32)index];
+                    return (PanelReportingAccount)panelReportingAccounts[(int)index];
                 }
                 else
                 {
@@ -45,7 +45,7 @@ namespace ParadoxAPILibrary.Model
             {
                 if (index < panelReportingAccounts.Count)
                 {
-                    PanelReportingAccount panelReportingAccount = (PanelReportingAccount)panelReportingAccounts[(Int32)index];
+                    PanelReportingAccount panelReportingAccount = (PanelReportingAccount)panelReportingAccounts[(int)index];
                     panelReportingAccount = value;
                 }
                 else

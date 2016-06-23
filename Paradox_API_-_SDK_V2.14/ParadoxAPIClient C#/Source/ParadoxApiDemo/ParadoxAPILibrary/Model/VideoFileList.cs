@@ -34,7 +34,7 @@ namespace ParadoxAPILibrary.Model
             {
                 if (index < videoFiles.Count)
                 {
-                    return (VideoFile)videoFiles[(Int32)index];
+                    return (VideoFile)videoFiles[(int)index];
                 }
                 else
                     return null;
@@ -43,7 +43,7 @@ namespace ParadoxAPILibrary.Model
             {
                 if (index < videoFiles.Count)
                 {
-                    VideoFile videoFile = (VideoFile)videoFiles[(Int32)index];
+                    VideoFile videoFile = (VideoFile)videoFiles[(int)index];
 
                     videoFile = value;
                 }

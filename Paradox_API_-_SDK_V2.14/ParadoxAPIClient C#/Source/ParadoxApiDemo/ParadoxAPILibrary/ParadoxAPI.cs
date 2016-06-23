@@ -1,884 +1,145 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using ParadoxAPILibrary.External;
 using ParadoxAPILibrary.Model;
 
 namespace ParadoxAPILibrary
 {
+    /// <summary>
+    /// Proxy on ParadoxAPIImport
+    /// </summary>
     public class ParadoxAPI
     {
         #region Constants
 
         public static Form formRef = null;
-        
+
         // Action Type
         public const string AT_READ = "Read";
         public const string AT_WRITE = "Write";
-        
+
         // Control area
-        public const string C_CONTROL_AREA_ARM       = "Arm";
-        public const string C_CONTROL_AREA_FORCE     = "Force";
-        public const string C_CONTROL_AREA_STAY      = "Stay";
-        public const string C_CONTROL_AREA_SLEEP     = "Sleep";
-        public const string C_CONTROL_AREA_INSTANT   = "Instant";
-        public const string C_CONTROL_AREA_DISARM    = "Disarm";
+        public const string C_CONTROL_AREA_ARM = "Arm";
+        public const string C_CONTROL_AREA_FORCE = "Force";
+        public const string C_CONTROL_AREA_STAY = "Stay";
+        public const string C_CONTROL_AREA_SLEEP = "Sleep";
+        public const string C_CONTROL_AREA_INSTANT = "Instant";
+        public const string C_CONTROL_AREA_DISARM = "Disarm";
 
         // Control Zone
-        public const string C_CONTROL_ZONE_BYPASS    = "Bypass";
-        public const string C_CONTROL_ZONE_UNBYPASS  = "Unbypass";
+        public const string C_CONTROL_ZONE_BYPASS = "Bypass";
+        public const string C_CONTROL_ZONE_UNBYPASS = "Unbypass";
 
         // Control PGM
-        public const string C_CONTROL_PGM_ON         = "On";
-        public const string C_CONTROL_PGM_OFF        = "Off";
-        public const string C_CONTROL_PGM_TEST       = "Test";
+        public const string C_CONTROL_PGM_ON = "On";
+        public const string C_CONTROL_PGM_OFF = "Off";
+        public const string C_CONTROL_PGM_TEST = "Test";
 
         // Control Door
-        public const string C_CONTROL_DOOR_LOCK      = "Lock";
-        public const string C_CONTROL_DOOR_UNLOCK    = "Unlock";
+        public const string C_CONTROL_DOOR_LOCK = "Lock";
+        public const string C_CONTROL_DOOR_UNLOCK = "Unlock";
 
         #endregion
 
-        #region Externs
+        #region Callbacks
+
+        private static ParadoxAPIImport.ProcConnectionStatusChangedDelegate _procConnectionStatusChangedDelegate;
+        private static ParadoxAPIImport.ProcProgressChangedDelegate _procProgressChangedDelegate;
+        private static ParadoxAPIImport.ProcProgressErrorDelegate _procProgressErrorDelegate;
+        private static ParadoxAPIImport.ProcReceiveReportingEventDelegate _procReceiveReportingEventDelegate;
+        private static ParadoxAPIImport.ProcReceiveBufferEventDelegate _procReceiveBufferEventDelegate;
+        private static ParadoxAPIImport.ProcReceiveLiveEventDelegate _procReceiveLiveEventDelegate;
+        private static ParadoxAPIImport.ProcMonitoringStatusChangedDelegate _procMonitoringStatusChangedDelegate;
+        private static ParadoxAPIImport.ProcHeartbeatDelegate _procHeartbeatDelegate;
+        private static ParadoxAPIImport.ProcRxStatusChangedDelegate _procRxStatusChangedDelegate;
+        private static ParadoxAPIImport.ProcTxStatusChangedDelegate _procTxStatusChangedDelegate;
+        private static ParadoxAPIImport.ProcIPModuleDetectedDelegate _procIPModuleDetectedDelegate;
+        private static ParadoxAPIImport.ProcSMSRequestDelegate _procSMSRequestDelegate;
+        private static ParadoxAPIImport.ProcAccountRegistrationDelegate _procAccountRegistrationDelegate;
+        private static ParadoxAPIImport.ProcAccountUpdateDelegate _procAccountUpdateDelegate;
+        private static ParadoxAPIImport.ProcAccountLinkDelegate _procAccountLinkDelegate;
+        private static ParadoxAPIImport.ProcIPDOXSocketChangedDelegate _procIPDOXSocketChangedDelegate;
 
-        [DllImport("ParadoxAPI.dll", CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Unicode, EntryPoint = "GetDriverVersion")]
-        public static extern Int32 GetDriverVersion([MarshalAs(UnmanagedType.BStr)] out string version);
-
-        [DllImport("ParadoxAPI.dll", CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Unicode, EntryPoint = "DiscoverModule")]
-        public static extern Int32 DiscoverModule([MarshalAs(UnmanagedType.BStr)] out string xmlInfo);
-        
-        [DllImport("ParadoxAPI.dll", CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Unicode, EntryPoint = "DetectPanel")]
-        public static extern Int32 DetectPanel([MarshalAs(UnmanagedType.BStr)] string xmlSettings, [MarshalAs(UnmanagedType.BStr)] out string xmlInfo);
-
-        [DllImport("ParadoxAPI.dll",
-           CallingConvention = CallingConvention.StdCall,
-           CharSet = CharSet.Unicode,
-           EntryPoint = "ConnectPanel")]
-        public static extern Int32 ConnectPanel(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.BStr)] string xmlSettings,
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 WaitTimeOut
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-           CallingConvention = CallingConvention.StdCall,
-           CharSet = CharSet.Unicode,
-           EntryPoint = "DisconnectPanel")]
-        public static extern Int32 DisconnectPanel(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-           CallingConvention = CallingConvention.StdCall,
-           CharSet = CharSet.Unicode,
-           EntryPoint = "RetrievePanelInfo")]
-        public static extern Int32 RetrievePanelInfo(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlInfo
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-           CallingConvention = CallingConvention.StdCall,
-           CharSet = CharSet.Unicode,
-           EntryPoint = "RegisterPanel")]
-        public static extern Int32 RegisterPanel(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.BStr)] string xmlAction
-                                                );
-
-
-        [DllImport("ParadoxAPI.dll",
-           CallingConvention = CallingConvention.StdCall,
-           CharSet = CharSet.Unicode,
-           EntryPoint = "ControlArea")]
-        public static extern Int32 ControlArea(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.BStr)] string xmlArea
-                                                );
-
-
-        [DllImport("ParadoxAPI.dll",
-           CallingConvention = CallingConvention.StdCall,
-           CharSet = CharSet.Unicode,
-           EntryPoint = "AreaStatus")]
-        public static extern Int32 AreaStatus(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlStatus
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-           CallingConvention = CallingConvention.StdCall,
-           CharSet = CharSet.Unicode,
-           EntryPoint = "ControlZone")]
-        public static extern Int32 ControlZone(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.BStr)] string xmlZone
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-          CallingConvention = CallingConvention.StdCall,
-          CharSet = CharSet.Unicode,
-          EntryPoint = "ZoneStatus")]
-        public static extern Int32 ZoneStatus(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlStatus
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-          CallingConvention = CallingConvention.StdCall,
-          CharSet = CharSet.Unicode,
-          EntryPoint = "ControlPGM")]
-        public static extern Int32 ControlPGM(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.BStr)] string xmlPGM
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-          CallingConvention = CallingConvention.StdCall,
-          CharSet = CharSet.Unicode,
-          EntryPoint = "PGMStatus")]
-        public static extern Int32 PGMStatus(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 PanelID,
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlStatus
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-          CallingConvention = CallingConvention.StdCall,
-          CharSet = CharSet.Unicode,
-          EntryPoint = "ControlDoor")]
-        public static extern Int32 ControlDoor(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.BStr)] string xmlDoor
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-          CallingConvention = CallingConvention.StdCall,
-          CharSet = CharSet.Unicode,
-          EntryPoint = "DoorStatus")]
-        public static extern Int32 DoorStatus(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlStatus
-                                                );
-
-
-        [DllImport("ParadoxAPI.dll",
-          CallingConvention = CallingConvention.StdCall,
-          CharSet = CharSet.Unicode,
-          EntryPoint = "ReadTimeStamp")]
-        public static extern Int32 ReadTimeStamp(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 blockID,
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlTimeStamp
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-          CallingConvention = CallingConvention.StdCall,
-          CharSet = CharSet.Unicode,
-          EntryPoint = "ReadDateTime")]
-        public static extern Int32 ReadDateTime(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.R8)] ref Double DateTime
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-          CallingConvention = CallingConvention.StdCall,
-          CharSet = CharSet.Unicode,
-          EntryPoint = "WriteDateTime")]
-        public static extern Int32 WriteDateTime(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.R8)] Double DateTime
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-          CallingConvention = CallingConvention.StdCall,
-          CharSet = CharSet.Unicode,
-          EntryPoint = "ReadArea")]
-        public static extern Int32 ReadArea(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 areaNo,
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlArea
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-          CallingConvention = CallingConvention.StdCall,
-          CharSet = CharSet.Unicode,
-          EntryPoint = "ReadAllAreas")]
-        public static extern Int32 ReadAllAreas(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,                                                
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlAreas
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-          CallingConvention = CallingConvention.StdCall,
-          CharSet = CharSet.Unicode,
-          EntryPoint = "ReadZone")]
-        public static extern Int32 ReadZone(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 zoneNo,
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlZone
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-          CallingConvention = CallingConvention.StdCall,
-          CharSet = CharSet.Unicode,
-          EntryPoint = "ReadAllZones")]
-        public static extern Int32 ReadAllZones(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlZones
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-          CallingConvention = CallingConvention.StdCall,
-          CharSet = CharSet.Unicode,
-          EntryPoint = "ReadPGM")]
-        public static extern Int32 ReadPGM(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 pgmNo,
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlPGM
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-          CallingConvention = CallingConvention.StdCall,
-          CharSet = CharSet.Unicode,
-          EntryPoint = "ReadAllPGMs")]
-        public static extern Int32 ReadAllPGMs(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,                                                
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlPGMs
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-         CallingConvention = CallingConvention.StdCall,
-         CharSet = CharSet.Unicode,
-         EntryPoint = "ReadDoor")]
-        public static extern Int32 ReadDoor(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 doorNo,
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlDoor
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-         CallingConvention = CallingConvention.StdCall,
-         CharSet = CharSet.Unicode,
-         EntryPoint = "WriteDoor")]
-        public static extern Int32 WriteDoor(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 doorNo,
-                                                [MarshalAs(UnmanagedType.BStr)] string xmlDoor
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-          CallingConvention = CallingConvention.StdCall,
-          CharSet = CharSet.Unicode,
-          EntryPoint = "ReadAllDoors")]
-        public static extern Int32 ReadAllDoors(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlDoors
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-         CallingConvention = CallingConvention.StdCall,
-         CharSet = CharSet.Unicode,
-         EntryPoint = "ReadUser")]
-        public static extern Int32 ReadUser(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 userNo,
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlUser
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-         CallingConvention = CallingConvention.StdCall,
-         CharSet = CharSet.Unicode,
-         EntryPoint = "WriteUser")]
-        public static extern Int32 WriteUser(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 userNo,
-                                                [MarshalAs(UnmanagedType.BStr)] string xmlUser
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-         CallingConvention = CallingConvention.StdCall,
-         CharSet = CharSet.Unicode,
-         EntryPoint = "ReadAllUsers")]
-        public static extern Int32 ReadAllUsers(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,                                                
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlUsers
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-         CallingConvention = CallingConvention.StdCall,
-         CharSet = CharSet.Unicode,
-         EntryPoint = "WriteMultipleUsers")]
-        public static extern Int32 WriteMultipleUsers(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.BStr)] string xmlUsers
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-         CallingConvention = CallingConvention.StdCall,
-         CharSet = CharSet.Unicode,
-         EntryPoint = "ReadSchedule")]
-        public static extern Int32 ReadSchedule(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 scheduleNo,
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlSchedule
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-         CallingConvention = CallingConvention.StdCall,
-         CharSet = CharSet.Unicode,
-         EntryPoint = "WriteSchedule")]
-        public static extern Int32 WriteSchedule(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 scheduleNo,
-                                                [MarshalAs(UnmanagedType.BStr)] string xmlSchedule
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-         CallingConvention = CallingConvention.StdCall,
-         CharSet = CharSet.Unicode,
-         EntryPoint = "ReadAllSchedules")]
-        public static extern Int32 ReadAllSchedules(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.BStr)] out string XMLSchedules
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-         CallingConvention = CallingConvention.StdCall,
-         CharSet = CharSet.Unicode,
-         EntryPoint = "ReadHolidays")]
-        public static extern Int32 ReadHolidays(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlHolidays
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-         CallingConvention = CallingConvention.StdCall,
-         CharSet = CharSet.Unicode,
-         EntryPoint = "WriteHolidays")]
-        public static extern Int32 WriteHolidays(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.BStr)] string xmlHolidays
-                                                );
-         
-        [DllImport("ParadoxAPI.dll",
-         CallingConvention = CallingConvention.StdCall,
-         CharSet = CharSet.Unicode,
-         EntryPoint = "ReadAccessLevel")]
-        public static extern Int32 ReadAccessLevel(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 accessLevelNo,
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlAccessLevel
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-         CallingConvention = CallingConvention.StdCall,
-         CharSet = CharSet.Unicode,
-         EntryPoint = "WriteAccessLevel")]
-        public static extern Int32 WriteAccessLevel(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 accessLevelNo,
-                                                [MarshalAs(UnmanagedType.BStr)] string xmlAccessLevel
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-         CallingConvention = CallingConvention.StdCall,
-         CharSet = CharSet.Unicode,
-         EntryPoint = "ReadAllAccessLevels")]
-        public static extern Int32 ReadAllAccessLevels(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,                                                
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlAccessLevels
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-         CallingConvention = CallingConvention.StdCall,
-         CharSet = CharSet.Unicode,
-         EntryPoint = "ReadIPReporting")]
-        public static extern Int32 ReadIPReporting(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 receiverNo,            
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlReporting
-                                                );
-        [DllImport("ParadoxAPI.dll",
-         CallingConvention = CallingConvention.StdCall,
-         CharSet = CharSet.Unicode,
-         EntryPoint = "WriteIPReporting")]
-        public static extern Int32 WriteIPReporting(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 receiverNo,
-                                                [MarshalAs(UnmanagedType.BStr)] string xmlReporting
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-         CallingConvention = CallingConvention.StdCall,
-         CharSet = CharSet.Unicode,
-         EntryPoint = "IPReportingStatus")]
-        public static extern Int32 IPReportingStatus(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlStatus
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-         CallingConvention = CallingConvention.StdCall,
-         CharSet = CharSet.Unicode,
-         EntryPoint = "ReadBufferEvents")]
-        public static extern Int32 ReadBufferEvents(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 eventCount
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-        CallingConvention = CallingConvention.StdCall,
-        CharSet = CharSet.Unicode,
-        EntryPoint = "ReadMonitoring")]
-        public static extern Int32 ReadMonitoring(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlMonitoring
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-        CallingConvention = CallingConvention.StdCall,
-        CharSet = CharSet.Unicode,
-        EntryPoint = "SystemTroubles")]
-        public static extern Int32 SystemTroubles(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlTroubles
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-       CallingConvention = CallingConvention.StdCall,
-       CharSet = CharSet.Unicode,
-       EntryPoint = "StartIPDOX")]
-        public static extern Int32 startIPDOX([MarshalAs(UnmanagedType.BStr)] string xmlSetting);
-
-        [DllImport("ParadoxAPI.dll",
-       CallingConvention = CallingConvention.StdCall,
-       CharSet = CharSet.Unicode,
-       EntryPoint = "StopIPDOX")]
-        public static extern Int32 stopIPDOX();
-        
-        [DllImport("ParadoxAPI.dll",
-       CallingConvention = CallingConvention.StdCall,
-       CharSet = CharSet.Unicode,
-       EntryPoint = "DeleteIPDOXAccount")]
-        public static extern Int32 deleteIPDOXAccount([MarshalAs(UnmanagedType.BStr)] string macAddress);
-        
-        [DllImport("ParadoxAPI.dll",
-          CallingConvention = CallingConvention.StdCall,
-          CharSet = CharSet.Unicode,
-          EntryPoint = "StartMonitoring")]
-        public static extern Int32 StartMonitoring(
-                                                  [MarshalAs(UnmanagedType.U4)] UInt32 panelID
-                                                  );        
-        [DllImport("ParadoxAPI.dll",
-       CallingConvention = CallingConvention.StdCall,
-       CharSet = CharSet.Unicode,
-       EntryPoint = "UnregisterAllCallback")]
-        public static extern void UnregisterAllCallback();
-
-        [DllImport("ParadoxAPI.dll",
-           CallingConvention = CallingConvention.StdCall,
-           CharSet = CharSet.Unicode,
-           EntryPoint = "GetSiteFromPMH")]
-        public static extern Int32 GetSiteFromPMH(
-                                                [MarshalAs(UnmanagedType.BStr)] string panelSerialNo,
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlSiteInfo
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-           CallingConvention = CallingConvention.StdCall,
-           CharSet = CharSet.Unicode,
-           EntryPoint = "ConfigureVideoServer")]
-        public static extern Int32 ConfigureVideoServer(
-                                                [MarshalAs(UnmanagedType.BStr)] string xmlVideoSettings                                                
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-           CallingConvention = CallingConvention.StdCall,
-           CharSet = CharSet.Unicode,
-           EntryPoint = "GetVideoAlarmFiles")]
-        public static extern Int32 GetVideoAlarmFiles(
-                                                [MarshalAs(UnmanagedType.BStr)] string accountNo,
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 zoneNo,
-                                                [MarshalAs(UnmanagedType.R8)] Double dateTime,
-                                                [MarshalAs(UnmanagedType.BStr)] out string XMLVideoFiles
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-           CallingConvention = CallingConvention.StdCall,
-           CharSet = CharSet.Unicode,
-           EntryPoint = "StartVideoOnDemand")]
-        public static extern Int32 StartVideoOnDemand(
-                                                [MarshalAs(UnmanagedType.BStr)] string ipAddress,
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 ipPort,
-                                                [MarshalAs(UnmanagedType.BStr)] string SessionKey,
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlVideoFile
-                                                );
-
-        [DllImport("ParadoxAPI.dll",
-           CallingConvention = CallingConvention.StdCall,
-           CharSet = CharSet.Unicode,
-           EntryPoint = "StartVideoOnDemandEx")]
-        public static extern Int32 StartVideoOnDemandEx(
-                                                [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                [MarshalAs(UnmanagedType.BStr)] string xmlVODSettings,                                                
-                                                [MarshalAs(UnmanagedType.BStr)] out string xmlVideoFile
-                                                );
-                                                                     
-        /// <summary>
-        /// Callbacks RegisterConnectionStatusChangedCallback 
-        /// </summary>
-        private static ProcConnectionStatusChangedDelegate procConnectionStatusChangedDelegate;
-
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        public delegate void ProcConnectionStatusChangedDelegate([MarshalAs(UnmanagedType.U4)] UInt32 fncPtr,
-                                                                 [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                                 [MarshalAs(UnmanagedType.BStr)] string status
-                                                                 );
-        [DllImport("ParadoxAPI.dll",
-        CallingConvention = CallingConvention.StdCall,
-        CharSet = CharSet.Ansi,
-        EntryPoint = "RegisterConnectionStatusChangedCallback")]
-        public static extern void RegisterConnectionStatusChangedCallback([MarshalAs(UnmanagedType.FunctionPtr)] ProcConnectionStatusChangedDelegate callBackHandle);
-
-
-        /// <summary>
-        /// Callbacks RegisterProgressChangedCallback 
-        /// </summary>
-        private static ProcProgressChangedDelegate procProgressChangedDelegate;
-
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        public delegate void ProcProgressChangedDelegate([MarshalAs(UnmanagedType.U4)] UInt32 fncPtr,
-                                                         [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                         [MarshalAs(UnmanagedType.U4)] UInt32 task,
-                                                         [MarshalAs(UnmanagedType.BStr)] string description,
-                                                         [MarshalAs(UnmanagedType.U4)] UInt32 percent
-                                                         );
-
-        [DllImport("ParadoxAPI.dll",
-        CallingConvention = CallingConvention.StdCall,
-        CharSet = CharSet.Unicode,
-        EntryPoint = "RegisterProgressChangedCallback")]
-        public static extern void RegisterProgressChangedCallback([MarshalAs(UnmanagedType.FunctionPtr)] ProcProgressChangedDelegate callBackHandle);
-
-
-        /// <summary>
-        /// Callbacks RegisterProgressErrorCallback 
-        /// </summary>
-        private static ProcProgressErrorDelegate procProgressErrorDelegate;
-
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        public delegate void ProcProgressErrorDelegate([MarshalAs(UnmanagedType.U4)] UInt32 fncPtr,
-                                                         [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                         [MarshalAs(UnmanagedType.U4)] UInt32 task,
-                                                         [MarshalAs(UnmanagedType.U4)] UInt32 errorCode,
-                                                         [MarshalAs(UnmanagedType.BStr)] string errorMsg
-                                                         );
-
-        [DllImport("ParadoxAPI.dll",
-        CallingConvention = CallingConvention.StdCall,
-        CharSet = CharSet.Unicode,
-        EntryPoint = "RegisterProgressErrorCallback")]
-        public static extern void RegisterProgressErrorCallback([MarshalAs(UnmanagedType.FunctionPtr)] ProcProgressErrorDelegate callBackHandle);
-
-        /// <summary>
-        /// Callbacks RegisterReceiveReportingEventCallback 
-        /// </summary>
-        private static ProcReceiveReportingEventDelegate procReceiveReportingEventDelegate;
-
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        public delegate void ProcReceiveReportingEventDelegate([MarshalAs(UnmanagedType.U4)] UInt32 fncPtr,                                                            
-                                                            [MarshalAs(UnmanagedType.BStr)] string xmlEvents
-                                                            );
-        
-        [DllImport("ParadoxAPI.dll",
-        CallingConvention = CallingConvention.StdCall,
-        CharSet = CharSet.Unicode,
-        EntryPoint = "RegisterReceiveReportingEventCallback")]
-        public static extern void RegisterReceiveReportingEventCallback([MarshalAs(UnmanagedType.FunctionPtr)] ProcReceiveReportingEventDelegate callBackHandle);
-
-        /// <summary>
-        /// Callbacks RegisterReceiveBufferEventCallback 
-        /// </summary>
-        private static ProcReceiveBufferEventDelegate procReceiveBufferEventDelegate;
-
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        public delegate void ProcReceiveBufferEventDelegate([MarshalAs(UnmanagedType.U4)] UInt32 fncPtr,
-                                                            [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                            [MarshalAs(UnmanagedType.BStr)] string xmlEvents
-                                                            );
-
-        [DllImport("ParadoxAPI.dll",
-        CallingConvention = CallingConvention.StdCall,
-        CharSet = CharSet.Unicode,
-        EntryPoint = "RegisterReceiveBufferEventCallback")]
-        public static extern void RegisterReceiveBufferEventCallback([MarshalAs(UnmanagedType.FunctionPtr)] ProcReceiveBufferEventDelegate callBackHandle);
-
-
-        /// <summary>
-        /// Callbacks RegisterReceiveLiveEventCallback 
-        /// </summary>
-        private static ProcReceiveLiveEventDelegate procReceiveLiveEventDelegate;
-
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        public delegate void ProcReceiveLiveEventDelegate([MarshalAs(UnmanagedType.U4)] UInt32 fncPtr,
-                                                          [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                          [MarshalAs(UnmanagedType.BStr)] string xmlEvents
-                                                          );
-
-        [DllImport("ParadoxAPI.dll",
-        CallingConvention = CallingConvention.StdCall,
-        CharSet = CharSet.Unicode,
-        EntryPoint = "RegisterReceiveLiveEventCallback")]
-        public static extern void RegisterReceiveLiveEventCallback([MarshalAs(UnmanagedType.FunctionPtr)] ProcReceiveLiveEventDelegate callBackHandle);
-
-
-        /// <summary>
-        /// Callbacks RegisterMonitoringStatusChangedCallback 
-        /// </summary>
-        private static ProcMonitoringStatusChangedDelegate procMonitoringStatusChangedDelegate;
-
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        public delegate void ProcMonitoringStatusChangedDelegate([MarshalAs(UnmanagedType.U4)] UInt32 fncPtr,
-                                                                 [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                                 [MarshalAs(UnmanagedType.BStr)] string xmlStatus
-                                                                 );
-
-        [DllImport("ParadoxAPI.dll",
-        CallingConvention = CallingConvention.StdCall,
-        CharSet = CharSet.Unicode,
-        EntryPoint = "RegisterMonitoringStatusChangedCallback")]
-        public static extern void RegisterMonitoringStatusChangedCallback([MarshalAs(UnmanagedType.FunctionPtr)] ProcMonitoringStatusChangedDelegate callBackHandle);
-
-        /// <summary>
-        /// Callbacks RegisterHeartbeatCallback 
-        /// </summary>
-        private static ProcHeartbeatDelegate procHeartbeatDelegate;
-
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        public delegate void ProcHeartbeatDelegate([MarshalAs(UnmanagedType.U4)] UInt32 fncPtr,
-                                                   [MarshalAs(UnmanagedType.U4)] UInt32 panelID
-                                                   );
-
-        [DllImport("ParadoxAPI.dll",
-        CallingConvention = CallingConvention.StdCall,
-        CharSet = CharSet.Unicode,
-        EntryPoint = "RegisterHeartbeatCallback")]
-        public static extern void RegisterHeartbeatCallback([MarshalAs(UnmanagedType.FunctionPtr)] ProcHeartbeatDelegate callBackHandle);
-
-        
-        /// <summary>
-        /// Callbacks RegisterRxStatusChangedCallback 
-        /// </summary>
-        private static ProcRxStatusChangedDelegate procRxStatusChangedDelegate;
-
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        public delegate void ProcRxStatusChangedDelegate([MarshalAs(UnmanagedType.U4)] UInt32 fncPtr,
-                                                         [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                         [MarshalAs(UnmanagedType.U4)] Int32 byteCount
-                                                        );
-
-        [DllImport("ParadoxAPI.dll",
-        CallingConvention = CallingConvention.StdCall,
-        CharSet = CharSet.Unicode,
-        EntryPoint = "RegisterRxStatusChangedCallback")]
-        public static extern void RegisterRxStatusChangedCallback([MarshalAs(UnmanagedType.FunctionPtr)] ProcRxStatusChangedDelegate callBackHandle);
-
-
-        /// <summary>
-        /// Callbacks RegisterTxStatusChangedCallback 
-        /// </summary>
-        private static ProcTxStatusChangedDelegate procTxStatusChangedDelegate;
-
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        public delegate void ProcTxStatusChangedDelegate([MarshalAs(UnmanagedType.U4)] UInt32 fncPtr,
-                                                         [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                         [MarshalAs(UnmanagedType.U4)] Int32 byteCount
-                                                        );
-
-        [DllImport("ParadoxAPI.dll",
-        CallingConvention = CallingConvention.StdCall,
-        CharSet = CharSet.Unicode,
-        EntryPoint = "RegisterTxStatusChangedCallback")]
-        public static extern void RegisterTxStatusChangedCallback([MarshalAs(UnmanagedType.FunctionPtr)] ProcTxStatusChangedDelegate callBackHandle);               
-
-        /// <summary>
-        /// Callbacks RegisterIPModuleDetectedCallback 
-        /// </summary>
-        private static ProcIPModuleDetectedDelegate procIPModuleDetectedDelegate;
-
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        public delegate void ProcIPModuleDetectedDelegate([MarshalAs(UnmanagedType.U4)] UInt32 fncPtr,                                                          
-                                                          [MarshalAs(UnmanagedType.BStr)] string xmlModule
-                                                         );
-
-        [DllImport("ParadoxAPI.dll",
-        CallingConvention = CallingConvention.StdCall,
-        CharSet = CharSet.Unicode,
-        EntryPoint = "RegisterIPModuleDetectedCallback")]
-        public static extern void RegisterIPModuleDetectedCallback([MarshalAs(UnmanagedType.FunctionPtr)] ProcIPModuleDetectedDelegate callBackHandle);
-
-        /// <summary>
-        /// Callbacks RegisterSMSRequestCallback 
-        /// </summary>
-        private static ProcSMSRequestDelegate procSMSRequestDelegate;
-
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        public delegate void ProcSMSRequestDelegate([MarshalAs(UnmanagedType.U4)] UInt32 fncPtr,
-                                                    [MarshalAs(UnmanagedType.U4)] UInt32 panelID,
-                                                    [MarshalAs(UnmanagedType.BStr)] string sms
-                                                   );
-
-        [DllImport("ParadoxAPI.dll",
-        CallingConvention = CallingConvention.StdCall,
-        CharSet = CharSet.Unicode,
-        EntryPoint = "RegisterSMSRequestCallback")]
-        public static extern void RegisterSMSRequestCallback([MarshalAs(UnmanagedType.FunctionPtr)] ProcSMSRequestDelegate callBackHandle);
-
-
-        /// <summary>
-        /// Callbacks RegisterAccountRegistrationCallback 
-        /// </summary>
-        private static ProcAccountRegistrationDelegate procAccountRegistrationDelegate;
-
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        public delegate void ProcAccountRegistrationDelegate([MarshalAs(UnmanagedType.U4)] UInt32 fncPtr,                                                             
-                                                             [MarshalAs(UnmanagedType.BStr)] string xmlAccounts
-                                                            );
-
-        [DllImport("ParadoxAPI.dll",
-        CallingConvention = CallingConvention.StdCall,
-        CharSet = CharSet.Unicode,
-        EntryPoint = "RegisterAccountRegistrationCallback")]
-        public static extern void RegisterAccountRegistrationCallback([MarshalAs(UnmanagedType.FunctionPtr)] ProcAccountRegistrationDelegate callBackHandle);
-
-
-        /// <summary>
-        /// Callbacks RegisterAccountUpdateCallback 
-        /// </summary>
-        private static ProcAccountUpdateDelegate procAccountUpdateDelegate;
-
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        public delegate void ProcAccountUpdateDelegate([MarshalAs(UnmanagedType.U4)] UInt32 fncPtr,                                                       
-                                                       [MarshalAs(UnmanagedType.BStr)] string xmlAccounts
-                                                      );
-
-        [DllImport("ParadoxAPI.dll",
-        CallingConvention = CallingConvention.StdCall,
-        CharSet = CharSet.Unicode,
-        EntryPoint = "RegisterAccountUpdateCallback")]
-        public static extern void RegisterAccountUpdateCallback([MarshalAs(UnmanagedType.FunctionPtr)] ProcAccountUpdateDelegate callBackHandle);
-
-
-        /// <summary>
-        /// Callbacks RegisterAccountLinkCallback 
-        /// </summary>
-        private static ProcAccountLinkDelegate procAccountLinkDelegate;
-
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        public delegate void ProcAccountLinkDelegate([MarshalAs(UnmanagedType.U4)] UInt32 fncPtr,                                                     
-                                                     [MarshalAs(UnmanagedType.BStr)] string xmlAccounts
-                                                    );
-
-        [DllImport("ParadoxAPI.dll",
-        CallingConvention = CallingConvention.StdCall,
-        CharSet = CharSet.Unicode,
-        EntryPoint = "RegisterAccountLinkCallback")]
-        public static extern void RegisterAccountLinkCallback([MarshalAs(UnmanagedType.FunctionPtr)] ProcAccountLinkDelegate callBackHandle);
-        
-        
-        /// <summary>
-        /// Callbacks RegisterIPDOXSocketChangedCallback 
-        /// </summary>
-        private static ProcIPDOXSocketChangedDelegate procIPDOXSocketChangedDelegate;
-
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        public delegate void ProcIPDOXSocketChangedDelegate([MarshalAs(UnmanagedType.U4)] UInt32 fncPtr,
-                                                     [MarshalAs(UnmanagedType.U4)] UInt32 port,
-                                                     [MarshalAs(UnmanagedType.U4)] UInt32 status,
-                                                     [MarshalAs(UnmanagedType.BStr)] string description
-                                                    );        
-        [DllImport("ParadoxAPI.dll",
-        CallingConvention = CallingConvention.StdCall,
-        CharSet = CharSet.Unicode,
-        EntryPoint = "RegisterIPDOXSocketChangedCallback")]
-        public static extern void RegisterIPDOXSocketChangedCallback([MarshalAs(UnmanagedType.FunctionPtr)] ProcIPDOXSocketChangedDelegate callBackHandle);
-
-        #endregion
-
-        // Callbacks
         public static void RegisterAllCallback()
         {
-            procConnectionStatusChangedDelegate = new ProcConnectionStatusChangedDelegate(ConnectionStatusChangedCalledFromParadoxAPI);
-            RegisterConnectionStatusChangedCallback(procConnectionStatusChangedDelegate);
+            _procConnectionStatusChangedDelegate = new ParadoxAPIImport.ProcConnectionStatusChangedDelegate(ConnectionStatusChangedCalledFromParadoxAPI);
+            ParadoxAPIImport.RegisterConnectionStatusChangedCallback(_procConnectionStatusChangedDelegate);
 
-            procProgressChangedDelegate = new ProcProgressChangedDelegate(ProgressChangedCalledFromParadoxAPI);
-            RegisterProgressChangedCallback(procProgressChangedDelegate);
+            _procProgressChangedDelegate = new ParadoxAPIImport.ProcProgressChangedDelegate(ProgressChangedCalledFromParadoxAPI);
+            ParadoxAPIImport.RegisterProgressChangedCallback(_procProgressChangedDelegate);
 
-            procProgressErrorDelegate = new ProcProgressErrorDelegate(ProgressErrorCalledFromParadoxAPI);
-            RegisterProgressErrorCallback(procProgressErrorDelegate);
+            _procProgressErrorDelegate = new ParadoxAPIImport.ProcProgressErrorDelegate(ProgressErrorCalledFromParadoxAPI);
+            ParadoxAPIImport.RegisterProgressErrorCallback(_procProgressErrorDelegate);
 
-            procMonitoringStatusChangedDelegate = new ProcMonitoringStatusChangedDelegate(MonitoringStatusChangedCalledFromParadoxAPI);
-            RegisterMonitoringStatusChangedCallback(procMonitoringStatusChangedDelegate);
+            _procMonitoringStatusChangedDelegate = new ParadoxAPIImport.ProcMonitoringStatusChangedDelegate(MonitoringStatusChangedCalledFromParadoxAPI);
+            ParadoxAPIImport.RegisterMonitoringStatusChangedCallback(_procMonitoringStatusChangedDelegate);
 
-            procReceiveLiveEventDelegate = new ProcReceiveLiveEventDelegate(ReceiveLiveEventCalledFromParadoxAPI);
-            RegisterReceiveLiveEventCallback(procReceiveLiveEventDelegate);
+            _procReceiveLiveEventDelegate = new ParadoxAPIImport.ProcReceiveLiveEventDelegate(ReceiveLiveEventCalledFromParadoxAPI);
+            ParadoxAPIImport.RegisterReceiveLiveEventCallback(_procReceiveLiveEventDelegate);
 
-            procReceiveBufferEventDelegate = new ProcReceiveBufferEventDelegate(ReceiveBufferEventCalledFromParadoxAPI);
-            RegisterReceiveBufferEventCallback(procReceiveBufferEventDelegate);
+            _procReceiveBufferEventDelegate = new ParadoxAPIImport.ProcReceiveBufferEventDelegate(ReceiveBufferEventCalledFromParadoxAPI);
+            ParadoxAPIImport.RegisterReceiveBufferEventCallback(_procReceiveBufferEventDelegate);
 
-            procReceiveReportingEventDelegate = new ProcReceiveReportingEventDelegate(ReceiveReportingEventCalledFromParadoxAPI);
-            RegisterReceiveReportingEventCallback(procReceiveReportingEventDelegate);
+            _procReceiveReportingEventDelegate = new ParadoxAPIImport.ProcReceiveReportingEventDelegate(ReceiveReportingEventCalledFromParadoxAPI);
+            ParadoxAPIImport.RegisterReceiveReportingEventCallback(_procReceiveReportingEventDelegate);
 
-            procHeartbeatDelegate = new ProcHeartbeatDelegate(HeartbeatCalledFromParadoxAPI);
-            RegisterHeartbeatCallback(procHeartbeatDelegate);
+            _procHeartbeatDelegate = new ParadoxAPIImport.ProcHeartbeatDelegate(HeartbeatCalledFromParadoxAPI);
+            ParadoxAPIImport.RegisterHeartbeatCallback(_procHeartbeatDelegate);
 
-            procRxStatusChangedDelegate = new ProcRxStatusChangedDelegate(RxStatusChangedCalledFromParadoxAPI);
-            RegisterRxStatusChangedCallback(procRxStatusChangedDelegate);
+            _procRxStatusChangedDelegate = new ParadoxAPIImport.ProcRxStatusChangedDelegate(RxStatusChangedCalledFromParadoxAPI);
+            ParadoxAPIImport.RegisterRxStatusChangedCallback(_procRxStatusChangedDelegate);
 
-            procTxStatusChangedDelegate = new ProcTxStatusChangedDelegate(TxStatusChangedCalledFromParadoxAPI);
-            RegisterTxStatusChangedCallback(procTxStatusChangedDelegate);
+            _procTxStatusChangedDelegate = new ParadoxAPIImport.ProcTxStatusChangedDelegate(TxStatusChangedCalledFromParadoxAPI);
+            ParadoxAPIImport.RegisterTxStatusChangedCallback(_procTxStatusChangedDelegate);
 
-            procIPModuleDetectedDelegate = new ProcIPModuleDetectedDelegate(IPModuleDetectedCalledFromParadoxAPI);
-            RegisterIPModuleDetectedCallback(procIPModuleDetectedDelegate);
+            _procIPModuleDetectedDelegate = new ParadoxAPIImport.ProcIPModuleDetectedDelegate(IPModuleDetectedCalledFromParadoxAPI);
+            ParadoxAPIImport.RegisterIPModuleDetectedCallback(_procIPModuleDetectedDelegate);
 
-            procSMSRequestDelegate = new ProcSMSRequestDelegate(SMSRequestCalledFromParadoxAPI);
-            RegisterSMSRequestCallback(procSMSRequestDelegate);
+            _procSMSRequestDelegate = new ParadoxAPIImport.ProcSMSRequestDelegate(SMSRequestCalledFromParadoxAPI);
+            ParadoxAPIImport.RegisterSMSRequestCallback(_procSMSRequestDelegate);
 
-            procAccountRegistrationDelegate = new ProcAccountRegistrationDelegate(AccountRegistrationCalledFromParadoxAPI);
-            RegisterAccountRegistrationCallback(procAccountRegistrationDelegate);
+            _procAccountRegistrationDelegate = new ParadoxAPIImport.ProcAccountRegistrationDelegate(AccountRegistrationCalledFromParadoxAPI);
+            ParadoxAPIImport.RegisterAccountRegistrationCallback(_procAccountRegistrationDelegate);
 
-            procAccountUpdateDelegate = new ProcAccountUpdateDelegate(AccountUpdateCalledFromParadoxAPI);
-            RegisterAccountUpdateCallback(procAccountUpdateDelegate);
+            _procAccountUpdateDelegate = new ParadoxAPIImport.ProcAccountUpdateDelegate(AccountUpdateCalledFromParadoxAPI);
+            ParadoxAPIImport.RegisterAccountUpdateCallback(_procAccountUpdateDelegate);
 
-            procAccountLinkDelegate = new ProcAccountLinkDelegate(AccountLinkCalledFromParadoxAPI);
-            RegisterAccountLinkCallback(procAccountLinkDelegate);
+            _procAccountLinkDelegate = new ParadoxAPIImport.ProcAccountLinkDelegate(AccountLinkCalledFromParadoxAPI);
+            ParadoxAPIImport.RegisterAccountLinkCallback(_procAccountLinkDelegate);
 
-            procIPDOXSocketChangedDelegate = new ProcIPDOXSocketChangedDelegate(IPDOXSocketChangedCalledFromParadoxAPI);
-            RegisterIPDOXSocketChangedCallback(procIPDOXSocketChangedDelegate);                     
+            _procIPDOXSocketChangedDelegate = new ParadoxAPIImport.ProcIPDOXSocketChangedDelegate(IPDOXSocketChangedCalledFromParadoxAPI);
+            ParadoxAPIImport.RegisterIPDOXSocketChangedCallback(_procIPDOXSocketChangedDelegate);
         }
+
+        public static void UnregisterAllCallback()
+        {
+            ParadoxAPIImport.UnregisterAllCallback();
+        }
+
+        #region MonitoringStatusChangesDelegate
 
         public delegate void MonitoringStatusChangesDelegate(UInt32 panelID, PanelMonitoring panelMonitoring);
 
-        public static MonitoringStatusChangesDelegate monitoringStatusChangesDelegate = null;
+        public static MonitoringStatusChangesDelegate MonitoringStatusChanges = null;
 
         // Callback
         public static void MonitoringStatusChangedCalledFromParadoxAPI([MarshalAs(UnmanagedType.U4)] UInt32 fncPtr, [MarshalAs(UnmanagedType.U4)] UInt32 panelID, [MarshalAs(UnmanagedType.BStr)] string xmlStatus)
         {
-
-            if (monitoringStatusChangesDelegate != null)
+            if (MonitoringStatusChanges != null)
             {
-                PanelMonitoring panelMonitoring = new PanelMonitoring();
-                try
+                using (var panelMonitoring = new PanelMonitoring())
                 {
                     panelMonitoring.parseXML(xmlStatus);
 
-                    monitoringStatusChangesDelegate(panelID, panelMonitoring);
+                    MonitoringStatusChanges(panelID, panelMonitoring);
                 }
-                finally
-                {
-                    panelMonitoring.Dispose();
-                }                
             }
         }
+
+        #endregion
+
+        #region ReceiveLiveEventDelegate
 
         public delegate void ReceiveLiveEventDelegate(UInt32 panelID, PanelEvent panelEvent);
 
@@ -887,7 +148,7 @@ namespace ParadoxAPILibrary
         // Callback
         public static void ReceiveLiveEventCalledFromParadoxAPI([MarshalAs(UnmanagedType.U4)] UInt32 fncPtr, [MarshalAs(UnmanagedType.U4)] UInt32 panelID, [MarshalAs(UnmanagedType.BStr)] string xmlEvents)
         {
-            
+
             if (receiveLiveEventDelegate != null)
             {
                 PanelEvent panelEvent = new PanelEvent();
@@ -903,6 +164,8 @@ namespace ParadoxAPILibrary
                 }
             }
         }
+
+        #endregion
 
         public delegate void ReceiveBufferedEventDelegate(UInt32 panelID, PanelEvent panelEvent);
 
@@ -952,7 +215,7 @@ namespace ParadoxAPILibrary
                 }
             }
         }
-                              
+
         public delegate void ProgressChangedDelegate(UInt32 panelID, UInt32 task, string description, UInt32 percent);
 
         public static ProgressChangedDelegate progressChangedDelegate = null;
@@ -965,7 +228,6 @@ namespace ParadoxAPILibrary
                 progressChangedDelegate(panelID, task, description, percent);
             }
         }
-
 
         public delegate void ProgressErrorDelegate(UInt32 panelID, UInt32 task, UInt32 errorCode, string errorMsg);
 
@@ -993,7 +255,6 @@ namespace ParadoxAPILibrary
             }
         }
 
-
         public delegate void HeartbeatDelegate(UInt32 panelID);
 
         public static HeartbeatDelegate heartbeatDelegate = null;
@@ -1007,13 +268,12 @@ namespace ParadoxAPILibrary
             }
         }
 
-
-        public delegate void RxStatusChangedDelegate(UInt32 panelID, Int32 byteCount);
+        public delegate void RxStatusChangedDelegate(UInt32 panelID, int byteCount);
 
         public static RxStatusChangedDelegate rxStatusChangedDelegate = null;
 
         // Callback
-        public static void RxStatusChangedCalledFromParadoxAPI([MarshalAs(UnmanagedType.U4)] UInt32 fncPtr, UInt32 panelID, Int32 byteCount)
+        public static void RxStatusChangedCalledFromParadoxAPI([MarshalAs(UnmanagedType.U4)] UInt32 fncPtr, UInt32 panelID, int byteCount)
         {
             if (rxStatusChangedDelegate != null)
             {
@@ -1021,12 +281,12 @@ namespace ParadoxAPILibrary
             }
         }
 
-        public delegate void TxStatusChangedDelegate(UInt32 panelID, Int32 byteCount);
+        public delegate void TxStatusChangedDelegate(UInt32 panelID, int byteCount);
 
         public static TxStatusChangedDelegate txStatusChangedDelegate = null;
 
         // Callback
-        public static void TxStatusChangedCalledFromParadoxAPI([MarshalAs(UnmanagedType.U4)] UInt32 fncPtr, UInt32 panelID, Int32 byteCount)
+        public static void TxStatusChangedCalledFromParadoxAPI([MarshalAs(UnmanagedType.U4)] UInt32 fncPtr, UInt32 panelID, int byteCount)
         {
             if (txStatusChangedDelegate != null)
             {
@@ -1065,7 +325,6 @@ namespace ParadoxAPILibrary
             }
         }
 
-
         public delegate void AccountRegistrationDelegate(PanelReportingAccount panelReportingAccount);
 
         public static AccountRegistrationDelegate accountRegistrationDelegate = null;
@@ -1083,7 +342,6 @@ namespace ParadoxAPILibrary
                 }
             }
         }
-
 
         public delegate void AccountUpdateDelegate(PanelReportingAccount panelReportingAccount);
 
@@ -1130,27 +388,27 @@ namespace ParadoxAPILibrary
         {
             if (ipDOXSocketChangedDelegate != null)
             {
-                ipDOXSocketChangedDelegate(port, status, description);                
+                ipDOXSocketChangedDelegate(port, status, description);
             }
         }
-              
-        public delegate void LogDelegate(UInt32 panelID, Int32 returnValue, string logs);
+
+        public delegate void LogDelegate(UInt32 panelID, int returnValue, string logs);
 
         public static LogDelegate logDelegate = null;
 
-        private static void Log(UInt32 panelID, Int32 returnValue, string value)
-        {            
+        private static void Log(UInt32 panelID, int returnValue, string value)
+        {
             if ((formRef != null) && (logDelegate != null))
             {
-                formRef.Invoke(logDelegate, new object[] {panelID, returnValue, value});                
+                formRef.Invoke(logDelegate, new object[] { panelID, returnValue, value });
             }
         }
 
-        public delegate void NotifyTaskCompletedDelegate(UInt32 panelID, Int32 returnValue, UInt32 ItemNo, string ItemType, string ActionType, object obj = null);
+        public delegate void NotifyTaskCompletedDelegate(UInt32 panelID, int returnValue, UInt32 ItemNo, string ItemType, string ActionType, object obj = null);
 
         public static NotifyTaskCompletedDelegate notifyTaskCompletedDelegate = null;
 
-        private static void NotifyTaskCompleted(UInt32 panelID, Int32 returnValue, UInt32 ItemNo, string ItemType, string ActionType, object obj = null)
+        private static void NotifyTaskCompleted(UInt32 panelID, int returnValue, UInt32 ItemNo, string ItemType, string ActionType, object obj = null)
         {
             if ((formRef != null) && (notifyTaskCompletedDelegate != null))
             {
@@ -1158,23 +416,23 @@ namespace ParadoxAPILibrary
             }
         }
 
-        public delegate void RefreshNotificationDelegate(UInt32 panelID, Int32 returnValue);
+        public delegate void RefreshNotificationDelegate(UInt32 panelID, int returnValue);
 
         public static RefreshNotificationDelegate refreshNotificationDelegate = null;
 
-        private static void RefreshNotification(UInt32 panelID, Int32 returnValue)
+        private static void RefreshNotification(UInt32 panelID, int returnValue)
         {
             if ((formRef != null) && (refreshNotificationDelegate != null))
             {
-                formRef.Invoke(refreshNotificationDelegate, new object[] { panelID, returnValue });                
+                formRef.Invoke(refreshNotificationDelegate, new object[] { panelID, returnValue });
             }
         }
 
-        public delegate void ErrorNotificationDelegate(UInt32 panelID, Int32 returnValue, string ErrorMsg);
+        public delegate void ErrorNotificationDelegate(UInt32 panelID, int returnValue, string ErrorMsg);
 
         public static ErrorNotificationDelegate errorNotificationDelegate = null;
 
-        private static void errorNotification(UInt32 panelID, Int32 returnValue, string ErrorMsg)
+        private static void errorNotification(UInt32 panelID, int returnValue, string ErrorMsg)
         {
             if ((formRef != null) && (errorNotificationDelegate != null))
             {
@@ -1182,9 +440,13 @@ namespace ParadoxAPILibrary
             }
         }
 
-        public static Int32 GetAPIVersion(ref string version)
+        #endregion
+
+        #region API Wrapers
+
+        public static int GetAPIVersion(ref string version)
         {
-            Int32 returnValue = GetDriverVersion(out version);                      
+            int returnValue = ParadoxAPIImport.GetDriverVersion(out version);
 
             if (!PanelResults.Succeeded((UInt32)returnValue))
             {
@@ -1193,14 +455,14 @@ namespace ParadoxAPILibrary
 
             return returnValue;
         }
-                
-        public static Int32 DiscoverModules(ModuleInfoList moduleInfoList)
+
+        public static int DiscoverModules(ModuleInfoList moduleInfoList)
         {
             if (moduleInfoList != null)
             {
                 string xmlInfo = "";
 
-                Int32 returnValue = DiscoverModule(out xmlInfo);
+                int returnValue = ParadoxAPIImport.DiscoverModule(out xmlInfo);
 
                 moduleInfoList.parseXML(xmlInfo);
 
@@ -1213,13 +475,11 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 ConnectToPanel(UInt32 panelID, PanelSettings panelSettings, UInt32 WaitTimeOut = 30)
+        public static int ConnectToPanel(UInt32 panelID, PanelSettings panelSettings, UInt32 WaitTimeOut = 30)
         {
             if (panelSettings != null)
             {
@@ -1227,7 +487,7 @@ namespace ParadoxAPILibrary
 
                 panelSettings.serializeXML(ref xmlSettings);
 
-                Int32 returnValue = ConnectPanel(panelID, xmlSettings, WaitTimeOut);
+                int returnValue = ParadoxAPIImport.ConnectPanel(panelID, xmlSettings, WaitTimeOut);
 
                 Log(panelID, returnValue, xmlSettings);
 
@@ -1238,15 +498,13 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }                       
+
+            return -1;
         }
 
-        public static Int32 DisconnectFromPanel(UInt32 panelID)
+        public static int DisconnectFromPanel(UInt32 panelID)
         {
-            Int32 returnValue = DisconnectPanel(panelID);
+            int returnValue = ParadoxAPIImport.DisconnectPanel(panelID);
 
             Log(panelID, returnValue, "Disconnet");
 
@@ -1258,16 +516,16 @@ namespace ParadoxAPILibrary
             return returnValue;
         }
 
-        public static Int32 DetectPanel(UInt32 panelID, PanelSettings panelSettings, PanelInfo panelInfo)
+        public static int DetectPanel(UInt32 panelID, PanelSettings panelSettings, PanelInfo panelInfo)
         {
-            if ((panelSettings != null) && (panelInfo != null)) 
+            if ((panelSettings != null) && (panelInfo != null))
             {
                 string xmlSettings = "";
                 string xmlInfo = "";
-                
+
                 panelSettings.serializeXML(ref xmlSettings);
 
-                Int32 returnValue = DetectPanel(xmlSettings, out xmlInfo);
+                int returnValue = ParadoxAPIImport.DetectPanel(xmlSettings, out xmlInfo);
 
                 panelInfo.parseXML(xmlInfo);
 
@@ -1278,24 +536,22 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }                      
+
+            return -1;
         }
 
-        public static Int32 RetrievePanelInfo(UInt32 panelID, PanelInfoEx panelInfoEx)
+        public static int RetrievePanelInfo(UInt32 panelID, PanelInfoEx panelInfoEx)
         {
             if (panelInfoEx != null)
             {
                 string xmlInfo = "";
 
-                Int32 returnValue = RetrievePanelInfo(panelID, out xmlInfo);
-                
+                int returnValue = ParadoxAPIImport.RetrievePanelInfo(panelID, out xmlInfo);
+
                 panelInfoEx.parseXML(xmlInfo);
 
                 Log(panelID, returnValue, xmlInfo);
-                
+
                 if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
                     errorNotification(panelID, returnValue, "RetrievePanelInfo: " + PanelResults.GetResultCode((UInt32)returnValue));
@@ -1306,22 +562,20 @@ namespace ParadoxAPILibrary
                 }
 
                 return returnValue;
-            }            
-            else
-            {
-                return -1;
-            }     
+            }
+
+            return -1;
         }
 
-        public static Int32 RegisterPanel(UInt32 panelID, PanelControl panelControl)
+        public static int RegisterPanel(UInt32 panelID, PanelControl panelControl)
         {
             if (panelControl != null)
             {
                 string xmlAction = "";
 
                 panelControl.serializeXML(ref xmlAction);
-                
-                Int32 returnValue = RegisterPanel(panelID, xmlAction);
+
+                int returnValue = ParadoxAPIImport.RegisterPanel(panelID, xmlAction);
 
                 Log(panelID, returnValue, xmlAction);
 
@@ -1332,21 +586,19 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }   
+
+            return -1;
         }
 
-        public static Int32 ControlArea(UInt32 panelID, PanelControl panelControl)
+        public static int ControlArea(UInt32 panelID, PanelControl panelControl)
         {
             if (panelControl != null)
             {
                 string xmlArea = "";
 
-                panelControl.serializeXML(ref xmlArea);                
+                panelControl.serializeXML(ref xmlArea);
 
-                Int32 returnValue = ControlArea(panelID, xmlArea);
+                int returnValue = ParadoxAPIImport.ControlArea(panelID, xmlArea);
 
                 Log(panelID, returnValue, xmlArea);
 
@@ -1357,19 +609,17 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }               
+
+            return -1;
         }
 
-        public static Int32 AreaStatus(UInt32 panelID, PanelMonitoring panelMonitoring)
+        public static int AreaStatus(UInt32 panelID, PanelMonitoring panelMonitoring)
         {
             if (panelMonitoring != null)
             {
                 string xmlStatus = "";
 
-                Int32 returnValue = AreaStatus(panelID, out xmlStatus);
+                int returnValue = ParadoxAPIImport.AreaStatus(panelID, out xmlStatus);
 
                 panelMonitoring.parseXML(xmlStatus);
 
@@ -1382,21 +632,19 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }   
+
+            return -1;
         }
 
-        public static Int32 ControlZone(UInt32 panelID, PanelControl panelControl)
+        public static int ControlZone(UInt32 panelID, PanelControl panelControl)
         {
             if (panelControl != null)
             {
                 string xmlZone = "";
 
-                panelControl.serializeXML(ref xmlZone);                
+                panelControl.serializeXML(ref xmlZone);
 
-                Int32 returnValue = ControlZone(panelID, xmlZone);
+                int returnValue = ParadoxAPIImport.ControlZone(panelID, xmlZone);
 
                 Log(panelID, returnValue, xmlZone);
 
@@ -1407,20 +655,18 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }                   
+
+            return -1;
         }
 
-        public static Int32 ZoneStatus(UInt32 panelID, PanelMonitoring panelMonitoring)
+        public static int ZoneStatus(UInt32 panelID, PanelMonitoring panelMonitoring)
         {
             if (panelMonitoring != null)
             {
                 string xmlStatus = "";
 
-                Int32 returnValue = ZoneStatus(panelID, out xmlStatus);
-                
+                int returnValue = ParadoxAPIImport.ZoneStatus(panelID, out xmlStatus);
+
                 panelMonitoring.parseXML(xmlStatus);
 
                 Log(panelID, returnValue, xmlStatus);
@@ -1432,21 +678,19 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }              
+
+            return -1;
         }
 
-        public static Int32 ControlPGM(UInt32 panelID, PanelControl panelControl)
+        public static int ControlPGM(UInt32 panelID, PanelControl panelControl)
         {
             if (panelControl != null)
             {
                 string xmlPGM = "";
 
-                panelControl.serializeXML(ref xmlPGM);               
+                panelControl.serializeXML(ref xmlPGM);
 
-                Int32 returnValue = ControlPGM(panelID, xmlPGM);
+                int returnValue = ParadoxAPIImport.ControlPGM(panelID, xmlPGM);
 
                 Log(panelID, returnValue, xmlPGM);
 
@@ -1457,20 +701,18 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }           
+
+            return -1;
         }
 
-        public static Int32 PGMStatus(UInt32 panelID, PanelMonitoring panelMonitoring)
+        public static int PGMStatus(UInt32 panelID, PanelMonitoring panelMonitoring)
         {
             if (panelMonitoring != null)
             {
                 string xmlStatus = "";
 
-                Int32 returnValue = PGMStatus(panelID, out xmlStatus);
-              
+                int returnValue = ParadoxAPIImport.PGMStatus(panelID, out xmlStatus);
+
                 panelMonitoring.parseXML(xmlStatus);
 
                 Log(panelID, returnValue, xmlStatus);
@@ -1482,21 +724,19 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }                          
+
+            return -1;
         }
 
-        public static Int32 ControlDoor(UInt32 panelID, PanelControl panelControl)
+        public static int ControlDoor(UInt32 panelID, PanelControl panelControl)
         {
             if (panelControl != null)
             {
                 string xmlDoor = "";
 
-                panelControl.serializeXML(ref xmlDoor);               
+                panelControl.serializeXML(ref xmlDoor);
 
-                Int32 returnValue = ControlDoor(panelID, xmlDoor);
+                int returnValue = ParadoxAPIImport.ControlDoor(panelID, xmlDoor);
 
                 Log(panelID, returnValue, xmlDoor);
 
@@ -1507,20 +747,18 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }         
+
+            return -1;
         }
 
-        public static Int32 DoorStatus(UInt32 panelID, PanelMonitoring panelMonitoring)
+        public static int DoorStatus(UInt32 panelID, PanelMonitoring panelMonitoring)
         {
             if (panelMonitoring != null)
             {
                 string xmlStatus = "";
 
-                Int32 returnValue = DoorStatus(panelID, out xmlStatus);
-                
+                int returnValue = ParadoxAPIImport.DoorStatus(panelID, out xmlStatus);
+
                 panelMonitoring.parseXML(xmlStatus);
 
                 Log(panelID, returnValue, xmlStatus);
@@ -1532,19 +770,17 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }                            
+
+            return -1;
         }
 
-        public static Int32 ReadTimeStamp(UInt32 panelID, UInt32 blockID, PanelTimeStamp panelTimeStamp)
+        public static int ReadTimeStamp(UInt32 panelID, UInt32 blockID, PanelTimeStamp panelTimeStamp)
         {
             if (panelTimeStamp != null)
             {
                 string xmlTimeStamp = "";
 
-                Int32 returnValue = ReadTimeStamp(panelID, blockID, out xmlTimeStamp);                
+                int returnValue = ParadoxAPIImport.ReadTimeStamp(panelID, blockID, out xmlTimeStamp);
 
                 panelTimeStamp.parseXML(xmlTimeStamp);
 
@@ -1559,19 +795,17 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }     
+
+            return -1;
         }
 
-        public static Int32 ReadDateTime(UInt32 panelID, DateTime dateTime)
+        public static int ReadDateTime(UInt32 panelID, DateTime dateTime)
         {
             if (dateTime != null)
             {
                 Double dt = 0.0;
 
-                Int32 returnValue = ReadDateTime(panelID, ref dt);
+                int returnValue = ParadoxAPIImport.ReadDateTime(panelID, ref dt);
 
                 dateTime = DateTime.FromOADate(dt);
 
@@ -1584,19 +818,17 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }    
+
+            return -1;
         }
 
-        public static Int32 WriteDateTime(UInt32 panelID, DateTime dateTime)
+        public static int WriteDateTime(UInt32 panelID, DateTime dateTime)
         {
             if (dateTime != null)
             {
-                Double dt = dateTime.ToOADate();                               
+                Double dt = dateTime.ToOADate();
 
-                Int32 returnValue = WriteDateTime(panelID, dt);
+                int returnValue = ParadoxAPIImport.WriteDateTime(panelID, dt);
 
                 if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
@@ -1605,20 +837,18 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }   
+
+            return -1;
         }
 
-        public static Int32 ReadArea(UInt32 panelID, UInt32 areaNo, PanelArea panelArea)
+        public static int ReadArea(UInt32 panelID, UInt32 areaNo, PanelArea panelArea)
         {
             if (panelArea != null)
             {
                 string xmlArea = "";
 
-                Int32 returnValue = ReadArea(panelID, areaNo, out xmlArea);
-               
+                int returnValue = ParadoxAPIImport.ReadArea(panelID, areaNo, out xmlArea);
+
                 panelArea.parseXML(xmlArea);
 
                 Log(panelID, returnValue, xmlArea);
@@ -1627,24 +857,22 @@ namespace ParadoxAPILibrary
                 {
                     errorNotification(panelID, returnValue, "ReadArea: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
-                
+
                 NotifyTaskCompleted(panelID, returnValue, areaNo, PanelObjectTypes.OT_AREA, AT_READ);
-                                
+
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 ReadAllAreas(UInt32 panelID, PanelAreaList panelAreas)
+        public static int ReadAllAreas(UInt32 panelID, PanelAreaList panelAreas)
         {
             if (panelAreas != null)
             {
                 string xmlAreas = "";
 
-                Int32 returnValue = ReadAllAreas(panelID, out xmlAreas);
+                var returnValue = ParadoxAPIImport.ReadAllAreas(panelID, out xmlAreas);
 
                 panelAreas.parseXML(xmlAreas);
 
@@ -1659,20 +887,18 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 ReadZone(UInt32 panelID, UInt32 zoneNo, PanelZone panelZone)
+        public static int ReadZone(UInt32 panelID, UInt32 zoneNo, PanelZone panelZone)
         {
             if (panelZone != null)
             {
                 string xmlZone = "";
 
-                Int32 returnValue = ReadZone(panelID, zoneNo, out xmlZone);
-                                
+                int returnValue = ParadoxAPIImport.ReadZone(panelID, zoneNo, out xmlZone);
+
                 panelZone.parseXML(xmlZone);
 
                 Log(panelID, returnValue, xmlZone);
@@ -1686,19 +912,17 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
-        
-        public static Int32 ReadAllZones(UInt32 panelID, PanelZoneList panelZones)
+
+        public static int ReadAllZones(UInt32 panelID, PanelZoneList panelZones)
         {
             if (panelZones != null)
             {
                 string xmlZones = "";
 
-                Int32 returnValue = ReadAllZones(panelID, out xmlZones);
+                int returnValue = ParadoxAPIImport.ReadAllZones(panelID, out xmlZones);
 
                 panelZones.parseXML(xmlZones);
 
@@ -1713,19 +937,17 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 ReadPGM(UInt32 panelID, UInt32 pgmNo, PanelPGM panelPGM)
+        public static int ReadPGM(UInt32 panelID, UInt32 pgmNo, PanelPGM panelPGM)
         {
             if (panelPGM != null)
             {
                 string xmlPGM = "";
 
-                Int32 returnValue = ReadPGM(panelID, pgmNo, out xmlPGM);
+                int returnValue = ParadoxAPIImport.ReadPGM(panelID, pgmNo, out xmlPGM);
 
                 panelPGM.parseXML(xmlPGM);
 
@@ -1740,19 +962,17 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else 
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 ReadAllPGMs(UInt32 panelID, PanelPGMList panelPGMs)
+        public static int ReadAllPGMs(UInt32 panelID, PanelPGMList panelPGMs)
         {
             if (panelPGMs != null)
             {
                 string xmlPGMs = "";
 
-                Int32 returnValue = ReadAllPGMs(panelID, out xmlPGMs);
+                int returnValue = ParadoxAPIImport.ReadAllPGMs(panelID, out xmlPGMs);
 
                 panelPGMs.parseXML(xmlPGMs);
 
@@ -1767,20 +987,18 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 ReadDoor(UInt32 panelID, UInt32 doorNo, PanelDoor panelDoor)
+        public static int ReadDoor(UInt32 panelID, UInt32 doorNo, PanelDoor panelDoor)
         {
             if (panelDoor != null)
             {
                 string xmlDoor = "";
-            
-                Int32 returnValue = ReadDoor(panelID, doorNo, out xmlDoor);
-               
+
+                int returnValue = ParadoxAPIImport.ReadDoor(panelID, doorNo, out xmlDoor);
+
                 panelDoor.parseXML(xmlDoor);
 
                 Log(panelID, returnValue, xmlDoor);
@@ -1791,16 +1009,14 @@ namespace ParadoxAPILibrary
                 }
 
                 NotifyTaskCompleted(panelID, returnValue, doorNo, PanelObjectTypes.OT_DOOR, AT_READ);
-                
+
                 return returnValue;
             }
-            else 
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 WriteDoor(UInt32 panelID, UInt32 doorNo, PanelDoor panelDoor)
+        public static int WriteDoor(UInt32 panelID, UInt32 doorNo, PanelDoor panelDoor)
         {
             if (panelDoor != null)
             {
@@ -1808,7 +1024,7 @@ namespace ParadoxAPILibrary
 
                 panelDoor.serializeXML(ref xmlDoor);
 
-                Int32 returnValue = WriteDoor(panelID, doorNo, xmlDoor);
+                int returnValue = ParadoxAPIImport.WriteDoor(panelID, doorNo, xmlDoor);
 
                 Log(panelID, returnValue, xmlDoor);
 
@@ -1821,19 +1037,17 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 ReadAllDoors(UInt32 panelID, PanelDoorList panelDoors)
+        public static int ReadAllDoors(UInt32 panelID, PanelDoorList panelDoors)
         {
             if (panelDoors != null)
             {
                 string xmlDoors = "";
 
-                Int32 returnValue = ReadAllDoors(panelID, out xmlDoors);
+                int returnValue = ParadoxAPIImport.ReadAllDoors(panelID, out xmlDoors);
 
                 panelDoors.parseXML(xmlDoors);
 
@@ -1848,20 +1062,18 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 ReadUser(UInt32 panelID, UInt32 userNo, PanelUser panelUser)
+        public static int ReadUser(UInt32 panelID, UInt32 userNo, PanelUser panelUser)
         {
             if (panelUser != null)
             {
                 string xmlUser = "";
-                
-                Int32 returnValue = ReadUser(panelID, userNo, out xmlUser);                          
-                             
+
+                int returnValue = ParadoxAPIImport.ReadUser(panelID, userNo, out xmlUser);
+
                 panelUser.parseXML(xmlUser);
 
                 Log(panelID, returnValue, xmlUser);
@@ -1875,21 +1087,19 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 WriteUser(UInt32 panelID, UInt32 userNo, PanelUser panelUser)
+        public static int WriteUser(UInt32 panelID, UInt32 userNo, PanelUser panelUser)
         {
             if (panelUser != null)
             {
                 string xmlUser = "";
 
-                panelUser.serializeXML(ref xmlUser);                
-                
-                Int32 returnValue = WriteUser(panelID, userNo, xmlUser);
+                panelUser.serializeXML(ref xmlUser);
+
+                int returnValue = ParadoxAPIImport.WriteUser(panelID, userNo, xmlUser);
 
                 Log(panelID, returnValue, xmlUser);
 
@@ -1902,19 +1112,17 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 ReadAllUsers(UInt32 panelID, PanelUserList panelUsers)
+        public static int ReadAllUsers(UInt32 panelID, PanelUserList panelUsers)
         {
             if (panelUsers != null)
             {
                 string xmlUsers = "";
 
-                Int32 returnValue = ReadAllUsers(panelID, out xmlUsers);
+                int returnValue = ParadoxAPIImport.ReadAllUsers(panelID, out xmlUsers);
 
                 panelUsers.parseXML(xmlUsers);
 
@@ -1929,21 +1137,19 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 WriteMultipleUsers(UInt32 panelID, PanelUserList panelUsers)
+        public static int WriteMultipleUsers(UInt32 panelID, PanelUserList panelUsers)
         {
             if (panelUsers != null)
             {
                 string xmlUsers = "";
 
                 panelUsers.serializeXML(ref xmlUsers);
-                              
-                Int32 returnValue = WriteMultipleUsers(panelID, xmlUsers);                               
+
+                int returnValue = ParadoxAPIImport.WriteMultipleUsers(panelID, xmlUsers);
 
                 Log(panelID, returnValue, xmlUsers);
 
@@ -1956,19 +1162,17 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 ReadSchedule(UInt32 panelID, UInt32 scheduleNo, PanelSchedule panelSchedule)
+        public static int ReadSchedule(UInt32 panelID, UInt32 scheduleNo, PanelSchedule panelSchedule)
         {
             if (panelSchedule != null)
             {
                 string xmlSchedule = "";
 
-                Int32 returnValue = ReadSchedule(panelID, scheduleNo, out xmlSchedule);
+                int returnValue = ParadoxAPIImport.ReadSchedule(panelID, scheduleNo, out xmlSchedule);
 
                 panelSchedule.parseXML(xmlSchedule);
 
@@ -1983,13 +1187,11 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 WriteSchedule(UInt32 panelID, UInt32 scheduleNo, PanelSchedule panelSchedule)
+        public static int WriteSchedule(UInt32 panelID, UInt32 scheduleNo, PanelSchedule panelSchedule)
         {
             if (panelSchedule != null)
             {
@@ -1997,7 +1199,7 @@ namespace ParadoxAPILibrary
 
                 panelSchedule.serializeXML(ref xmlSchedule);
 
-                Int32 returnValue = WriteSchedule(panelID, scheduleNo, xmlSchedule);
+                int returnValue = ParadoxAPIImport.WriteSchedule(panelID, scheduleNo, xmlSchedule);
 
                 Log(panelID, returnValue, xmlSchedule);
 
@@ -2010,22 +1212,20 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 ReadAllSchedules(UInt32 panelID, PanelScheduleList panelSchedules)
+        public static int ReadAllSchedules(UInt32 panelID, PanelScheduleList panelSchedules)
         {
             if (panelSchedules != null)
             {
                 string xmlSchedules = "";
 
-                Int32 returnValue = ReadAllSchedules(panelID, out xmlSchedules);                              
-                
+                int returnValue = ParadoxAPIImport.ReadAllSchedules(panelID, out xmlSchedules);
+
                 panelSchedules.parseXML(xmlSchedules);
-                                              
+
                 Log(panelID, returnValue, xmlSchedules);
 
                 if (!PanelResults.Succeeded((UInt32)returnValue))
@@ -2037,19 +1237,17 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 ReadAccessLevel(UInt32 panelID, UInt32 accessLevelNo, PanelAccessLevel panelAccessLevel)
+        public static int ReadAccessLevel(UInt32 panelID, UInt32 accessLevelNo, PanelAccessLevel panelAccessLevel)
         {
             if (panelAccessLevel != null)
             {
                 string xmlAccessLevel = "";
 
-                Int32 returnValue = ReadAccessLevel(panelID, accessLevelNo, out xmlAccessLevel);
+                int returnValue = ParadoxAPIImport.ReadAccessLevel(panelID, accessLevelNo, out xmlAccessLevel);
 
                 panelAccessLevel.parseXML(xmlAccessLevel);
 
@@ -2064,13 +1262,11 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 WriteAccessLevel(UInt32 panelID, UInt32 accessLevelNo, PanelAccessLevel panelAccessLevel)
+        public static int WriteAccessLevel(UInt32 panelID, UInt32 accessLevelNo, PanelAccessLevel panelAccessLevel)
         {
             if (panelAccessLevel != null)
             {
@@ -2078,7 +1274,7 @@ namespace ParadoxAPILibrary
 
                 panelAccessLevel.serializeXML(ref xmlAccessLevel);
 
-                Int32 returnValue = WriteAccessLevel(panelID, accessLevelNo, xmlAccessLevel);
+                int returnValue = ParadoxAPIImport.WriteAccessLevel(panelID, accessLevelNo, xmlAccessLevel);
 
                 Log(panelID, returnValue, xmlAccessLevel);
 
@@ -2091,19 +1287,17 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 ReadAllAccessLevels(UInt32 panelID, PanelAccessLevelList panelAccessLevels)
+        public static int ReadAllAccessLevels(UInt32 panelID, PanelAccessLevelList panelAccessLevels)
         {
             if (panelAccessLevels != null)
             {
                 string xmlAccessLevels = "";
 
-                Int32 returnValue = ReadAllAccessLevels(panelID, out xmlAccessLevels);
+                int returnValue = ParadoxAPIImport.ReadAllAccessLevels(panelID, out xmlAccessLevels);
 
                 panelAccessLevels.parseXML(xmlAccessLevels);
 
@@ -2118,19 +1312,17 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 ReadHolidays(UInt32 panelID, PanelHolidayList panelHolidayList)
+        public static int ReadHolidays(UInt32 panelID, PanelHolidayList panelHolidayList)
         {
             if (panelHolidayList != null)
             {
                 string xmlHolidays = "";
 
-                Int32 returnValue = ReadHolidays(panelID, out xmlHolidays);
+                int returnValue = ParadoxAPIImport.ReadHolidays(panelID, out xmlHolidays);
 
                 panelHolidayList.parseXML(xmlHolidays);
 
@@ -2145,13 +1337,11 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 WriteHolidays(UInt32 panelID, PanelHolidayList panelHolidayList)
+        public static int WriteHolidays(UInt32 panelID, PanelHolidayList panelHolidayList)
         {
             if (panelHolidayList != null)
             {
@@ -2159,7 +1349,7 @@ namespace ParadoxAPILibrary
 
                 panelHolidayList.serializeXML(ref xmlHolidays);
 
-                Int32 returnValue = WriteHolidays(panelID, xmlHolidays);
+                int returnValue = ParadoxAPIImport.WriteHolidays(panelID, xmlHolidays);
 
                 Log(panelID, returnValue, xmlHolidays);
 
@@ -2172,15 +1362,13 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 ReadBufferedEvents(UInt32 panelID, UInt32 eventCount)
+        public static int ReadBufferedEvents(UInt32 panelID, UInt32 eventCount)
         {
-            Int32 returnValue = ReadBufferEvents(panelID, eventCount);
+            int returnValue = ParadoxAPIImport.ReadBufferEvents(panelID, eventCount);
 
             Log(panelID, returnValue, string.Format("Read Buffered Event Count: {0}", eventCount));
 
@@ -2192,14 +1380,14 @@ namespace ParadoxAPILibrary
             return returnValue;
         }
 
-        public static Int32 ReadMonitoringStatus(UInt32 panelID, PanelMonitoring panelMonitoring)
+        public static int ReadMonitoringStatus(UInt32 panelID, PanelMonitoring panelMonitoring)
         {
             if (panelMonitoring != null)
             {
                 string xmlMonitoring = "";
 
-                Int32 returnValue = ReadMonitoring(panelID, out xmlMonitoring);
-                
+                int returnValue = ParadoxAPIImport.ReadMonitoring(panelID, out xmlMonitoring);
+
                 panelMonitoring.parseXML(xmlMonitoring);
 
                 Log(panelID, returnValue, xmlMonitoring);
@@ -2213,19 +1401,17 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 GetSystemTroubles(UInt32 panelID, PanelTroubleList panelTroubleList)
+        public static int GetSystemTroubles(UInt32 panelID, PanelTroubleList panelTroubleList)
         {
             if (panelTroubleList != null)
             {
                 string xmlTroubles = "";
 
-                Int32 returnValue = SystemTroubles(panelID, out xmlTroubles);                
+                int returnValue = ParadoxAPIImport.SystemTroubles(panelID, out xmlTroubles);
 
                 panelTroubleList.parseXML(xmlTroubles);
 
@@ -2240,16 +1426,13 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 StartControlPanelMonitoring(UInt32 panelID)
+        public static int StartControlPanelMonitoring(UInt32 panelID)
         {
-            
-            Int32 returnValue = StartMonitoring(panelID);
+            int returnValue = ParadoxAPIImport.StartMonitoring(panelID);
 
             Log(panelID, returnValue, "Start Monitoring");
 
@@ -2258,10 +1441,10 @@ namespace ParadoxAPILibrary
                 errorNotification(panelID, returnValue, "StartControlPanelMonitoring: " + PanelResults.GetResultCode((UInt32)returnValue));
             }
 
-            return returnValue;            
+            return returnValue;
         }
 
-        public static Int32 WriteIPReporting(UInt32 panelID, UInt32 receiverID, PanelIPReporting panelIPReporting)
+        public static int WriteIPReporting(UInt32 panelID, UInt32 receiverID, PanelIPReporting panelIPReporting)
         {
             if (panelIPReporting != null)
             {
@@ -2269,10 +1452,10 @@ namespace ParadoxAPILibrary
 
                 panelIPReporting.serializeXML(ref xmlReporting);
 
-                Int32 returnValue = WriteIPReporting(panelID, receiverID, xmlReporting);
+                int returnValue = ParadoxAPIImport.WriteIPReporting(panelID, receiverID, xmlReporting);
 
                 Log(panelID, returnValue, xmlReporting);
-                               
+
                 if (!PanelResults.Succeeded((UInt32)returnValue))
                 {
                     errorNotification(panelID, returnValue, "WriteIPReporting: " + PanelResults.GetResultCode((UInt32)returnValue));
@@ -2284,19 +1467,17 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 ReadIPReporting(UInt32 panelID, UInt32 receiverID, PanelIPReporting panelIPReporting)
+        public static int ReadIPReporting(UInt32 panelID, UInt32 receiverID, PanelIPReporting panelIPReporting)
         {
             if (panelIPReporting != null)
             {
                 string xmlReporting = "";
 
-                Int32 returnValue = ReadIPReporting(panelID, receiverID, out xmlReporting);
+                int returnValue = ParadoxAPIImport.ReadIPReporting(panelID, receiverID, out xmlReporting);
 
                 panelIPReporting.parseXML(xmlReporting);
 
@@ -2306,7 +1487,7 @@ namespace ParadoxAPILibrary
                 {
                     errorNotification(panelID, returnValue, "ReadIPReporting: " + PanelResults.GetResultCode((UInt32)returnValue));
                 }
-                else                
+                else
                 {
                     NotifyTaskCompleted(panelID, returnValue, (UInt32)panelIPReporting.ReceiverNo, PanelObjectTypes.OT_IP_RECEIVER, AT_READ, panelIPReporting);
                 }
@@ -2315,21 +1496,19 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 StartIPDOX(IPDOXSettings ipDOXSettings)
+        public static int StartIPDOX(IPDOXSettings settings)
         {
-            if (ipDOXSettings != null)
+            if (settings != null)
             {
                 string xmlSetting = "";
 
-                ipDOXSettings.serializeXML(ref xmlSetting);
+                settings.serializeXML(ref xmlSetting);
 
-                Int32 returnValue = startIPDOX(xmlSetting);
+                int returnValue = ParadoxAPIImport.StartIPDOX(xmlSetting);
 
                 Log(0, returnValue, xmlSetting);
 
@@ -2340,15 +1519,13 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 StopIPDOX()
-        {                 
-            Int32 returnValue = stopIPDOX();
+        public static int StopIPDOX()
+        {
+            int returnValue = ParadoxAPIImport.StopIPDOX();
 
             Log(0, returnValue, "StopIPDOX");
 
@@ -2357,12 +1534,12 @@ namespace ParadoxAPILibrary
                 errorNotification(0, returnValue, "StopIPDOX: " + PanelResults.GetResultCode((UInt32)returnValue));
             }
 
-            return returnValue;            
+            return returnValue;
         }
 
-        public static Int32 DeleteIPDOXAccount(string macAddress)
+        public static int DeleteIPDOXAccount(string macAddress)
         {
-            Int32 returnValue = ParadoxAPI.DeleteIPDOXAccount(macAddress);
+            int returnValue = ParadoxAPIImport.DeleteIPDOXAccount(macAddress);
 
             Log(0, returnValue, "DeleteIPDOXAccount");
 
@@ -2374,13 +1551,13 @@ namespace ParadoxAPILibrary
             return returnValue;
         }
 
-        public static Int32 IPReportingStatus(UInt32 panelID, PanelIPReportingStatusList panelIPReportingStatusList)
+        public static int IPReportingStatus(UInt32 panelID, PanelIPReportingStatusList panelIPReportingStatusList)
         {
             if (panelIPReportingStatusList != null)
             {
                 string xmlStatus = "";
 
-                Int32 returnValue = IPReportingStatus(panelID, out xmlStatus);
+                int returnValue = ParadoxAPIImport.IPReportingStatus(panelID, out xmlStatus);
 
                 panelIPReportingStatusList.parseXML(xmlStatus);
 
@@ -2395,19 +1572,17 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 GetSiteFromPMH(string panelSerialNo, SiteInfo siteInfo)
+        public static int GetSiteFromPMH(string panelSerialNo, SiteInfo siteInfo)
         {
             if (siteInfo != null)
             {
-                string xmlSiteInfo = "";                                
+                string xmlSiteInfo = "";
 
-                Int32 returnValue = GetSiteFromPMH(panelSerialNo, out xmlSiteInfo);
+                int returnValue = ParadoxAPIImport.GetSiteFromPMH(panelSerialNo, out xmlSiteInfo);
 
                 siteInfo.parseXML(xmlSiteInfo);
 
@@ -2420,13 +1595,11 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
-        
-        public static Int32 ConfigureVideoServer(VideoSettings videoSettings)
+
+        public static int ConfigureVideoServer(VideoSettings videoSettings)
         {
             if (videoSettings != null)
             {
@@ -2434,7 +1607,7 @@ namespace ParadoxAPILibrary
 
                 videoSettings.serializeXML(ref xmlVideoSettings);
 
-                Int32 returnValue = ConfigureVideoServer(xmlVideoSettings);
+                int returnValue = ParadoxAPIImport.ConfigureVideoServer(xmlVideoSettings);
 
                 Log(0, returnValue, xmlVideoSettings);
 
@@ -2445,13 +1618,11 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-        public static Int32 GetVideoAlarmFiles(string accountNo, UInt32 zoneNo, DateTime dateTime, VideoFileList videoFileList)
+        public static int GetVideoAlarmFiles(string accountNo, UInt32 zoneNo, DateTime dateTime, VideoFileList videoFileList)
         {
             if (videoFileList != null)
             {
@@ -2459,7 +1630,7 @@ namespace ParadoxAPILibrary
 
                 Double dt = dateTime.ToOADate();
 
-                Int32 returnValue = GetVideoAlarmFiles(accountNo, zoneNo, dt, out XMLVideoFiles);
+                int returnValue = ParadoxAPIImport.GetVideoAlarmFiles(accountNo, zoneNo, dt, out XMLVideoFiles);
 
                 videoFileList.parseXML(XMLVideoFiles);
 
@@ -2472,20 +1643,17 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
 
-
-        public static Int32 StartVideoOnDemand(string ipAddress, UInt32 ipPort, string SessionKey, VideoFileList videoFileList)
+        public static int StartVideoOnDemand(string ipAddress, UInt32 ipPort, string sessionKey, VideoFileList videoFileList)
         {
             if (videoFileList != null)
             {
-                string xmlVideoFile = "";                               
+                string xmlVideoFile = "";
 
-                Int32 returnValue = StartVideoOnDemand(ipAddress, ipPort, SessionKey, out xmlVideoFile);
+                int returnValue = ParadoxAPIImport.StartVideoOnDemand(ipAddress, ipPort, sessionKey, out xmlVideoFile);
 
                 videoFileList.parseXML(xmlVideoFile);
 
@@ -2498,13 +1666,11 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
-        } 
 
-        public static Int32 StartVideoOnDemandEx(UInt32 panelID, VODSettings vodSettings, VideoFileList videoFileList)
+            return -1;
+        }
+
+        public static int StartVideoOnDemandEx(UInt32 panelID, VODSettings vodSettings, VideoFileList videoFileList)
         {
             if ((videoFileList != null) && (vodSettings != null))
             {
@@ -2513,7 +1679,7 @@ namespace ParadoxAPILibrary
 
                 vodSettings.serializeXML(ref xmlVODSettings);
 
-                Int32 returnValue = StartVideoOnDemandEx(panelID, xmlVODSettings, out xmlVideoFile);
+                int returnValue = ParadoxAPIImport.StartVideoOnDemandEx(panelID, xmlVODSettings, out xmlVideoFile);
 
                 videoFileList.parseXML(xmlVideoFile);
 
@@ -2526,10 +1692,10 @@ namespace ParadoxAPILibrary
 
                 return returnValue;
             }
-            else
-            {
-                return -1;
-            }
+
+            return -1;
         }
+
+        #endregion
     }
 }

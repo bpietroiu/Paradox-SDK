@@ -88,10 +88,10 @@ namespace ParadoxAPILibrary.Model
         public UInt32 AreaNo;
         public string AreaLabel;
         public bool AreaEnabled;
-        public Int32 AreaExitDelay;
-        public Int32 AreaBellCutOffTimer;
+        public int AreaExitDelay;
+        public int AreaBellCutOffTimer;
         public DateTime AreaAutoArmingTime;
-        public Int32 AreaNoMovementTimer;
+        public int AreaNoMovementTimer;
         public string Status;
 
         //EVO

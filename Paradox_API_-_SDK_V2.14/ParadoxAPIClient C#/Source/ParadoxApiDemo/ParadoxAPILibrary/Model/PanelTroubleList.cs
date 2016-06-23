@@ -45,7 +45,7 @@ namespace ParadoxAPILibrary.Model
             {
                 if (index < panelTroubles.Count)
                 {
-                    return (PanelTrouble)panelTroubles[(Int32)index];
+                    return (PanelTrouble)panelTroubles[(int)index];
                 }
                 else
                     return null;
@@ -54,7 +54,7 @@ namespace ParadoxAPILibrary.Model
             {
                 if (index < panelTroubles.Count)
                 {
-                    PanelTrouble panelTrouble = (PanelTrouble)panelTroubles[(Int32)index];
+                    PanelTrouble panelTrouble = (PanelTrouble)panelTroubles[(int)index];
 
                     panelTrouble = value;
                 }

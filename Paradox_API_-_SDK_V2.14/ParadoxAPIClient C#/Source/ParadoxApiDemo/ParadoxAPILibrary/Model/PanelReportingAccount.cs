@@ -37,7 +37,7 @@ namespace ParadoxAPILibrary.Model
         public string AccountNo;
         public string AccountStatus;
         public string MACAddress;
-        public Int32 ProfileID;
+        public int ProfileID;
         public string ProtocolID;
         public string PanelType;
         public string PanelSerialNo;

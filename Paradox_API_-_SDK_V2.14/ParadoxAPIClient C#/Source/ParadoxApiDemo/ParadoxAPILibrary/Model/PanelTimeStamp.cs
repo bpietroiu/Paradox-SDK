@@ -21,7 +21,7 @@ namespace ParadoxAPILibrary.Model
     
     public class PanelTimeStamp : BasePanelModel<PanelTimeStamp>
     {
-        public Int32 TimeStamp;
+        public int TimeStamp;
 
         public PanelTimeStamp()
         {
