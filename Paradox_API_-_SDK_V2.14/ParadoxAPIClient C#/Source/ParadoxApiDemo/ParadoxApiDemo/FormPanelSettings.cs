@@ -1,27 +1,34 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using Harmony.SDK.Paradox;
-using Harmony.SDK.Paradox.Model;
+using ParadoxAPILibrary;
 
 namespace ParadoxApiDemo
 {
     public partial class FormPanelSettings : Form
     {
+
         public PanelSettings mSettings = new PanelSettings();
 
         private void FillPanelType()
         {
             cbxPanelType.Items.Clear();
-            cbxPanelType.Items.Add("Auto-Detect");
-            cbxPanelType.Items.Add(PanelTypes.CP_PROD_NAME_SP4000);
-            cbxPanelType.Items.Add(PanelTypes.CP_PROD_NAME_SP5500);
-            cbxPanelType.Items.Add(PanelTypes.CP_PROD_NAME_SP6000);
-            cbxPanelType.Items.Add(PanelTypes.CP_PROD_NAME_SP7000);
-            cbxPanelType.Items.Add(PanelTypes.CP_PROD_NAME_MG5000);
-            cbxPanelType.Items.Add(PanelTypes.CP_PROD_NAME_MG5050);
+            cbxPanelType.Items.Add("Auto-Detect");            
+            cbxPanelType.Items.Add(ParadoxAPI.CP_PROD_NAME_SP4000);            
+            cbxPanelType.Items.Add(ParadoxAPI.CP_PROD_NAME_SP5500);
+            cbxPanelType.Items.Add(ParadoxAPI.CP_PROD_NAME_SP6000);
+            cbxPanelType.Items.Add(ParadoxAPI.CP_PROD_NAME_SP7000);
+            cbxPanelType.Items.Add(ParadoxAPI.CP_PROD_NAME_MG5000);
+            cbxPanelType.Items.Add(ParadoxAPI.CP_PROD_NAME_MG5050);
 
-            cbxPanelType.Items.Add(PanelTypes.CP_PROD_NAME_DGP_EVO_192);
-            cbxPanelType.Items.Add(PanelTypes.CP_PROD_NAME_DGP_EVO_VHD);
+            cbxPanelType.Items.Add(ParadoxAPI.CP_PROD_NAME_DGP_EVO_192);
+            cbxPanelType.Items.Add(ParadoxAPI.CP_PROD_NAME_DGP_EVO_VHD);
 
             cbxPanelType.SelectedIndex = 0;
         }
@@ -29,42 +36,42 @@ namespace ParadoxApiDemo
         private void FillSystemAlarmLanguage()
         {
             cbxSystemAlarmLanguage.Items.Clear();
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_ENGLISH);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_FRENCH);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_SPANISH);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_ITALIAN);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_SWEDISH);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_POLISH);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_PORTUGUESE);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_GERMAN);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_TURKISH);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_HUNGARIAN);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_CZECH);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_DUTCH);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_CROATIAN); ;
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_GREEK);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_HEBREW);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_RUSSIAN);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_BULGARIAN);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_ROMANIAN);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_SLOVAK);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_CHINESE);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_SERBIAN);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_MALAY);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_SLOVENIAN);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_LITHUANIAN); ;
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_FINNISH);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_ESTONIAN);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_BELGIAN);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_LATVIAN);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_MACEDONIA); ;
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_ALBANIAN);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_NORWEGIAN);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_ARABIC_PERSAIN);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_ARABIC_WESTERN);
-            cbxSystemAlarmLanguage.Items.Add(PanelLanguages.SYS_ALARM_LANGUAGE_ARABIC_EASTERN);
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_ENGLISH); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_FRENCH); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_SPANISH); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_ITALIAN); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_SWEDISH); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_POLISH); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_PORTUGUESE); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_GERMAN); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_TURKISH); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_HUNGARIAN); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_CZECH); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_DUTCH); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_CROATIAN); ;
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_GREEK); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_HEBREW); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_RUSSIAN); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_BULGARIAN); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_ROMANIAN); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_SLOVAK); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_CHINESE); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_SERBIAN); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_MALAY); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_SLOVENIAN); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_LITHUANIAN); ;
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_FINNISH); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_ESTONIAN);             
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_BELGIAN); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_LATVIAN); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_MACEDONIA); ;
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_ALBANIAN); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_NORWEGIAN); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_ARABIC_PERSAIN); 
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_ARABIC_WESTERN);
+            cbxSystemAlarmLanguage.Items.Add(ParadoxAPI.SYS_ALARM_LANGUAGE_ARABIC_EASTERN);
             cbxSystemAlarmLanguage.Sorted = true;
-            cbxSystemAlarmLanguage.SelectedIndex = cbxSystemAlarmLanguage.Items.IndexOf(PanelLanguages.SYS_ALARM_LANGUAGE_ENGLISH);
+            cbxSystemAlarmLanguage.SelectedIndex = cbxSystemAlarmLanguage.Items.IndexOf(ParadoxAPI.SYS_ALARM_LANGUAGE_ENGLISH);
         }
 
         public FormPanelSettings()
@@ -82,10 +89,10 @@ namespace ParadoxApiDemo
             ipAddressControl.Text = "...";
             txbIPPort.Text = "10000";
             txtIPModulePassword.Text = "paradox";
-            txbUserPassword.Text = "1234";
+            txbUserPassword.Text = "1234";            
         }
 
-        public FormPanelSettings(PanelSettings settings)
+        public FormPanelSettings(PanelSettings settings) 
         {
             InitializeComponent();
 
@@ -110,7 +117,7 @@ namespace ParadoxApiDemo
 
             if (cbxSystemAlarmLanguage.SelectedIndex == -1)
             {
-                cbxSystemAlarmLanguage.SelectedIndex = cbxSystemAlarmLanguage.Items.IndexOf(PanelLanguages.SYS_ALARM_LANGUAGE_ENGLISH);
+                cbxSystemAlarmLanguage.SelectedIndex = cbxSystemAlarmLanguage.Items.IndexOf(ParadoxAPI.SYS_ALARM_LANGUAGE_ENGLISH);
             }
 
             cbxConnectionType.SelectedIndex = -1;
@@ -127,12 +134,12 @@ namespace ParadoxApiDemo
             mSettings.IPPassword = settings.IPPassword;
             mSettings.UserCode = settings.UserCode;
             mSettings.SystemAlarmLanguage = settings.SystemAlarmLanguage;
-
+            
             txbUserPassword.Text = mSettings.UserCode;
 
-            if ((mSettings.ComPort - 1) < cbxSerialComPort.Items.Count)
+            if ((mSettings.ComPort-1) < cbxSerialComPort.Items.Count)
             {
-                cbxSerialComPort.SelectedIndex = mSettings.ComPort - 1;
+                cbxSerialComPort.SelectedIndex = mSettings.ComPort-1;
             }
             else
             {
@@ -154,27 +161,27 @@ namespace ParadoxApiDemo
             ipAddressControl.Text = mSettings.IPAddress;
             txbIPPort.Text = Convert.ToString(mSettings.IPPort);
             txtIPModulePassword.Text = mSettings.IPPassword;
-            txbUserPassword.Text = mSettings.UserCode;
+            txbUserPassword.Text = mSettings.UserCode;           
 
 
-            if (mSettings.ComType == "SERIAL")
+            if (mSettings.ComType == "SERIAL") 
             {
-                cbxConnectionType.SelectedIndex = 0;
+                cbxConnectionType.SelectedIndex = 0;                
 
                 txbDNSSiteID.Enabled = false;
                 ipAddressControl.Enabled = false;
                 txbIPPort.Enabled = false;
-                txtIPModulePassword.Enabled = false;
-
+                txtIPModulePassword.Enabled = false;                
+                               
             }
-            else if (mSettings.ComType == "IP")
+            else if (mSettings.ComType == "IP") 
             {
                 cbxConnectionType.SelectedIndex = 1;
 
                 txbDNSSiteID.Enabled = false;
                 cbxSerialComPort.Enabled = false;
-                cbxSerialBaudRate.Enabled = false;
-
+                cbxSerialBaudRate.Enabled = false;                
+            
             }
             else if (mSettings.ComType == "GPRSSTATIC")
             {
@@ -184,8 +191,8 @@ namespace ParadoxApiDemo
 
                 txbDNSSiteID.Enabled = false;
                 cbxSerialComPort.Enabled = false;
-                cbxSerialBaudRate.Enabled = false;
-
+                cbxSerialBaudRate.Enabled = false;                                                
+                
             }
             else if (mSettings.ComType == "GPRSPRIVATE")
             {
@@ -215,7 +222,7 @@ namespace ParadoxApiDemo
                 ipAddressControl.Enabled = false;
                 txbIPPort.Enabled = false;
                 txtIPModulePassword.Enabled = false;
-            }
+            }      
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -226,12 +233,12 @@ namespace ParadoxApiDemo
             }
             else
             {
-                mSettings.PanelType = cbxPanelType.Items[cbxPanelType.SelectedIndex].ToString();
+                mSettings.PanelType = cbxPanelType.Items[cbxPanelType.SelectedIndex].ToString();    
             }
 
 
             mSettings.SystemAlarmLanguage = cbxSystemAlarmLanguage.Items[cbxSystemAlarmLanguage.SelectedIndex].ToString();
-
+            
 
             switch (cbxConnectionType.SelectedIndex)
             {
@@ -266,8 +273,8 @@ namespace ParadoxApiDemo
                         break;
                     }
             }
-
-            mSettings.ComPort = cbxSerialComPort.SelectedIndex + 1;
+            
+            mSettings.ComPort = cbxSerialComPort.SelectedIndex+1;
 
             switch (cbxSerialBaudRate.SelectedIndex)
             {
@@ -285,44 +292,44 @@ namespace ParadoxApiDemo
             mSettings.IPAddress = ipAddressControl.Text;
             mSettings.IPPort = Convert.ToInt32(txbIPPort.Text);
             mSettings.IPPassword = txtIPModulePassword.Text;
-            mSettings.UserCode = txbUserPassword.Text;
+            mSettings.UserCode = txbUserPassword.Text;                       
         }
 
         private void cbxConnectionType_SelectedValueChanged(object sender, EventArgs e)
         {
             switch (cbxConnectionType.SelectedIndex)
             {
-                case 0:
+                case 0: 
                     {
                         cbxSerialComPort.Enabled = true;
                         cbxSerialBaudRate.Enabled = true;
                         txbDNSSiteID.Enabled = false;
                         ipAddressControl.Enabled = false;
                         txbIPPort.Enabled = false;
-                        txtIPModulePassword.Enabled = false;
-                        break;
+                        txtIPModulePassword.Enabled = false;  
+                        break; 
                     }
-                case 1:
-                    {
+                case 1: 
+                    {                        
                         cbxSerialComPort.Enabled = false;
                         cbxSerialBaudRate.Enabled = false;
                         txbDNSSiteID.Enabled = false;
                         ipAddressControl.Enabled = true;
                         txbIPPort.Enabled = true;
-                        txtIPModulePassword.Enabled = true;
+                        txtIPModulePassword.Enabled = true;  
                         mSettings.SMSCallback = false;
-                        break;
+                        break; 
                     }
-                case 2:
-                    {
+                case 2: 
+                    {                        
                         cbxSerialComPort.Enabled = false;
                         cbxSerialBaudRate.Enabled = false;
                         txbDNSSiteID.Enabled = false;
                         ipAddressControl.Enabled = true;
                         txbIPPort.Enabled = true;
-                        txtIPModulePassword.Enabled = true;
+                        txtIPModulePassword.Enabled = true;  
                         mSettings.SMSCallback = true;
-                        break;
+                        break; 
                     }
                 case 3:
                     {
@@ -335,27 +342,28 @@ namespace ParadoxApiDemo
                         mSettings.SMSCallback = false;
                         break;
                     }
-                case 4:
+                case 4: 
                     {
                         cbxSerialComPort.Enabled = false;
                         cbxSerialBaudRate.Enabled = false;
                         txbDNSSiteID.Enabled = true;
                         ipAddressControl.Enabled = false;
                         txbIPPort.Enabled = false;
-                        txtIPModulePassword.Enabled = true;
-                        break;
+                        txtIPModulePassword.Enabled = true;  
+                        break; 
                     }
-                default:
+                default: 
                     {
                         cbxSerialComPort.Enabled = true;
                         cbxSerialBaudRate.Enabled = true;
                         txbDNSSiteID.Enabled = false;
                         ipAddressControl.Enabled = false;
                         txbIPPort.Enabled = false;
-                        txtIPModulePassword.Enabled = false;
-                        break;
+                        txtIPModulePassword.Enabled = false; 
+                        break; 
                     }
             }
         }
+        
     }
 }

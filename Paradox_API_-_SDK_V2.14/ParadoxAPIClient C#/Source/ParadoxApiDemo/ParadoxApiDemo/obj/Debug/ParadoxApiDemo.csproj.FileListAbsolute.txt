@@ -19,16 +19,3 @@ C:\Paradox Softwares XE2\ParadoxAPI\Win32\Bin\ParadoxApiDemo.exe
 C:\Paradox Softwares XE2\ParadoxAPI\Win32\Bin\ParadoxApiDemo.pdb
 C:\Paradox Softwares XE2\ParadoxAPI\Demo\ParadoxApiDemo\ParadoxApiDemo\obj\Debug\ParadoxApiDemo.exe
 C:\Paradox Softwares XE2\ParadoxAPI\Demo\ParadoxApiDemo\ParadoxApiDemo\obj\Debug\ParadoxApiDemo.pdb
-C:\Users\pils0\Downloads\Samples\Paradox_API_-_SDK_V2.14\ParadoxAPIClient C#\Win32\Bin\ParadoxApiDemo.exe.config
-C:\Users\pils0\Downloads\Samples\Paradox_API_-_SDK_V2.14\ParadoxAPIClient C#\Source\ParadoxApiDemo\ParadoxApiDemo\obj\Debug\ParadoxApiDemo.exe
-C:\Users\pils0\Downloads\Samples\Paradox_API_-_SDK_V2.14\ParadoxAPIClient C#\Source\ParadoxApiDemo\ParadoxApiDemo\obj\Debug\ParadoxApiDemo.pdb
-C:\Users\spilote\Documents\GitHub\Paradox-SDK\Paradox_API_-_SDK_V2.14\ParadoxAPIClient C#\Win32\Bin\ParadoxApiDemo.exe.config
-C:\Users\spilote\Documents\GitHub\Paradox-SDK\Paradox_API_-_SDK_V2.14\ParadoxAPIClient C#\Win32\Bin\ParadoxApiDemo.exe
-C:\Users\spilote\Documents\GitHub\Paradox-SDK\Paradox_API_-_SDK_V2.14\ParadoxAPIClient C#\Win32\Bin\ParadoxApiDemo.pdb
-C:\Users\spilote\Documents\GitHub\Paradox-SDK\Paradox_API_-_SDK_V2.14\ParadoxAPIClient C#\Source\ParadoxApiDemo\ParadoxApiDemo\obj\Debug\ParadoxApiDemo.csprojResolveAssemblyReference.cache
-C:\Users\spilote\Documents\GitHub\Paradox-SDK\Paradox_API_-_SDK_V2.14\ParadoxAPIClient C#\Source\ParadoxApiDemo\ParadoxApiDemo\obj\Debug\ParadoxApiDemo.FormPanelSettings.resources
-C:\Users\spilote\Documents\GitHub\Paradox-SDK\Paradox_API_-_SDK_V2.14\ParadoxAPIClient C#\Source\ParadoxApiDemo\ParadoxApiDemo\obj\Debug\ParadoxApiDemo.FormParadoxAPI.resources
-C:\Users\spilote\Documents\GitHub\Paradox-SDK\Paradox_API_-_SDK_V2.14\ParadoxAPIClient C#\Source\ParadoxApiDemo\ParadoxApiDemo\obj\Debug\ParadoxApiDemo.Properties.Resources.resources
-C:\Users\spilote\Documents\GitHub\Paradox-SDK\Paradox_API_-_SDK_V2.14\ParadoxAPIClient C#\Source\ParadoxApiDemo\ParadoxApiDemo\obj\Debug\ParadoxApiDemo.csproj.GenerateResource.Cache
-C:\Users\spilote\Documents\GitHub\Paradox-SDK\Paradox_API_-_SDK_V2.14\ParadoxAPIClient C#\Source\ParadoxApiDemo\ParadoxApiDemo\obj\Debug\ParadoxApiDemo.exe
-C:\Users\spilote\Documents\GitHub\Paradox-SDK\Paradox_API_-_SDK_V2.14\ParadoxAPIClient C#\Source\ParadoxApiDemo\ParadoxApiDemo\obj\Debug\ParadoxApiDemo.pdb

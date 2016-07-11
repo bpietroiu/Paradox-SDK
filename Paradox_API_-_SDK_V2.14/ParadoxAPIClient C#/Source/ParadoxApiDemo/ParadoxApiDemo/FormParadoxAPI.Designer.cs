@@ -221,7 +221,6 @@
             this.label26 = new System.Windows.Forms.Label();
             this.edtVODIpPortEx = new System.Windows.Forms.TextBox();
             this.label27 = new System.Windows.Forms.Label();
-            this.editVODIpAddressEx = new IPAddressControlLib.IPAddressControl();
             this.label24 = new System.Windows.Forms.Label();
             this.edtPanelID = new System.Windows.Forms.TextBox();
             this.textBoxVOD = new System.Windows.Forms.RichTextBox();
@@ -230,7 +229,6 @@
             this.label22 = new System.Windows.Forms.Label();
             this.edtVODIpPort = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
-            this.editVODIpAddress = new IPAddressControlLib.IPAddressControl();
             this.buttonStartVideoOnDemandEx = new System.Windows.Forms.Button();
             this.buttonStartVideoOnDemand = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -284,6 +282,8 @@
             this.timerStatusTx = new System.Windows.Forms.Timer(this.components);
             this.timerStatusRx = new System.Windows.Forms.Timer(this.components);
             this.miniToolStrip = new System.Windows.Forms.ToolStrip();
+            this.editVODIpAddressEx = new IPAddressControlLib.IPAddressControl();
+            this.editVODIpAddress = new IPAddressControlLib.IPAddressControl();
             this.panel3.SuspendLayout();
             this.tabControlAll.SuspendLayout();
             this.tabPageControlPanels.SuspendLayout();
@@ -338,7 +338,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1276, 594);
+            this.panel3.Size = new System.Drawing.Size(1549, 594);
             this.panel3.TabIndex = 9;
             // 
             // tabControlAll
@@ -352,7 +352,7 @@
             this.tabControlAll.Location = new System.Drawing.Point(0, 0);
             this.tabControlAll.Name = "tabControlAll";
             this.tabControlAll.SelectedIndex = 0;
-            this.tabControlAll.Size = new System.Drawing.Size(1276, 572);
+            this.tabControlAll.Size = new System.Drawing.Size(1549, 572);
             this.tabControlAll.TabIndex = 9;
             // 
             // tabPageControlPanels
@@ -364,7 +364,7 @@
             this.tabPageControlPanels.Location = new System.Drawing.Point(4, 22);
             this.tabPageControlPanels.Name = "tabPageControlPanels";
             this.tabPageControlPanels.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageControlPanels.Size = new System.Drawing.Size(1268, 546);
+            this.tabPageControlPanels.Size = new System.Drawing.Size(1541, 546);
             this.tabPageControlPanels.TabIndex = 0;
             this.tabPageControlPanels.Text = "Control Panels";
             this.tabPageControlPanels.UseVisualStyleBackColor = true;
@@ -374,7 +374,7 @@
             this.splitter4.Dock = System.Windows.Forms.DockStyle.Top;
             this.splitter4.Location = new System.Drawing.Point(3, 397);
             this.splitter4.Name = "splitter4";
-            this.splitter4.Size = new System.Drawing.Size(1262, 3);
+            this.splitter4.Size = new System.Drawing.Size(1535, 3);
             this.splitter4.TabIndex = 19;
             this.splitter4.TabStop = false;
             // 
@@ -383,7 +383,7 @@
             this.splitter3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.splitter3.Location = new System.Drawing.Point(3, 540);
             this.splitter3.Name = "splitter3";
-            this.splitter3.Size = new System.Drawing.Size(1262, 3);
+            this.splitter3.Size = new System.Drawing.Size(1535, 3);
             this.splitter3.TabIndex = 17;
             this.splitter3.TabStop = false;
             // 
@@ -405,7 +405,7 @@
             this.listViewPanelEvent.GridLines = true;
             this.listViewPanelEvent.Location = new System.Drawing.Point(3, 397);
             this.listViewPanelEvent.Name = "listViewPanelEvent";
-            this.listViewPanelEvent.Size = new System.Drawing.Size(1262, 146);
+            this.listViewPanelEvent.Size = new System.Drawing.Size(1535, 146);
             this.listViewPanelEvent.TabIndex = 16;
             this.listViewPanelEvent.UseCompatibleStateImageBehavior = false;
             this.listViewPanelEvent.View = System.Windows.Forms.View.Details;
@@ -466,7 +466,7 @@
             this.panelControlPanels.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControlPanels.Location = new System.Drawing.Point(3, 3);
             this.panelControlPanels.Name = "panelControlPanels";
-            this.panelControlPanels.Size = new System.Drawing.Size(1262, 394);
+            this.panelControlPanels.Size = new System.Drawing.Size(1535, 394);
             this.panelControlPanels.TabIndex = 10;
             // 
             // panel5
@@ -476,7 +476,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(265, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(997, 394);
+            this.panel5.Size = new System.Drawing.Size(1270, 394);
             this.panel5.TabIndex = 23;
             // 
             // tabControlPanel
@@ -489,7 +489,7 @@
             this.tabControlPanel.Location = new System.Drawing.Point(0, 25);
             this.tabControlPanel.Name = "tabControlPanel";
             this.tabControlPanel.SelectedIndex = 0;
-            this.tabControlPanel.Size = new System.Drawing.Size(997, 369);
+            this.tabControlPanel.Size = new System.Drawing.Size(1270, 369);
             this.tabControlPanel.TabIndex = 21;
             // 
             // tabPagePanelStatus
@@ -500,7 +500,7 @@
             this.tabPagePanelStatus.Location = new System.Drawing.Point(4, 22);
             this.tabPagePanelStatus.Name = "tabPagePanelStatus";
             this.tabPagePanelStatus.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePanelStatus.Size = new System.Drawing.Size(989, 343);
+            this.tabPagePanelStatus.Size = new System.Drawing.Size(1262, 343);
             this.tabPagePanelStatus.TabIndex = 0;
             this.tabPagePanelStatus.Text = "Status";
             this.tabPagePanelStatus.UseVisualStyleBackColor = true;
@@ -511,7 +511,7 @@
             this.tvControlPanelStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvControlPanelStatus.Location = new System.Drawing.Point(3, 178);
             this.tvControlPanelStatus.Name = "tvControlPanelStatus";
-            this.tvControlPanelStatus.Size = new System.Drawing.Size(983, 140);
+            this.tvControlPanelStatus.Size = new System.Drawing.Size(1256, 140);
             this.tvControlPanelStatus.TabIndex = 16;
             // 
             // statusStrip3
@@ -520,7 +520,7 @@
             this.labelSMSMessageToSend});
             this.statusStrip3.Location = new System.Drawing.Point(3, 318);
             this.statusStrip3.Name = "statusStrip3";
-            this.statusStrip3.Size = new System.Drawing.Size(983, 22);
+            this.statusStrip3.Size = new System.Drawing.Size(1256, 22);
             this.statusStrip3.TabIndex = 15;
             this.statusStrip3.Text = "statusStrip3";
             // 
@@ -538,7 +538,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(983, 175);
+            this.panel4.Size = new System.Drawing.Size(1256, 175);
             this.panel4.TabIndex = 12;
             // 
             // panelIPReceiver
@@ -587,7 +587,7 @@
             this.panelIPReceiver.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelIPReceiver.Location = new System.Drawing.Point(381, 24);
             this.panelIPReceiver.Name = "panelIPReceiver";
-            this.panelIPReceiver.Size = new System.Drawing.Size(602, 151);
+            this.panelIPReceiver.Size = new System.Drawing.Size(875, 151);
             this.panelIPReceiver.TabIndex = 20;
             // 
             // textBoxRcv2Area2AccountNo
@@ -966,7 +966,7 @@
             this.timeToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(983, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1256, 24);
             this.menuStrip1.TabIndex = 17;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1665,7 +1665,7 @@
             this.PanelStatusInfoLabel});
             this.toolStripPanelStatus.Location = new System.Drawing.Point(0, 0);
             this.toolStripPanelStatus.Name = "toolStripPanelStatus";
-            this.toolStripPanelStatus.Size = new System.Drawing.Size(997, 25);
+            this.toolStripPanelStatus.Size = new System.Drawing.Size(1270, 25);
             this.toolStripPanelStatus.TabIndex = 19;
             this.toolStripPanelStatus.Text = "toolStrip1";
             // 
@@ -2069,21 +2069,6 @@
             this.label27.TabIndex = 29;
             this.label27.Text = "IP Address:";
             // 
-            // editVODIpAddressEx
-            // 
-            this.editVODIpAddressEx.AllowInternalTab = false;
-            this.editVODIpAddressEx.AutoHeight = true;
-            this.editVODIpAddressEx.BackColor = System.Drawing.SystemColors.Window;
-            this.editVODIpAddressEx.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.editVODIpAddressEx.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.editVODIpAddressEx.Location = new System.Drawing.Point(351, 50);
-            this.editVODIpAddressEx.MinimumSize = new System.Drawing.Size(87, 20);
-            this.editVODIpAddressEx.Name = "editVODIpAddressEx";
-            this.editVODIpAddressEx.ReadOnly = false;
-            this.editVODIpAddressEx.Size = new System.Drawing.Size(159, 20);
-            this.editVODIpAddressEx.TabIndex = 28;
-            this.editVODIpAddressEx.Text = "10.100.20.148";
-            // 
             // label24
             // 
             this.label24.AutoSize = true;
@@ -2155,21 +2140,6 @@
             this.label21.Size = new System.Drawing.Size(61, 13);
             this.label21.TabIndex = 20;
             this.label21.Text = "IP Address:";
-            // 
-            // editVODIpAddress
-            // 
-            this.editVODIpAddress.AllowInternalTab = false;
-            this.editVODIpAddress.AutoHeight = true;
-            this.editVODIpAddress.BackColor = System.Drawing.SystemColors.Window;
-            this.editVODIpAddress.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.editVODIpAddress.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.editVODIpAddress.Location = new System.Drawing.Point(237, 21);
-            this.editVODIpAddress.MinimumSize = new System.Drawing.Size(87, 20);
-            this.editVODIpAddress.Name = "editVODIpAddress";
-            this.editVODIpAddress.ReadOnly = false;
-            this.editVODIpAddress.Size = new System.Drawing.Size(159, 20);
-            this.editVODIpAddress.TabIndex = 19;
-            this.editVODIpAddress.Text = "10.100.20.148";
             // 
             // buttonStartVideoOnDemandEx
             // 
@@ -2612,7 +2582,7 @@
             this.StatusLabelPanelInfo});
             this.statusStrip1.Location = new System.Drawing.Point(0, 572);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1276, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1549, 22);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 7;
             this.statusStrip1.Text = "statusStrip1";
@@ -2622,7 +2592,7 @@
             this.StatusLabelPanelInfo.AutoSize = false;
             this.StatusLabelPanelInfo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.StatusLabelPanelInfo.Name = "StatusLabelPanelInfo";
-            this.StatusLabelPanelInfo.Size = new System.Drawing.Size(1261, 17);
+            this.StatusLabelPanelInfo.Size = new System.Drawing.Size(1534, 17);
             this.StatusLabelPanelInfo.Spring = true;
             this.StatusLabelPanelInfo.Tag = "";
             this.StatusLabelPanelInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2632,7 +2602,7 @@
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Top;
             this.splitter2.Location = new System.Drawing.Point(0, 0);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(1276, 3);
+            this.splitter2.Size = new System.Drawing.Size(1549, 3);
             this.splitter2.TabIndex = 10;
             this.splitter2.TabStop = false;
             // 
@@ -2666,11 +2636,41 @@
             this.miniToolStrip.Size = new System.Drawing.Size(1017, 25);
             this.miniToolStrip.TabIndex = 15;
             // 
+            // editVODIpAddressEx
+            // 
+            this.editVODIpAddressEx.AllowInternalTab = false;
+            this.editVODIpAddressEx.AutoHeight = true;
+            this.editVODIpAddressEx.BackColor = System.Drawing.SystemColors.Window;
+            this.editVODIpAddressEx.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.editVODIpAddressEx.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.editVODIpAddressEx.Location = new System.Drawing.Point(351, 50);
+            this.editVODIpAddressEx.MinimumSize = new System.Drawing.Size(87, 20);
+            this.editVODIpAddressEx.Name = "editVODIpAddressEx";
+            this.editVODIpAddressEx.ReadOnly = false;
+            this.editVODIpAddressEx.Size = new System.Drawing.Size(159, 20);
+            this.editVODIpAddressEx.TabIndex = 28;
+            this.editVODIpAddressEx.Text = "10.100.20.148";
+            // 
+            // editVODIpAddress
+            // 
+            this.editVODIpAddress.AllowInternalTab = false;
+            this.editVODIpAddress.AutoHeight = true;
+            this.editVODIpAddress.BackColor = System.Drawing.SystemColors.Window;
+            this.editVODIpAddress.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.editVODIpAddress.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.editVODIpAddress.Location = new System.Drawing.Point(237, 21);
+            this.editVODIpAddress.MinimumSize = new System.Drawing.Size(87, 20);
+            this.editVODIpAddress.Name = "editVODIpAddress";
+            this.editVODIpAddress.ReadOnly = false;
+            this.editVODIpAddress.Size = new System.Drawing.Size(159, 20);
+            this.editVODIpAddress.TabIndex = 19;
+            this.editVODIpAddress.Text = "10.100.20.148";
+            // 
             // FormParadoxAPI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1276, 594);
+            this.ClientSize = new System.Drawing.Size(1549, 594);
             this.Controls.Add(this.splitter2);
             this.Controls.Add(this.panel3);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

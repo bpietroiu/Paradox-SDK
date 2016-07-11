@@ -1,29 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 using System.Xml;
 using System.IO;
 using System.Net;
 using System.Threading;
+using System.Xml;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Diagnostics;
-using Harmony.SDK.Paradox;
-using Harmony.SDK.Paradox.Model;
-using ParadoxApiDemo.ViewModel;
+using ParadoxAPILibrary;
+
 
 namespace ParadoxApiDemo
 {
     public partial class FormParadoxAPI : Form
-    {
+    {               
         //UInt32 mPanelID = 0x01; //For the menu items - PanelID test variable needed to keep a reference on a communication link  
 
-        public List<ControlPanelViewModel> controlPanels = new List<ControlPanelViewModel>();
+        public List<ControlPanel> controlPanels = new List<ControlPanel>();
         IPDOXSettings ipDOXSettings = new IPDOXSettings();
-
+              
         public FormParadoxAPI()
         {
             InitializeComponent();
@@ -53,7 +57,7 @@ namespace ParadoxApiDemo
 
             UpdateUI();
 
-            ParadoxAPI.MonitoringStatusChanges = monitoringStatusChangesDelegate;
+            ParadoxAPI.monitoringStatusChangesDelegate = monitoringStatusChangesDelegate;
             ParadoxAPI.heartbeatDelegate = heartbeatDelegate;
             ParadoxAPI.receiveLiveEventDelegate = receiveLiveEventDelegate;
             ParadoxAPI.receiveBufferedEventDelegate = receiveBufferedEventDelegate;
@@ -90,7 +94,7 @@ namespace ParadoxApiDemo
         //Callback call from ThreadPool.QueueUserWorkItem
         private void DisconnectFromControlPanel(Object stateInfo)
         {
-            var controlPanel = (ControlPanelViewModel)stateInfo;
+            ControlPanel controlPanel = (ControlPanel)stateInfo;
 
             Int32 returnValue = ParadoxAPI.DisconnectFromPanel(controlPanel.panelID);
         }
@@ -98,19 +102,19 @@ namespace ParadoxApiDemo
         //Callback call from ThreadPool.QueueUserWorkItem
         private void ConnectToControlPanel(Object stateInfo)
         {
-            var controlPanel = (ControlPanelViewModel)stateInfo;
+            ControlPanel controlPanel = (ControlPanel)stateInfo;
 
             Int32 returnValue = ParadoxAPI.ConnectToPanel(controlPanel.panelID, controlPanel.Settings);
 
-            if (PanelResults.Succeeded((UInt32)returnValue))
+            if (ParadoxAPI.Succeeded((UInt32)returnValue))
             {
                 PanelInfoEx panelInfoEx = new PanelInfoEx();
 
                 returnValue = ParadoxAPI.RetrievePanelInfo(controlPanel.panelID, panelInfoEx);
 
-                if (PanelResults.Succeeded((UInt32)returnValue))
+                if (ParadoxAPI.Succeeded((UInt32)returnValue))
                 {
-                    controlPanel.InfoEx = panelInfoEx.FullCopy();
+                    controlPanel.InfoEx = panelInfoEx.fullCopy();
 
                     controlPanel.Settings.PanelType = controlPanel.InfoEx.Description;
 
@@ -121,7 +125,7 @@ namespace ParadoxApiDemo
             }
         }               
 
-        private bool GetControlPanel(UInt32 panelID, ref ControlPanelViewModel controlPanel)
+        private Boolean GetControlPanel(UInt32 panelID, ref ControlPanel controlPanel)
         {
             Int32 pnlID = (Int32)panelID - 1;
 
@@ -129,7 +133,14 @@ namespace ParadoxApiDemo
             {
                 controlPanel = controlPanels.ElementAt(pnlID);
 
-                return (controlPanel != null);
+                if (controlPanel != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
@@ -137,7 +148,7 @@ namespace ParadoxApiDemo
             }
         }
 
-        private bool GetSelectedControlPanel(UInt32 panelID, ref ControlPanelViewModel controlPanel)
+        private Boolean GetSelectedControlPanel(UInt32 panelID, ref ControlPanel controlPanel)
         {
             if ((tvContolPanels as TreeView).SelectedNode != null)
             {
@@ -150,7 +161,14 @@ namespace ParadoxApiDemo
                         {
                             controlPanel = controlPanels.ElementAt(treeNode.Index);
 
-                            return (controlPanel.panelID == panelID);
+                            if (controlPanel.panelID == panelID)
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
                         }
                         else
                         {
@@ -163,14 +181,19 @@ namespace ParadoxApiDemo
                         if (treeNodeParent.Index < controlPanels.Count())
                         {
                             controlPanel = controlPanels.ElementAt(treeNodeParent.Index);
-
-                            return (controlPanel.panelID == panelID);
+                            if (controlPanel.panelID == panelID)
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
                         }
                         else
                         {
                            return false; 
-                        }
-                       
+                        }                        
                     default: 
                         {
                             return false;
@@ -183,7 +206,7 @@ namespace ParadoxApiDemo
             }                       
         }
 
-        private bool GetSelectedControlPanel(ref ControlPanelViewModel controlPanel)
+        private Boolean GetSelectedControlPanel(ref ControlPanel controlPanel)
         {
             if ((tvContolPanels as TreeView).SelectedNode != null)
             {
@@ -196,27 +219,38 @@ namespace ParadoxApiDemo
                         {
                             controlPanel = controlPanels.ElementAt(treeNode.Index);
 
-                            return (controlPanel != null);
+                            if (controlPanel != null)
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
                         }
                         else
                         {
                            return false; 
                         }
-
                     case 1:
                         TreeNode treeNodeParent = treeNode.Parent;
 
                         if (treeNodeParent.Index < controlPanels.Count())
                         {
                             controlPanel = controlPanels.ElementAt(treeNodeParent.Index);
-
-                            return (controlPanel != null);
+                            if (controlPanel != null)
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
                         }
                         else
                         {
                            return false; 
                         }
-
                     default: 
                         {
                             return false;
@@ -229,7 +263,7 @@ namespace ParadoxApiDemo
             }                    
         }
 
-        private Boolean GetSelectedControlPanelConnected(ref ControlPanelViewModel controlPanel)
+        private Boolean GetSelectedControlPanelConnected(ref ControlPanel controlPanel)
         {
             if ((tvContolPanels as TreeView).SelectedNode != null)
             {
@@ -242,7 +276,14 @@ namespace ParadoxApiDemo
                         {
                             controlPanel = controlPanels.ElementAt(treeNode.Index);
 
-                            return (controlPanel.ConnectionStatus == "CONNECTED");
+                            if (controlPanel.ConnectionStatus == "CONNECTED")
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
                         }
                         else
                         {
@@ -254,14 +295,19 @@ namespace ParadoxApiDemo
                         if (treeNodeParent.Index < controlPanels.Count())
                         {
                             controlPanel = controlPanels.ElementAt(treeNodeParent.Index);
-
-                            return (controlPanel.ConnectionStatus == "CONNECTED");
+                            if (controlPanel.ConnectionStatus == "CONNECTED")
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
                         }
                         else
                         {
                            return false; 
-                        }
-
+                        }                        
                     default: 
                         {
                             return false;
@@ -304,7 +350,7 @@ namespace ParadoxApiDemo
                     doc.Save(fileName);
                     return 0;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     return -1;
                 }
@@ -342,10 +388,12 @@ namespace ParadoxApiDemo
                 }
             }
 
+
             files.Sort();
 
             foreach (String str in files)
             {
+                
                 Int32 pos = str.IndexOf("ControlPanelID_");
                 if (pos >= 0)
                 {
@@ -353,7 +401,7 @@ namespace ParadoxApiDemo
                     lStr = str.Remove(0, pos);
                     lPanelID = Convert.ToInt32(lStr);
 
-                    var controlPanel = new ControlPanelViewModel();
+                    ControlPanel controlPanel = new ControlPanel();
                     controlPanel.panelID = (UInt32)lPanelID;
                     controlPanels.Add(controlPanel);
                     lStr = "Data\\ControlPanelID_" + String.Format("{0}", lPanelID) + ".xml";                                       
@@ -369,7 +417,7 @@ namespace ParadoxApiDemo
                             XmlDocument doc = new XmlDocument();
                             doc.Load(str);
                             String xml = doc.InnerXml;
-                            ipDOXSettings.ParseXML(xml);
+                            ipDOXSettings.parseXML(xml);
                             UpdateIPDOXSettingsUI();
                         }
                     }
@@ -377,7 +425,7 @@ namespace ParadoxApiDemo
             }                        
         }
 
-        private void UpdateUIOnNewPanel(ControlPanelViewModel controlPanel)
+        private void UpdateUIOnNewPanel(ControlPanel controlPanel)
         {
             
             TreeNode treeNode = new TreeNode(String.Format("Control Panel (PanelID = {0:D4})", controlPanel.panelID));
@@ -464,9 +512,10 @@ namespace ParadoxApiDemo
                       
         }
 
-        private void UpdateUIOnPanelConnected(ControlPanelViewModel controlPanel)
+        private void UpdateUIOnPanelConnected(ControlPanel controlPanel)
         {
-            ControlPanelViewModel ctrlPanel = null;
+            
+            ControlPanel ctrlPanel = null;
 
             TreeNode workingTreeNode = null;
 
@@ -500,8 +549,10 @@ namespace ParadoxApiDemo
             
         }
 
-        private void UpdateUIOnPanelChanged(ControlPanelViewModel controlPanel)
+        private void UpdateUIOnPanelChanged(ControlPanel controlPanel)
         {
+            
+
             TreeNode workingTreeNode = null;
                
             tvContolPanels.BeginUpdate();
@@ -511,7 +562,7 @@ namespace ParadoxApiDemo
                 {
                     TreeNode treeNode = (tvContolPanels as TreeView).SelectedNode;
 
-                    ControlPanelViewModel ctrlPanel = null;
+                    ControlPanel ctrlPanel = null;
 
                     switch (treeNode.Level)
                     {
@@ -620,15 +671,16 @@ namespace ParadoxApiDemo
             }            
         }
 
-        private void DeletePanel(ControlPanelViewModel controlPanel)
+        private void DeletePanel(ControlPanel controlPanel)
         {
+            
             TreeNode workingTreeNode = null;
 
             if ((tvContolPanels as TreeView).SelectedNode != null)
             {
                 TreeNode treeNode = (tvContolPanels as TreeView).SelectedNode;
 
-                ControlPanelViewModel ctrlPanel = null;
+                ControlPanel ctrlPanel = null;
 
                 switch (treeNode.Level)
                 {
@@ -667,18 +719,21 @@ namespace ParadoxApiDemo
             }            
         }
 
-        private void UpdateControlPanelStatusMonitoring(ControlPanelViewModel controlPanel, PanelMonitoring panelMonitoring)
+        private void UpdateControlPanelStatusMonitoring(ControlPanel controlPanel, PanelMonitoring panelMonitoring)
         {
+            
             controlPanel.UpdateStatus(panelMonitoring);
 
             if (GetSelectedControlPanel(controlPanel.panelID, ref controlPanel))
             {
                 UpdateControlPanelStatusView(tvControlPanelStatus, controlPanel);
             }
+            
         }
-
-        private void UpdateControlPanelStatusView(TreeView treeView, ControlPanelViewModel controlPanel, UInt32 ItemNo, String ItemType)
+                
+        private void UpdateControlPanelStatusView(TreeView treeView, ControlPanel controlPanel, UInt32 ItemNo, String ItemType)
         {
+            
             TreeNode treeNode = null;
             String sName = "";
 
@@ -696,7 +751,7 @@ namespace ParadoxApiDemo
             treeView.BeginUpdate();
             try
             {
-                if (ItemType == PanelObjectTypes.OT_AREA)
+                if (ItemType == ParadoxAPI.OT_AREA)
                 {
                     if (ItemNo <= controlPanel.Areas.panelAreas.Count)
                     {
@@ -723,9 +778,9 @@ namespace ParadoxApiDemo
 
                     }
                 }
-                else if (ItemType == PanelObjectTypes.OT_ZONE)
+                else if (ItemType == ParadoxAPI.OT_ZONE)
                 {
-                    if (ItemNo <= controlPanel.Zones.PanelZones.Count)
+                    if (ItemNo <= controlPanel.Zones.panelZones.Count)
                     {
                         treeNode = treeView.Nodes[0];
 
@@ -757,7 +812,7 @@ namespace ParadoxApiDemo
                         }
                     }
                 }
-                else if (ItemType == PanelObjectTypes.OT_PGM)
+                else if (ItemType == ParadoxAPI.OT_PGM)
                 {
                     if (ItemNo <= controlPanel.PGMs.panelPGMs.Count)
                     {
@@ -785,7 +840,7 @@ namespace ParadoxApiDemo
                         }
                     }
                 }
-                else if (ItemType == PanelObjectTypes.OT_DOOR)
+                else if (ItemType == ParadoxAPI.OT_DOOR)
                 {
                     if (ItemNo <= controlPanel.Doors.panelDoors.Count)
                     {
@@ -809,7 +864,7 @@ namespace ParadoxApiDemo
                     }
                 }
 
-                else if (ItemType == PanelObjectTypes.OT_USER)
+                else if (ItemType == ParadoxAPI.OT_USER)
                 {
 
                 }
@@ -820,8 +875,9 @@ namespace ParadoxApiDemo
             }                
         }
 
-        private void FillControlPanelStatusView(TreeView treeView, ControlPanelViewModel controlPanel)
+        private void FillControlPanelStatusView(TreeView treeView, ControlPanel controlPanel)
         {
+            
             treeView.Nodes.Clear();
             treeView.BeginUpdate();
             try
@@ -839,12 +895,12 @@ namespace ParadoxApiDemo
                     }
                 }
 
-                if (controlPanel.Zones.PanelZones.Count > 0)
+                if (controlPanel.Zones.panelZones.Count > 0)
                 {
                     TreeNode treeNodeZones = new TreeNode("Zones");
                     treeView.Nodes.Add(treeNodeZones);
 
-                    foreach (PanelZone panelZone in controlPanel.Zones.PanelZones)
+                    foreach (PanelZone panelZone in controlPanel.Zones.panelZones)
                     {
                         TreeNode treeNodeZone = new TreeNode("Zone " + Convert.ToString(panelZone.ZoneNo));
                         treeNodeZone.Name = "treeNode" + "Zone" + Convert.ToString(panelZone.ZoneNo);
@@ -887,8 +943,9 @@ namespace ParadoxApiDemo
             }            
         }
 
-        private void UpdateControlPanelStatusView(TreeView treeView, ControlPanelViewModel controlPanel)        
+        private void UpdateControlPanelStatusView(TreeView treeView, ControlPanel controlPanel)        
         {
+            
             TreeNode treeNode = null;
             String sName = "";
 
@@ -926,11 +983,11 @@ namespace ParadoxApiDemo
                     }
                 }
 
-                if (controlPanel.Zones.PanelZones.Count > 0)
+                if (controlPanel.Zones.panelZones.Count > 0)
                 {
                     treeNode = treeView.Nodes[0];
 
-                    foreach (PanelZone panelZone in controlPanel.Zones.PanelZones)
+                    foreach (PanelZone panelZone in controlPanel.Zones.panelZones)
                     {
                         sName = "Zone " + Convert.ToString(panelZone.ZoneNo);
 
@@ -1005,7 +1062,7 @@ namespace ParadoxApiDemo
             }            
         }
 
-        private void UpdatePanel(ControlPanelViewModel controlPanel)
+        private void UpdatePanel(ControlPanel controlPanel)
         {            
             if (controlPanel.InfoEx.AreaCount != controlPanel.Areas.panelAreas.Count)
             {
@@ -1020,7 +1077,7 @@ namespace ParadoxApiDemo
                 }
             }
 
-            if (controlPanel.InfoEx.ZoneCount != controlPanel.Zones.PanelZones.Count)
+            if (controlPanel.InfoEx.ZoneCount != controlPanel.Zones.panelZones.Count)
             {
                 controlPanel.Zones.Clear();
 
@@ -1030,7 +1087,7 @@ namespace ParadoxApiDemo
                     panelZone.ZoneNo = (UInt32)i;
                     panelZone.ZonePartition = 1;
                     panelZone.ZoneLabel = "Zone " + Convert.ToString(panelZone.ZoneNo);
-                    controlPanel.Zones.PanelZones.Add(panelZone);
+                    controlPanel.Zones.panelZones.Add(panelZone);
                 }
             }
 
@@ -1108,9 +1165,11 @@ namespace ParadoxApiDemo
                 }
             }
         }
-        
-        private void UpdateControlPanelStatus(ControlPanelViewModel controlPanel)
+
+
+        private void UpdateControlPanelStatus(ControlPanel controlPanel)
         {
+           
             String productDescription = controlPanel.InfoEx.Description;
 
             labelSMSMessageToSend.Text = "SMS Message to Send: " + controlPanel.smsMessageToSend;
@@ -1172,7 +1231,7 @@ namespace ParadoxApiDemo
                    
         }
 
-        private void UpdateControlPanelIPReceiver(ControlPanelViewModel controlPanel, UInt32 ItemNo)
+        private void UpdateControlPanelIPReceiver(ControlPanel controlPanel, UInt32 ItemNo)
         {
             PanelIPReporting panelIPReporting = null;
 
@@ -1214,7 +1273,7 @@ namespace ParadoxApiDemo
 
         private void RefreshControlPanelUI()
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {                
@@ -1222,15 +1281,17 @@ namespace ParadoxApiDemo
                 UpdateControlPanelStatusView(tvControlPanelStatus, controlPanel);
                 UpdateControlPanelTrouble(listViewPanelTrouble, controlPanel);
                 FillControlPanelUserView(listViewUsers, controlPanel);
+                
             }
         }
-        
+
+
         private void UpdateUI()
         {
             btnRX.Image = imageListStatus.Images[0];
             btnTX.Image = imageListStatus.Images[0];
 
-            foreach (var controlPanel in controlPanels)
+            foreach (ControlPanel controlPanel in controlPanels)
             {
                 UpdateUIOnNewPanel(controlPanel);
             }
@@ -1244,7 +1305,7 @@ namespace ParadoxApiDemo
         private void LogDelegate(UInt32 panelID, Int32 returnValue, String value)
         {
             textBoxLogs.AppendText("Panel ID: " + Convert.ToString(panelID) + "\u2028");
-            textBoxLogs.AppendText("Result: " + PanelResults.GetResultCode((UInt32)returnValue) + "\u2028");
+            textBoxLogs.AppendText("Result: " + ParadoxAPI.GetResultCode((UInt32)returnValue) + "\u2028");
             textBoxLogs.AppendText("\u2028");
             textBoxLogs.AppendText(value + "\u2028");
             textBoxLogs.AppendText("\u2028");
@@ -1252,7 +1313,7 @@ namespace ParadoxApiDemo
 
         private void RefreshNotificationDelegate(UInt32 panelID, Int32 returnValue)
         {
-            ControlPanelViewModel controlPanel = null;           
+            ControlPanel controlPanel = null;           
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -1269,7 +1330,7 @@ namespace ParadoxApiDemo
             textBoxErrors.AppendText(errorString);                                    
             textBoxErrors.AppendText("\u2028");
 
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanel(ref controlPanel))
             {
@@ -1280,13 +1341,13 @@ namespace ParadoxApiDemo
 
         private void NotifyTaskCompletedDelegate(UInt32 panelID, Int32 returnValue, UInt32 ItemNo, String ItemType, String ActionType, Object obj)
         {
-            ControlPanelViewModel controlPanel = null;                      
+            ControlPanel controlPanel = null;                      
 
             if (GetSelectedControlPanel(panelID, ref controlPanel))
             {
-                if (ActionType == OperationTypes.AT_READ)
+                if (ActionType == ParadoxAPI.AT_READ)
                 {
-                    if (ItemType == PanelObjectTypes.OT_IP_RECEIVER)
+                    if (ItemType == ParadoxAPI.OT_IP_RECEIVER)
                     {
                         PanelIPReporting pnlIPReporting = (PanelIPReporting)obj;
 
@@ -1304,77 +1365,77 @@ namespace ParadoxApiDemo
 
                         UpdateControlPanelIPReceiver(controlPanel, ItemNo);
                     }
-                    else if (ItemType == PanelObjectTypes.OT_USER)
+                    else if (ItemType == ParadoxAPI.OT_USER)
                     {
                         UpdateControlPanelUserView(listViewUsers, controlPanel, ItemNo, ItemType);
                     }
-                    else if (ItemType == PanelObjectTypes.OT_USERS)
+                    else if (ItemType == ParadoxAPI.OT_USERS)
                     {
                         foreach (PanelUser panelUser in controlPanel.Users.panelUsers)
                         {
-                            UpdateControlPanelUserView(listViewUsers, controlPanel, panelUser.UserNo, PanelObjectTypes.OT_USER);
+                            UpdateControlPanelUserView(listViewUsers, controlPanel, panelUser.UserNo, ParadoxAPI.OT_USER);
                         }
                     }
-                    else if (ItemType == PanelObjectTypes.OT_ZONES)
+                    else if (ItemType == ParadoxAPI.OT_ZONES)
                     {
-                        foreach (PanelZone panelZone in controlPanel.Zones.PanelZones)
+                        foreach (PanelZone panelZone in controlPanel.Zones.panelZones)
                         {
-                            UpdateControlPanelStatusView(tvControlPanelStatus, controlPanel, panelZone.ZoneNo, PanelObjectTypes.OT_ZONE);
+                            UpdateControlPanelStatusView(tvControlPanelStatus, controlPanel, panelZone.ZoneNo, ParadoxAPI.OT_ZONE);
                         }
                     }
-                    else if (ItemType == PanelObjectTypes.OT_DOORS)
+                    else if (ItemType == ParadoxAPI.OT_DOORS)
                     {
                         foreach (PanelDoor panelDoor in controlPanel.Doors.panelDoors)
                         {
-                            UpdateControlPanelStatusView(tvControlPanelStatus, controlPanel, panelDoor.DoorNo, PanelObjectTypes.OT_DOOR);
+                            UpdateControlPanelStatusView(tvControlPanelStatus, controlPanel, panelDoor.DoorNo, ParadoxAPI.OT_DOOR);
                         }
 
                         FillControlPanelDoorView(listViewDoors, controlPanel);
                     }
-                    else if (ItemType == PanelObjectTypes.OT_AREAS)
+                    else if (ItemType == ParadoxAPI.OT_AREAS)
                     {
                         foreach (PanelArea panelArea in controlPanel.Areas.panelAreas)
                         {
-                            UpdateControlPanelStatusView(tvControlPanelStatus, controlPanel, panelArea.AreaNo, PanelObjectTypes.OT_AREA);
+                            UpdateControlPanelStatusView(tvControlPanelStatus, controlPanel, panelArea.AreaNo, ParadoxAPI.OT_AREA);
                         }
                     }
-                    else if (ItemType == PanelObjectTypes.OT_PGMS)
+                    else if (ItemType == ParadoxAPI.OT_PGMS)
                     {
                         foreach (PanelPGM panelPGM in controlPanel.PGMs.panelPGMs)
                         {
-                            UpdateControlPanelStatusView(tvControlPanelStatus, controlPanel, panelPGM.PGMNo, PanelObjectTypes.OT_PGM);
+                            UpdateControlPanelStatusView(tvControlPanelStatus, controlPanel, panelPGM.PGMNo, ParadoxAPI.OT_PGM);
                         }
                     }
-                    else if (ItemType == PanelObjectTypes.OT_SCHEDULE)
+                    else if (ItemType == ParadoxAPI.OT_SCHEDULE)
                     {
                         FillControlPanelScheduleView(listViewSchedules, controlPanel);                                                
                     }
-                    else if (ItemType == PanelObjectTypes.OT_SCHEDULES)
+                    else if (ItemType == ParadoxAPI.OT_SCHEDULES)
                     {
                         FillControlPanelScheduleView(listViewSchedules, controlPanel);
                     }
-                    else if (ItemType == PanelObjectTypes.OT_HOLIDAYS)
+                    else if (ItemType == ParadoxAPI.OT_HOLIDAYS)
                     {
                         UpdateDoorHolidays(controlPanel);                                                
                     }
-                    else if (ItemType == PanelObjectTypes.OT_ACCESS_LEVEL)
+                    else if (ItemType == ParadoxAPI.OT_ACCESS_LEVEL)
                     {
                         UpdateDoorAccessLevel(controlPanel, ItemNo, ItemType);                                                 
                     }
-                    else if (ItemType == PanelObjectTypes.OT_ACCESS_LEVELS)
+                    else if (ItemType == ParadoxAPI.OT_ACCESS_LEVELS)
                     {
                         foreach (PanelAccessLevel panelAccessLevel in controlPanel.PanelAccessLevels.panelAccessLevels)
                         {
-                            UpdateDoorAccessLevel(controlPanel, panelAccessLevel.AccessLevelNo, PanelObjectTypes.OT_ACCESS_LEVEL);
+                            UpdateDoorAccessLevel(controlPanel, panelAccessLevel.AccessLevelNo, ParadoxAPI.OT_ACCESS_LEVEL);
                         }
                     }                        
-                   else if (ItemType == PanelObjectTypes.OT_PANEL_INFO_EX) 
+                   else if (ItemType == ParadoxAPI.OT_PANEL_INFO_EX) 
                     {
                         if (controlPanel.Settings.PanelType == "")
                         {
-                            var panelInfoEx = (PanelInfoEx)obj;
+                            PanelInfoEx panelInfoEx = (PanelInfoEx)obj;
 
-                            controlPanel.InfoEx = panelInfoEx.FullCopy();
+                            controlPanel.InfoEx = panelInfoEx.fullCopy();
 
                             controlPanel.Settings.PanelType = controlPanel.InfoEx.Description;
 
@@ -1393,24 +1454,24 @@ namespace ParadoxApiDemo
                         UpdateControlPanelStatusView(tvControlPanelStatus, controlPanel, ItemNo, ItemType);
                     }                                        
                 }
-                else if (ActionType == OperationTypes.AT_WRITE)
+                else if (ActionType == ParadoxAPI.AT_WRITE)
                 {
                     
                 }
 
-                PanelStatusInfoLabel.Text = "Last Msg: " + ActionType + " " + ItemType + " " + Convert.ToString(ItemNo) + " Result: " + PanelResults.GetResultCode((UInt32)returnValue);
+                PanelStatusInfoLabel.Text = "Last Msg: " + ActionType + " " + ItemType + " " + Convert.ToString(ItemNo) + " Result: " + ParadoxAPI.GetResultCode((UInt32)returnValue);
             }
             else if (GetControlPanel(panelID, ref controlPanel))
             {
-                StatusLabelPanelInfo.Text = "Last Msg: " + ActionType + " " + ItemType + " " + Convert.ToString(ItemNo) + " Result: " + PanelResults.GetResultCode((UInt32)returnValue);
+                StatusLabelPanelInfo.Text = "Last Msg: " + ActionType + " " + ItemType + " " + Convert.ToString(ItemNo) + " Result: " + ParadoxAPI.GetResultCode((UInt32)returnValue);
 
-                if (ItemType == PanelObjectTypes.OT_PANEL_INFO_EX)
+                if (ItemType == ParadoxAPI.OT_PANEL_INFO_EX)
                 {
                     if (controlPanel.Settings.PanelType == "")
                     {
-                        var panelInfoEx = (PanelInfoEx)obj;
+                        PanelInfoEx panelInfoEx = (PanelInfoEx)obj;
 
-                        controlPanel.InfoEx = panelInfoEx.FullCopy();
+                        controlPanel.InfoEx = panelInfoEx.fullCopy();
 
                         controlPanel.Settings.PanelType = controlPanel.InfoEx.Description;
 
@@ -1429,7 +1490,7 @@ namespace ParadoxApiDemo
 
         private void monitoringStatusChangesDelegate(UInt32 panelID, PanelMonitoring panelMonitoring)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetControlPanel(panelID, ref controlPanel))
             {
@@ -1444,7 +1505,7 @@ namespace ParadoxApiDemo
 
         private void receiveBufferedEventDelegate(UInt32 panelID, PanelEvent panelEvent)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetControlPanel(panelID, ref controlPanel))
             {
@@ -1457,7 +1518,7 @@ namespace ParadoxApiDemo
             }
         }
 
-        private void FillControlPanelUserView(ListView listView, ControlPanelViewModel controlPanel)
+        private void FillControlPanelUserView(ListView listView, ControlPanel controlPanel)
         {
             listView.BeginUpdate();
             try
@@ -1539,9 +1600,9 @@ namespace ParadoxApiDemo
             }
         }
 
-        private void UpdateControlPanelUserView(ListView listView, ControlPanelViewModel controlPanel, UInt32 ItemNo, String ItemType)
+        private void UpdateControlPanelUserView(ListView listView, ControlPanel controlPanel, UInt32 ItemNo, String ItemType)
         {
-            if ((ItemNo == 0) || (ItemType != PanelObjectTypes.OT_USER))
+            if ((ItemNo == 0) || (ItemType != ParadoxAPI.OT_USER))
                 return;
 
             if (listView.Items.Count != controlPanel.Users.panelUsers.Count)
@@ -1599,7 +1660,7 @@ namespace ParadoxApiDemo
             }
         } 
         
-        private void UpdateControlPanelUserView(ListView listView, ControlPanelViewModel controlPanel)
+        private void UpdateControlPanelUserView(ListView listView, ControlPanel controlPanel)
         {
             if (listView.Items.Count != controlPanel.Users.panelUsers.Count)
             {
@@ -1652,7 +1713,7 @@ namespace ParadoxApiDemo
             }            
         }        
 
-        private void UpdateControlPanelTrouble(ListView listview, ControlPanelViewModel controlPanel)
+        private void UpdateControlPanelTrouble(ListView listview, ControlPanel controlPanel)
         {
             listview.Items.Clear();
             listview.BeginUpdate();
@@ -1731,16 +1792,19 @@ namespace ParadoxApiDemo
                 ListViewItem item = new ListViewItem(arr);                              
                 listview.Items.Insert(0, item);
             }
+
             finally
             {
                 listview.EndUpdate();
             }
         }
 
+
         private void receiveReportingEventDelegate(PanelReportingEvent panelReportingEvent)
         {
             UpdateListViewIPReportingEvents(listViewIPReportingEvents, panelReportingEvent);
         }
+
 
         private void progressChangedDelegate(UInt32 panelID, UInt32 task, String description, UInt32 percent)
         {
@@ -1757,7 +1821,7 @@ namespace ParadoxApiDemo
 
             //Update Control Panel Status and Selected Control Panel 
 
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetControlPanel(panelID, ref controlPanel))
             {
@@ -1799,7 +1863,7 @@ namespace ParadoxApiDemo
 
             //Update Control Panel Status and Selected Control Panel 
 
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetControlPanel(panelID, ref controlPanel))
             {
@@ -1817,8 +1881,8 @@ namespace ParadoxApiDemo
         private void connectionStatusChangedDelegate(UInt32 panelID, String status)
         {
             //Update Control Panel Status and Selected Control Panel 
-
-            ControlPanelViewModel controlPanel = null;
+            
+            ControlPanel controlPanel = null;
 
             if (GetControlPanel(panelID, ref controlPanel))
             {
@@ -1854,11 +1918,12 @@ namespace ParadoxApiDemo
                 }
             }                 
         }
-        
+
+
         //Callback call from ThreadPool.QueueUserWorkItem
         private void GetSystemTroublesFromControlPanel(Object stateInfo)
         {
-            var controlPanel = (ControlPanelViewModel)stateInfo;
+            ControlPanel controlPanel = (ControlPanel)stateInfo;
 
             PanelTroubleList panelTroubleList = new PanelTroubleList();
 
@@ -1870,8 +1935,8 @@ namespace ParadoxApiDemo
         private void heartbeatDelegate(UInt32 panelID)
         {
             //To keep the connection active, every x seconds (normally 10 seconds) the ParadoxAPI send a command to the control panel when the communication is idlle
-
-            ControlPanelViewModel controlPanel = null;
+            
+            ControlPanel controlPanel = null;
 
             if (GetControlPanel(panelID, ref controlPanel))
             {
@@ -1891,10 +1956,11 @@ namespace ParadoxApiDemo
             btnRX.Image = imageListStatus.Images[0];
             timerStatusRx.Enabled = false;
         }
-        
+
+
         private void rxStatusChangedDelegate(UInt32 panelID, Int32 byteCount)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanel(panelID, ref controlPanel))
             {
@@ -1916,7 +1982,7 @@ namespace ParadoxApiDemo
 
         private void txStatusChangedDelegate(UInt32 panelID, Int32 byteCount)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanel(panelID, ref controlPanel))
             {
@@ -1937,7 +2003,7 @@ namespace ParadoxApiDemo
 
         private void smsRequestDelegate(UInt32 panelID, String sms)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetControlPanel(panelID, ref controlPanel))
             {
@@ -1970,6 +2036,7 @@ namespace ParadoxApiDemo
             labelIPDOXStatus.Text = "Status: " + "Port: " + Convert.ToString(port) + " - " + description;
         }
         
+
         private void UpdateListViewIPReportingAccounts(ListView listview, PanelReportingAccount panelReportingAccount)
         {
             if (panelReportingAccount.MACAddress.Trim() == "")
@@ -2094,7 +2161,7 @@ namespace ParadoxApiDemo
 
         }
 
-        private void FillBufferdEventListView(ListView listview, ControlPanelViewModel controlPanel)
+        private void FillBufferdEventListView(ListView listview, ControlPanel controlPanel)
         {
             listview.Items.Clear();
 
@@ -2164,6 +2231,7 @@ namespace ParadoxApiDemo
 
         private void UpdateListViewIPDeviceOnNetwork(ModuleInfoList moduleInfoList)
         {
+
             listViewIPDeviceOnNetwork.Clear();
             listViewIPDeviceOnNetwork.BeginUpdate();
             try
@@ -2212,6 +2280,7 @@ namespace ParadoxApiDemo
 
         private void UpdateListViewIPDeviceOnNetwork(ModuleInfo moduleInfo)
         {
+            
             listViewIPDeviceOnNetwork.BeginUpdate();
             try
             {
@@ -2254,7 +2323,7 @@ namespace ParadoxApiDemo
 
         }
 
-        private void FillControlPanel(TreeView treeView, ListView listView, ControlPanelViewModel controlPanel)
+        private void FillControlPanel(TreeView treeView, ListView listView, ControlPanel controlPanel)
         {
             FillControlPanelStatusView(treeView, controlPanel);
             FillControlPanelUserView(listView, controlPanel);
@@ -2273,7 +2342,7 @@ namespace ParadoxApiDemo
 
         private void LoadPanelBufferedEventsButton_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -2283,7 +2352,7 @@ namespace ParadoxApiDemo
                 
         private void retrievePanelInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -2296,13 +2365,13 @@ namespace ParadoxApiDemo
                
         private void MenuItemArmArea1_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
                 PanelControl panelControl = new PanelControl();
 
-                panelControl.Command = AreaActions.C_CONTROL_AREA_ARM;
+                panelControl.Command = ParadoxAPI.C_CONTROL_AREA_ARM;
                 panelControl.Items = "1";
 
                 Int32 returnValue = ParadoxAPI.ControlArea(controlPanel.panelID, panelControl);
@@ -2311,13 +2380,13 @@ namespace ParadoxApiDemo
 
         private void MenuItemDisarmArea1_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
                 PanelControl panelControl = new PanelControl();
 
-                panelControl.Command = AreaActions.C_CONTROL_AREA_DISARM;
+                panelControl.Command = ParadoxAPI.C_CONTROL_AREA_DISARM;
                 panelControl.Items = "1";
 
                 Int32 returnValue = ParadoxAPI.ControlArea(controlPanel.panelID, panelControl);
@@ -2326,13 +2395,13 @@ namespace ParadoxApiDemo
 
         private void MenuItemArmArea2_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
                 PanelControl panelControl = new PanelControl();
 
-                panelControl.Command = AreaActions.C_CONTROL_AREA_ARM;
+                panelControl.Command = ParadoxAPI.C_CONTROL_AREA_ARM;
                 panelControl.Items = "2";
 
                 Int32 returnValue = ParadoxAPI.ControlArea(controlPanel.panelID, panelControl);
@@ -2341,13 +2410,13 @@ namespace ParadoxApiDemo
 
         private void MenuItemDisarmArea2_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
                 PanelControl panelControl = new PanelControl();
 
-                panelControl.Command = AreaActions.C_CONTROL_AREA_DISARM;
+                panelControl.Command = ParadoxAPI.C_CONTROL_AREA_DISARM;
                 panelControl.Items = "2";
 
                 Int32 returnValue = ParadoxAPI.ControlArea(controlPanel.panelID, panelControl);
@@ -2356,7 +2425,7 @@ namespace ParadoxApiDemo
 
         private void areaStatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -2368,13 +2437,13 @@ namespace ParadoxApiDemo
 
         private void MenuItemBypassZones_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
                 PanelControl panelControl = new PanelControl();
 
-                panelControl.Command = ZoneActions.C_CONTROL_ZONE_BYPASS;
+                panelControl.Command = ParadoxAPI.C_CONTROL_ZONE_BYPASS;
                 panelControl.Items = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32";
 
                 Int32 returnValue = ParadoxAPI.ControlZone(controlPanel.panelID, panelControl);
@@ -2383,13 +2452,13 @@ namespace ParadoxApiDemo
 
         private void MenuItemUnbypassZones_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
                 PanelControl panelControl = new PanelControl();
 
-                panelControl.Command = ZoneActions.C_CONTROL_ZONE_UNBYPASS;
+                panelControl.Command = ParadoxAPI.C_CONTROL_ZONE_UNBYPASS;
                 panelControl.Items = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32";
 
                 Int32 returnValue = ParadoxAPI.ControlZone(controlPanel.panelID, panelControl);
@@ -2398,7 +2467,7 @@ namespace ParadoxApiDemo
 
         private void zoneStatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -2410,7 +2479,7 @@ namespace ParadoxApiDemo
 
         private void MenuItemPGMsOn_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+             ControlPanel controlPanel = null;
 
              if (GetSelectedControlPanelConnected(ref controlPanel))
              {
@@ -2418,7 +2487,7 @@ namespace ParadoxApiDemo
 
                  //To Do initialize values
 
-                 panelControl.Command = PGMActions.C_CONTROL_PGM_ON;
+                 panelControl.Command = ParadoxAPI.C_CONTROL_PGM_ON;
                  panelControl.Items = "1,2";
 
                  Int32 returnValue = ParadoxAPI.ControlPGM(controlPanel.panelID, panelControl);
@@ -2427,7 +2496,7 @@ namespace ParadoxApiDemo
 
         private void MenuItemPGMsOff_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -2435,7 +2504,7 @@ namespace ParadoxApiDemo
 
                 //To Do initialize values
 
-                panelControl.Command = PGMActions.C_CONTROL_PGM_OFF;
+                panelControl.Command = ParadoxAPI.C_CONTROL_PGM_OFF;
                 panelControl.Items = "1,2";
 
                 Int32 returnValue = ParadoxAPI.ControlPGM(controlPanel.panelID, panelControl);
@@ -2444,7 +2513,7 @@ namespace ParadoxApiDemo
 
         private void pGMStatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -2456,13 +2525,13 @@ namespace ParadoxApiDemo
 
         private void MenuItemUnlockDoors_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
                 PanelControl panelControl = new PanelControl();
 
-                panelControl.Command = DoorActions.C_CONTROL_DOOR_UNLOCK;
+                panelControl.Command = ParadoxAPI.C_CONTROL_DOOR_UNLOCK;
                 panelControl.Items = "1,2";
 
                 Int32 returnValue = ParadoxAPI.ControlDoor(controlPanel.panelID, panelControl);
@@ -2471,13 +2540,13 @@ namespace ParadoxApiDemo
 
         private void MenuItemLockDoors_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
                 PanelControl panelControl = new PanelControl();
 
-                panelControl.Command = DoorActions.C_CONTROL_DOOR_LOCK;
+                panelControl.Command = ParadoxAPI.C_CONTROL_DOOR_LOCK;
                 panelControl.Items = "1,2";
 
                 Int32 returnValue = ParadoxAPI.ControlDoor(controlPanel.panelID, panelControl);
@@ -2486,7 +2555,7 @@ namespace ParadoxApiDemo
 
         private void doorStatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -2498,7 +2567,7 @@ namespace ParadoxApiDemo
 
         private void readTimeStampToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -2511,7 +2580,7 @@ namespace ParadoxApiDemo
         //Callback call from ThreadPool.QueueUserWorkItem
         private void ReadDateTimeFromControlPanel(Object stateInfo)
         {
-            ControlPanelViewModel controlPanel = (ControlPanelViewModel)stateInfo;
+            ControlPanel controlPanel = (ControlPanel)stateInfo;
 
             System.DateTime dateTime = new System.DateTime();
 
@@ -2519,15 +2588,16 @@ namespace ParadoxApiDemo
 
             Int32 returnValue = ParadoxAPI.ReadDateTime(controlPanel.panelID, dateTime);
 
-            if (PanelResults.Succeeded((UInt32)returnValue))
+            if (ParadoxAPI.Succeeded((UInt32)returnValue))
             {
                 controlPanel.dateTime = dateTime;                
             }
         }
-        
+
+
         private void readDateTimeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -2537,7 +2607,7 @@ namespace ParadoxApiDemo
 
                 Int32 returnValue = ParadoxAPI.ReadDateTime(controlPanel.panelID, dateTime);
 
-                if (PanelResults.Succeeded((UInt32)returnValue))
+                if (ParadoxAPI.Succeeded((UInt32)returnValue))
                 {
                     controlPanel.dateTime = dateTime;
 
@@ -2548,7 +2618,7 @@ namespace ParadoxApiDemo
                
         private void writeDateTimeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -2563,7 +2633,7 @@ namespace ParadoxApiDemo
         //Callback call from ThreadPool.QueueUserWorkItem
         private void ReadAllAreasFromControlPanel(Object stateInfo)
         {
-            ControlPanelViewModel controlPanel = (ControlPanelViewModel)stateInfo;
+            ControlPanel controlPanel = (ControlPanel)stateInfo;
 
             Int32 returnValue = ParadoxAPI.ReadAllAreas(controlPanel.panelID, controlPanel.Areas);
 
@@ -2575,7 +2645,7 @@ namespace ParadoxApiDemo
 
         private void readAllAreasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -2586,7 +2656,7 @@ namespace ParadoxApiDemo
         //Callback call from ThreadPool.QueueUserWorkItem
         private void ReadAllZonesFromControlPanel(Object stateInfo)
         {
-            ControlPanelViewModel controlPanel = (ControlPanelViewModel)stateInfo;
+            ControlPanel controlPanel = (ControlPanel)stateInfo;
 
             Int32 returnValue = ParadoxAPI.ReadAllZones(controlPanel.panelID, controlPanel.Zones);
 
@@ -2598,7 +2668,7 @@ namespace ParadoxApiDemo
 
         private void readAllZonesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -2609,7 +2679,7 @@ namespace ParadoxApiDemo
         //Callback call from ThreadPool.QueueUserWorkItem
         private void ReadAllPGMsFromControlPanel(Object stateInfo)
         {
-            ControlPanelViewModel controlPanel = (ControlPanelViewModel)stateInfo;
+            ControlPanel controlPanel = (ControlPanel)stateInfo;
 
             Int32 returnValue = ParadoxAPI.ReadAllPGMs(controlPanel.panelID, controlPanel.PGMs);
 
@@ -2621,7 +2691,7 @@ namespace ParadoxApiDemo
 
         private void readAllPGMsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -2632,7 +2702,7 @@ namespace ParadoxApiDemo
         //Callback call from ThreadPool.QueueUserWorkItem
         private void ReadAllDoorsFromControlPanel(Object stateInfo)
         {
-            ControlPanelViewModel controlPanel = (ControlPanelViewModel)stateInfo;
+            ControlPanel controlPanel = (ControlPanel)stateInfo;
 
             Int32 returnValue = ParadoxAPI.ReadAllDoors(controlPanel.panelID, controlPanel.Doors);
 
@@ -2644,7 +2714,7 @@ namespace ParadoxApiDemo
 
         private void readAllDoorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -2655,7 +2725,7 @@ namespace ParadoxApiDemo
         //Callback call from ThreadPool.QueueUserWorkItem
         private void ReadAllUsersFromControlPanel(Object stateInfo)
         {
-            ControlPanelViewModel controlPanel = (ControlPanelViewModel)stateInfo;
+            ControlPanel controlPanel = (ControlPanel)stateInfo;
 
             ParadoxAPI.ReadAllUsers(controlPanel.panelID, controlPanel.Users);
             
@@ -2667,7 +2737,7 @@ namespace ParadoxApiDemo
 
         private void readAllUsersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -2678,7 +2748,7 @@ namespace ParadoxApiDemo
         //Callback call from ThreadPool.QueueUserWorkItem
         private void WriteMultipleUsersToControlPanel(Object stateInfo)
         {
-            ControlPanelViewModel controlPanel = (ControlPanelViewModel)stateInfo;
+            ControlPanel controlPanel = (ControlPanel)stateInfo;
 
             PanelUserList tmpPanelUsers = new PanelUserList();
 
@@ -2706,7 +2776,7 @@ namespace ParadoxApiDemo
 
         private void menuItemWriteMutipleUsers_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -2716,7 +2786,7 @@ namespace ParadoxApiDemo
 
         private void MenuItemReadUser5_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -2724,7 +2794,7 @@ namespace ParadoxApiDemo
                                
                 Int32 returnValue = ParadoxAPI.ReadUser(controlPanel.panelID, 5, panelUser);
 
-                if (PanelResults.Succeeded((UInt32)returnValue))
+                if (ParadoxAPI.Succeeded((UInt32)returnValue))
                 {
                     PanelUser returnPanelUser = controlPanel.Users[5];
                     returnPanelUser.UserNo = panelUser.UserNo;
@@ -2739,7 +2809,7 @@ namespace ParadoxApiDemo
 
         private void MenuItemWriteUser5_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -2755,15 +2825,17 @@ namespace ParadoxApiDemo
 
                 Int32 returnValue = ParadoxAPI.WriteUser(controlPanel.panelID, 5, panelUser);
 
-                if (PanelResults.Succeeded((UInt32)returnValue))
+                if (ParadoxAPI.Succeeded((UInt32)returnValue))
                 {
+
+
                 }
             }
         }
         
         private void readMonitoringStatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -2775,7 +2847,7 @@ namespace ParadoxApiDemo
 
         private void getSystemTroublesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -2791,7 +2863,7 @@ namespace ParadoxApiDemo
 
         private void writeIPReportingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -2805,7 +2877,7 @@ namespace ParadoxApiDemo
 
         private void readIPReportingToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -2831,17 +2903,20 @@ namespace ParadoxApiDemo
 
             ThreadPool.QueueUserWorkItem(new WaitCallback(DiscoverModulesOnLanNetwork), moduleInfoList);             
         }
-        
+
+
         private void tsBtnAddControlPanel_Click_1(object sender, EventArgs e)
         {
-            var controlPanel = new ControlPanelViewModel();
-            var formPanelSettings = new FormPanelSettings(controlPanel.Settings);
+            ControlPanel controlPanel = new ControlPanel();
+
+            FormPanelSettings formPanelSettings = new FormPanelSettings(controlPanel.Settings);
 
             if (formPanelSettings.ShowDialog(this) == DialogResult.OK)
             {
                 UInt32 no = 1;
 
-                ControlPanelViewModel ctrlPanel = null;
+                ControlPanel ctrlPanel = null;
+
                 TreeNode treeNode = null;
 
                 for (int i = 0; i < (tvContolPanels as TreeView).GetNodeCount(false); i++)                  
@@ -2865,7 +2940,7 @@ namespace ParadoxApiDemo
                     controlPanel.panelID = (UInt32)controlPanels.Count() + 1;
                 }
 
-                controlPanel.Settings = formPanelSettings.mSettings.FullCopy();
+                controlPanel.Settings = formPanelSettings.mSettings.fullCopy();
 
                 bool inserted = false;
 
@@ -2894,17 +2969,17 @@ namespace ParadoxApiDemo
 
         private void tsBtnModifySettings_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanel(ref controlPanel))
             {
                 FormPanelSettings formPanelSettings = new FormPanelSettings(controlPanel.Settings);
 
-                formPanelSettings.mSettings = controlPanel.Settings.FullCopy();
+                formPanelSettings.mSettings = controlPanel.Settings.fullCopy();
 
                 if (formPanelSettings.ShowDialog(this) == DialogResult.OK)
                 {                    
-                    controlPanel.Settings = formPanelSettings.mSettings.FullCopy();
+                    controlPanel.Settings = formPanelSettings.mSettings.fullCopy();
 
                     UpdateUIOnPanelChanged(controlPanel);
 
@@ -2915,17 +2990,20 @@ namespace ParadoxApiDemo
 
         private void tsBtnDeletePanel_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
                 MessageBox.Show("Control Panel is Connected!");
             }
+
             else if (GetSelectedControlPanel(ref controlPanel))
             {
                 string message = "Delete Control Panel " + Convert.ToString(controlPanel.panelID) + " ?";
                 string caption = "Deleting Control Panel";
-                var result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                var result = MessageBox.Show(message, caption,
+                                             MessageBoxButtons.YesNo,
+                                             MessageBoxIcon.Question);
 
                 // If the no button was pressed ... 
                 if (result == DialogResult.Yes)
@@ -2935,11 +3013,11 @@ namespace ParadoxApiDemo
                     DeletePanel(controlPanel);
                 }
             }
-        }
-
+        }               
+                
         private void tsBtnConnect_Click(object sender, EventArgs e)
-        {
-            ControlPanelViewModel controlPanel = null;
+        {            
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -2966,8 +3044,7 @@ namespace ParadoxApiDemo
                     case 0:
                         if (treeNode.Index < controlPanels.Count())
                         {
-                            var controlPanel = controlPanels.ElementAt(treeNode.Index);
-
+                            ControlPanel controlPanel = controlPanels.ElementAt(treeNode.Index);
                             FillBufferdEventListView(listViewPanelBufferedEvent, controlPanel);
                             FillControlPanel(tvControlPanelStatus, listViewUsers, controlPanel);
                             UpdateControlPanelStatus(controlPanel);
@@ -2976,8 +3053,7 @@ namespace ParadoxApiDemo
                             FillControlPanelDoorView(listViewDoors, controlPanel);
                             FillControlPanelScheduleView(listViewSchedules, controlPanel);
                             UpdateDoorHolidays(controlPanel);
-                            UpdateDoorAccessLevels(controlPanel);
-                             
+                            UpdateDoorAccessLevels(controlPanel);  
                             if (controlPanel.SupportAccessControl())
                             {
                                 tabPageAccessControl.Visible = true;
@@ -2995,8 +3071,7 @@ namespace ParadoxApiDemo
 
                         if (treeNodeParent.Index < controlPanels.Count())
                         {
-                            var controlPanel = controlPanels.ElementAt(treeNodeParent.Index);
-
+                            ControlPanel controlPanel = controlPanels.ElementAt(treeNodeParent.Index);
                             FillBufferdEventListView(listViewPanelBufferedEvent, controlPanel);
                             FillControlPanel(tvControlPanelStatus, listViewUsers, controlPanel);
                             UpdateControlPanelStatus(controlPanel);
@@ -3032,6 +3107,7 @@ namespace ParadoxApiDemo
             textBoxIPDOXWanAddress.Text = ipDOXSettings.WANAddress;
             textBoxIPDOXWanPort.Text = Convert.ToString(ipDOXSettings.WANPort);
             textBoxIPDOXIPPassword.Text = ipDOXSettings.IPPassword;
+           
         }
 
         private void btnStartIPDOX_Click(object sender, EventArgs e)
@@ -3040,6 +3116,7 @@ namespace ParadoxApiDemo
             ipDOXSettings.WANPort = Convert.ToInt32(textBoxIPDOXWanPort.Text);
             ipDOXSettings.IPPassword = textBoxIPDOXIPPassword.Text;
             ipDOXSettings.WANEnabled = true;
+
 
             SaveIPDOXSettingsToFile("Data\\IPDOXSettings.xml", true);
 
@@ -3056,26 +3133,29 @@ namespace ParadoxApiDemo
             textBoxErrors.Clear();
         }
 
+
         private void ConnectToAllControlPanels()
         {
-            foreach (var controlPanel in controlPanels)
+            foreach(ControlPanel controlPanel in controlPanels)
             {
                 if (controlPanel.ConnectionStatus == "DISCONNECTED")
                 {
                     ThreadPool.QueueUserWorkItem(new WaitCallback(ConnectToControlPanel), controlPanel); 
                 }
             }
+
         }
 
         private void DisconnectFromAllControlPanels()
         {
-            foreach (var controlPanel in controlPanels)
+            foreach (ControlPanel controlPanel in controlPanels)
             {
                 if (controlPanel.ConnectionStatus != "DISCONNECTED")
                 {
                     ThreadPool.QueueUserWorkItem(new WaitCallback(DisconnectFromControlPanel), controlPanel);
                 }
             }
+
         }
 
         private void menuConnectToAllControlPanels_Click(object sender, EventArgs e)
@@ -3090,7 +3170,7 @@ namespace ParadoxApiDemo
 
         private void btnStopIPDOX_Click(object sender, EventArgs e)
         {            
-            if (PanelResults.Succeeded((UInt32)ParadoxAPI.StopIPDOX()))
+            if (ParadoxAPI.Succeeded((UInt32)ParadoxAPI.StopIPDOX()))
             {
                 labelIPDOXStatus.Text = "Status:";
             }
@@ -3098,15 +3178,16 @@ namespace ParadoxApiDemo
 
         private void btnDeleteSelectedIPDOXAccount_Click(object sender, EventArgs e)
         {
+            String macAddress = ""; 
             foreach (ListViewItem listViewItem in listViewIPReportingAccounts.SelectedItems)
             {
-                var macAddress = listViewItem.SubItems[0].Text;
+                macAddress = listViewItem.SubItems[0].Text;
 
-                if (PanelResults.Succeeded((UInt32)ParadoxAPI.DeleteIPDOXAccount(macAddress)))
+                if (ParadoxAPI.Succeeded((UInt32)ParadoxAPI.deleteIPDOXAccount(macAddress)))
                 {
                     listViewItem.Remove();
                 }
-            }
+            }            
         }
 
         private void btnGetLocalIPAddress_Click(object sender, EventArgs e)
@@ -3140,11 +3221,11 @@ namespace ParadoxApiDemo
         //Callback call from ThreadPool.QueueUserWorkItem
         private void ReadIPReportingProgrammingRcv1ToControlPanel(Object stateInfo)
         {
-            var controlPanel = (ControlPanelViewModel)stateInfo;
+            ControlPanel controlPanel = (ControlPanel)stateInfo;
 
             PanelIPReporting pnlIPReporting = new PanelIPReporting();
 
-            if (PanelResults.Succeeded((UInt32)ParadoxAPI.ReadIPReporting(controlPanel.panelID, 1, pnlIPReporting)))
+            if (ParadoxAPI.Succeeded((UInt32)ParadoxAPI.ReadIPReporting(controlPanel.panelID, 1, pnlIPReporting)))
             {
                 //PanelIPReporting panelIPReporting = controlPanel.PanelIPReportingReceiver[1];
 
@@ -3158,11 +3239,11 @@ namespace ParadoxApiDemo
                 //panelIPReporting.Area1AccountNo = pnlIPReporting.Area1AccountNo;
                 //panelIPReporting.Area2AccountNo = pnlIPReporting.Area2AccountNo;                                   
             }
-        }
+        }   
 
         private void buttonReadReceiverProg1_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -3173,11 +3254,11 @@ namespace ParadoxApiDemo
         //Callback call from ThreadPool.QueueUserWorkItem
         private void ReadIPReportingProgrammingRcv2ToControlPanel(Object stateInfo)
         {
-            var controlPanel = (ControlPanelViewModel)stateInfo;
+            ControlPanel controlPanel = (ControlPanel)stateInfo;
 
             PanelIPReporting pnlIPReporting = new PanelIPReporting();
 
-            if (PanelResults.Succeeded((UInt32)ParadoxAPI.ReadIPReporting(controlPanel.panelID, 2, pnlIPReporting)))
+            if (ParadoxAPI.Succeeded((UInt32)ParadoxAPI.ReadIPReporting(controlPanel.panelID, 2, pnlIPReporting)))
             {
                 //PanelIPReporting panelIPReporting = controlPanel.PanelIPReportingReceiver[2];
 
@@ -3195,7 +3276,7 @@ namespace ParadoxApiDemo
 
         private void buttonReadReceiverProg2_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -3206,11 +3287,11 @@ namespace ParadoxApiDemo
         //Callback call from ThreadPool.QueueUserWorkItem
         private void UpdateIPReportingRcvStatusToControlPanel(Object stateInfo)
         {
-            var controlPanel = (ControlPanelViewModel)stateInfo;
+            ControlPanel controlPanel = (ControlPanel)stateInfo;
 
             PanelIPReportingStatusList panelIPReportingStatusList = new PanelIPReportingStatusList();
             
-            if (PanelResults.Succeeded((UInt32)ParadoxAPI.IPReportingStatus(controlPanel.panelID, panelIPReportingStatusList)))
+            if (ParadoxAPI.Succeeded((UInt32)ParadoxAPI.IPReportingStatus(controlPanel.panelID, panelIPReportingStatusList)))
             {               
                 controlPanel.PanelIPReportingReceiver[1].Status = panelIPReportingStatusList[0].RegistrationStatus + " " + panelIPReportingStatusList[0].RegistrationError;                      
                 controlPanel.PanelIPReportingReceiver[2].Status = panelIPReportingStatusList[1].RegistrationStatus + " " + panelIPReportingStatusList[1].RegistrationError;                
@@ -3219,7 +3300,7 @@ namespace ParadoxApiDemo
 
         private void buttonUpdateReceiverStatus_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -3230,7 +3311,7 @@ namespace ParadoxApiDemo
         //Callback call from ThreadPool.QueueUserWorkItem
         private void WriteIPReportingProgrammingRcv1ToControlPanel(Object stateInfo)
         {
-            var controlPanel = (ControlPanelViewModel)stateInfo;
+            ControlPanel controlPanel = (ControlPanel)stateInfo;
 
             PanelIPReporting panelIPReporting = controlPanel.PanelIPReportingReceiver[1]; 
 
@@ -3238,11 +3319,11 @@ namespace ParadoxApiDemo
             {
                 Int32 returnValue = ParadoxAPI.WriteIPReporting(controlPanel.panelID, 1, panelIPReporting);            
             }            
-        }
+        }           
 
         private void buttonWriteReceiverProg1_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -3269,7 +3350,7 @@ namespace ParadoxApiDemo
         //Callback call from ThreadPool.QueueUserWorkItem
         private void WriteIPReportingProgrammingRcv2ToControlPanel(Object stateInfo)
         {
-            var controlPanel = (ControlPanelViewModel)stateInfo;
+            ControlPanel controlPanel = (ControlPanel)stateInfo;
 
             PanelIPReporting panelIPReporting = controlPanel.PanelIPReportingReceiver[2];
 
@@ -3281,7 +3362,7 @@ namespace ParadoxApiDemo
 
         private void buttonWriteReceiverProg2_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -3307,32 +3388,38 @@ namespace ParadoxApiDemo
 
         private void buttonRegisterReceiverProg1_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
+
                 PanelControl panelControl = new PanelControl();
                 panelControl.Command = "Register";
                 panelControl.Items = "1";
-                
-                if (PanelResults.Succeeded((UInt32)ParadoxAPI.RegisterPanel(controlPanel.panelID, panelControl)))
+
+
+                if (ParadoxAPI.Succeeded((UInt32)ParadoxAPI.RegisterPanel(controlPanel.panelID, panelControl)))
                 {
+
                 }
             }
         }
 
         private void buttonRegisterReceiverProg2_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
+
                 PanelControl panelControl = new PanelControl();
                 panelControl.Command = "Register";
                 panelControl.Items = "2";
-                
-                if (PanelResults.Succeeded((UInt32)ParadoxAPI.RegisterPanel(controlPanel.panelID, panelControl)))
+
+
+                if (ParadoxAPI.Succeeded((UInt32)ParadoxAPI.RegisterPanel(controlPanel.panelID, panelControl)))
                 {
+
                 }
             }
         }
@@ -3359,7 +3446,7 @@ namespace ParadoxApiDemo
 
         private void readAllDoorsMenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -3369,7 +3456,7 @@ namespace ParadoxApiDemo
 
         private void readDoor1MenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -3377,7 +3464,7 @@ namespace ParadoxApiDemo
 
                 Int32 returnValue = ParadoxAPI.ReadDoor(controlPanel.panelID, 1, panelDoor);
 
-                if (PanelResults.Succeeded((UInt32)returnValue))
+                if (ParadoxAPI.Succeeded((UInt32)returnValue))
                 {
                     PanelDoor returnPanelDoor = controlPanel.Doors[1];
                     returnPanelDoor.DoorLabel =                                  panelDoor.DoorLabel;                        
@@ -3421,7 +3508,7 @@ namespace ParadoxApiDemo
 
         private void WriteDoor1MenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -3469,8 +3556,10 @@ namespace ParadoxApiDemo
 
                 Int32 returnValue = ParadoxAPI.WriteDoor(controlPanel.panelID, 1, panelDoor);
 
-                if (PanelResults.Succeeded((UInt32)returnValue))
+                if (ParadoxAPI.Succeeded((UInt32)returnValue))
                 {
+
+
                 }
             }
         }
@@ -3526,7 +3615,7 @@ namespace ParadoxApiDemo
             }                
         }
 
-        private void UpdateDoorAccessLevels(ControlPanelViewModel controlPanel)
+        private void UpdateDoorAccessLevels(ControlPanel controlPanel)
         {
             DataGridViewRow row;
             DataGridViewCheckBoxCell chk;
@@ -3544,20 +3633,22 @@ namespace ParadoxApiDemo
                     }
                 }
             }
-            
+
+
             foreach (PanelAccessLevel panelAccessLevel in controlPanel.PanelAccessLevels.panelAccessLevels)
             {
                 row = gridAccessLevels.Rows[(Int32)(panelAccessLevel.AccessLevelNo)];
 
-                foreach (var doorNo in panelAccessLevel.Doors)
+                for (int i = 0; i < panelAccessLevel.Doors.Count; i++)
                 {
-                    chk = (DataGridViewCheckBoxCell)row.Cells[doorNo];
+                    Door door = (Door)panelAccessLevel.Doors[i];
+                    chk = (DataGridViewCheckBoxCell)row.Cells[door.No];
                     chk.Value = true;
                 }
             }
         }
 
-        private void UpdateDoorAccessLevel(ControlPanelViewModel controlPanel, UInt32 ItemNo, String ItemType)
+        private void UpdateDoorAccessLevel(ControlPanel controlPanel, UInt32 ItemNo, String ItemType)
         {
             if (ItemNo != 0)
             {
@@ -3572,9 +3663,10 @@ namespace ParadoxApiDemo
                     chk.Value = false;
                 }
 
-                foreach (var doorNo in panelAccessLevel.Doors)
+                for (int i = 0; i < panelAccessLevel.Doors.Count; i++)
                 {
-                    chk = (DataGridViewCheckBoxCell)row.Cells[doorNo + 1];
+                    Door door = (Door)panelAccessLevel.Doors[i];
+                    chk = (DataGridViewCheckBoxCell)row.Cells[door.No + 1];
                     chk.Value = true;
                 }
             }
@@ -3629,7 +3721,7 @@ namespace ParadoxApiDemo
             
         }
 
-        private void UpdateDoorHolidays(ControlPanelViewModel controlPanel)
+        private void UpdateDoorHolidays(ControlPanel controlPanel)
         {
             DataGridViewRow row;
             DataGridViewCheckBoxCell chk;
@@ -3656,7 +3748,7 @@ namespace ParadoxApiDemo
             }
         }
        
-        private void FillControlPanelDoorView(ListView listView, ControlPanelViewModel controlPanel)
+        private void FillControlPanelDoorView(ListView listView, ControlPanel controlPanel)
         {            
             listView.BeginUpdate();
             try
@@ -3765,8 +3857,8 @@ namespace ParadoxApiDemo
             }
         }
 
-        private void FillControlPanelScheduleView(ListView listView, ControlPanelViewModel controlPanel)
-        {
+        private void FillControlPanelScheduleView(ListView listView, ControlPanel controlPanel)
+        {            
             listView.BeginUpdate();
             try
             {
@@ -3802,16 +3894,19 @@ namespace ParadoxApiDemo
                     listView.Items.Add(itm);
                 }
             }
+
             finally
             {
                 listView.EndUpdate();
             }
         }
+
         
+
         //Callback call from ThreadPool.QueueUserWorkItem
         private void ReadAllAccessLevelsFromControlPanel(Object stateInfo)
         {
-            var controlPanel = (ControlPanelViewModel)stateInfo;
+            ControlPanel controlPanel = (ControlPanel)stateInfo;
 
             Int32 returnValue = ParadoxAPI.ReadAllAccessLevels(controlPanel.panelID, controlPanel.PanelAccessLevels);
 
@@ -3820,10 +3915,10 @@ namespace ParadoxApiDemo
             //    Int32 returnValue = ParadoxAPI.ReadAccessLevel(controlPanel.panelID, panelAccessLevel.AccessLevelNo, panelAccessLevel);
             //}   
         }
-
+               
         private void ReadAllAccessLevelsMenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -3833,7 +3928,7 @@ namespace ParadoxApiDemo
 
         private void readAccessLevel1MenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -3841,7 +3936,7 @@ namespace ParadoxApiDemo
 
                 Int32 returnValue = ParadoxAPI.ReadAccessLevel(controlPanel.panelID, 1, panelAccessLevel);
 
-                if (PanelResults.Succeeded((UInt32)returnValue))
+                if (ParadoxAPI.Succeeded((UInt32)returnValue))
                 {
                     PanelAccessLevel returnAccessLevel = controlPanel.PanelAccessLevels[1];
                     returnAccessLevel.AccessLevelDoors = panelAccessLevel.AccessLevelDoors;
@@ -3849,7 +3944,7 @@ namespace ParadoxApiDemo
 
                 returnValue = ParadoxAPI.ReadAccessLevel(controlPanel.panelID, 15, panelAccessLevel);
 
-                if (PanelResults.Succeeded((UInt32)returnValue))
+                if (ParadoxAPI.Succeeded((UInt32)returnValue))
                 {
                     PanelAccessLevel returnAccessLevel = controlPanel.PanelAccessLevels[15];
                     returnAccessLevel.AccessLevelDoors = panelAccessLevel.AccessLevelDoors;
@@ -3859,7 +3954,7 @@ namespace ParadoxApiDemo
 
         private void writeAccessLevel1MenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
             PanelAccessLevel panelAccessLevel;
             Int32 returnValue;
 
@@ -3872,8 +3967,10 @@ namespace ParadoxApiDemo
                 
                 returnValue = ParadoxAPI.WriteAccessLevel(controlPanel.panelID, 1, panelAccessLevel);
 
-                if (PanelResults.Succeeded((UInt32)returnValue))
+                if (ParadoxAPI.Succeeded((UInt32)returnValue))
                 {
+
+
                 }
 
                 panelAccessLevel = controlPanel.PanelAccessLevels[15];
@@ -3883,15 +3980,17 @@ namespace ParadoxApiDemo
 
                 returnValue = ParadoxAPI.WriteAccessLevel(controlPanel.panelID, 15, panelAccessLevel);
 
-                if (PanelResults.Succeeded((UInt32)returnValue))
+                if (ParadoxAPI.Succeeded((UInt32)returnValue))
                 {
+
+
                 }
-            }
+            }                        
         }
 
         private void readHolidaysMenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -3901,7 +4000,7 @@ namespace ParadoxApiDemo
 
         private void writeHolidaysMenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -3948,7 +4047,7 @@ namespace ParadoxApiDemo
         //Callback call from ThreadPool.QueueUserWorkItem
         private void ReadAllSchedulesFromControlPanel(Object stateInfo)
         {
-            var controlPanel = (ControlPanelViewModel)stateInfo;
+            ControlPanel controlPanel = (ControlPanel)stateInfo;
 
             //foreach (PanelSchedule panelSchedule in controlPanel.PanelSchedules.panelSchedules)
             //{
@@ -3956,11 +4055,12 @@ namespace ParadoxApiDemo
             //}
 
             Int32 returnValue = ParadoxAPI.ReadAllSchedules(controlPanel.panelID, controlPanel.PanelSchedules);
+            
         }               
 
         private void readAllSchedulesMenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -3970,7 +4070,7 @@ namespace ParadoxApiDemo
 
         private void readSchedule1MenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -3978,7 +4078,7 @@ namespace ParadoxApiDemo
 
                 Int32 returnValue = ParadoxAPI.ReadSchedule(controlPanel.panelID, 1, panelSchedule);
 
-                if (PanelResults.Succeeded((UInt32)returnValue))
+                if (ParadoxAPI.Succeeded((UInt32)returnValue))
                 {
                     PanelSchedule returnSchedule = controlPanel.PanelSchedules[1];
 
@@ -3996,7 +4096,7 @@ namespace ParadoxApiDemo
 
         private void writeSchedule1MenuItem_Click(object sender, EventArgs e)
         {
-            ControlPanelViewModel controlPanel = null;
+            ControlPanel controlPanel = null;
 
             if (GetSelectedControlPanelConnected(ref controlPanel))
             {
@@ -4015,7 +4115,7 @@ namespace ParadoxApiDemo
                                
                 Int32 returnValue = ParadoxAPI.WriteSchedule(controlPanel.panelID, 1, panelSchedule);
 
-                if (PanelResults.Succeeded((UInt32)returnValue))
+                if (ParadoxAPI.Succeeded((UInt32)returnValue))
                 {
 
                 }
@@ -4035,7 +4135,7 @@ namespace ParadoxApiDemo
 
                 returnValue = ParadoxAPI.WriteSchedule(controlPanel.panelID, 15, panelSchedule);
 
-                if (PanelResults.Succeeded((UInt32)returnValue))
+                if (ParadoxAPI.Succeeded((UInt32)returnValue))
                 {
 
                 }
@@ -4055,7 +4155,7 @@ namespace ParadoxApiDemo
 
                 returnValue = ParadoxAPI.WriteSchedule(controlPanel.panelID, 32, panelSchedule);
 
-                if (PanelResults.Succeeded((UInt32)returnValue))
+                if (ParadoxAPI.Succeeded((UInt32)returnValue))
                 {
 
                 }
@@ -4071,13 +4171,13 @@ namespace ParadoxApiDemo
 
             Int32 returnValue = ParadoxAPI.ConfigureVideoServer(videoSettings);
 
-            if (PanelResults.Succeeded((UInt32)returnValue))
+            if (ParadoxAPI.Succeeded((UInt32)returnValue))
             {
                 labelConfigureVideoServerResult.Text = "Successfull";
             }
             else 
             {
-                labelConfigureVideoServerResult.Text = PanelResults.GetResultCode((UInt32)returnValue) + " - " + String.Format("0x{0:X8}", (UInt32)returnValue);
+                labelConfigureVideoServerResult.Text = ParadoxAPI.GetResultCode((UInt32)returnValue) + " - " + String.Format("0x{0:X8}", (UInt32)returnValue);
             }
         }
 
@@ -4093,7 +4193,7 @@ namespace ParadoxApiDemo
 
             textBoxVideoFiles.Clear();
 
-            if (PanelResults.Succeeded((UInt32)returnValue))
+            if (ParadoxAPI.Succeeded((UInt32)returnValue))
             {
                 foreach (VideoFile videoFile in videoFileList.videoFiles)
                 {
@@ -4105,7 +4205,7 @@ namespace ParadoxApiDemo
             }
             else 
             {
-                textBoxVideoFiles.AppendText(PanelResults.GetResultCode((UInt32)returnValue) + " - " + String.Format("0x{0:X8}", (UInt32)returnValue));
+                textBoxVideoFiles.AppendText(ParadoxAPI.GetResultCode((UInt32)returnValue) + " - " + String.Format("0x{0:X8}", (UInt32)returnValue));
             }
         }
 
@@ -4121,7 +4221,7 @@ namespace ParadoxApiDemo
 
             textBoxVOD.Clear();
 
-            if (PanelResults.Succeeded((UInt32)returnValue))
+            if (ParadoxAPI.Succeeded((UInt32)returnValue))
             {
                  foreach (VideoFile videoFile in videoFileList.videoFiles)
                 {
@@ -4133,9 +4233,10 @@ namespace ParadoxApiDemo
             }
             else 
             {
-                textBoxVOD.AppendText(PanelResults.GetResultCode((UInt32)returnValue) + " - " + String.Format("0x{0:X8}", (UInt32)returnValue));
+                textBoxVOD.AppendText(ParadoxAPI.GetResultCode((UInt32)returnValue) + " - " + String.Format("0x{0:X8}", (UInt32)returnValue));
             }
         }
+               
 
         private void buttonStartVideoOnDemandEx_Click(object sender, EventArgs e)
         {
@@ -4153,7 +4254,7 @@ namespace ParadoxApiDemo
 
             textBoxVOD.Clear();
 
-            if (PanelResults.Succeeded((UInt32)returnValue))
+            if (ParadoxAPI.Succeeded((UInt32)returnValue))
             {
                  foreach (VideoFile videoFile in videoFileList.videoFiles)
                 {
@@ -4169,7 +4270,7 @@ namespace ParadoxApiDemo
             }
             else 
             {
-                textBoxVOD.AppendText(PanelResults.GetResultCode((UInt32)returnValue) + " - " + String.Format("0x{0:X8}", (UInt32)returnValue));
+                textBoxVOD.AppendText(ParadoxAPI.GetResultCode((UInt32)returnValue) + " - " + String.Format("0x{0:X8}", (UInt32)returnValue));
             }
         }
 
@@ -4194,5 +4295,8 @@ namespace ParadoxApiDemo
                 }
             }
         }
-    }
+
+       
+        
+    }                                                                                                  
 }

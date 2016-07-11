@@ -1,0 +1,3467 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+using System.Xml;
+using System.IO;
+using System.Reflection;
+
+
+namespace ParadoxAPILibrary
+{
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// CustomXmlParser Base class 
+    /// 
+    /// <summary>
+    public class CustomXmlParser : IDisposable
+    {
+        protected string sObjectname;
+        protected string sName;
+
+        public string Objectname 
+        { 
+            get 
+            { 
+                return sObjectname; 
+            }
+            set 
+            { 
+                sObjectname = value; 
+            }
+        }
+        public string Name 
+        { 
+            get 
+            { 
+                return sName; 
+            }
+            set
+            {
+                sName = value;
+            }
+        }
+
+        protected void fullCopy(CustomXmlParser dest)
+        {
+            dest.sName = (string)sName.Clone();
+            dest.sObjectname = (string)sObjectname.Clone();
+        }
+
+        public void Dispose()
+        {           
+            GC.SuppressFinalize(this);
+        }   
+
+        public Boolean checkBoolean(string svalue)
+        {
+            if (svalue.Trim().ToLower() == "true") return true;
+            else return false;
+        }
+
+        private string propname(string fldname)
+        {
+            if (fldname == null || fldname == "") return "";
+            else if (fldname[0] == 'F') return fldname.Substring(1);
+            else return fldname;
+        }
+
+        //Example:  <object objectname="TPanelUserXML" name="User1">
+        protected internal Boolean parseXML(XmlReader reader)
+        {
+            try
+            {
+                reader.MoveToFirstAttribute();
+                sObjectname = reader.Value;                
+                reader.MoveToNextAttribute();
+                sName = reader.Value;
+                return true;
+            }
+            catch (Exception e)
+            {                
+                return false;
+            }
+        }
+
+        public Boolean serializeXML(ref String xmlObj) 
+        {             
+            StringBuilder output = new StringBuilder();
+            XmlWriterSettings ws = new XmlWriterSettings();
+            ws.Indent = true;
+            
+            try
+            {
+                // create the Type object
+                Type typeObj = this.GetType();
+
+                // declare and populate the arrays to hold the information...
+                FieldInfo[] fi = typeObj.GetFields(); //(BindingFlags.Default | BindingFlags.Static | BindingFlags.Public); // fields
+
+                using (XmlWriter writer = XmlWriter.Create(output, ws))
+                {
+                    writer.WriteProcessingInstruction("xml", "version='1.0'");
+                    writer.WriteStartElement("objects");
+                    writer.WriteStartElement("object"); writer.WriteStartAttribute("objectname"); writer.WriteValue(Objectname); writer.WriteEndAttribute();
+                    writer.WriteStartAttribute("name"); writer.WriteValue(Name); writer.WriteEndAttribute();
+
+                    writer.WriteStartElement("published");
+
+                    // iterate through all the field members
+                    foreach (FieldInfo f in fi)
+                    {
+                        if (f.GetValue(this) != null)
+                        {
+                            writer.WriteStartElement("method"); writer.WriteStartAttribute("name");
+                            writer.WriteValue(propname(f.Name)); writer.WriteEndAttribute();
+
+                            writer.WriteStartAttribute("readonly"); writer.WriteValue("True"); writer.WriteEndAttribute();
+                            writer.WriteStartAttribute("type");
+                            if (f.FieldType.Name == "string") writer.WriteValue("UnicodeString");
+                            else if (f.FieldType.Name == "String") writer.WriteValue("UnicodeString");
+                            else if (f.FieldType.Name == "int") writer.WriteValue("Integer");
+                            else if (f.FieldType.Name == "UInt32") writer.WriteValue("Integer");
+                            else if (f.FieldType.Name == "Int32") writer.WriteValue("Integer");
+                            else if (f.FieldType.Name == "Boolean") writer.WriteValue("Boolean");
+                            else
+                                writer.WriteValue("UnknownType?");
+                            writer.WriteEndAttribute();
+                            writer.WriteString(f.GetValue(this).ToString()); writer.WriteEndElement();
+                        }
+                    }
+
+                    writer.WriteEndElement();   // </published>
+                    writer.WriteEndElement();   // "object"      
+                    writer.WriteFullEndElement();   // "objects"                          
+                    
+                    writer.Flush();
+                }
+
+                xmlObj = output.ToString();
+                return true;
+            }
+            catch (Exception e)
+            {
+                //Console.WriteLine("Exception : {0}", e.Message);
+                return false;
+            }
+        }// serializeXML
+
+        public Boolean serializeXML(XmlWriterSettings ws, StringBuilder output, XmlWriter writer, ref UInt32 objectCount)
+        {            
+            try
+            {
+                // create the Type object
+                Type typeObj = this.GetType();
+
+                // declare and populate the arrays to hold the information...
+                FieldInfo[] fi = typeObj.GetFields(); //(BindingFlags.Default | BindingFlags.Static | BindingFlags.Public); // fields
+                                   
+                writer.WriteStartElement(String.Format("objects{0}", objectCount));
+                objectCount += 1;
+                    
+                writer.WriteStartElement("object"); writer.WriteStartAttribute("objectname"); writer.WriteValue(Objectname); writer.WriteEndAttribute();
+                writer.WriteStartAttribute("name"); writer.WriteValue(Name); writer.WriteEndAttribute();
+
+                writer.WriteStartElement("published");
+
+                // iterate through all the field members
+                foreach (FieldInfo f in fi)
+                {
+                    if (f.GetValue(this) != null)
+                    {
+                        writer.WriteStartElement("method"); writer.WriteStartAttribute("name");
+                        writer.WriteValue(propname(f.Name)); writer.WriteEndAttribute();
+
+                        writer.WriteStartAttribute("readonly"); writer.WriteValue("True"); writer.WriteEndAttribute();
+                        writer.WriteStartAttribute("type");
+                        if (f.FieldType.Name == "string") writer.WriteValue("UnicodeString");
+                        else if (f.FieldType.Name == "String") writer.WriteValue("UnicodeString");
+                        else if (f.FieldType.Name == "int") writer.WriteValue("Integer");
+                        else if (f.FieldType.Name == "UInt32") writer.WriteValue("Integer");
+                        else if (f.FieldType.Name == "Int32") writer.WriteValue("Integer");
+                        else if (f.FieldType.Name == "Boolean") writer.WriteValue("Boolean");
+                        else
+                            writer.WriteValue("UnknownType?");
+                        writer.WriteEndAttribute();
+                        writer.WriteString(f.GetValue(this).ToString()); writer.WriteEndElement();
+                    }
+                }
+                writer.WriteEndElement();   // </published>
+                writer.WriteEndElement();   // "object"
+                writer.WriteEndElement();   // "objects"                                                  
+                                                  
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }// serializeXML
+
+    }//class CustomXmlParser
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelUser
+    /*         
+     <?xml version="1.0"?>
+        <objects>
+          <object objectname="TPanelUserXML" name="User1">
+            <published>
+              <method name="UserNo" readonly="False" type="Integer">0</method>
+              <method name="UserName" readonly="False" type="UnicodeString"></method>
+              <method name="UserUsed" readonly="False" type="Boolean">False</method>
+              <method name="UserCode" readonly="False" type="UnicodeString"></method>
+              <method name="UserCard" readonly="False" type="UnicodeString"></method>
+              <method name="UserRemoteSerialNo" readonly="False" type="UnicodeString"></method>
+              <method name="UserPartitionAccess" readonly="False" type="UnicodeString"></method>
+              <method name="UserCanBypass" readonly="False" type="Boolean">False</method>
+              <method name="UserCanStaySleepArm" readonly="False" type="Boolean">False</method>
+              <method name="UserCanForceArm" readonly="False" type="Boolean">False</method>
+              <method name="UserCanArmOnly" readonly="False" type="Boolean">False</method>
+              <method name="UserCanActivationPGMOnly" readonly="False" type="Boolean">False</method>
+              <method name="UserCanDuress" readonly="False" type="Boolean">False</method>
+            </published>
+          </object>
+        </objects>     
+    */
+    /// </summary>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public class PanelUser : CustomXmlParser
+    {        
+        public UInt32 UserNo;// { get; set; }
+        public String UserName;// { get; set; }
+        public Boolean UserUsed;// { get; set; }
+        public String UserCode;// { get; set; }
+        public String UserCard;// { get; set; }
+        public String UserRemoteSerialNo;// { get; set; }
+        public String UserPartitionAccess;// { get; set; }
+        public Boolean UserCanBypass;// { get; set; }
+        public Boolean UserCanStaySleepArm;// { get; set; }
+        public Boolean UserCanForceArm;// { get; set; }
+        public Boolean UserCanArmOnly;// { get; set; }
+        public Boolean UserCanActivationPGMOnly;// { get; set; }
+        public Boolean UserCanDuress;// { get; set; }
+                
+        public PanelUser() { sObjectname = "TPanelUserXML"; sName = "User"; }
+
+        public PanelUser fullCopy()
+        {
+            PanelUser cloned = (PanelUser)this.MemberwiseClone();
+            return cloned;
+        }
+
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sname, svalue;
+
+            if (xmlString != null)
+            {
+                using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                {
+                    try
+                    {
+                        reader.ReadToFollowing("object");
+                        base.parseXML(reader);
+
+                        while (reader.ReadToFollowing("method"))
+                        {
+                            reader.MoveToFirstAttribute();
+                            sname = reader.Value;
+
+                            if (reader.MoveToContent() == XmlNodeType.Element && reader.Name == "method")
+                            {
+                                svalue = reader.ReadString();
+                                if (sname == "UserNo") UserNo = Convert.ToUInt32(svalue.Trim());
+                                else if (sname == "UserName") UserName = svalue.Trim();
+                                else if (sname == "UserUsed") UserUsed = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "UserCode") UserCode = svalue.Trim();
+                                else if (sname == "UserCard") UserCard = svalue.Trim();
+                                else if (sname == "UserRemoteSerialNo") UserRemoteSerialNo = svalue.Trim();
+                                else if (sname == "UserPartitionAccess") UserPartitionAccess = svalue.Trim();
+                                else if (sname == "UserCanBypass") UserCanBypass = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "UserCanStaySleepArm") UserCanStaySleepArm = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "UserCanForceArm") UserCanForceArm = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "UserCanArmOnly") UserCanArmOnly = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "UserCanActivationPGMOnly") UserCanActivationPGMOnly = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "UserCanDuress") UserCanDuress = Convert.ToBoolean(svalue.Trim());
+                            }
+                        }
+                        return true;
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+                return false;
+        }
+
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelUserList
+    ///    
+    /// </summary>
+    public class PanelUserList
+    {
+        public ArrayList panelUsers;
+
+        public PanelUserList()
+        {
+            panelUsers = new ArrayList();
+        }
+
+        ~PanelUserList()
+        {
+            panelUsers.Clear();
+        }
+
+        public PanelUserList fullCopy()
+        {
+
+            PanelUserList cloned = new PanelUserList();
+            for (int i = 0; i < panelUsers.Count; i++)
+                cloned.panelUsers.Add(((PanelUserList)panelUsers[i]).fullCopy());
+            return cloned;
+        }
+
+        public PanelUser this[UInt32 index]
+        {
+            get
+            {
+                PanelUser panelUser = null;
+
+                for (int i = 0; i < panelUsers.Count; i++)
+                {
+                    panelUser = (PanelUser)panelUsers[i];
+
+                    if (panelUser.UserNo == index)
+                    {
+                        return panelUser;
+                    }
+                }
+
+                return null;
+            }
+            set
+            {
+                Boolean found = false;
+
+                PanelUser panelUser = null;
+
+                for (int i = 0; i < panelUsers.Count; i++)
+                {
+                    panelUser = (PanelUser)panelUsers[i];
+
+                    if (panelUser.UserNo == value.UserNo)
+                    {
+                        panelUser = value;
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    PanelUser pnlUser = new PanelUser();
+
+                    pnlUser = value;
+
+                    panelUsers.Add(pnlUser);
+                }
+            }
+        }
+
+        public void Clear()
+        {
+            panelUsers.Clear();
+        }
+
+        public void serializeXML(XmlWriterSettings ws, StringBuilder output, XmlWriter writer, ref UInt32 objectCount)
+        {
+            foreach (PanelUser obj in panelUsers)
+            {
+                obj.Name = String.Format("User{0}", obj.UserNo);
+                obj.serializeXML(ws, output, writer, ref objectCount);
+            }
+        }
+
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sobject;
+            if (xmlString != null)
+            {
+                try
+                {
+                    using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                    {
+                        while (reader.ReadToFollowing("object"))
+                        {
+                            reader.MoveToAttribute("objectname");
+                            if (reader.Value == "TPanelUserXML")
+                            {
+                                reader.MoveToElement();
+                                sobject = reader.ReadOuterXml();
+                                if (sobject != "")
+                                {
+                                    PanelUser obj = new PanelUser();
+                                    obj.parseXML(sobject);
+                                    panelUsers.Add(obj);
+                                }
+                            }
+                        }
+                        return true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+            else
+                return false;
+        }        
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelZone
+    /*    
+       <?xml version="1.0"?>
+        <objects>
+          <object objectname="TPanelZoneXML" name="Zone1">
+            <published>
+              <method name="ZoneNo" readonly="False" type="Integer">0</method>
+              <method name="ZoneEnabled" readonly="False" type="Boolean">False</method>
+              <method name="ZoneLabel" readonly="False" type="UnicodeString"></method>
+              <method name="ZoneSerialNo" readonly="False" type="UnicodeString"></method>
+              <method name="ZoneInputNo" readonly="False" type="Integer">0</method>
+              <method name="ZonePartition" readonly="False" type="Integer">0</method>
+              <method name="ZoneDefinition" readonly="False" type="UnicodeString"></method>
+              <method name="ZoneAlarmType" readonly="False" type="UnicodeString"></method>
+              <method name="ZoneStay" readonly="False" type="Boolean">False</method>
+              <method name="ZoneForce" readonly="False" type="Boolean">False</method>
+              <method name="ZoneBypass" readonly="False" type="Boolean">False</method>
+              <method name="ZoneAutoShutdown" readonly="False" type="Boolean">False</method>
+              <method name="ZoneRFSupervision" readonly="False" type="Boolean">False</method>
+              <method name="ZoneIntellizone" readonly="False" type="Boolean">False</method>
+              <method name="ZoneDelayBeforeTransmission" readonly="False" type="Boolean">False</method>
+            </published>
+          </object>
+        </objects>
+    */
+    /// </summary>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public class PanelZone : CustomXmlParser
+    {
+        public UInt32 ZoneNo;// { get; set; }
+        public Boolean ZoneEnabled;// { get; set; }
+        public String ZoneLabel;// { get; set; }
+        public String ZoneSerialNo;// { get; set; }
+        public UInt32 ZoneInputNo;// { get; set; }
+        public UInt32 ZonePartition;// { get; set; }
+        public String ZoneDefinition;// { get; set; }
+        public String ZoneAlarmType;// { get; set; }
+        public Boolean ZoneStay;// { get; set; }
+        public Boolean ZoneForce;// { get; set; }
+        public Boolean ZoneBypass;// { get; set; }
+        public Boolean ZoneAutoShutdown;// { get; set; }
+        public Boolean ZoneRFSupervision;// { get; set; }
+        public Boolean ZoneIntellizone;// { get; set; }
+        public Boolean ZoneDelayBeforeTransmission;// { get; set; }
+        public String Status;// { get; set; }
+                      
+
+        public PanelZone() { sObjectname = "TPanelZoneXML"; sName = "Zone"; }
+
+        public PanelZone fullCopy()
+        {
+            PanelZone cloned = (PanelZone)this.MemberwiseClone();
+            return cloned;
+        }
+
+
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sname, svalue;
+            if (xmlString != null)
+            {
+                using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                {
+                    try
+                    {
+                        reader.ReadToFollowing("object");
+                        base.parseXML(reader);
+
+                        while (reader.ReadToFollowing("method"))
+                        {
+                            reader.MoveToFirstAttribute();
+                            sname = reader.Value;
+
+                            if (reader.MoveToContent() == XmlNodeType.Element && reader.Name == "method")
+                            {
+                                svalue = reader.ReadString();
+                                if (sname == "ZoneNo") ZoneNo = Convert.ToUInt32(svalue.Trim());
+                                else if (sname == "ZoneEnabled") ZoneEnabled = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "ZoneLabel") ZoneLabel = svalue.Trim();
+                                else if (sname == "ZoneSerialNo") ZoneSerialNo = svalue.Trim();
+                                else if (sname == "ZoneInputNo") ZoneInputNo = Convert.ToUInt32(svalue.Trim());
+                                else if (sname == "ZonePartition") ZonePartition = Convert.ToUInt32(svalue.Trim());
+                                else if (sname == "ZoneDefinition") ZoneDefinition = svalue.Trim();
+                                else if (sname == "ZoneAlarmType") ZoneAlarmType = svalue.Trim();
+                                else if (sname == "ZoneStay") ZoneStay = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "ZoneForce") ZoneForce = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "ZoneBypass") ZoneBypass = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "ZoneAutoShutdown") ZoneAutoShutdown = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "ZoneRFSupervision") ZoneRFSupervision = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "ZoneIntellizone") ZoneIntellizone = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "ZoneDelayBeforeTransmission") ZoneDelayBeforeTransmission = Convert.ToBoolean(svalue.Trim());                                                                
+                            }
+                        }
+                        return true;
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }                
+            }
+            else
+                return false;                
+        }
+
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelZoneList
+    ///    
+    /// </summary>
+    public class PanelZoneList
+    {
+        public ArrayList panelZones;
+
+        public PanelZoneList()
+        {
+            panelZones = new ArrayList();
+        }
+
+        ~PanelZoneList()
+        {
+            panelZones.Clear();
+        }
+
+        public PanelZoneList fullCopy()
+        {
+
+            PanelZoneList cloned = new PanelZoneList();
+            for (int i = 0; i < panelZones.Count; i++)
+                cloned.panelZones.Add(((PanelZoneList)panelZones[i]).fullCopy());
+            return cloned;
+        }
+
+        public PanelZone this[UInt32 index]
+        {
+            get
+            {
+                PanelZone panelZone = null;
+
+                for (int i = 0; i < panelZones.Count; i++)
+                {
+                    panelZone = (PanelZone)panelZones[i];
+
+                    if (panelZone.ZoneNo == index)
+                    {
+                        return panelZone;
+                    }
+                }
+
+                return null;
+            }
+            set
+            {
+                Boolean found = false;
+
+                PanelZone panelZone = null;
+
+                for (int i = 0; i < panelZones.Count; i++)
+                {
+                    panelZone = (PanelZone)panelZones[i];
+
+                    if (panelZone.ZoneNo == value.ZoneNo)
+                    {
+                        panelZone = value;
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    PanelZone pnlZone = new PanelZone();
+
+                    pnlZone = value;
+
+                    panelZones.Add(pnlZone);
+                }
+            }
+        }
+
+        public void Clear()
+        {
+            panelZones.Clear();
+        }
+
+        public void serializeXML(XmlWriterSettings ws, StringBuilder output, XmlWriter writer, ref UInt32 objectCount)
+        {
+            foreach (PanelZone obj in panelZones)
+            {
+                obj.Name = String.Format("Zone{0}", obj.ZoneNo);
+                obj.serializeXML(ws, output, writer, ref objectCount);
+            }   
+        }
+
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sobject;
+            if (xmlString != null)
+            {
+                try
+                {
+                    using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                    {
+                        while (reader.ReadToFollowing("object"))
+                        {
+                            reader.MoveToAttribute("objectname");
+                            if (reader.Value == "TPanelZoneXML")
+                            {
+                                reader.MoveToElement();
+                                sobject = reader.ReadOuterXml();
+                                if (sobject != "")
+                                {
+                                    PanelZone obj = new PanelZone();
+                                    obj.parseXML(sobject);
+                                    panelZones.Add(obj);
+                                }
+                            }
+                        }
+                        return true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+            else
+                return false;
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelArea
+    ///    
+    /*   
+        <?xml version="1.0"?>
+        <objects>
+          <object objectname="TPanelAreaXML" name="Area1">
+            <published>
+              <method name="AreaNo" readonly="False" type="Integer">0</method>
+              <method name="AreaLabel" readonly="False" type="UnicodeString"></method>
+              <method name="AreaEnabled" readonly="False" type="Boolean">False</method>
+              <method name="AreaExitDelay" readonly="False" type="Integer">0</method>
+              <method name="AreaBellCutOffTimer" readonly="False" type="Integer">0</method>
+              <method name="AreaAutoArmingTime" readonly="False" type="Double">0</method>
+              <method name="AreaNoMovementTimer" readonly="False" type="Integer">0</method>
+            </published>
+          </object>
+        </objects>
+    */
+    /// </summary>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public class PanelArea : CustomXmlParser
+    {
+        public UInt32 AreaNo;// { get; set; }
+        public String AreaLabel;// { get; set; }        
+        public Boolean AreaEnabled;// { get; set; }
+        public Int32 AreaExitDelay;// { get; set; }
+        public Int32 AreaBellCutOffTimer;// { get; set; }
+        public DateTime AreaAutoArmingTime;// { get; set; }
+        public Int32 AreaNoMovementTimer;// { get; set; }
+        public String Status;// { get; set; }
+
+        public PanelArea() { sObjectname = "TPanelAreaXML"; sName = "Area"; }
+
+        public PanelArea fullCopy()
+        {
+            PanelArea cloned = (PanelArea)this.MemberwiseClone();
+            return cloned;
+        }
+
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sname, svalue;
+            if (xmlString != null)
+            {
+                using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                {
+                    try
+                    {
+                        reader.ReadToFollowing("object");
+                        base.parseXML(reader);
+
+                        while (reader.ReadToFollowing("method"))
+                        {
+                            reader.MoveToFirstAttribute();
+                            sname = reader.Value;
+
+                            if (reader.MoveToContent() == XmlNodeType.Element && reader.Name == "method")
+                            {
+                                svalue = reader.ReadString();
+                                if (sname == "AreaNo") AreaNo = Convert.ToUInt32(svalue.Trim());
+                                else if (sname == "AreaLabel") AreaLabel = svalue.Trim();
+                                else if (sname == "AreaEnabled") AreaEnabled = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "AreaExitDelay") AreaExitDelay = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "AreaBellCutOffTimer") AreaBellCutOffTimer = Convert.ToInt32(svalue.Trim());
+<<<<<<< local
+                                else if (sname == "AreaAutoArmingTime")
+                                {
+                                    try
+                                    {
+                                        AreaAutoArmingTime = System.DateTime.FromOADate(Convert.ToDouble(svalue.Trim()));
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        AreaAutoArmingTime = System.DateTime.FromOADate(0.0);
+                                    }
+                                }
+=======
+                                else if (sname == "AreaAutoArmingTime")
+                                {
+                                    try
+                                    {
+                                        AreaAutoArmingTime = System.DateTime.FromOADate(Convert.ToDouble(svalue.Trim()));
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        AreaAutoArmingTime = System.DateTime.FromOADate(0.0);
+                                    }                                            
+                                }
+>>>>>>> other
+                                else if (sname == "AreaNoMovementTimer") AreaNoMovementTimer = Convert.ToInt32(svalue.Trim());
+                            }
+                        }
+                        return true;
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+                return false;
+        }
+
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelAreaList
+    ///    
+    /// </summary>
+    public class PanelAreaList
+    {
+        public ArrayList panelAreas;
+
+        public PanelAreaList()
+        {
+            panelAreas = new ArrayList();
+        }
+
+        ~PanelAreaList()
+        {
+            panelAreas.Clear();
+        }
+
+        public PanelAreaList fullCopy()
+        {
+
+            PanelAreaList cloned = new PanelAreaList();
+            for (int i = 0; i < panelAreas.Count; i++)
+                cloned.panelAreas.Add(((PanelAreaList)panelAreas[i]).fullCopy());
+            return cloned;
+        }
+
+        public PanelArea this[UInt32 index]
+        {
+            get
+            {
+                PanelArea panelArea = null;
+
+                for (int i = 0; i < panelAreas.Count; i++)
+                {
+                    panelArea = (PanelArea)panelAreas[i];
+                    
+                    if (panelArea.AreaNo == index)
+                    {
+                        return panelArea;
+                    }
+                }
+
+                return null;
+            }
+            set
+            {
+                Boolean found = false;
+
+                PanelArea panelArea = null;
+
+                for (int i = 0; i < panelAreas.Count; i++)
+                {
+                    panelArea = (PanelArea)panelAreas[i];
+
+                    if (panelArea.AreaNo == value.AreaNo)
+                    {
+                        panelArea = value;
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    PanelArea pnlArea = new PanelArea();
+
+                    pnlArea = value;
+
+                    panelAreas.Add(pnlArea);
+                }
+            }
+        }
+
+        public void Clear()
+        {
+            panelAreas.Clear();
+        }
+
+
+        public void serializeXML(XmlWriterSettings ws, StringBuilder output, XmlWriter writer, ref UInt32 objectCount)
+        {
+            foreach (PanelArea obj in panelAreas)
+            {
+                obj.Name = String.Format("Area{0}", obj.AreaNo);
+                obj.serializeXML(ws, output, writer, ref objectCount);  
+            }   
+        }
+
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sobject;
+
+            if (xmlString != null)
+            {
+                try
+                {
+                    using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                    {
+                        while (reader.ReadToFollowing("object"))
+                        {
+                            reader.MoveToAttribute("objectname");
+                            if (reader.Value == "TPanelAreaXML")
+                            {
+                                reader.MoveToElement();
+                                sobject = reader.ReadOuterXml();
+                                if (sobject != "")
+                                {
+                                    PanelArea obj = new PanelArea();
+                                    obj.parseXML(sobject);
+                                    panelAreas.Add(obj);
+                                }
+                            }
+                        }
+                        return true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+            else
+                return false;
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelDoor
+    ///    
+    /*   
+        <?xml version="1.0"?>
+        <objects>
+          <object objectname="TPanelDoorXML" name="Door1">
+            <published>
+              <method name="DoorNo" readonly="False" type="Integer">0</method>
+              <method name="DoorLabel" readonly="False" type="UnicodeString"></method>
+              <method name="DoorEnabled" readonly="False" type="Boolean">False</method>
+              <method name="DoorSerialNo" readonly="False" type="UnicodeString"></method>
+            </published>
+          </object>
+        </objects>
+    */
+    /// </summary>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public class PanelDoor : CustomXmlParser
+    {
+        public UInt32 DoorNo;// { get; set; }
+        public String DoorLabel;// { get; set; }
+        public Boolean DoorEnabled;// { get; set; }
+        public String DoorSerialNo;// { get; set; }
+        public String Status;// { get; set; }
+               
+
+        public PanelDoor() { sObjectname = "TPanelDoorXML"; sName = "Door"; }
+
+        public PanelDoor fullCopy()
+        {
+            PanelDoor cloned = (PanelDoor)this.MemberwiseClone();
+            return cloned;
+        }
+
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sname, svalue;
+            if (xmlString != null)
+            {
+                using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                {
+                    try
+                    {
+                        reader.ReadToFollowing("object");
+                        base.parseXML(reader);
+
+                        while (reader.ReadToFollowing("method"))
+                        {
+                            reader.MoveToFirstAttribute();
+                            sname = reader.Value;
+
+                            if (reader.MoveToContent() == XmlNodeType.Element && reader.Name == "method")
+                            {
+                                svalue = reader.ReadString();
+                                if (sname == "DoorNo") DoorNo = Convert.ToUInt32(svalue.Trim());
+                                else if (sname == "DoorLabel") DoorLabel = svalue.Trim();
+                                else if (sname == "DoorEnabled") DoorEnabled = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "DoorSerialNo") DoorSerialNo = svalue.Trim();
+                            }
+                        }
+                        return true;
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+                return false;
+        }
+
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelDoorList
+    ///    
+    /// </summary>
+    public class PanelDoorList
+    {
+        public ArrayList panelDoors;
+
+        public PanelDoorList()
+        {
+            panelDoors = new ArrayList();
+        }
+
+        ~PanelDoorList()
+        {
+            panelDoors.Clear();
+        }
+
+        public PanelDoorList fullCopy()
+        {
+
+            PanelDoorList cloned = new PanelDoorList();
+            for (int i = 0; i < panelDoors.Count; i++)
+                cloned.panelDoors.Add(((PanelDoorList)panelDoors[i]).fullCopy());
+            return cloned;
+        }
+
+        public PanelDoor this[UInt32 index]
+        {
+            get
+            {
+                PanelDoor panelDoor = null;
+
+                for (int i = 0; i < panelDoors.Count; i++)
+                {
+                    panelDoor = (PanelDoor)panelDoors[i];
+
+                    if (panelDoor.DoorNo == index)
+                    {
+                        return panelDoor;
+                    }
+                }
+
+                return null;
+            }
+            set
+            {
+                Boolean found = false;
+
+                PanelDoor panelDoor = null;
+
+                for (int i = 0; i < panelDoors.Count; i++)
+                {
+                    panelDoor = (PanelDoor)panelDoors[i];
+
+                    if (panelDoor.DoorNo == value.DoorNo)
+                    {
+                        panelDoor = value;
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    PanelDoor pnlDoor = new PanelDoor();
+
+                    pnlDoor = value;
+
+                    panelDoors.Add(pnlDoor);
+                }
+            }
+        }
+
+        public void Clear()
+        {
+            panelDoors.Clear();
+        }
+
+        public void serializeXML(XmlWriterSettings ws, StringBuilder output, XmlWriter writer, ref UInt32 objectCount)
+        {
+            foreach (PanelDoor obj in panelDoors)
+            {
+                obj.Name = String.Format("Door{0}", obj.DoorNo);
+                obj.serializeXML(ws, output, writer, ref objectCount);
+            }           
+        }
+
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sobject;
+            if (xmlString != null)
+            {
+                try
+                {
+                    using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                    {
+                        while (reader.ReadToFollowing("object"))
+                        {
+                            reader.MoveToAttribute("objectname");
+                            if (reader.Value == "TPanelDoorXML")
+                            {
+                                reader.MoveToElement();
+                                sobject = reader.ReadOuterXml();
+                                if (sobject != "")
+                                {
+                                    PanelDoor obj = new PanelDoor();
+                                    obj.parseXML(sobject);
+                                    panelDoors.Add(obj);
+                                }
+                            }
+                        }
+                        return true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+            else
+                return false;
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelPGM
+    ///    
+    /*   
+       <?xml version="1.0"?>
+        <objects>
+          <object objectname="TPanelPGMXML" name="PGM1">
+            <published>
+              <method name="PGMNo" readonly="False" type="Integer">0</method>
+              <method name="PGMLabel" readonly="False" type="UnicodeString"></method>
+              <method name="PGMTimer" readonly="False" type="Integer">0</method>
+              <method name="PGMSerialNo" readonly="False" type="UnicodeString"></method>
+              <method name="PGMInputNo" readonly="False" type="Integer">0</method>
+              <method name="PGMActivationEvent" readonly="False" type="UnicodeString"></method>
+              <method name="PGMDeactivationEvent" readonly="False" type="UnicodeString"></method>
+              <method name="PGMActvationMode" readonly="False" type="UnicodeString"></method>
+              <method name="PGMPulseEvery30Secs" readonly="False" type="Boolean">False</method>
+              <method name="PGMPulseOnAnyAlarm" readonly="False" type="Boolean">False</method>
+            </published>
+          </object>
+        </objects>
+    */
+    /// </summary>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public class PanelPGM : CustomXmlParser
+    {
+        public UInt32 PGMNo;// { get; set; }
+        public String PGMLabel;// { get; set; }
+        public Int32 PGMTimer;// { get; set; }
+        public String PGMSerialNo;// { get; set; }
+        public Int32 PGMInputNo;// { get; set; }
+        public String PGMActivationEvent;// { get; set; }
+        public String PGMDeactivationEvent;// { get; set; }
+        public String PGMActvationMode;// { get; set; }
+        public Boolean PGMPulseEvery30Secs;// { get; set; }
+        public Boolean PGMPulseOnAnyAlarm;// { get; set; }
+        public String Status;// { get; set; }
+
+        public PanelPGM() { sObjectname = "TPanelPGMXML"; sName = "PGM"; }
+
+        public PanelPGM fullCopy()
+        {
+            PanelPGM cloned = (PanelPGM)this.MemberwiseClone();
+            return cloned;
+        }
+
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sname, svalue;
+            if (xmlString != null)
+            {
+                using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                {
+                    try
+                    {
+                        reader.ReadToFollowing("object");
+                        base.parseXML(reader);
+
+                        while (reader.ReadToFollowing("method"))
+                        {
+                            reader.MoveToFirstAttribute();
+                            sname = reader.Value;
+
+                            if (reader.MoveToContent() == XmlNodeType.Element && reader.Name == "method")
+                            {
+                                svalue = reader.ReadString();
+                                if (sname == "PGMNo") PGMNo = Convert.ToUInt32(svalue.Trim());
+                                else if (sname == "PGMLabel") PGMLabel = svalue.Trim();
+                                else if (sname == "PGMTimer") PGMTimer = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "PGMSerialNo") PGMSerialNo = svalue.Trim();
+                                else if (sname == "PGMInputNo") PGMInputNo = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "PGMActivationEvent") PGMActivationEvent = svalue.Trim();
+                                else if (sname == "PGMDeactivationEvent") PGMDeactivationEvent = svalue.Trim();
+                                else if (sname == "PGMActvationMode") PGMActvationMode = svalue.Trim();
+                                else if (sname == "PGMPulseEvery30Secs") PGMPulseEvery30Secs = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "PGMPulseOnAnyAlarm") PGMPulseEvery30Secs = Convert.ToBoolean(svalue.Trim());                                
+                            }
+                        }
+                        return true;
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+                return false;
+        }
+
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelPGMList
+    ///    
+    /// </summary>
+    public class PanelPGMList
+    {
+        public ArrayList panelPGMs;
+
+        public PanelPGMList()
+        {
+            panelPGMs = new ArrayList();
+        }
+
+        ~PanelPGMList()
+        {
+            panelPGMs.Clear();
+        }
+
+        public PanelPGMList fullCopy()
+        {
+
+            PanelPGMList cloned = new PanelPGMList();
+            for (int i = 0; i < panelPGMs.Count; i++)
+                cloned.panelPGMs.Add(((PanelPGMList)panelPGMs[i]).fullCopy());
+            return cloned;
+        }
+
+        public PanelPGM this[UInt32 index]
+        {
+            get
+            {
+                PanelPGM panelPGM = null;
+
+                for (int i = 0; i < panelPGMs.Count; i++)
+                {
+                    panelPGM = (PanelPGM)panelPGMs[i];
+
+                    if (panelPGM.PGMNo == index)
+                    {
+                        return panelPGM;
+                    }
+                }
+
+                return null;
+            }
+            set
+            {
+                Boolean found = false;
+
+                PanelPGM panelPGM = null;
+
+                for (int i = 0; i < panelPGMs.Count; i++)
+                {
+                    panelPGM = (PanelPGM)panelPGMs[i];
+
+                    if (panelPGM.PGMNo == value.PGMNo)
+                    {
+                        panelPGM = value;
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    PanelPGM pnlPGM = new PanelPGM();
+
+                    pnlPGM = value;
+
+                    panelPGMs.Add(pnlPGM);
+                }
+            }
+        }
+
+        public void Clear()
+        {
+            panelPGMs.Clear();
+        }
+
+        public void serializeXML(XmlWriterSettings ws, StringBuilder output, XmlWriter writer, ref UInt32 objectCount)
+        {
+            foreach (PanelPGM obj in panelPGMs)
+            {
+                obj.Name = String.Format("PGM{0}", obj.PGMNo);
+                obj.serializeXML(ws, output, writer, ref objectCount);
+            } 
+        }
+        
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sobject;
+            if (xmlString != null)
+            {
+                try
+                {
+                    using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                    {
+                        while (reader.ReadToFollowing("object"))
+                        {
+                            reader.MoveToAttribute("objectname");
+                            if (reader.Value == "TPanelPGMXML")
+                            {
+                                reader.MoveToElement();
+                                sobject = reader.ReadOuterXml();
+                                if (sobject != "")
+                                {
+                                    PanelPGM obj = new PanelPGM();
+                                    obj.parseXML(sobject);
+                                    panelPGMs.Add(obj);
+                                }
+                            }
+                        }
+                        return true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+            else
+                return false;
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// ModuleInfo
+    ///    
+    /*   
+       <?xml version="1.0"?>
+        <objects>
+          <object objectname="TModuleInfoXML" name="Module1">
+            <published>
+              <method name="MacString" readonly="False" type="UnicodeString"></method>
+              <method name="NetMaskString" readonly="False" type="UnicodeString"></method>
+              <method name="DHCPString" readonly="False" type="UnicodeString"></method>
+              <method name="TypeString" readonly="False" type="UnicodeString"></method>
+              <method name="IPString" readonly="False" type="UnicodeString"></method>
+              <method name="SiteNameString" readonly="False" type="UnicodeString"></method>
+              <method name="SiteIDString" readonly="False" type="UnicodeString"></method>
+              <method name="VersionString" readonly="False" type="UnicodeString"></method>
+              <method name="IPPortString" readonly="False" type="UnicodeString"></method>
+              <method name="WebPortString" readonly="False" type="UnicodeString"></method>
+              <method name="LanguageString" readonly="False" type="UnicodeString"></method>
+              <method name="SerialNoString" readonly="False" type="UnicodeString"></method>
+              <method name="HTTPSPortString" readonly="False" type="UnicodeString"></method>
+              <method name="DiscoverOnLAN" readonly="False" type="Boolean">False</method>
+              <method name="UseHTTPSString" readonly="False" type="UnicodeString"></method>
+              <method name="RegisteredToPMH" readonly="False" type="Boolean">False</method>
+              <method name="NetworkInterfaceIpAddress" readonly="False" type="UnicodeString"></method>
+            </published>
+          </object>
+        </objects>
+    */
+    /// </summary>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public class ModuleInfo : CustomXmlParser
+    {
+        public String MacString;// { get; set; }
+        public String NetMaskString;// { get; set; }
+        public String DHCPString;// { get; set; }
+        public String TypeString;// { get; set; }
+        public String IPString;// { get; set; }
+        public String SiteNameString;// { get; set; }
+        public String SiteIDString;// { get; set; }
+        public String VersionString;// { get; set; }
+        public String IPPortString;// { get; set; }
+        public String WebPortString;// { get; set; }
+        public String LanguageString;// { get; set; }
+        public String SerialNoString;// { get; set; }
+        public String HTTPSPortString;// { get; set; }
+        public Boolean DiscoverOnLAN;// { get; set; }
+        public String UseHTTPSString;// { get; set; }
+        public Boolean RegisteredToPMH;// { get; set; }
+        public String NetworkInterfaceIpAddress;// { get; set; }
+
+
+        public Boolean PGMEnabled;// { get; set; }
+
+
+        public ModuleInfo() { sObjectname = "TModuleInfoXML"; sName = "ModuleInfo"; }
+
+        public ModuleInfo fullCopy()
+        {
+            ModuleInfo cloned = (ModuleInfo)this.MemberwiseClone();
+            return cloned;
+        }
+
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sname, svalue;
+            if (xmlString != null)
+            {
+                using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                {
+                    try
+                    {
+                        reader.ReadToFollowing("object");
+                        base.parseXML(reader);
+
+                        while (reader.ReadToFollowing("method"))
+                        {
+                            reader.MoveToFirstAttribute();
+                            sname = reader.Value;
+
+                            if (reader.MoveToContent() == XmlNodeType.Element && reader.Name == "method")
+                            {
+                                svalue = reader.ReadString();
+                                if (sname == "MacString") MacString = svalue.Trim();
+                                else if (sname == "NetMaskString") NetMaskString = svalue.Trim();
+                                else if (sname == "DHCPString") DHCPString = svalue.Trim();
+                                else if (sname == "TypeString") TypeString = svalue.Trim();
+                                else if (sname == "IPString") IPString = svalue.Trim();
+                                else if (sname == "SiteNameString") SiteNameString = svalue.Trim();
+                                else if (sname == "SiteIDString") SiteIDString = svalue.Trim();
+                                else if (sname == "VersionString") VersionString = svalue.Trim();
+                                else if (sname == "IPPortString") IPPortString = svalue.Trim();
+                                else if (sname == "WebPortString") WebPortString = svalue.Trim();
+                                else if (sname == "LanguageString") LanguageString = svalue.Trim();
+                                else if (sname == "SerialNoString") SerialNoString = svalue.Trim();
+                                else if (sname == "HTTPSPortString") HTTPSPortString = svalue.Trim();
+                                else if (sname == "DiscoverOnLAN") DiscoverOnLAN = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "UseHTTPSString") UseHTTPSString = svalue.Trim();
+                                else if (sname == "RegisteredToPMH") RegisteredToPMH = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "NetworkInterfaceIpAddress") NetworkInterfaceIpAddress = svalue.Trim();
+                            }
+                        }
+                        return true;
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+                return false;
+        }
+
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// ModuleInfoList
+    ///    
+    /// </summary>
+    public class ModuleInfoList
+    {
+        public ArrayList moduleInfos;
+
+        public ModuleInfoList()
+        {
+            moduleInfos = new ArrayList();
+        }
+
+        ~ModuleInfoList()
+        {
+            moduleInfos.Clear();
+        }
+
+        public ModuleInfoList fullCopy()
+        {
+
+            ModuleInfoList cloned = new ModuleInfoList();
+            for (int i = 0; i < moduleInfos.Count; i++)
+                cloned.moduleInfos.Add(((ModuleInfoList)moduleInfos[i]).fullCopy());
+            return cloned;
+        }
+
+        public ModuleInfo this[UInt32 index]
+        {
+            get
+            {
+                if (index < moduleInfos.Count)
+                {
+                    return (ModuleInfo)moduleInfos[(int)index];
+                }
+                else 
+                {
+                    return null;
+                }                           
+            }
+            set
+            {
+                Boolean found = false;
+
+                ModuleInfo moduleInfo = null;
+
+                for (int i = 0; i < moduleInfos.Count; i++)
+                {
+                    moduleInfo = (ModuleInfo)moduleInfos[i];
+
+                    if (moduleInfo.MacString == value.MacString)
+                    {
+                        moduleInfo = value;
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    ModuleInfo _ModuleInfo = new ModuleInfo();
+
+                    _ModuleInfo = value;
+
+                    moduleInfos.Add(_ModuleInfo);
+                }
+            }
+        }
+
+        public void Clear()
+        {
+            moduleInfos.Clear();
+        }
+
+        public void serializeXML(XmlWriterSettings ws, StringBuilder output, XmlWriter writer, ref UInt32 objectCount)
+        {
+            foreach (ModuleInfo obj in moduleInfos)
+            {
+                obj.serializeXML(ws, output, writer, ref objectCount);
+            }
+        }
+
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sobject;
+            if (xmlString != null)
+            {
+                try
+                {
+                    using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                    {
+                        while (reader.ReadToFollowing("object"))
+                        {
+                            reader.MoveToAttribute("objectname");
+                            if (reader.Value == "TModuleInfoXML")
+                            {
+                                reader.MoveToElement();
+                                sobject = reader.ReadOuterXml();
+                                if (sobject != "")
+                                {
+                                    ModuleInfo obj = new ModuleInfo();
+                                    obj.parseXML(sobject);
+                                    moduleInfos.Add(obj);
+                                }
+                            }
+                        }
+                        return true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+            else
+                return false;
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelEvent
+    ///    
+    /*   
+       <?xml version="1.0"?>
+        <objects>
+          <object objectname="TPanelEventXML" name="PanelEvent">
+            <published>
+              <method name="DateTime" readonly="False" type="Double">42201.4059706366</method>
+              <method name="SequenceNo" readonly="False" type="Int64">-1</method>
+              <method name="EventDateTime" readonly="False" type="UnicodeString"></method>
+              <method name="EventLabel" readonly="False" type="UnicodeString"></method>
+              <method name="EventType" readonly="False" type="UnicodeString"></method>
+              <method name="EventSerialNo" readonly="False" type="UnicodeString"></method>
+              <method name="EventDescription" readonly="False" type="UnicodeString"></method>
+              <method name="EventAdditionalInfo" readonly="False" type="UnicodeString"></method>
+              <method name="EventUserLabel" readonly="False" type="UnicodeString"></method>
+              <method name="EventSequenceNo" readonly="False" type="UnicodeString"></method>
+            </published>
+          </object>
+        </objects>
+    */
+    /// </summary>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public class PanelEvent : CustomXmlParser
+    {
+        public DateTime dateTime;// { get; set; }
+        public Int64 SequenceNo;// { get; set; }
+        public String EventDateTime;// { get; set; }
+        public String EventLabel;// { get; set; }
+        public String EventType;// { get; set; }
+        public String EventSerialNo;// { get; set; }
+        public String EventDescription;// { get; set; }
+        public String EventAdditionalInfo;// { get; set; }
+        public String EventUserLabel;// { get; set; }
+        public String EventSequenceNo;// { get; set; }
+
+        public PanelEvent() { sObjectname = "TPanelEventXML"; sName = "PanelEvent"; }
+
+        public PanelEvent fullCopy()
+        {
+            PanelEvent cloned = (PanelEvent)this.MemberwiseClone();
+            return cloned;
+        }
+
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sname, svalue;
+            if (xmlString != null)
+            {
+                using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                {
+                    try
+                    {
+                        reader.ReadToFollowing("object");
+                        base.parseXML(reader);
+
+                        while (reader.ReadToFollowing("method"))
+                        {
+                            reader.MoveToFirstAttribute();
+                            sname = reader.Value;
+
+                            if (reader.MoveToContent() == XmlNodeType.Element && reader.Name == "method")
+                            {
+                                svalue = reader.ReadString();
+<<<<<<< local
+                                if (sname == "DateTime")
+                                {
+                                    try
+                                    {
+                                        dateTime = System.DateTime.FromOADate(Convert.ToDouble(svalue.Trim()));
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        dateTime = System.DateTime.FromOADate(0.0);
+                                    }                                    
+                                }
+=======
+                                if (sname == "DateTime")
+                                {
+                                    try
+                                    {
+                                        dateTime = System.DateTime.FromOADate(Convert.ToDouble(svalue.Trim()));
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        dateTime = System.DateTime.FromOADate(0.0);
+                                    }                                          
+                                }
+>>>>>>> other
+                                else if (sname == "SequenceNo") SequenceNo = Convert.ToInt64(svalue.Trim());
+                                else if (sname == "EventDateTime") EventDateTime = svalue.Trim();
+                                else if (sname == "EventLabel") EventLabel = svalue.Trim();
+                                else if (sname == "EventType") EventType = svalue.Trim();
+                                else if (sname == "EventSerialNo") EventSerialNo = svalue.Trim();
+                                else if (sname == "EventDescription") EventDescription = svalue.Trim();
+                                else if (sname == "EventAdditionalInfo") EventAdditionalInfo = svalue.Trim();
+                                else if (sname == "EventUserLabel") EventUserLabel = svalue.Trim();
+                                else if (sname == "EventSequenceNo") EventSequenceNo = svalue.Trim();
+                            }
+                        }
+                        return true;
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+                return false;
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelEventList
+    ///    
+    /// </summary>
+    public class PanelEventList
+    {
+        public ArrayList panelEvents;
+
+        public PanelEventList()
+        {
+            panelEvents = new ArrayList();
+        }
+
+        ~PanelEventList()
+        {
+            panelEvents.Clear();
+        }
+
+        public PanelEventList fullCopy()
+        {
+
+            PanelEventList cloned = new PanelEventList();
+            for (int i = 0; i < panelEvents.Count; i++)
+                cloned.panelEvents.Add(((PanelEventList)panelEvents[i]).fullCopy());
+            return cloned;
+        }
+
+        public PanelEvent this[UInt32 index]
+        {
+            get
+            {
+                if (index < panelEvents.Count)
+                {
+                    return (PanelEvent)panelEvents[(int)index];
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                /*
+                Boolean found = false;
+
+                PanelEvent panelEvent = null;
+                
+                for (int i = 0; i < panelEvents.Count; i++)
+                {
+                    panelEvent = (PanelEvent)panelEvents[i];
+
+                    if (panelEvent.SequenceNo == value.SequenceNo)
+                    {
+                        panelEvent = value;
+                        found = true;
+                        break;
+                    }
+                }
+                
+
+                if (!found)
+                {
+                    PanelEvent _PanelEvent = new PanelEvent();
+
+                    _PanelEvent = value;
+
+                    panelEvents.Add(_PanelEvent);
+                }
+                 */
+            }
+        }
+
+        public void Clear()
+        {
+            panelEvents.Clear();
+        }
+
+        public void AddEvent(PanelEvent panelEvent)
+        {
+            PanelEvent obj = new PanelEvent();
+
+            obj = panelEvent;
+            panelEvents.Add(obj);
+        }
+
+        public void serializeXML(XmlWriterSettings ws, StringBuilder output, XmlWriter writer, ref UInt32 objectCount)
+        {
+            foreach (PanelEvent obj in panelEvents)
+            {
+                obj.serializeXML(ws, output, writer, ref objectCount);
+            }
+        }
+        
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sobject;
+            if (xmlString != null)
+            {
+                try
+                {
+                    using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                    {
+                        while (reader.ReadToFollowing("object"))
+                        {
+                            reader.MoveToAttribute("objectname");
+                            if (reader.Value == "TPanelEventXML")
+                            {
+                                reader.MoveToElement();
+                                sobject = reader.ReadOuterXml();
+                                if (sobject != "")
+                                {
+                                    PanelEvent obj = new PanelEvent();
+                                    obj.parseXML(sobject);
+                                    panelEvents.Add(obj);
+                                }
+                            }
+                        }
+                        return true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+            else
+                return false;
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelMonitoring
+    ///    
+    /*                
+        <?xml version="1.0"?>
+         <PanelInfo>
+            <ZoneStatus Zone3="Opened,Alarm In Memory"/>
+        </PanelInfo>
+    */
+    /// </summary>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public class PanelMonitoring : CustomXmlParser
+    {
+        public const String C_MONITORING_ZONE_ITEM_TYPE = "Zone";
+        public const String C_MONITORING_AREA_ITEM_TYPE = "Area";
+        public const String C_MONITORING_DOOR_ITEM_TYPE = "Door";
+        public const String C_MONITORING_PGM_ITEM_TYPE = "PGM";
+
+        public UInt32 ItemNo;// { get; set; }
+        public String ItemType;// { get; set; }
+        public String Status;// { get; set; }
+
+        public PanelMonitoring() { sObjectname = "PanelInfo"; sName = "Status"; }
+
+        public PanelMonitoring fullCopy()
+        {
+            PanelMonitoring cloned = (PanelMonitoring)this.MemberwiseClone();
+            return cloned;
+        }
+
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sType, sname, svalue, sItemNo;
+            if (xmlString != null)
+            {
+                using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                {
+                    try
+                    {
+                        reader.ReadToFollowing("PanelInfo");
+                        reader.Read();
+                        reader.Read();
+                        sType = reader.LocalName;
+                        reader.MoveToFirstAttribute();
+                        sname = reader.Name;
+                        svalue = reader.Value;
+                        
+                        if (sType == "ZoneStatus")
+                        {                           
+                            if (sname.Contains("Zone"))
+                            {
+                                sItemNo = sname.Remove(0, 4);
+                                ItemNo = Convert.ToUInt32(sItemNo);
+                                ItemType = C_MONITORING_ZONE_ITEM_TYPE;
+                                Status = svalue;
+                            }
+                        }
+                        else if (sType == "AreaStatus")
+                        {                            
+                            if (sname.Contains("Area"))
+                            {
+                                sItemNo = sname.Remove(0, 4);
+                                ItemNo = Convert.ToUInt32(sItemNo);
+                                ItemType = C_MONITORING_AREA_ITEM_TYPE;
+                                Status = svalue;
+                            }
+                        }
+                        else if (sType == "DoorStatus")
+                        {                            
+                            if (sname.Contains("Door"))
+                            {
+                                sItemNo = sname.Remove(0, 4);
+                                ItemNo = Convert.ToUInt32(sItemNo);
+                                ItemType = C_MONITORING_DOOR_ITEM_TYPE;
+                                Status = svalue;
+                            }
+                        }
+                        else if (sType == "PGMStatus")
+                        {                           
+                            if (sname.Contains("PGM"))
+                            {
+                                sItemNo = sname.Remove(0, 3);
+                                ItemNo = Convert.ToUInt32(sItemNo);
+                                ItemType = C_MONITORING_PGM_ITEM_TYPE;
+                                Status = svalue;
+                            }
+                        }
+                                                
+                        return true;
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+                return false;
+        }
+
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelMonitoringList
+    ///    
+    /// </summary>
+    public class PanelMonitoringList
+    {
+        public ArrayList panelMonitorings;
+
+        public PanelMonitoringList()
+        {
+            panelMonitorings = new ArrayList();
+        }
+
+        ~PanelMonitoringList()
+        {
+            panelMonitorings.Clear();
+        }
+
+        public PanelMonitoringList fullCopy()
+        {
+
+            PanelMonitoringList cloned = new PanelMonitoringList();
+            for (int i = 0; i < panelMonitorings.Count; i++)
+                cloned.panelMonitorings.Add(((PanelMonitoringList)panelMonitorings[i]).fullCopy());
+            return cloned;
+        }
+
+        public PanelMonitoring this[UInt32 index]
+        {
+            get
+            {                
+                if (index < panelMonitorings.Count)                
+                {
+                    return (PanelMonitoring)panelMonitorings[(Int32)index];                  
+                }
+                else
+                    return null;
+            }
+            set
+            {                             
+                if (index < panelMonitorings.Count) 
+                {
+                    PanelMonitoring panelMonitoring = (PanelMonitoring)panelMonitorings[(Int32)index];
+
+                    panelMonitoring = value;                                                    
+                }
+                else        
+                {
+                    PanelMonitoring panelMonitoring = new PanelMonitoring();
+
+                    panelMonitoring = value;
+
+                    panelMonitorings.Add(panelMonitoring);
+                }
+            }
+        }
+
+        public void Clear()
+        {
+            panelMonitorings.Clear();
+        }
+
+        public void serializeXML(XmlWriterSettings ws, StringBuilder output, XmlWriter writer, ref UInt32 objectCount)
+        {
+            foreach (PanelMonitoring obj in panelMonitorings)
+            {
+                obj.serializeXML(ws, output, writer, ref objectCount);
+            }
+        }
+        
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sobject;
+            if (xmlString != null)
+            {
+                try
+                {
+                    using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                    {
+                        while (reader.ReadToFollowing("object"))
+                        {
+                            reader.MoveToAttribute("objectname");
+                            if (reader.Value == "TPanelMonitoringXML")
+                            {
+                                reader.MoveToElement();
+                                sobject = reader.ReadOuterXml();
+                                if (sobject != "")
+                                {
+                                    PanelMonitoring obj = new PanelMonitoring();
+                                    obj.parseXML(sobject);
+                                    panelMonitorings.Add(obj);
+                                }
+                            }
+                        }
+                        return true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+            else
+                return false;        
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelReportingEvent
+    ///    
+    /*   
+       <?xml version="1.0"?>
+        <objects>
+          <object objectname="TPanelReportingEventXML" name="PanelReportingEvent">
+            <published>
+              <method name="EventID" readonly="False" type="Integer">0</method>
+              <method name="EventAccountNo" readonly="False" type="UnicodeString"></method>
+              <method name="EventDateTime" readonly="False" type="Double">0</method>
+              <method name="EventProtocolID" readonly="False" type="UnicodeString"></method>
+              <method name="EventCode" readonly="False" type="UnicodeString"></method>
+              <method name="EventDescription" readonly="False" type="UnicodeString"></method>
+              <method name="EventAreaDoorNo" readonly="False" type="UnicodeString"></method>
+              <method name="EventZoneUserNo" readonly="False" type="UnicodeString"></method>
+              <method name="EventMACAddress" readonly="False" type="UnicodeString"></method>
+              <method name="EventStatus" readonly="False" type="UnicodeString"></method>
+            </published>
+          </object>
+        </objects>
+    */
+    /// </summary>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public class PanelReportingEvent : CustomXmlParser
+    {
+        public Int32 EventID;// { get; set; }
+        public String EventAccountNo;// { get; set; }                
+        public DateTime EventDateTime;// { get; set; }        
+        public String EventProtocolID;// { get; set; }        
+        public String EventCode;// { get; set; }        
+        public String EventDescription;// { get; set; }
+        public String EventAreaDoorNo;// { get; set; }
+        public String EventZoneUserNo;// { get; set; }
+        public String EventMACAddress;// { get; set; }
+        public String EventStatus;// { get; set; }
+
+        public PanelReportingEvent() { sObjectname = "TPanelReportingEventXML"; sName = "PanelReportingEvent"; }
+
+        public PanelReportingEvent fullCopy()
+        {
+            PanelReportingEvent cloned = (PanelReportingEvent)this.MemberwiseClone();
+            return cloned;
+        }
+
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sname, svalue;
+            if (xmlString != null)
+            {
+                using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                {
+                    try
+                    {
+                        reader.ReadToFollowing("object");
+                        base.parseXML(reader);
+
+                        while (reader.ReadToFollowing("method"))
+                        {
+                            reader.MoveToFirstAttribute();
+                            sname = reader.Value;
+
+                            if (reader.MoveToContent() == XmlNodeType.Element && reader.Name == "method")
+                            {
+                                svalue = reader.ReadString();
+
+                                if (sname == "EventID") EventID = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "EventAccountNo") EventAccountNo = svalue.Trim();
+<<<<<<< local
+                                else if (sname == "EventDateTime")
+                                {
+                                    try
+                                    {
+                                        EventDateTime = System.DateTime.FromOADate(Convert.ToDouble(svalue.Trim()));
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        EventDateTime = System.DateTime.FromOADate(0.0);
+                                    }                                      
+                                }
+=======
+                                else if (sname == "EventDateTime")
+                                {
+                                    try
+                                    {
+                                        EventDateTime = System.DateTime.FromOADate(Convert.ToDouble(svalue.Trim()));
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        EventDateTime = System.DateTime.FromOADate(0.0);
+                                    }                                        
+                                }
+>>>>>>> other
+                                else if (sname == "EventProtocolID") EventProtocolID = svalue.Trim();
+                                else if (sname == "EventCode") EventCode = svalue.Trim();
+                                else if (sname == "EventDescription") EventDescription = svalue.Trim();
+                                else if (sname == "EventAreaDoorNo") EventAreaDoorNo = svalue.Trim();
+                                else if (sname == "EventZoneUserNo") EventZoneUserNo = svalue.Trim();
+                                else if (sname == "EventMACAddress") EventMACAddress = svalue.Trim();
+                                else if (sname == "EventStatus") EventStatus = svalue.Trim();                                
+                            }
+                        }
+                        return true;
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+                return false;
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelSettings
+    ///    
+    /*   
+       <?xml version="1.0"?>
+        <objects>
+          <object objectname="TPanelSettingsXML" name="Settings">
+            <published>
+              <method name="PanelType" readonly="False" type="UnicodeString"></method>
+              <method name="ComType" readonly="False" type="UnicodeString"></method>
+              <method name="SiteID" readonly="False" type="UnicodeString"></method>
+              <method name="SerialNo" readonly="False" type="UnicodeString"></method>
+              <method name="IPAddress" readonly="False" type="UnicodeString"></method>
+              <method name="IPPort" readonly="False" type="Integer">0</method>
+              <method name="ComPort" readonly="False" type="Integer">0</method>
+              <method name="BaudRate" readonly="False" type="Integer">0</method>
+              <method name="SMSCallback" readonly="False" type="Boolean">False</method>
+              <method name="IPPassword" readonly="False" type="UnicodeString"></method>
+              <method name="UserCode" readonly="False" type="UnicodeString"></method>
+              <method name="SystemAlarmLanguage" readonly="False" type="UnicodeString"></method>
+            </published>
+          </object>
+        </objects>
+    */
+    /// </summary>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public class PanelSettings : CustomXmlParser
+    {
+        public String PanelType;// { get; set; }
+        public String ComType;// { get; set; }
+        public String SiteID;// { get; set; }
+        public String SerialNo;// { get; set; }
+        public String IPAddress;// { get; set; }
+        public Int32 IPPort;// { get; set; }
+        public Int32 ComPort;// { get; set; }
+        public Int32 BaudRate;// { get; set; }
+        public Boolean SMSCallback;// { get; set; }
+        public String IPPassword;// { get; set; }
+        public String UserCode;// { get; set; }
+        public String SystemAlarmLanguage;// { get; set; }
+
+        public PanelSettings() { sObjectname = "TPanelSettingsXML"; sName = "Settings"; }
+
+        public PanelSettings fullCopy()
+        {
+            PanelSettings cloned = (PanelSettings)this.MemberwiseClone();
+            return cloned;
+        }
+
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sname, svalue;
+            if (xmlString != null)
+            {
+                using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                {
+                    try
+                    {
+                        reader.ReadToFollowing("object");
+                        base.parseXML(reader);
+
+                        while (reader.ReadToFollowing("method"))
+                        {
+                            reader.MoveToFirstAttribute();
+                            sname = reader.Value;
+
+                            if (reader.MoveToContent() == XmlNodeType.Element && reader.Name == "method")
+                            {
+                                svalue = reader.ReadString();
+
+                                if (sname == "PanelType") PanelType = svalue.Trim();
+                                else if (sname == "ComType") ComType = svalue.Trim();
+                                else if (sname == "SiteID") SiteID = svalue.Trim();
+                                else if (sname == "SerialNo") SerialNo = svalue.Trim();
+                                else if (sname == "IPAddress") IPAddress = svalue.Trim();
+                                else if (sname == "IPPort") IPPort = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "ComPort") ComPort = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "BaudRate") BaudRate = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "SMSCallback") SMSCallback = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "IPPassword") IPPassword = svalue.Trim();
+                                else if (sname == "UserCode") UserCode = svalue.Trim();
+                                else if (sname == "SystemAlarmLanguage") SystemAlarmLanguage = svalue.Trim();
+                            }
+                        }
+                        return true;
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+                return false;
+        }
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelInfo
+    ///    
+    /*   
+       <?xml version="1.0"?>
+        <objects>
+          <object objectname="TPanelInfoXML" name="PanelInfo">
+            <published>
+              <method name="SiteName" readonly="False" type="UnicodeString"></method>
+              <method name="MediaType" readonly="False" type="UnicodeString"></method>
+              <method name="ProductID" readonly="False" type="Integer">0</method>
+              <method name="Description" readonly="False" type="UnicodeString"></method>
+              <method name="SerialNo" readonly="False" type="UnicodeString"></method>
+              <method name="Version" readonly="False" type="UnicodeString"></method>
+              <method name="SiteID" readonly="False" type="UnicodeString"></method>
+              <method name="IPAddress" readonly="False" type="UnicodeString"></method>
+              <method name="IPPort" readonly="False" type="Integer">0</method>
+              <method name="WebPort" readonly="False" type="Integer">0</method>
+            </published>
+          </object>
+        </objects>
+    */
+    /// </summary>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public class PanelInfo : CustomXmlParser
+    {
+        public String SiteName;// { get; set; }
+        public String MediaType;// { get; set; }
+        public Int32 ProductID;// { get; set; }        
+        public String Description;// { get; set; }
+        public String SerialNo;// { get; set; }
+        public String SiteID;// { get; set; }
+        public String Version;// { get; set; }
+        public String IPAddress;// { get; set; }
+        public Int32 IPPort;// { get; set; }
+        public Int32 WebPort;// { get; set; }
+        
+
+        public PanelInfo() { sObjectname = "TPanelInfoXML"; sName = "PanelInfo"; }
+
+        public PanelInfo fullCopy()
+        {
+            PanelInfo cloned = (PanelInfo)this.MemberwiseClone();
+            return cloned;
+        }
+
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sname, svalue;
+            if (xmlString != null)
+            {
+                using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                {
+                    try
+                    {
+                        reader.ReadToFollowing("object");
+                        base.parseXML(reader);
+
+                        while (reader.ReadToFollowing("method"))
+                        {
+                            reader.MoveToFirstAttribute();
+                            sname = reader.Value;
+
+                            if (reader.MoveToContent() == XmlNodeType.Element && reader.Name == "method")
+                            {
+                                svalue = reader.ReadString();
+
+                                if (sname == "SiteName") SiteName = svalue.Trim();
+                                else if (sname == "MediaType") MediaType = svalue.Trim();
+                                else if (sname == "ProductID") ProductID = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "Description") Description = svalue.Trim();
+                                else if (sname == "SiteID") Description = svalue.Trim();
+                                else if (sname == "SerialNo") SerialNo = svalue.Trim();
+                                else if (sname == "Version") SerialNo = svalue.Trim();
+                                else if (sname == "IPAddress") IPAddress = svalue.Trim();
+                                else if (sname == "IPPort") IPPort = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "WebPort") WebPort = Convert.ToInt32(svalue.Trim());
+                                
+                            }
+                        }
+                        return true;
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+                return false;
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelInfoEx
+    ///    
+    /*   
+       <?xml version="1.0"?>
+        <objects>
+          <object objectname="TPanelInfoExXML" name="PanelInfoEx">
+            <published>
+              <method name="Description" readonly="False" type="UnicodeString"></method>
+              <method name="ProductID" readonly="False" type="Integer">0</method>
+              <method name="SerialNo" readonly="False" type="UnicodeString"></method>
+              <method name="Version" readonly="False" type="Integer">0</method>
+              <method name="Revision" readonly="False" type="Integer">0</method>
+              <method name="Build" readonly="False" type="Integer">0</method>
+              <method name="AreaCount" readonly="False" type="Integer">0</method>
+              <method name="ZoneCount" readonly="False" type="Integer">0</method>
+              <method name="PGMCount" readonly="False" type="Integer">0</method>
+              <method name="UserCount" readonly="False" type="Integer">0</method>
+              <method name="DoorCount" readonly="False" type="Integer">0</method>
+            </published>
+          </object>
+        </objects>
+    */
+    /// </summary>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public class PanelInfoEx : CustomXmlParser
+    {
+        public String Description;// { get; set;} 
+        public Int32 ProductID;// { get; set; }        
+        public String SerialNo;// { get; set; }
+        public Int32 Version;// { get; set; }
+        public Int32 Revision;// { get; set; }
+        public Int32 Build;// { get; set; }
+        public Int32 AreaCount;// { get; set; }
+        public Int32 ZoneCount;// { get; set; }
+        public Int32 PGMCount;// { get; set; }
+        public Int32 UserCount;// { get; set; }
+        public Int32 DoorCount;// { get; set; }
+
+
+        public PanelInfoEx() { sObjectname = "TPanelInfoExXML"; sName = "PanelInfoEx"; }
+
+        public PanelInfoEx fullCopy()
+        {
+            PanelInfoEx cloned = (PanelInfoEx)this.MemberwiseClone();
+            return cloned;
+        }
+
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sname, svalue;
+            if (xmlString != null)
+            {
+                using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                {
+                    try
+                    {
+                        reader.ReadToFollowing("object");
+                        base.parseXML(reader);
+
+                        while (reader.ReadToFollowing("method"))
+                        {
+                            reader.MoveToFirstAttribute();
+                            sname = reader.Value;
+
+                            if (reader.MoveToContent() == XmlNodeType.Element && reader.Name == "method")
+                            {
+                                svalue = reader.ReadString();
+
+                                if (sname == "Description") Description = svalue.Trim();
+                                else if (sname == "ProductID") ProductID = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "SerialNo") SerialNo = svalue.Trim();
+                                else if (sname == "Version") Version = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "Revision") Revision = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "Build") Build = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "AreaCount") AreaCount = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "ZoneCount") ZoneCount = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "PGMCount") PGMCount = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "UserCount") UserCount = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "DoorCount") DoorCount = Convert.ToInt32(svalue.Trim());
+                            }
+                        }
+                        return true;
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+                return false;
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelControl
+    ///    
+    /*   
+       <?xml version="1.0"?>
+        <objects>
+          <object objectname="TPanelControlXML" name="Action">
+            <published>
+              <method name="Command" readonly="False" type="UnicodeString"></method>
+              <method name="Items" readonly="False" type="UnicodeString"></method>
+              <method name="Timer" readonly="False" type="Integer">0</method>
+            </published>
+          </object>
+        </objects>
+    */
+    /// </summary>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public class PanelControl : CustomXmlParser
+    {
+        public String Command;// { get; set; }
+        public String Items;// { get; set; }       
+        public Int32 Timer;// { get; set; }        
+
+        public PanelControl() 
+        { 
+            sObjectname = "TPanelControlXML"; 
+            sName = "Action";
+            Command = "";
+            Items = "";
+            Timer = 0;
+        }
+
+        public PanelControl fullCopy()
+        {
+            PanelControl cloned = (PanelControl)this.MemberwiseClone();
+            return cloned;
+        }
+
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sname, svalue;
+            if (xmlString != null)
+            {
+                using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                {
+                    try
+                    {
+                        reader.ReadToFollowing("object");
+                        base.parseXML(reader);
+
+                        while (reader.ReadToFollowing("method"))
+                        {
+                            reader.MoveToFirstAttribute();
+                            sname = reader.Value;
+
+                            if (reader.MoveToContent() == XmlNodeType.Element && reader.Name == "method")
+                            {
+                                svalue = reader.ReadString();
+
+                                if (sname == "Command") Command = svalue.Trim();
+                                else if (sname == "Items") Items = svalue.Trim();
+                                else if (sname == "Timer") Timer = Convert.ToInt32(svalue.Trim());
+                            }
+                        }
+                        return true;
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+                return false;
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelTrouble
+    ///       
+    /// </summary>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public class PanelTrouble : CustomXmlParser
+    {        
+        public UInt32 ItemNo;// { get; set; }        
+        public String Status;// { get; set; }
+               
+        public PanelTrouble fullCopy()
+        {
+            PanelTrouble cloned = (PanelTrouble)this.MemberwiseClone();
+            return cloned;
+        }       
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelTroubleList
+    /// 
+    /// <?xml version="1.0"?>
+    ///    <PanelInfo>
+    ///      <PanelTrouble Trouble1="Battery Failure" Trouble2="IP Receiver 1 Fail to comm" Trouble3="Zone Tampered:2907586A" Trouble4="Module Failed to communicate:1FF008CF"/>
+    ///    </PanelInfo>
+    ///
+    ///    
+    /// </summary>
+    public class PanelTroubleList
+    {
+        public ArrayList panelTroubles;
+
+        public PanelTroubleList()
+        {
+            panelTroubles = new ArrayList();
+        }
+
+        ~PanelTroubleList()
+        {
+            panelTroubles.Clear();
+        }
+
+        public PanelTroubleList fullCopy()
+        {
+
+            PanelTroubleList cloned = new PanelTroubleList();
+            for (int i = 0; i < panelTroubles.Count; i++)
+                cloned.panelTroubles.Add(((PanelTroubleList)panelTroubles[i]).fullCopy());
+            return cloned;
+        }
+
+        public PanelTrouble this[UInt32 index]
+         {
+            get
+            {                
+                if (index < panelTroubles.Count)                
+                {
+                    return (PanelTrouble)panelTroubles[(Int32)index];                  
+                }
+                else
+                    return null;
+            }
+            set
+            {                             
+                if (index < panelTroubles.Count) 
+                {
+                    PanelTrouble panelTrouble = (PanelTrouble)panelTroubles[(Int32)index];
+
+                    panelTrouble = value;                                                    
+                }
+                else        
+                {
+                    PanelTrouble panelTrouble = new PanelTrouble();
+
+                    panelTrouble = value;
+
+                    panelTroubles.Add(panelTrouble);
+                }
+            }
+        }
+        
+        public void Clear()
+        {
+            panelTroubles.Clear();
+        }
+
+        public void serializeXML(XmlWriterSettings ws, StringBuilder output, XmlWriter writer, ref UInt32 objectCount)
+        {
+            foreach (PanelTrouble obj in panelTroubles)
+            {
+                obj.serializeXML(ws, output, writer, ref objectCount);
+            }
+        }
+
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sType, sname, svalue, sItemNo;
+
+            if (xmlString != null)
+            {
+                try
+                {
+                    using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                    {
+                        reader.ReadToFollowing("PanelInfo");
+                        reader.Read();
+                        reader.Read();
+                        sType = reader.LocalName;
+
+                        if (sType == "PanelTrouble")
+                        {
+                            reader.MoveToFirstAttribute();
+
+                            sname = reader.Name;
+                            svalue = reader.Value;
+
+                            if (sname.Contains("Trouble"))
+                            {
+                                sItemNo = sname.Remove(0, 7);
+                                PanelTrouble obj = new PanelTrouble();
+                                obj.ItemNo = Convert.ToUInt32(sItemNo);
+                                obj.Status = svalue;
+                                panelTroubles.Add(obj);
+                            }
+                            
+                            while (reader.MoveToNextAttribute())
+                            {
+                                sname = reader.Name;
+                                svalue = reader.Value;
+                                
+                                if (sname.Contains("Trouble"))
+                                {
+                                    sItemNo = sname.Remove(0, 7);
+                                    PanelTrouble obj = new PanelTrouble();
+                                    obj.ItemNo = Convert.ToUInt32(sItemNo);
+                                    obj.Status = svalue;
+                                    panelTroubles.Add(obj);
+                                }
+                            }                            
+                        }                    
+                        return true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+            else
+                return false;
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelIPReporting
+    ///    
+    /*   
+       <?xml version="1.0"?>
+        <objects>
+          <object objectname="TPanelIPReportingXML" name="IPReporting">
+            <published>
+              <method name="ReceiverNo" readonly="False" type="Integer">0</method>
+              <method name="ReportingIPEnabled" readonly="False" type="Boolean">False</method>
+              <method name="ReceiverIPPassword" readonly="False" type="UnicodeString"></method>
+              <method name="ReceiverIPProfile" readonly="False" type="Integer">0</method>
+              <method name="Area1AccountNo" readonly="False" type="UnicodeString"></method>
+              <method name="Area2AccountNo" readonly="False" type="UnicodeString"></method>
+              <method name="WAN1IPAddress" readonly="False" type="UnicodeString"></method>
+              <method name="WAN1IPPort" readonly="False" type="Integer">0</method>
+              <method name="WAN2IPAddress" readonly="False" type="UnicodeString"></method>
+              <method name="WAN2IPPort" readonly="False" type="Integer">0</method>
+              <method name="ParallelReporting" readonly="False" type="Boolean">False</method>
+              <method name="ServiceFailureOptions" readonly="False" type="UnicodeString"></method>
+              <method name="GPRSAccessPointName" readonly="False" type="UnicodeString"></method>
+              <method name="GPRSUserName" readonly="False" type="UnicodeString"></method>
+              <method name="GPRSPassword" readonly="False" type="UnicodeString"></method>
+            </published>
+          </object>
+        </objects>
+    */
+    /// </summary>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public class PanelIPReporting : CustomXmlParser
+    {
+        public Int32 ReceiverNo;// { get; set; }
+        public Boolean ReportingIPEnabled;// { get; set; }
+        public String ReceiverIPPassword;// { get; set; }
+        public Int32 ReceiverIPProfile;// { get; set; }
+        public String Area1AccountNo;// { get; set; }
+        public String Area2AccountNo;// { get; set; }
+        public String WAN1IPAddress;// { get; set; }
+        public Int32 WAN1IPPort;// { get; set; }
+        public String WAN2IPAddress;// { get; set; }
+        public Int32 WAN2IPPort;// { get; set; }
+        public Boolean ParallelReporting;// { get; set; }
+        public String ServiceFailureOptions;// { get; set; }
+        public String GPRSAccessPointName;// { get; set; }
+        public String GPRSUserName;// { get; set; }
+        public String GPRSPassword;// { get; set; }
+               
+
+        public PanelIPReporting() { sObjectname = "TPanelIPReportingXML"; sName = "IPReporting"; }
+
+        public PanelIPReporting fullCopy()
+        {
+            PanelIPReporting cloned = (PanelIPReporting)this.MemberwiseClone();
+            return cloned;
+        }
+
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sname, svalue;
+            if (xmlString != null)
+            {
+                using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                {
+                    try
+                    {
+                        reader.ReadToFollowing("object");
+                        base.parseXML(reader);
+
+                        while (reader.ReadToFollowing("method"))
+                        {
+                            reader.MoveToFirstAttribute();
+                            sname = reader.Value;
+
+                            if (reader.MoveToContent() == XmlNodeType.Element && reader.Name == "method")
+                            {
+                                svalue = reader.ReadString();
+
+                                if (sname == "ReceiverNo") ReceiverNo = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "ReportingIPEnabled") ReportingIPEnabled = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "ReceiverIPPassword") ReceiverIPPassword = svalue.Trim();
+                                else if (sname == "ReceiverIPProfile") ReceiverIPProfile = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "Area1AccountNo") Area1AccountNo = svalue.Trim();
+                                else if (sname == "Area2AccountNo") Area2AccountNo = svalue.Trim();
+                                else if (sname == "WAN1IPAddress") WAN1IPAddress = svalue.Trim();
+                                else if (sname == "WAN1IPPort") WAN1IPPort = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "WAN2IPAddress") WAN2IPAddress = svalue.Trim();
+                                else if (sname == "WAN2IPPort") WAN2IPPort = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "ParallelReporting") ParallelReporting = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "ServiceFailureOptions") ServiceFailureOptions = svalue.Trim();
+                                else if (sname == "GPRSAccessPointName") GPRSAccessPointName = svalue.Trim();
+                                else if (sname == "GPRSUserName") GPRSUserName = svalue.Trim();
+                                else if (sname == "GPRSPassword") GPRSPassword = svalue.Trim();
+                            }
+                        }
+                        return true;
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+                return false;
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelReportingAccount
+    ///    
+    /*   
+       <?xml version="1.0"?>
+        <objects>
+          <object objectname="TPanelReportingAccountXML" name="PanelReportingAccount">
+            <published>
+              <method name="AccountNo" readonly="False" type="UnicodeString"></method>
+              <method name="AccountStatus" readonly="False" type="UnicodeString"></method>
+              <method name="MACAddress" readonly="False" type="UnicodeString"></method>
+              <method name="ProfileID" readonly="False" type="Integer">0</method>
+              <method name="ProtocolID" readonly="False" type="UnicodeString"></method>
+              <method name="PanelType" readonly="False" type="UnicodeString"></method>
+              <method name="PanelSerialNo" readonly="False" type="UnicodeString"></method>
+              <method name="PanelVersion" readonly="False" type="UnicodeString"></method>
+              <method name="ModuleType" readonly="False" type="UnicodeString"></method>
+              <method name="ModuleSerialNo" readonly="False" type="UnicodeString"></method>
+              <method name="ModuleVersion" readonly="False" type="UnicodeString"></method>
+              <method name="RegistrationDate" readonly="False" type="Double">0</method>
+              <method name="LastIPAddress" readonly="False" type="UnicodeString"></method>
+              <method name="LastPollingTime" readonly="False" type="Double">0</method>
+            </published>
+          </object>
+        </objects>
+    */
+    /// </summary>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public class PanelReportingAccount : CustomXmlParser
+    {
+        public String AccountNo;// { get; set; }
+        public String AccountStatus;// { get; set; }
+        public String MACAddress;// { get; set; }
+        public Int32 ProfileID;// { get; set; }
+        public String ProtocolID;// { get; set; }
+        public String PanelType;// { get; set; }
+        public String PanelSerialNo;// { get; set; }
+        public String PanelVersion;// { get; set; }
+        public String ModuleType;// { get; set; }
+        public String ModuleSerialNo;// { get; set; }
+        public String ModuleVersion;// { get; set; }
+        public DateTime RegistrationDate;// { get; set; }
+        public String LastIPAddress;// { get; set; }
+        public DateTime LastPollingTime;// { get; set; }
+
+
+        public PanelReportingAccount() { sObjectname = "TPanelReportingAccountXML"; sName = "PanelReportingAccount"; }
+
+        public PanelReportingAccount fullCopy()
+        {
+            PanelReportingAccount cloned = (PanelReportingAccount)this.MemberwiseClone();
+            return cloned;
+        }
+
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sname, svalue;
+            if (xmlString != null)
+            {
+                using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                {
+                    try
+                    {
+                        reader.ReadToFollowing("object");
+                        base.parseXML(reader);
+
+                        while (reader.ReadToFollowing("method"))
+                        {
+                            reader.MoveToFirstAttribute();
+                            sname = reader.Value;
+
+                            if (reader.MoveToContent() == XmlNodeType.Element && reader.Name == "method")
+                            {
+                                svalue = reader.ReadString();
+
+                                if (sname == "AccountNo") AccountNo = svalue.Trim();
+                                else if (sname == "AccountStatus") AccountStatus = svalue.Trim();
+                                else if (sname == "MACAddress") MACAddress = svalue.Trim();
+                                else if (sname == "ProfileID") ProfileID = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "ProtocolID") ProtocolID = svalue.Trim();
+                                else if (sname == "PanelType") PanelType = svalue.Trim();
+                                else if (sname == "PanelSerialNo") PanelSerialNo = svalue.Trim();
+                                else if (sname == "PanelVersion") PanelVersion = svalue.Trim();
+                                else if (sname == "ModuleType") ModuleType = svalue.Trim();
+                                else if (sname == "ModuleSerialNo") ModuleSerialNo = svalue.Trim();
+                                else if (sname == "ModuleVersion") ModuleVersion = svalue.Trim();
+<<<<<<< local
+                                else if (sname == "RegistrationDate")
+                                {
+                                    try
+                                    {
+                                        RegistrationDate = System.DateTime.FromOADate(Convert.ToDouble(svalue.Trim()));
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        RegistrationDate = System.DateTime.FromOADate(0.0);
+                                    }
+                                    
+                                }
+=======
+                                else if (sname == "RegistrationDate")
+                                {
+                                    try
+                                    {
+                                        RegistrationDate = System.DateTime.FromOADate(Convert.ToDouble(svalue.Trim()));
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        RegistrationDate = System.DateTime.FromOADate(0.0);
+                                    }                                    
+                                }
+>>>>>>> other
+                                else if (sname == "LastIPAddress") LastIPAddress = svalue.Trim();
+<<<<<<< local
+                                else if (sname == "LastPollingTime")
+                                {
+                                    try
+                                    {
+                                        LastPollingTime = System.DateTime.FromOADate(Convert.ToDouble(svalue.Trim()));
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        LastPollingTime = System.DateTime.FromOADate(0.0);
+                                    }                                    
+                                }
+=======
+                                else if (sname == "LastPollingTime")
+                                {
+                                    try
+                                    {
+                                        LastPollingTime = System.DateTime.FromOADate(Convert.ToDouble(svalue.Trim()));
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        LastPollingTime = System.DateTime.FromOADate(0.0);
+                                    }                                                                                
+                                }
+>>>>>>> other
+                            }
+                        }
+                        return true;
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+                return false;
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelReportingAccountList
+    ///    
+    /// </summary>
+    public class PanelReportingAccountList
+    {
+        public ArrayList panelReportingAccounts;
+
+        public PanelReportingAccountList()
+        {
+            panelReportingAccounts = new ArrayList();
+        }
+
+        ~PanelReportingAccountList()
+        {
+            panelReportingAccounts.Clear();
+        }
+
+        public PanelReportingAccountList fullCopy()
+        {
+
+            PanelReportingAccountList cloned = new PanelReportingAccountList();
+            for (int i = 0; i < panelReportingAccounts.Count; i++)
+                cloned.panelReportingAccounts.Add(((PanelReportingAccountList)panelReportingAccounts[i]).fullCopy());
+            return cloned;
+        }
+
+        public PanelReportingAccount this[UInt32 index]
+        {
+            get
+            {
+                if (index < panelReportingAccounts.Count)
+                {                    
+                    return (PanelReportingAccount)panelReportingAccounts[(Int32)index];
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                if (index < panelReportingAccounts.Count)
+                {
+                    PanelReportingAccount panelReportingAccount = (PanelReportingAccount)panelReportingAccounts[(Int32)index];
+                    panelReportingAccount = value;
+                }
+                else
+                {
+                    PanelReportingAccount panelReportingAccount = new PanelReportingAccount();
+
+                    panelReportingAccount = value;
+
+                    panelReportingAccounts.Add(panelReportingAccount);
+                }                                
+            }
+        }
+
+        public void Clear()
+        {
+            panelReportingAccounts.Clear();
+        }
+
+        public void serializeXML(XmlWriterSettings ws, StringBuilder output, XmlWriter writer, ref UInt32 objectCount)
+        {
+            foreach (PanelReportingAccount obj in panelReportingAccounts)
+            {
+                obj.serializeXML(ws, output, writer, ref objectCount);
+            }
+        }
+
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sobject;
+            if (xmlString != null)
+            {
+                try
+                {
+                    using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                    {
+                        while (reader.ReadToFollowing("object"))
+                        {
+                            reader.MoveToAttribute("objectname");
+                            if (reader.Value == "TPanelReportingAccountXML")
+                            {
+                                reader.MoveToElement();
+                                sobject = reader.ReadOuterXml();
+                                if (sobject != "")
+                                {
+                                    PanelReportingAccount obj = new PanelReportingAccount();
+                                    obj.parseXML(sobject);
+                                    panelReportingAccounts.Add(obj);
+                                }
+                            }
+                        }
+                        return true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+            else
+                return false;
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelReportingEventUpdate
+    ///    
+    /*   
+       <?xml version="1.0"?>
+        <objects>
+          <object objectname="TPanelReportingEventUpdateXML" name="PanelReportingEventUpdate">
+            <published>
+              <method name="EventID" readonly="False" type="Integer">0</method>
+              <method name="EventStatus" readonly="False" type="UnicodeString"></method>
+              <method name="EventDateTime" readonly="False" type="Double">0</method>
+            </published>
+          </object>
+        </objects>
+    */
+    /// </summary>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public class PanelReportingEventUpdate : CustomXmlParser
+    {        
+        public Int32 EventID;// { get; set; }
+        public String EventStatus;// { get; set; }        
+        public DateTime EventDateTime;// { get; set; }        
+
+        public PanelReportingEventUpdate() { sObjectname = "TPanelReportingEventUpdateXML"; sName = "PanelReportingEventUpdate"; }
+
+        public PanelReportingEventUpdate fullCopy()
+        {
+            PanelReportingEventUpdate cloned = (PanelReportingEventUpdate)this.MemberwiseClone();
+            return cloned;
+        }
+
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sname, svalue;
+            if (xmlString != null)
+            {
+                using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                {
+                    try
+                    {
+                        reader.ReadToFollowing("object");
+                        base.parseXML(reader);
+
+                        while (reader.ReadToFollowing("method"))
+                        {
+                            reader.MoveToFirstAttribute();
+                            sname = reader.Value;
+
+                            if (reader.MoveToContent() == XmlNodeType.Element && reader.Name == "method")
+                            {
+                                svalue = reader.ReadString();
+                                
+                                if (sname == "EventID") EventID = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "EventStatus") EventStatus = svalue.Trim();
+<<<<<<< local
+                                else if (sname == "EventDateTime")
+                                {
+                                    try
+                                    {
+                                        EventDateTime = System.DateTime.FromOADate(Convert.ToDouble(svalue.Trim()));
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        EventDateTime = System.DateTime.FromOADate(0.0);
+                                    }                                     
+                                }
+=======
+                                else if (sname == "EventDateTime") 
+                                {
+                                    try
+                                    {
+                                        EventDateTime = System.DateTime.FromOADate(Convert.ToDouble(svalue.Trim()));
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        EventDateTime = System.DateTime.FromOADate(0.0);
+                                    }                                       
+                                }                                
+>>>>>>> other
+                            }
+                        }
+                        return true;
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+                return false;
+        }
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// IPDOXSettings
+    ///    
+    /*   
+       <?xml version="1.0"?>
+        <objects>
+          <object objectname="TIPDOXSettingsXML" name="Settings">
+            <published>
+              <method name="IPPassword" readonly="False" type="UnicodeString"></method> **
+              <method name="ACCFilePath" readonly="False" type="UnicodeString"></method>
+              <method name="LogEnabled" readonly="False" type="Boolean">False</method>
+              <method name="LogLevel" readonly="False" type="Integer">0</method>
+              <method name="LogInterval" readonly="False" type="Integer">0</method>
+              <method name="LogFileLifeTime" readonly="False" type="Integer">0</method>
+              <method name="LogMaxDiskSize" readonly="False" type="Integer">0</method>
+              <method name="LogFileDir" readonly="False" type="UnicodeString"></method>
+              <method name="OutputEnabled" readonly="False" type="Boolean">False</method>
+              <method name="OutputType" readonly="False" type="Integer">0</method>
+              <method name="OutputCOMPort" readonly="False" type="Integer">0</method>
+              <method name="OutputBaudRate" readonly="False" type="Integer">0</method>
+              <method name="OutputUDP" readonly="False" type="Boolean">False</method>
+              <method name="OutputIPPort" readonly="False" type="Integer">0</method>
+              <method name="OutputIPAddress" readonly="False" type="UnicodeString"></method>
+              <method name="OutputProtocolID" readonly="False" type="Integer">0</method>
+              <method name="OutputReceiverNo" readonly="False" type="Integer">0</method>
+              <method name="OutputLineNo" readonly="False" type="Integer">0</method>
+              <method name="OutputHeaderID" readonly="False" type="Integer">0</method>
+              <method name="OutputTrailerID" readonly="False" type="Integer">0</method>
+              <method name="OutputAckNack" readonly="False" type="Boolean">False</method>
+              <method name="OutputWaitForAck" readonly="False" type="Integer">0</method>
+              <method name="OutputTestMessage" readonly="False" type="Boolean">False</method>
+              <method name="OutputTestMsgDelay" readonly="False" type="Integer">0</method>
+              <method name="OutputForcePartition" readonly="False" type="Boolean">False</method>
+              <method name="OutputPartitionNo" readonly="False" type="Integer">0</method>
+              <method name="OutputUseMACAddress" readonly="False" type="Boolean">False</method>
+              <method name="MonitoringAccountNo" readonly="False" type="UnicodeString"></method>
+              <method name="WANId" readonly="False" type="Integer">0</method>
+              <method name="WANEnabled" readonly="False" type="Boolean">False</method> ***
+              <method name="WANPort" readonly="False" type="Integer">0</method> ***
+              <method name="WANAddress" readonly="False" type="UnicodeString"></method> ***
+            </published>
+          </object>
+        </objects>
+    */
+    /// </summary>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public class IPDOXSettings : CustomXmlParser
+    {
+        public String IPPassword;// { get; set; }
+        public String AccountFilePath;// { get; set; }
+        public Boolean LogEnabled;// { get; set; }
+        public Int32 LogLevel;// { get; set; }
+        public Int32 LogInterval;// { get; set; }
+        public Int32 LogFileLifeTime;// { get; set; }
+        public Int32 LogMaxDiskSize;// { get; set; }
+        public String LogFileDir;// { get; set; }
+        public Boolean OutputEnabled;// { get; set; }
+        public Int32 OutputType;// { get; set; }
+        public Int32 OutputCOMPort;// { get; set; }
+        public Int32 OutputBaudRate;// { get; set; }
+        public Boolean OutputUDP;// { get; set; }
+        public Int32 OutputIPPort;// { get; set; }
+        public String OutputIPAddress;// { get; set; }
+        public Int32 OutputProtocolID;// { get; set; }
+        public Int32 OutputReceiverNo;// { get; set; }
+        public Int32 OutputLineNo;// { get; set; }
+        public Int32 OutputHeaderID;// { get; set; }
+        public Int32 OutputTrailerID;// { get; set; }
+        public Boolean OutputAckNack;// { get; set; }
+        public Int32 OutputWaitForAck;// { get; set; }
+        public Boolean OutputTestMessage;// { get; set; }
+        public Int32 OutputTestMsgDelay;// { get; set; }
+        public Boolean OutputForcePartition;// { get; set; }
+        public Int32 OutputPartitionNo;// { get; set; }
+        public Boolean OutputUseMACAddress;// { get; set; }
+        public String MonitoringAccountNo;// { get; set; }
+        public Int32 WANId;// { get; set; }
+        public Boolean WANEnabled;// { get; set; }
+        public Int32 WANPort;// { get; set; }
+        public String WANAddress;// { get; set; }
+
+
+        public IPDOXSettings() { sObjectname = "TIPDOXSettingsXML"; sName = "Settings"; }
+
+        public IPDOXSettings fullCopy()
+        {
+            IPDOXSettings cloned = (IPDOXSettings)this.MemberwiseClone();
+            return cloned;
+        }
+
+        public Boolean parseXML(string xmlString)
+        {
+            string sname, svalue;
+            if (xmlString != null)
+            {
+                using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                {
+                    try
+                    {
+                        reader.ReadToFollowing("object");
+                        base.parseXML(reader);
+
+                        while (reader.ReadToFollowing("method"))
+                        {
+                            reader.MoveToFirstAttribute();
+                            sname = reader.Value;
+
+                            if (reader.MoveToContent() == XmlNodeType.Element && reader.Name == "method")
+                            {
+                                svalue = reader.ReadString();
+
+                                if (sname == "IPPassword") IPPassword = svalue.Trim();
+                                else if (sname == "ACCFilePath") AccountFilePath = svalue.Trim();
+
+                                else if (sname == "LogEnabled") LogEnabled = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "LogLevel") LogLevel = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "LogInterval") LogInterval = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "LogFileLifeTime") LogFileLifeTime = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "LogMaxDiskSize") LogMaxDiskSize = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "LogFileDir") LogFileDir = svalue.Trim();
+
+                                else if (sname == "OutputEnabled") OutputEnabled = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "OutputType") OutputType = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "OutputCOMPort") OutputCOMPort = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "OutputBaudRate") OutputBaudRate = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "OutputUDP") OutputUDP = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "OutputIPPort") OutputIPPort = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "OutputIPAddress") OutputIPAddress = svalue.Trim();
+                                else if (sname == "OutputProtocolID") OutputProtocolID = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "OutputReceiverNo") OutputReceiverNo = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "OutputLineNo") OutputLineNo = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "OutputHeaderID") OutputHeaderID = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "OutputTrailerID") OutputTrailerID = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "OutputAckNack") OutputAckNack = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "OutputWaitForAck") OutputWaitForAck = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "OutputTestMessage") OutputTestMessage = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "OutputTestMsgDelay") OutputTestMsgDelay = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "OutputForcePartition") OutputForcePartition = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "OutputPartitionNo") OutputPartitionNo = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "OutputUseMACAddress") OutputUseMACAddress = Convert.ToBoolean(svalue.Trim());
+
+                                else if (sname == "MonitoringAccountNo") MonitoringAccountNo = svalue.Trim();
+                                else if (sname == "WANId") WANId = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "WANEnabled") WANEnabled = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "WANPort") WANPort = Convert.ToInt32(svalue.Trim());
+                                else if (sname == "WANAddress") WANAddress = svalue.Trim();
+                            }
+                        }
+                        return true;
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+                return false;
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// IPReportingStatus
+    ///    
+    /*   
+       <?xml version="1.0"?>
+        <objects>
+          <object objectname="TPanelReportingStatusXML" name="IPReportingStatus">
+            <published>
+              <method name="Registered" readonly="False" type="Boolean">False</method>
+              <method name="RegistrationStatus" readonly="False" type="UnicodeString"></method>
+              <method name="RegistrationError" readonly="False" type="UnicodeString"></method>
+            </published>
+          </object>
+        </objects>
+    */
+    /// </summary>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public class IPReportingStatus : CustomXmlParser
+    {
+        public Boolean Registered;// { get; set; }
+        public String RegistrationStatus;// { get; set; }
+        public String RegistrationError;// { get; set; }
+
+        public IPReportingStatus() { sObjectname = "TPanelReportingStatusXML"; sName = "IPReportingStatus"; }
+
+        public IPReportingStatus fullCopy()
+        {
+            IPReportingStatus cloned = (IPReportingStatus)this.MemberwiseClone();
+            return cloned;
+        }
+
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sname, svalue;
+            if (xmlString != null)
+            {
+                using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                {
+                    try
+                    {
+                        reader.ReadToFollowing("object");
+                        base.parseXML(reader);
+
+                        while (reader.ReadToFollowing("method"))
+                        {
+                            reader.MoveToFirstAttribute();
+                            sname = reader.Value;
+
+                            if (reader.MoveToContent() == XmlNodeType.Element && reader.Name == "method")
+                            {
+                                svalue = reader.ReadString();
+
+                                if (sname == "Registered") Registered = Convert.ToBoolean(svalue.Trim());
+                                else if (sname == "RegistrationStatus") RegistrationStatus = svalue.Trim();
+                                else if (sname == "RegistrationError") RegistrationError = svalue.Trim();
+                            }
+                        }
+                        return true;
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+                return false;
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// 
+    /// PanelTimeStamp
+    ///    
+    /*   
+       <?xml version="1.0"?>
+        <objects>
+          <object objectname="TPanelTimeStampXML" name="PanelTimeStamp">
+            <published>
+              <method name="TimeStamp" readonly="False" type="Integer">0</method>
+            </published>
+          </object>
+        </objects>
+    */
+    /// </summary>
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public class PanelTimeStamp : CustomXmlParser
+    {
+        public Int32 TimeStamp;// { get; set; }
+
+        public PanelTimeStamp() { sObjectname = "TPanelTimeStampXML"; sName = "PanelTimeStamp"; }
+
+        public PanelTimeStamp fullCopy()
+        {
+            PanelTimeStamp cloned = (PanelTimeStamp)this.MemberwiseClone();
+            return cloned;
+        }
+
+        protected internal Boolean parseXML(string xmlString)
+        {
+            string sname, svalue;
+            if (xmlString != null)
+            {
+                using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                {
+                    try
+                    {
+                        reader.ReadToFollowing("object");
+                        base.parseXML(reader);
+
+                        while (reader.ReadToFollowing("method"))
+                        {
+                            reader.MoveToFirstAttribute();
+                            sname = reader.Value;
+
+                            if (reader.MoveToContent() == XmlNodeType.Element && reader.Name == "method")
+                            {
+                                svalue = reader.ReadString();
+
+                                if (sname == "TimeStamp") TimeStamp = Convert.ToInt32(svalue.Trim());
+                            }
+                        }
+                        return true;
+                    }
+                    catch (Exception e)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+                return false;
+        }
+    }
+
+}
